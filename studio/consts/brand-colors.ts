@@ -1,19 +1,20 @@
+// TODO: replace with the real Lyra brand palette.
 // https://www.sanity.io/plugins/color-input
 
 export const brandColors = {
   colorList: [
-    '#0018F3', // Arratech Blue
-    '#0621ec', // Arratech Blue 90
-    '#3b67af', // Arratech Blue 80
-    '#4e8199', // Arratech Blue 70
+    '#2563EB', // Lyra Primary
+    '#1D4ED8', // Lyra Primary 90
+    '#3B82F6', // Lyra Primary 80
+    '#60A5FA', // Lyra Primary 70
     '#000000', // Black
-    '#1A2B33', // Arratech Storm 100
-    '#324148', // Arratech Storm 90
-    '#3C474D', // Arratech Storm 80
-    '#505f66', // Arratech Storm 70
-    '#acd2e5', // Arratech Storm 60
-    '#CDEBFA', // Arratech Storm 20
-    '#E0E3E4', // Arratech Gray 20
+    '#0F172A', // Lyra Slate 100
+    '#1E293B', // Lyra Slate 90
+    '#334155', // Lyra Slate 80
+    '#475569', // Lyra Slate 70
+    '#94A3B8', // Lyra Slate 60
+    '#CBD5E1', // Lyra Slate 20
+    '#E2E8F0', // Lyra Gray 20
     '#ffffff', // White
     {r: 255, g: 255, b: 255, a: 0}, // Transparent
   ],

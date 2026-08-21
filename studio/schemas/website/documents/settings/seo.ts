@@ -21,7 +21,7 @@ export const seoSettings = defineType({
       type: 'string',
       title: 'Business Classification',
       description: 'The business classification for structured data (schema.org)',
-      placeholder: 'Business Software',
+      placeholder: 'Software',
     }),
 
     defineField({
@@ -29,16 +29,16 @@ export const seoSettings = defineType({
       type: 'text',
       rows: 10,
       title: 'Keywords',
-      description: 'Comma-separated keywords for SEO (e.g. "e-invoicing, Peppol, API")',
-      placeholder: 'e-invoicing, Peppol, API',
+      description: 'Comma-separated keywords for SEO (e.g. "web design, branding, strategy")',
+      placeholder: 'web design, branding, strategy',
     }),
 
     defineField({
       name: 'twitterHandle',
       type: 'string',
       title: 'Twitter',
-      description: 'Twitter handle, e.g. @arratech',
-      placeholder: '@arratech',
+      description: 'Twitter handle, e.g. @lyra',
+      placeholder: '@lyra',
     }),
 
     defineField({
@@ -46,7 +46,7 @@ export const seoSettings = defineType({
       type: 'string',
       title: 'LinkedIn',
       description: 'LinkedIn company page URL',
-      placeholder: '/company/arratech-ab',
+      placeholder: '/company/lyra',
     }),
 
     defineField({

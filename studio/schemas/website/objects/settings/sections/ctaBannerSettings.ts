@@ -41,7 +41,7 @@ export const ctaBannerSettings = defineType({
       initialValue: 'banner',
       options: {
         list: [
-          {title: 'Arratech Banner (Default)', value: 'banner'},
+          {title: 'Lyra Banner (Default)', value: 'banner'},
           {title: 'Flare', value: 'flare'},
           {title: 'Lemon Twist', value: 'lemontwist'},
           {title: 'Lunada', value: 'lunada'},

@@ -14,7 +14,7 @@ export const blockContentMaxi = defineType({
         {title: 'Paragraph (Default)', value: 'normal'},
         {title: 'Paragraph - Center', value: 'pCenter'},
         {title: 'Paragraph - Right', value: 'pRight'},
-        {title: 'BlockQuote (Arratech Style)', value: 'blockquote'},
+        {title: 'BlockQuote (Lyra Style)', value: 'blockquote'},
         {title: 'BlockQuote (Normal)', value: 'quotenormal'},
         {title: 'H1', value: 'h1'},
         {title: 'H2', value: 'h2'},

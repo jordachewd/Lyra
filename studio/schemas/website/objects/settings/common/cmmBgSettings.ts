@@ -123,7 +123,7 @@ export const cmmBgSettings = defineType({
       options: {
         list: [
           {title: 'None (Default)', value: 'none'},
-          {title: 'Arratech Banner', value: 'banner'},
+          {title: 'Lyra Banner', value: 'banner'},
           {title: 'Flare', value: 'flare'},
           {title: 'Lemon Twist', value: 'lemontwist'},
           {title: 'Lunada', value: 'lunada'},

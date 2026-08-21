@@ -39,7 +39,7 @@ export const generalSettings = defineType({
       type: 'url',
       title: 'Site URL',
       description: 'The main URL of the website, used for SEO and sharing',
-      placeholder: 'https://www.arratech.com',
+      placeholder: 'https://www.lyra.com',
     }),
 
     defineField({
@@ -47,7 +47,7 @@ export const generalSettings = defineType({
       type: 'email',
       title: 'Site Email',
       description: 'The contact email address for the website',
-      placeholder: 'office@arratech.com',
+      placeholder: 'office@lyra.com',
     }),
   ],
   preview: {
