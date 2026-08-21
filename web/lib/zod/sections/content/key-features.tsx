@@ -15,7 +15,7 @@ export const KeyFeaturesSectionSchema = z.object({
   kind: z.literal('keyFeatures'),
   topHeadline: z.string().optional().default(''),
   description: PortableTextSchema.optional(),
-  bottomHeadline: z.string().optional().default(''),
+  bottomHeadline: z.string().optional().nullable().default(''),
   cards: z.array(KeyFeatureCardSchema).default([]),
   settings: SectionSettingsSchema.optional(),
 })
