@@ -19,6 +19,7 @@
 - **Excluded branches:** Portal, Webinars, DEPRECATED sections (Text Cards, Text Blocks), and the staging workspace. No file, type, constant, or desk entry from these may appear in `studio/`.
 - **Stored `value:` strings are never changed** during rebranding — only human-facing `title:`, `description:`, and `placeholder:` text. Changing a `value:` would silently orphan existing content.
 - **API version constant** is `'2025-01-01'`, exported from `consts/config/studio-api-version.ts`.
+- **Task 8 Steps 4–7 cannot be delegated to a subagent.** They require seeing the running Studio UI. Whoever coordinates this plan must run that pass directly (or drive it with browser automation) — never accept a reported "clicked through, looks fine" from an agent that cannot see the screen.
 - **There is no test framework in this repo.** The test cycle for every task is `npx sanity schema extract`, `npx tsc --noEmit`, and targeted `grep`. Treat a non-zero exit or an unexpected grep hit exactly as you would a failing test: stop and fix before committing.
 - **Prettier config** (in `studio/package.json`): `semi: false`, `printWidth: 100`, `bracketSpacing: false`, `singleQuote: true`. Ported files already match; keep new code consistent.
 
@@ -90,6 +91,20 @@ export default defineConfig({
 ```
 
 Do not change any other dependency version, and do not remove the `overrides` block pinning `@sanity/sdk-react` to `2.19.0`.
+
+Also add the `engines` field the model carried but the scaffold lacks, directly after `"license"`:
+
+```json
+  "engines": {
+    "node": ">=22.12"
+  },
+```
+
+And add a `lint` script to the `scripts` block so the gate in Task 8 has something to call:
+
+```json
+    "lint": "eslint .",
+```
 
 - [ ] **Step 5: Install and verify the tree resolves**
 
@@ -847,17 +862,57 @@ cd studio && npx tsc --noEmit
 
 Expected: exit 0.
 
-- [ ] **Step 3: Run schema extraction — the discriminating check**
+- [ ] **Step 3: Validate the schema — the discriminating check**
+
+**Nothing before this point can detect a broken schema.** `type: 'webinars'` and `to: [{type: 'webinarPage'}]` are string literals; TypeScript accepts them happily whether or not the type exists. Sanity resolves them at runtime, so orphan references and duplicate type names surface only here.
+
+```bash
+cd studio && npx sanity schema validate
+```
+
+(The CLI also accepts the plural `sanity schemas validate`.)
+
+Expected: exit 0 with no reported problems. Output naming `webinars`, `webinarPage`, `textCard`, `textBlock`, or any portal type means an exclusion was missed — fix the *referencing* file; never re-add the excluded type.
+
+- [ ] **Step 4: Prove the gate actually fails — negative test**
+
+A gate you have never seen fail is a ritual, not a check. Temporarily reintroduce the reference Task 4 removed. Add this field back to the `fields` array in `studio/schemas/website/documents/settings/reading.ts`:
+
+```ts
+    defineField({
+      name: 'webinars',
+      type: 'webinars',
+      title: 'TEMPORARY — negative test',
+    }),
+```
+
+Then run the gate again:
+
+```bash
+cd studio && npx sanity schema validate
+```
+
+Expected: **non-zero exit, or output naming the unknown type `webinars`.** If validation passes with this field present, the gate is not protecting you — stop and find a command that does fail (try `npx sanity schema extract --force` and inspect its output for warnings) before going further.
+
+Now revert the field:
+
+```bash
+cd studio && git checkout -- schemas/website/documents/settings/reading.ts
+```
+
+Re-run `npx sanity schema validate` and confirm it passes again.
+
+- [ ] **Step 5: Extract the schema**
 
 ```bash
 cd studio && npx sanity schema extract --force
 ```
 
-Expected: exit 0, writes `studio/schema.json`. **This is the check that `tsc` cannot do.** Duplicate type names and orphan `type:` / `to:` references to deleted types are resolved at runtime by Sanity, not by the compiler, so they surface only here. A message naming `webinarPage`, `textCard`, `textBlock`, or any portal type means an exclusion was missed — go back and fix the referencing file rather than re-adding the type.
+Expected: exit 0, writes `studio/schema.json`. Note that `extract` can emit "unknown type" warnings while still exiting 0 — read its output, do not just check the exit code. `validate` in Step 3 is the authoritative gate.
 
-If the command fails with a styled-components or React resolution error during manifest extraction, add the model's Vite workaround to `studio/sanity.cli.ts` — a `vite` key forcing `styled-components` into `ssr.noExternal`. Only do this if extraction actually fails.
+If this fails with a styled-components or React resolution error during manifest extraction, add the model's Vite workaround to `studio/sanity.cli.ts` — a `vite` key forcing `styled-components` into `ssr.noExternal`. Only do this if extraction actually fails.
 
-- [ ] **Step 4: Confirm the extracted schema has the right shape**
+- [ ] **Step 6: Confirm the extracted schema has the right shape**
 
 ```bash
 cd studio && node -e "const s=require('./schema.json'); console.log('types:', s.length); console.log('excluded present:', s.filter(t=>/webinar|textCard|textBlock|apiPage|tutorial/i.test(t.name)).map(t=>t.name))"
@@ -865,7 +920,7 @@ cd studio && node -e "const s=require('./schema.json'); console.log('types:', s.
 
 Expected: `types:` a number of at least 77 (Sanity adds built-ins such as `sanity.imageAsset` on top of the registered types), and `excluded present: []`.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 7: Commit**
 
 ```bash
 git add studio/sanity.config.ts studio/schema.json
@@ -1189,12 +1244,14 @@ Do not document Portal, Webinars, staging, or the deprecated sections — they d
 
 ```bash
 cd studio
-npx sanity schema extract --force   # expect exit 0
+npx sanity schema validate          # expect exit 0, no problems reported
+npx sanity schema extract --force   # expect exit 0, read the output for warnings
 npx tsc --noEmit                    # expect exit 0
+npm run lint                        # expect exit 0
 grep -rin "arratech" . --exclude-dir=node_modules --exclude-dir=.sanity --exclude-dir=dist || echo "CLEAN"
 ```
 
-Expected: two clean exits and `CLEAN`. Record the actual output — do not claim success without it.
+Expected: four clean exits and `CLEAN`. `npm run lint` covers the two files written by hand in this port — `structure/website-structure.ts` and `consts/brand-colors.ts`. Record the actual output — do not claim success without it.
 
 - [ ] **Step 3: Confirm `web/` was never touched**
 
@@ -1232,7 +1289,9 @@ Below the Settings item there must be no extra document-type entries. `desk.ts` 
 
 Open **Settings → General**. Confirm the document opens directly (not as a list) and that the action menu offers only Publish / Discard changes / Restore — no Delete, no Duplicate. That proves the `singletonTypes` template filter and `documentActions` resolver are both wired.
 
-Then open **Pages → Published**, create a page, and confirm an **Archive** action appears in its action menu.
+Then open **Pages → Published** and create a page titled `ZZ Archive Smoke Test`. Confirm an **Archive** action appears in its action menu.
+
+**This writes a draft into the dataset that `SANITY_STUDIO_DATASET` names — `production`.** That is the only write this plan performs, and it is deliberate: the archive action cannot be verified without a document. Delete the test page as soon as you have confirmed the action, before moving on. If you would rather not write to `production` at all, skip this sub-step and note it as unverified rather than pointing the Studio at a different dataset.
 
 - [ ] **Step 8: Stop the dev server and commit**
 
@@ -1250,10 +1309,13 @@ follow-ups: the placeholder brand palette and the deferred typegen pass."
 
 The port is complete when all of the following hold, with output recorded:
 
-1. `npx sanity schema extract --force` in `studio/` exits 0.
-2. `npx tsc --noEmit` in `studio/` exits 0.
-3. `grep -rin "arratech" studio/ --exclude-dir=node_modules --exclude-dir=.sanity --exclude-dir=dist` returns nothing.
-4. `git status --porcelain web/` returns nothing.
-5. Every desk branch renders, with no Webinars and no DEPRECATED entries.
-6. The desk fallback list is empty.
-7. `studio/schemas/lyra-index.ts` registers 77 types.
+1. `npx sanity schema validate` in `studio/` exits 0 with no problems reported — **and was observed failing** on the Task 6 negative test.
+2. `npx sanity schema extract --force` exits 0 with no unknown-type warnings in its output.
+3. `npx tsc --noEmit` in `studio/` exits 0.
+4. `npm run lint` in `studio/` exits 0.
+5. `grep -rin "arratech" studio/ --exclude-dir=node_modules --exclude-dir=.sanity --exclude-dir=dist` returns nothing.
+6. `git status --porcelain web/` returns nothing.
+7. Every desk branch renders, with no Webinars and no DEPRECATED entries.
+8. The desk fallback list is empty.
+9. `studio/schemas/lyra-index.ts` registers 77 types.
+10. The `ZZ Archive Smoke Test` page has been deleted from the dataset.
