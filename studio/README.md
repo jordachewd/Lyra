@@ -31,6 +31,12 @@ gitignored — never commit real values.
 `npm run typegen` writes into `web/`. Run it only as part of frontend work, and
 expect to update the queries in `web/src` alongside it.
 
+> **`npm run dev` also writes to `web/`.** `sanity.cli.ts` sets
+> `typegen.enabled: true`, so the dev server regenerates `../web/sanity.types.ts`
+> on start and whenever the schema changes. If you are not doing frontend work,
+> check `git status web/` after a dev session and revert if you did not intend
+> the change.
+
 ## Verifying a schema change
 
 `tsc` cannot catch a broken schema — `type: 'foo'` and `to: [{type: 'foo'}]` are

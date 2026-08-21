@@ -160,6 +160,12 @@ describing the current `post` type and `web/` keeps compiling. Regenerating
 types is deferred to the frontend pass. No frontend rendering, no content
 migration, no deploy.
 
+**Caveat found during implementation:** `sanity.cli.ts` sets
+`typegen.enabled: true`, so `npm run dev` regenerates `../web/sanity.types.ts`
+on start — not just the explicit `npm run typegen`. Any dev session therefore
+dirties `web/` and the change must be reverted to hold this boundary. Check
+`git status --porcelain web/` after running the Studio.
+
 ## Verification
 
 Evidence is required before claiming completion.
