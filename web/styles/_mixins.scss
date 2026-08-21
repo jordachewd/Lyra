@@ -1,0 +1,248 @@
+@use 'sass:math';
+@use 'sass:meta';
+@use 'sass:string';
+@use './variables' as *;
+
+/* Media Query || Max Width */
+/* Usage: @include arrMediaQuery(40em) { ... } */
+@mixin arrMediaQuery($query) {
+  @if $no-mq-support {
+    @if $query <= $serve-to-nomq-max-width {
+      @content;
+    }
+  } @else {
+    @media screen and ( min-width:  #{$query} ) {
+      @content;
+    }
+  }
+}
+
+/* Media Query || Max Height */
+/* Usage: @include arrMediaQueryHeight(40em) { ... } */
+@mixin arrMediaQueryHeight($query) {
+  @if $no-mq-support {
+    @if $query <= $serve-to-nomq-max-width {
+      @content;
+    }
+  } @else {
+    @media screen and (min-height: #{$query}) {
+      @content;
+    }
+  }
+}
+
+/* Typography Mixin */
+/* Usage: .foo { @include arrTextTypography(1rem, 300, 1.6, 0.02em, var(--text-primary), break-word); } */
+@function arrFluidFontSize($size) {
+  @if meta.type-of($size) != 'number' or math.is-unitless($size) {
+    @return $size; // clamp()/calc() (headings) and unitless pass through
+  }
+
+  @if math.unit($size) == 'px' {
+    $size: math.div($size, 16px) * 1rem; // normalize px -> rem
+  } @else if math.unit($size) != 'rem' {
+    @return $size; // em/%/etc. untouched
+  }
+
+  @return $size; // rem returned as specified — no upward inflation
+}
+
+@mixin arrTextTypography(
+  $fSize: 0.875rem,
+  $fWeight: 300,
+  $lHeight: 1.6,
+  $ltSpacing: 0,
+  $txtColor: var(--text-primary),
+  $wordWrap: break-word
+) {
+  font-size: arrFluidFontSize($fSize);
+  font-weight: $fWeight;
+  line-height: $lHeight;
+  letter-spacing: $ltSpacing;
+  font-family: 'Inter', sans-serif;
+  color: $txtColor;
+  word-wrap: $wordWrap;
+}
+
+/* Transform Mixins */
+/* Usage: .foo { @include arrTransform(translateY(-50%) rotate(2deg), center); } */
+@mixin arrTransform($value, $origin: null, $box: null) {
+  transform: $value;
+  @if $origin != null {
+    transform-origin: $origin;
+  }
+  @if $box != null {
+    transform-box: $box;
+  }
+}
+
+/* Optional: varargs convenience */
+/* Usage: .bar { @include arrTransformV(translateX(10px), scale(.95)); } */
+@mixin arrTransformV($values...) {
+  transform: $values;
+}
+
+/* Transition Mixins */
+/* Usage: .button { @include arrTransition(background-color, .2s, $ease-standard); } */
+@mixin arrTransition(
+  $property: all,
+  $duration: 0.5s,
+  $easing: ease-in-out,
+  $delay: 0s,
+  $respect-reduced-motion: true
+) {
+  transition-property: $property;
+  transition-duration: $duration;
+  transition-timing-function: $easing;
+  transition-delay: $delay;
+
+  @if $respect-reduced-motion and $duration != 0s {
+    @media (prefers-reduced-motion: reduce) {
+      transition-duration: 0s;
+    }
+  }
+}
+
+/* Backdrop Blur Mixin */
+/* Usage:
+.card--frosted { @include arrBackdropBlur(20px, rgba(255,255,255,.12), 120%); }
+.toolbar       { @include arrBackdropBlur(16px, rgba(0,0,0,.22), 140%, 105%); } 
+*/
+@mixin arrBackdropBlur(
+  $blur: 8px,
+  $bg: rgba(255, 255, 255, 0.15),
+  $saturate: null,
+  $brightness: null
+) {
+  background: $bg;
+  $filters: blur($blur);
+
+  @if $saturate != null {
+    $sat: $saturate;
+    @if meta.type-of($saturate) == 'number' and math.unit($saturate) == '%' {
+      $sat: math.div($saturate, 100);
+    }
+    $filters: #{$filters} #{string.unquote(' saturate(' + $sat + ')')};
+  }
+
+  @if $brightness != null {
+    $bri: $brightness;
+    @if meta.type-of($brightness) == 'number' and math.unit($brightness) == '%' {
+      $bri: math.div($brightness, 100);
+    }
+    $filters: #{$filters} #{string.unquote(' brightness(' + $bri + ')')};
+  }
+
+  @supports ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    background: color-mix(in srgb, $bg 70%, transparent);
+    -webkit-backdrop-filter: #{$filters};
+    backdrop-filter: #{$filters};
+  }
+}
+
+// Reset / remove previously applied backdrop blur
+// Usage:
+// .card--plain { @include arrBackdropBlurReset(); }
+// .toolbar--solid { @include arrBackdropBlurReset(#121212, $important: true); }
+@mixin arrBackdropBlurReset($background: transparent, $important: false) {
+  $imp: null;
+  @if $important {
+    $imp: '!important';
+  }
+  background: $background #{$imp};
+  -webkit-backdrop-filter: none #{$imp};
+  backdrop-filter: none #{$imp};
+  filter: none #{$imp};
+}
+
+/* Text Gradient Overlay Mixin */
+/* Usage: .heading-gradient {
+  @include textGradientOverlay(rgba(255,0,150,1), rgba(0,204,255,1), 90deg, fill);
+}
+*/
+@mixin textGradientOverlay(
+  $from: rgba(0, 24, 243, 1),
+  $to: rgba(255, 255, 255, 1),
+  $angle: 180deg,
+  $mode: fill
+) {
+  @if $mode == fill {
+    /* Paint the text itself with a gradient */
+    background: linear-gradient($angle, $from 0%, $to 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  } @else {
+    /* Overlay mode: requires data-text containing the same string */
+    position: relative;
+    z-index: 0;
+
+    &::after {
+      content: attr(data-text);
+      position: absolute;
+      inset: 0;
+      display: block;
+      /* Stack above original text but below any foreground controls */
+      z-index: 1;
+      pointer-events: none;
+
+      /* Gradient clipped to glyphs */
+      background: linear-gradient($angle, $from 0%, $to 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+
+      /* Match typography & layout of the host element */
+      font: inherit;
+      letter-spacing: inherit;
+      line-height: inherit;
+      text-align: inherit;
+      padding: inherit;
+      margin: 0;
+      -webkit-font-smoothing: antialiased; /* for better font rendering */
+    }
+  }
+}
+
+// Hover Mixins
+// Usage:
+// .btn { @include arrHover { background: #222; } }
+
+@mixin arrHover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+// .card { @include arrHoverOn('&:hover .card__img') { transform: scale(1.03); } }
+@mixin arrHoverOn($selector) {
+  @media (hover: hover) and (pointer: fine) {
+    #{$selector} {
+      @content;
+    }
+  }
+}
+
+// Focus visible mixin for consistent keyboard focus styling
+// Usage: .btn { @include arrFocusVisible; }
+// or with custom color: .btn { @include arrFocusVisible(#ff0000, 3px); }
+@mixin arrFocusVisible($color: #3b82f6, $offset: 2px, $width: 2px) {
+  &:focus-visible {
+    outline: $width solid $color;
+    outline-offset: $offset;
+  }
+}
+
+// Touch target mixin ensures minimum 44x44px interactive area
+// Usage: .link { @include arrTouchTarget; }
+@mixin arrTouchTarget($min-size: 44px) {
+  min-height: $min-size;
+  min-width: $min-size;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,300 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+.arrContentBlocks {
+  &-wrapper {
+    &.normal,
+    &.reversed {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+
+  &-grid {
+    display: grid !important;
+    max-width: 100% !important;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.65rem;
+
+    &.card {
+      gap: 1rem;
+    }
+
+    &.text {
+      gap: 3rem;
+    }
+
+    &.gap {
+      &-medium {
+        gap: 1.5rem;
+        &.card {
+          gap: 2rem;
+        }
+        &.text {
+          gap: 4rem;
+        }
+      }
+      &-bigger {
+        gap: 2.5rem;
+        &.card {
+          gap: 3rem;
+        }
+        &.text {
+          gap: 5rem;
+        }
+      }
+    }
+
+    &:has(.twoPerRow) {
+      @include arrMediaQuery($mq-tablet) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    &:has(.threePerRow) {
+      @include arrMediaQuery($mq-tablet) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      @include arrMediaQuery($mq-desktop) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    &:has(.fourPerRow) {
+      @include arrMediaQuery($mq-tablet) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      @include arrMediaQuery($mq-desktop) {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+
+    &.collapsible {
+      grid-auto-rows: max-content;
+      align-items: start;
+    }
+  }
+
+  &-block {
+    height: 100%;
+    display: flex;
+    position: relative;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 2rem;
+
+    &.box {
+      border-radius: 12px;
+      position: relative;
+      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.05);
+      @include arrTransition(border-color, 0.25s);
+      @include arrBackdropBlur(8px, var(--contentBlocks-bg, rgba(255, 255, 255, 0.15)));
+    }
+
+    &.card {
+      gap: 1.25rem;
+      border-radius: 1.5rem;
+      padding: 1.25rem;
+      margin: 0;
+      background: var(--contentBlocks-bg, linear-gradient(to bottom, #324148, #799dae));
+
+      &.samerow {
+        @include arrMediaQuery($mq-tablet) {
+          gap: 3rem;
+        }
+      }
+    }
+
+    &.collapsible {
+      cursor: pointer;
+      gap: 0 !important;
+      height: auto;
+      @include arrFocusVisible;
+    }
+
+    &-head {
+      display: flex;
+      position: relative;
+      align-items: center;
+      gap: 1.5rem;
+
+      &.samerow {
+        flex-direction: row;
+      }
+
+      &.stacked {
+        flex-direction: column;
+        align-items: flex-start;
+        &.card {
+          gap: 2rem;
+          @include arrMediaQuery($mq-tablet) {
+            gap: 3rem;
+          }
+        }
+      }
+
+      &-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+
+        &.box,
+        &.text {
+          background: var(--contentBlocks-icon-bg, var(--color-white));
+          border: 1px solid var(--contentBlocks-icon-bg, var(--color-white));
+          box-shadow: 0px 0px 1rem 0px #ffffff50;
+          border-radius: 100%;
+
+          & > img {
+            display: flex;
+            max-width: 50%;
+            max-height: 50%;
+          }
+        }
+
+        &.card {
+          & > img {
+            display: block;
+            height: 100%;
+            width: auto;
+            max-width: 100%;
+          }
+        }
+      }
+
+      &-title {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        width: 100%;
+        gap: 0.25rem;
+
+        &-text,
+        &-tagline {
+          @include arrTextTypography(1.25rem, 500, 1.3);
+          color: var(--contentBlocks-accent, var(--contentBlocks-txt, var(--text-primary)));
+        }
+
+        &-tagline {
+          font-size: 0.875rem;
+          font-weight: 600;
+          color: var(--contentBlocks-txt, var(--text-primary));
+        }
+      }
+    }
+
+    &:has(&-head.samerow) &-head-title {
+      flex: 1 1 calc(100% - 4rem);
+    }
+
+    &-desc {
+      display: flex;
+
+      &.collapsible {
+        display: grid;
+        grid-template-rows: 0fr;
+        overflow: hidden;
+        margin-top: 0;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          grid-template-rows 0.34s ease,
+          opacity 0.24s ease,
+          margin-top 0.24s ease,
+          padding 0.24s ease,
+          visibility 0s linear 0.24s;
+        will-change: grid-template-rows, opacity, margin-top;
+
+        &.open {
+          grid-template-rows: 1fr;
+          margin-top: 1rem;
+          opacity: 1;
+          visibility: visible;
+          transition:
+            grid-template-rows 0.34s ease,
+            opacity 0.24s ease,
+            margin-top 0.24s ease,
+            padding 0.24s ease,
+            visibility 0s;
+        }
+      }
+
+      &-content {
+        overflow: hidden;
+        p {
+          line-height: 1.4;
+          font-size: 0.875rem;
+          color: var(--contentBlocks-txt, var(--text-primary));
+        }
+      }
+    }
+
+    &-collapse {
+      display: block;
+      position: absolute !important;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid var(--contentBlocks-icon-bg, rgba(255, 255, 255, 0.35));
+      top: 0.75rem;
+      right: 0.75rem;
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease;
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background: var(--contentBlocks-icon-bg, rgba(255, 255, 255, 0.85));
+        transition: opacity 0.2s ease;
+      }
+      &::before {
+        width: 10px;
+        height: 2px;
+      }
+
+      &::after {
+        width: 2px;
+        height: 10px;
+      }
+    }
+
+    &:has(&-desc.collapsible.open) &-collapse {
+      background: var(--contentBlocks-txt, var(--color-white));
+      border-color: var(--contentBlocks-txt, var(--color-white));
+      transform: rotate(180deg);
+      &:before,
+      &:after {
+        background: var(--contentBlocks-txt, var(--color-dark));
+        filter: invert(50%);
+      }
+      &:after {
+        opacity: 0;
+      }
+    }
+  }
+
+  &:has(&-wrapper.centered) &-title,
+  &:has(&-wrapper.revCentered) &-title {
+    margin: 0 auto;
+  }
+
+  &:has(&-wrapper.centered) &-grid,
+  &:has(&-wrapper.revCentered) &-grid {
+    .arrContentBlocks-block {
+      &-head-title-text,
+      &-head-title-tagline,
+      &-desc-content {
+        text-align: left;
+      }
+    }
+  }
+}

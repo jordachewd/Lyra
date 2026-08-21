@@ -1,0 +1,150 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+.arrPortableTable {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  flex-direction: column;
+
+  @include arrMediaQuery($mq-tablet) {
+    border-radius: 0.625rem;
+    border: 1px solid
+      rgba(var(--portableTable-accentRgb, var(--portableTable-txtRgb, var(--color-white-rgb))), 0.1);
+  }
+
+  thead,
+  tbody {
+    flex-direction: column;
+    width: 100%;
+
+    tr {
+      width: 100%;
+      display: flex;
+      overflow: hidden;
+      flex-direction: column;
+      border-radius: 1rem;
+      border: 1px solid
+        rgba(
+          var(--portableTable-accentRgb, var(--portableTable-txtRgb, var(--color-white-rgb))),
+          0.1
+        );
+
+      @include arrMediaQuery($mq-tablet) {
+        flex-direction: row;
+        border-radius: 0;
+        overflow: visible;
+        border: none;
+      }
+
+      th,
+      td {
+        flex: 1;
+        display: flex;
+        padding: 0.8rem 1rem;
+        text-align: left;
+        opacity: 0.85;
+        border-bottom: 1px solid
+          rgba(
+            var(--portableTable-accentRgb, var(--portableTable-txtRgb, var(--color-white-rgb))),
+            0.1
+          );
+
+        @include arrTextTypography(
+          0.875rem,
+          300,
+          1.2,
+          0,
+          var(--portableTable-txt, var(--text-primary))
+        );
+
+        font-size: 0.875rem;
+
+        @include arrBackdropBlur(
+          4px,
+          rgba(var(--portableTable-txtRgb, var(--color-white-rgb)), 0.05)
+        );
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        @include arrMediaQuery($mq-tablet) {
+          border-right: 1px solid
+            rgba(
+              var(--portableTable-accentRgb, var(--portableTable-txtRgb, var(--color-white-rgb))),
+              0.1
+            );
+          &:last-child {
+            border-right: none;
+            border-bottom: 1px solid
+              rgba(
+                var(--portableTable-accentRgb, var(--portableTable-txtRgb, var(--color-white-rgb))),
+                0.1
+              );
+          }
+        }
+      }
+
+      th {
+        opacity: 1;
+        padding: 1.125rem 1rem;
+        font-weight: 600;
+        font-size: 1rem;
+        color: var(--portableTable-accent, var(--portableTable-txt, var(--text-primary)));
+        @include arrBackdropBlur(
+          4px,
+          rgba(
+            var(--portableTable-accentRgb, var(--portableTable-txtRgb, var(--color-white-rgb))),
+            0.15
+          )
+        );
+      }
+
+      td:first-child {
+        font-weight: 600;
+        opacity: 1;
+        @include arrBackdropBlur(
+          4px,
+          rgba(var(--portableTable-txtRgb, var(--color-white-rgb)), 0.15)
+        );
+
+        @include arrMediaQuery($mq-tablet) {
+          @include arrBackdropBlur(
+            4px,
+            rgba(var(--portableTable-txtRgb, var(--color-white-rgb)), 0.08)
+          );
+        }
+      }
+
+      &:last-child td {
+        border-bottom: none;
+      }
+    }
+  }
+
+  thead {
+    display: none;
+    @include arrMediaQuery($mq-tablet) {
+      display: flex;
+    }
+  }
+
+  tbody {
+    gap: 1rem;
+    display: flex;
+
+    @include arrMediaQuery($mq-tablet) {
+      gap: 0;
+    }
+
+    tr {
+      cursor: default;
+      @include arrTransition(background-color);
+
+      @include arrHover {
+        background-color: rgba(var(--portableTable-txtRgb, var(--color-white-rgb)), 0.08);
+      }
+    }
+  }
+}

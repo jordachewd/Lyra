@@ -1,0 +1,230 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+.arrFooter {
+  width: 100%;
+  display: flex;
+  margin: 0;
+  padding: 0;
+
+  &.bg-color {
+    background-color: var(--arrFooter-bg, transparent);
+  }
+
+  &.bg-img {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image:
+      var(--arrFooter-bgImg),
+      linear-gradient(
+        rgba(var(--arrFooter-bgOverlayRgb, 0, 0, 0), var(--arrFooter-bgOpacity, 0.5)),
+        rgba(
+          var(--arrFooter-bgOverlayRgb, 0, 0, 0),
+          min(1, calc(var(--arrFooter-bgOpacity, 0.5) + 0.1))
+        )
+      );
+    background-blend-mode: overlay;
+  }
+
+  &.ptb {
+    &_normal {
+      padding-top: 3rem;
+      padding-bottom: 2rem;
+
+      @include arrMediaQuery($site-width) {
+        padding-top: 4rem;
+      }
+    }
+
+    &_medium {
+      padding-top: 2.25rem;
+      padding-bottom: 1.75rem;
+
+      @include arrMediaQuery($site-width) {
+        padding-top: 3rem;
+      }
+    }
+
+    &_half {
+      padding-top: 1.5rem;
+      padding-bottom: 1rem;
+
+      @include arrMediaQuery($site-width) {
+        padding-top: 2rem;
+      }
+    }
+
+    &_small {
+      padding-top: 1rem;
+      padding-bottom: 0.5rem;
+    }
+  }
+
+  &.pdd {
+    &_top {
+      padding-bottom: 0;
+    }
+    &_bottom {
+      padding-top: 0;
+    }
+    &_none {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  &-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 3rem;
+    padding: 0 1rem;
+    margin: 0 auto;
+    background-color: transparent;
+
+    @include arrMediaQuery($mq-tablet) {
+      flex-wrap: wrap;
+      flex-direction: row;
+    }
+
+    @include arrMediaQuery($site-width) {
+      padding: 0;
+      gap: 4rem;
+    }
+
+    &.siteWidth {
+      max-width: $site-width;
+    }
+
+    &.fullWidth {
+      @include arrMediaQuery($mq-max) {
+        padding-left: 4rem;
+        padding-right: 4rem;
+      }
+    }
+  }
+
+  &-logo {
+    display: flex;
+    align-items: center;
+
+    & > a > img {
+      display: block;
+      position: relative;
+      max-width: 178px;
+      width: 60%;
+      height: auto;
+
+      @include arrMediaQuery($mq-tablet) {
+        width: 80%;
+      }
+
+      @include arrMediaQuery($site-width) {
+        width: 100%;
+      }
+    }
+  }
+
+  &-nav-center {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    flex: 1 1 0%;
+    width: 100%;
+
+    @include arrMediaQuery($mq-tablet) {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+
+    @include arrMediaQuery($site-width) {
+      gap: 3rem;
+    }
+  }
+
+  &-nav-column {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+
+    @include arrMediaQuery($site-width) {
+      padding: 0 2rem;
+    }
+  }
+
+  &-nav-heading {
+    @include arrTextTypography(0.875rem, 600, 1, 0.02em, var(--arrFooter-txt, inherit));
+    text-transform: uppercase;
+  }
+
+  &-nav-list {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    &.child-list {
+      margin: 6px 0 12px;
+      padding-left: 16px;
+    }
+  }
+
+  &-nav-item {
+    @include arrTransition();
+    @include arrTextTypography();
+    color: var(--arrFooter-txt, var(--color-white));
+    display: inline-flex;
+    position: relative;
+    align-items: center;
+    text-decoration: none;
+    line-height: 1.3;
+    margin: 0.5rem 0;
+
+    @include arrMediaQuery($mq-tablet) {
+      font-size: 0.875rem;
+    }
+
+    &:after {
+      content: '';
+      position: absolute;
+      height: 1px;
+      width: 0;
+      left: 0;
+      bottom: -1px;
+      border-radius: 0.25rem;
+      background: var(--color-accent-light);
+      opacity: 0;
+      @include arrTransition(all, 0.4s, ease);
+    }
+
+    &:hover {
+      color: var(--color-accent-light);
+      &:after {
+        width: 100%;
+        opacity: 1;
+      }
+    }
+
+    &.child {
+      font-size: 0.8125rem;
+      min-height: 36px;
+    }
+  }
+
+  &-bottom {
+    width: 100%;
+    display: flex;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 1rem;
+  }
+
+  &-copyright {
+    display: flex;
+    @include arrTextTypography(0.75rem, 300, 1.6, 0em, var(--arrFooter-txt, inherit));
+  }
+}

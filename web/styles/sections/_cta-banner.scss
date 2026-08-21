@@ -1,0 +1,180 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+.arrCtaBanner {
+  &-container {
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+    border-radius: 1.5rem;
+    background-color: var(--ctaContainer-bg, transparent);
+
+    @include arrMediaQuery($mq-tablet) {
+      flex-direction: row;
+    }
+
+    @include arrMediaQuery($mq-desktop) {
+      &.cols-firstBig {
+        &.normal {
+          & > div:first-child {
+            flex: 1 1 calc(2 / 3 * 100%);
+          }
+          & > div:last-child {
+            flex: 1 1 calc(1 / 3 * 100%);
+          }
+        }
+        &.reversed {
+          & > div:first-child {
+            flex: 1 1 calc(1 / 3 * 100%);
+          }
+          & > div:last-child {
+            flex: 1 1 calc(2 / 3 * 100%);
+          }
+        }
+      }
+
+      &.cols-lastBig {
+        &.normal {
+          & > div:first-child {
+            flex: 1 1 calc(1 / 3 * 100%);
+          }
+          & > div:last-child {
+            flex: 1 1 calc(2 / 3 * 100%);
+          }
+        }
+        &.reversed {
+          & > div:first-child {
+            flex: 1 1 calc(2 / 3 * 100%);
+          }
+          & > div:last-child {
+            flex: 1 1 calc(1 / 3 * 100%);
+          }
+        }
+      }
+    }
+  }
+
+  &-image {
+    display: flex;
+    position: relative;
+
+    & > img {
+      display: flex;
+      object-fit: cover;
+      object-position: right;
+      height: 100%;
+      width: 100%;
+    }
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 1 1 100%;
+    gap: 2rem;
+
+    &:not(.pd-none) {
+      padding: 2rem;
+    }
+
+    &.pd-none {
+      padding: 0;
+    }
+
+    @include arrMediaQuery($mq-tablet) {
+      gap: 2.5rem;
+      &.pd {
+        &-normal {
+          padding: 3rem 3.25rem;
+        }
+        &-medium {
+          padding: 2.5rem 2.75rem;
+        }
+        &-half {
+          padding: 1.5rem 1.75rem;
+        }
+        &-small {
+          padding: 0.75rem 1rem;
+        }
+      }
+    }
+
+    .arrTitleDesc {
+      &.shrink {
+        max-width: 65%;
+      }
+      &.right {
+        margin-left: 0;
+        margin-right: auto;
+      }
+    }
+
+    &-title,
+    &-actions {
+      display: flex;
+      width: 100%;
+    }
+
+    &-actions {
+      gap: 1rem;
+    }
+
+    .arrPortableText p {
+      margin: 0;
+    }
+  }
+
+  &:has(&-wrapper.cols-normal) &-container:not(.no-img) &-image {
+    width: 100%;
+    @include arrMediaQuery($mq-tablet) {
+      max-width: 620px;
+    }
+  }
+
+  &:has(&-wrapper.centered) &-container,
+  &:has(&-wrapper.revCentered) &-container {
+    max-width: 100%;
+  }
+
+  &:has(&-wrapper.centered) &-content-title,
+  &:has(&-wrapper.centered) &-content-actions,
+  &:has(&-wrapper.revCentered) &-content-title,
+  &:has(&-wrapper.revCentered) &-content-actions {
+    justify-content: center;
+  }
+
+  &:has(&-wrapper.reversed) &-container,
+  &:has(&-wrapper.revCentered) &-container {
+    flex-direction: row-reverse;
+  }
+
+  &:has(&-wrapper.reversed) &-container:not(.no-img) &-content {
+    &-title .arrTitleDesc {
+      &-title,
+      &-eyebrow,
+      &-desc {
+        text-align: left;
+        justify-content: flex-start;
+      }
+    }
+  }
+
+  &:has(&-wrapper.reversed) &-container.no-img &-content {
+    &-actions {
+      justify-content: flex-end;
+    }
+  }
+
+  &:has(&-wrapper.revCentered) &-container.no-img &-content {
+    flex-direction: column-reverse;
+  }
+
+  &:has(&-wrapper.normal) &-container.no-img &-content {
+    &-actions {
+      flex-direction: row;
+    }
+  }
+}

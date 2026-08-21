@@ -1,0 +1,89 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+.arrKeyFeatures {
+  &-wrapper {
+    flex-direction: column;
+    &.centered,
+    &.revCentered {
+      .arrKeyFeatures {
+        &-topHeadline,
+        &-bottomHeadline {
+          margin: 0 auto;
+        }
+        &-cards {
+          max-width: 100%;
+        }
+      }
+    }
+
+    &.reversed {
+      flex-direction: column;
+      .arrKeyFeatures-bottomHeadline .arrTitleDesc-title {
+        justify-content: flex-start;
+      }
+    }
+  }
+
+  &-bottomHeadline .arrTitleDesc-title {
+    justify-content: flex-end;
+  }
+
+  &-cards {
+    display: grid !important;
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+
+    @include arrMediaQuery($mq-tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include arrMediaQuery($mq-desktop) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  &-card {
+    height: 100%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1rem;
+    border-radius: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+
+    @include arrMediaQuery($mq-tablet) {
+      padding: 1.5rem;
+    }
+
+    &-icon {
+      width: 48px;
+      height: 48px;
+      background: #fff;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow: 0px 0px 16px 0px #ffffff4d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0 !important;
+      flex-shrink: 0;
+
+      img {
+        max-width: 50%;
+        max-height: 50%;
+        display: block;
+      }
+    }
+
+    &-text p {
+      line-height: 1.4;
+    }
+  }
+
+  &:has(&-wrapper.centered) &-card-text,
+  &:has(&-wrapper.revCentered) &-card-text {
+    text-align: left;
+  }
+}

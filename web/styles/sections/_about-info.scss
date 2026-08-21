@@ -1,0 +1,210 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+.arrAboutInfo {
+  &-wrapper {
+    align-items: flex-start;
+  }
+
+  &-features {
+    order: 1;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    @include arrMediaQuery($mq-tablet) {
+      order: 0;
+    }
+  }
+
+  &-feature {
+    &-card {
+      width: 100%;
+      margin: 0;
+      display: flex;
+      position: relative;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 1.5rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 12px;
+      cursor: pointer;
+      @include arrBackdropBlur;
+      @include arrTransition(border-color, 0.25s);
+      @include arrMediaQuery($mq-tablet) {
+        max-width: calc(50% - (1.5rem / 4));
+      }
+
+      &:hover {
+        border-color: rgba(255, 255, 255, 0.3);
+      }
+    }
+
+    &-icon {
+      width: 44px;
+      height: 44px;
+      background: #fff;
+      border-radius: 32px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0px 0px 16px 0px #ffffff4d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.5rem;
+    }
+
+    &-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &-title {
+      @include arrTextTypography(0.875rem, 600);
+      max-width: calc(100% - 32px);
+      text-transform: uppercase;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 0;
+    }
+
+    &-rollout {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      position: relative;
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease;
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(255, 255, 255, 0.85);
+        transition: opacity 0.2s ease;
+      }
+      &::before {
+        width: 10px;
+        height: 2px;
+      }
+
+      &::after {
+        width: 2px;
+        height: 10px;
+      }
+    }
+
+    &-content {
+      display: grid;
+      grid-template-rows: 0fr;
+      overflow: hidden;
+      margin-top: 0;
+      opacity: 0;
+      visibility: hidden;
+      transition:
+        grid-template-rows 0.34s ease,
+        opacity 0.24s ease,
+        margin-top 0.24s ease,
+        padding 0.24s ease,
+        visibility 0s linear 0.24s;
+      will-change: grid-template-rows, opacity, margin-top;
+
+      &-inner {
+        overflow: hidden;
+      }
+
+      &-body p {
+        font-size: 0.875rem;
+        line-height: 1.4;
+      }
+
+      &.opened {
+        grid-template-rows: 1fr;
+        margin-top: 1rem;
+        opacity: 1;
+        visibility: visible;
+        transition:
+          grid-template-rows 0.34s ease,
+          opacity 0.24s ease,
+          margin-top 0.24s ease,
+          padding 0.24s ease,
+          visibility 0s;
+
+        &-body {
+          transform: translateY(0);
+        }
+      }
+    }
+
+    &-card:has(&-content.opened) &-rollout {
+      background: white;
+      border-color: white;
+      transform: rotate(180deg);
+      &::before,
+      &::after {
+        background: var(--color-dark);
+      }
+      &::after {
+        opacity: 0;
+      }
+    }
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  &__heading {
+    @include arrTextTypography(3rem, 300, 1);
+  }
+
+  &__desc {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    & > p {
+      font-weight: 300;
+      line-height: 1.4;
+    }
+  }
+
+  &-actions {
+    display: flex;
+    gap: 1rem;
+  }
+
+  &:has(&-wrapper.centered) &-content,
+  &:has(&-wrapper.revCentered) &-content {
+    max-width: 100%;
+    .arrAboutInfo-actions {
+      justify-content: center;
+    }
+  }
+
+  &:has(&-wrapper.centered) &-features,
+  &:has(&-wrapper.revCentered) &-features {
+    margin: 0 auto;
+    .arrAboutInfo-feature-content {
+      text-align: left;
+    }
+  }
+
+  &:has(&-wrapper.reversed) &-content {
+    .arrTitleDesc {
+      &-title,
+      &-eyebrow,
+      &-desc {
+        text-align: left;
+        justify-content: flex-start;
+      }
+    }
+  }
+}

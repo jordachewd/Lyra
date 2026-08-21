@@ -1,0 +1,121 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+.arrCollapsibleAddons {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+
+  &-header {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    gap: 0.75rem;
+    width: 100%;
+
+    &-text {
+      text-transform: uppercase;
+      @include arrTextTypography(0.875rem, 600, 1.2);
+      color: var(--collapsibleAddon-txt, var(--text-primary));
+    }
+
+    &-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 0.125rem solid
+        color-mix(in srgb, var(--collapsibleAddon-txt, var(--text-primary)) 50%, transparent);
+      position: relative;
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease;
+
+      &:before,
+      &:after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background: color-mix(
+          in srgb,
+          var(--collapsibleAddon-txt, var(--text-primary)) 85%,
+          transparent
+        );
+        transition: opacity 0.2s ease;
+      }
+      &:before {
+        width: 10px;
+        height: 2px;
+      }
+
+      &:after {
+        width: 2px;
+        height: 10px;
+      }
+    }
+  }
+
+  &-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    overflow: hidden;
+    margin-top: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      grid-template-rows 0.34s ease,
+      opacity 0.24s ease,
+      margin-top 0.24s ease,
+      padding 0.24s ease,
+      visibility 0s linear 0.24s;
+    will-change: grid-template-rows, opacity, margin-top;
+
+    &.open {
+      grid-template-rows: 1fr;
+      margin-top: 1rem;
+      opacity: 1;
+      visibility: visible;
+      transition:
+        grid-template-rows 0.34s ease,
+        opacity 0.24s ease,
+        margin-top 0.24s ease,
+        padding 0.24s ease,
+        visibility 0s;
+
+      .arrCollapsibleAddons-wrapper-content {
+        transform: translateY(0);
+      }
+    }
+
+    &-content {
+      overflow: hidden;
+      ul,
+      ol {
+        margin: 0 !important;
+      }
+      p,
+      li,
+      span {
+        font-size: 0.9375rem;
+        line-height: 1.35;
+        font-weight: 300;
+        color: var(--collapsibleAddon-txt, var(--text-primary));
+      }
+    }
+  }
+
+  &:has(&-wrapper.open) &-header-icon {
+    background: var(--collapsibleAddon-txt, var(--text-primary));
+    border-color: var(--collapsibleAddon-txt, var(--text-primary));
+    transform: rotate(180deg);
+    &:before,
+    &:after {
+      background: var(--color-dark);
+      filter: invert(50%);
+    }
+    &:after {
+      opacity: 0;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+version: 0.1
+contact: info@arratech.com
+policy:
+  crawl: allow
+  cache: allow
+  train: disallow
+  summarize: allow
+  attribute: require
+  rate_limit: 1 rps
+  commercial_use: disallow
+notes: Please link back to https://www.arratech.com when quoting.

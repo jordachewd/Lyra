@@ -1,0 +1,261 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+.arrSection {
+  width: 100%;
+  display: flex;
+  margin: 0;
+
+  &.ptb {
+    &_normal {
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+
+      @include arrMediaQuery($mq-tablet) {
+        padding-top: 4.75rem;
+        padding-bottom: 4.75rem;
+      }
+
+      @include arrMediaQuery($site-width) {
+        padding-top: 7rem;
+        padding-bottom: 7rem;
+      }
+    }
+
+    &_medium {
+      padding-top: 2rem;
+      padding-bottom: 2rem;
+
+      @include arrMediaQuery($mq-tablet) {
+        padding-top: 3.25rem;
+        padding-bottom: 3.25rem;
+      }
+
+      @include arrMediaQuery($site-width) {
+        padding-top: 5rem;
+        padding-bottom: 5rem;
+      }
+    }
+
+    &_half {
+      padding-top: 1.5rem;
+      padding-bottom: 1.5rem;
+
+      @include arrMediaQuery($mq-tablet) {
+        padding-top: 2.375rem;
+        padding-bottom: 2.375rem;
+      }
+
+      @include arrMediaQuery($site-width) {
+        padding-top: 3.5rem;
+        padding-bottom: 3.5rem;
+      }
+    }
+
+    &_small {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+
+      @include arrMediaQuery($mq-tablet) {
+        padding-top: 1.375rem;
+        padding-bottom: 1.375rem;
+      }
+
+      @include arrMediaQuery($site-width) {
+        padding-top: 1.75rem;
+        padding-bottom: 1.75rem;
+      }
+    }
+  }
+
+  &.pdd {
+    &_top {
+      padding-bottom: 0;
+    }
+    &_bottom {
+      padding-top: 0;
+    }
+    &_none {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+
+  &.bg-color {
+    background-color: var(--sectionWrapper-bg, transparent);
+  }
+
+  &.bg-img {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image:
+      var(--sectionWrapper-bgImg),
+      linear-gradient(
+        to right,
+        rgba(var(--sectionWrapper-bgOverlayRgb, 0, 0, 0), var(--sectionWrapper-bgOpacity, 0.5)) 0%,
+        rgba(
+            var(--sectionWrapper-bgOverlayRgb, 0, 0, 0),
+            clamp(0, calc(var(--sectionWrapper-bgOpacity, 0.5) * 0.7), 1)
+          )
+          55%,
+        rgba(
+            var(--sectionWrapper-bgOverlayRgb, 0, 0, 0),
+            clamp(0, calc(var(--sectionWrapper-bgOpacity, 0.5) * 0.2), 1)
+          )
+          100%
+      );
+    background-blend-mode: var(--sectionWrapper-bgOvlBlend, overlay);
+  }
+
+  &-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem;
+    margin: 0 auto;
+    gap: 2rem;
+
+    & > div {
+      display: flex;
+      width: 100%;
+      /* Allow columns to shrink below their content's min-content width,
+         otherwise nowrap children (e.g. AboutInfo card titles) push the
+         sibling column past the viewport in row layouts. */
+      min-width: 0;
+    }
+
+    @include arrMediaQuery($mq-tablet) {
+      gap: 3rem;
+      flex-direction: row;
+
+      &:not(.cols-firstBig):not(.cols-lastBig) > div {
+        flex: 1 1 calc(50% - 3rem);
+      }
+
+      &.cols-firstBig {
+        &.normal {
+          & > div:first-child {
+            flex: 1 1 calc(2 / 3 * 100% - 3rem);
+          }
+          & > div:last-child {
+            flex: 1 1 calc(1 / 3 * 100% - 3rem);
+          }
+        }
+        &.reversed {
+          & > div:first-child {
+            flex: 1 1 calc(1 / 3 * 100% - 3rem);
+          }
+          & > div:last-child {
+            flex: 1 1 calc(2 / 3 * 100% - 3rem);
+          }
+        }
+      }
+
+      &.cols-lastBig {
+        &.normal {
+          & > div:first-child {
+            flex: 1 1 calc(1 / 3 * 100% - 3rem);
+          }
+          & > div:last-child {
+            flex: 1 1 calc(2 / 3 * 100% - 3rem);
+          }
+        }
+        &.reversed {
+          & > div:first-child {
+            flex: 1 1 calc(2 / 3 * 100% - 3rem);
+          }
+          & > div:last-child {
+            flex: 1 1 calc(1 / 3 * 100% - 3rem);
+          }
+        }
+      }
+    }
+
+    @include arrMediaQuery($mq-desktop) {
+      gap: 4rem;
+
+      &:not(.cols-firstBig):not(.cols-lastBig) > div {
+        flex: 1 1 calc(50% - 4rem);
+      }
+
+      &.cols-firstBig {
+        &.normal {
+          & > div:first-child {
+            flex: 1 1 calc(2 / 3 * 100% - 4rem);
+          }
+          & > div:last-child {
+            flex: 1 1 calc(1 / 3 * 100% - 4rem);
+          }
+        }
+        &.reversed {
+          & > div:first-child {
+            flex: 1 1 calc(1 / 3 * 100% - 4rem);
+          }
+          & > div:last-child {
+            flex: 1 1 calc(2 / 3 * 100% - 4rem);
+          }
+        }
+      }
+
+      &.cols-lastBig {
+        &.normal {
+          & > div:first-child {
+            flex: 1 1 calc(1 / 3 * 100% - 4rem);
+          }
+          & > div:last-child {
+            flex: 1 1 calc(2 / 3 * 100% - 4rem);
+          }
+        }
+        &.reversed {
+          & > div:first-child {
+            flex: 1 1 calc(2 / 3 * 100% - 4rem);
+          }
+          & > div:last-child {
+            flex: 1 1 calc(1 / 3 * 100% - 4rem);
+          }
+        }
+      }
+    }
+
+    &.centered {
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      & > div:not(.arrTitleDesc) {
+        width: 100%;
+        max-width: $mq-tablet;
+      }
+    }
+
+    &.reversed {
+      flex-direction: column-reverse;
+      @include arrMediaQuery($mq-tablet) {
+        flex-direction: row-reverse;
+      }
+    }
+
+    &.revCentered {
+      flex-direction: column-reverse;
+      justify-content: center;
+      text-align: center;
+      & > div:not(.arrTitleDesc) {
+        max-width: $mq-tablet;
+      }
+    }
+
+    &.siteWidth {
+      max-width: $site-width;
+      @include arrMediaQuery($site-width) {
+        padding: 0;
+      }
+    }
+
+    &.fullWidth {
+      @include arrMediaQuery($mq-max) {
+        padding-left: 4rem;
+        padding-right: 4rem;
+      }
+    }
+  }
+}

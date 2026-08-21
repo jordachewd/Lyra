@@ -1,0 +1,30 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100dvh;
+  height: auto;
+  position: relative;
+  color: var(--text-primary);
+  background: var(--arr-active-gradient, var(--color-dark));
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: transparent;
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
+}
+
+/* Smooth anchor scrolling if supported by the browser. */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Respect users who prefer reduced motion. */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+}

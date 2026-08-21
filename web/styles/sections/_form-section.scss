@@ -1,0 +1,77 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+.arrFormSection {
+  &-heading {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    @include arrMediaQuery($mq-tablet) {
+      gap: 1.5rem;
+    }
+  }
+
+  &-inputs {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.75rem;
+  }
+
+  &-form {
+    flex: 1;
+    gap: 1.75rem;
+    display: flex;
+    flex-direction: column;
+
+    &-title {
+      display: flex;
+      @include arrTextTypography(1.5rem, 300);
+      @include arrMediaQuery($mq-tablet) {
+        font-size: 2rem;
+      }
+    }
+
+    & > button.arrButton {
+      padding: 1rem;
+      margin-top: 1.5rem;
+    }
+  }
+
+  /*   &-hubspot {
+    flex: auto !important;
+  } */
+
+  &:has(&-wrapper.centered) &-heading,
+  &:has(&-wrapper.revCentered) &-heading {
+    margin: 0 auto;
+    &-features {
+      justify-content: center;
+      flex-direction: row;
+      gap: 2rem;
+    }
+  }
+
+  &:has(&-wrapper.centered) &-hubspot,
+  &:has(&-wrapper.revCentered) &-hubspot {
+    width: 100%;
+    margin: 0 auto;
+    flex: none !important;
+  }
+
+  &:has(&-wrapper.reversed) &-heading .arrTitleDesc {
+    margin-left: 0;
+    & > * {
+      justify-content: flex-start;
+      text-align: left;
+    }
+  }
+
+  &:has(&-wrapper.centered) &-form,
+  &:has(&-wrapper.revCentered) &-form {
+    width: 100%;
+    max-width: $mq-tablet;
+    margin: 0 auto;
+  }
+}

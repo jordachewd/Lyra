@@ -2,24 +2,27 @@ import type {Section} from '@/lib/zod/website/layout/sections'
 import type {PageJsonLdData} from '@/lib/types/seo'
 import type {Metadata} from 'next'
 import type {ComponentType} from 'react'
-import type {RichTextPropValue} from '@/components/ui/RichText'
-import PageGradientStyle from '@/components/layout/body/PageGradientStyle'
-import TitleDesc from '@/components/layout/partials/TitleDesc'
-import PageJsonLd from '@/components/seo/PageJsonLd'
+import {RichTextPropValue} from '@/components/ui/RichText'
 import {isProduction} from '@/lib/const/env'
 import {sectionRegistry, type SectionKind} from '@/lib/const/sections-kind'
 import {getPageBySlug} from '@/lib/data/page'
-import {getHomeSlug} from '@/lib/data/utils/get-home-slug'
 import {arrGetPageMetadata} from '@/lib/utils/seo/metadata/page-metadata'
 import {notFound} from 'next/navigation'
+import PageGradientStyle from '@/components/layout/body/PageGradientStyle'
+import TitleDesc from '@/components/layout/partials/TitleDesc'
+import PageJsonLd from '@/components/seo/PageJsonLd'
 import {PageSettingsType} from '@/lib/zod/sections/layout/page-settings'
 import PageHeadWrapper from '@/components/layout/partials/PageHeadWrapper'
-import {SanityColor} from '@/lib/types/color-format'
 import {TitleDescSettingsSchema} from '@/lib/zod/sections/settings/section-titledesc'
+import {SanityColor} from '@/lib/types/color-format'
 
-export async function generateMetadata(): Promise<Metadata> {
-  const homeslug = await getHomeSlug()
-  const page = homeslug ? await getPageBySlug(homeslug) : null
+type PageProps = {
+  params: Promise<{slug: string}>
+}
+
+export async function generateMetadata({params}: PageProps): Promise<Metadata> {
+  const {slug} = await params
+  const page = await getPageBySlug(slug)
 
   if (!page)
     return {
@@ -27,16 +30,11 @@ export async function generateMetadata(): Promise<Metadata> {
       description: 'The requested page does not exist.',
     }
 
-  return (await arrGetPageMetadata({
-    page,
-    canonical: '/',
-  })) as Promise<Metadata>
+  return await arrGetPageMetadata({page})
 }
 
-export default async function HomePage() {
-  const slug = await getHomeSlug()
-  if (!slug) notFound()
-
+export default async function Page({params}: PageProps) {
+  const {slug} = await params
   const page = await getPageBySlug(slug)
   if (!page) notFound()
 
@@ -44,7 +42,6 @@ export default async function HomePage() {
   if (isProduction) {
     jsonld = (await arrGetPageMetadata({
       page,
-      canonical: '/',
       data: 'jsonld',
     })) as PageJsonLdData
   }
@@ -68,7 +65,7 @@ export default async function HomePage() {
       <main className="arrMain" id="main-content">
         <div className="arrMain-wrapper" id={`page-${page._id}`}>
           {showTitle && (
-            <PageHeadWrapper id={page._id} settings={settings} className="arrMain-pgHead">
+            <PageHeadWrapper id={page._id} settings={settings}>
               <TitleDesc
                 title={page.title}
                 desc={pageDesc}

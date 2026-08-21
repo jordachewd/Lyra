@@ -1,0 +1,63 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+/* Category / Tags Chip */
+.cattag {
+  &-chips {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75em;
+
+    @include arrMediaQuery($mq-tablet) {
+      justify-content: flex-start;
+    }
+  }
+
+  &-label {
+    font-size: 0.75rem;
+    font-weight: 300;
+  }
+
+  &-chip {
+    @include arrTransition();
+    @include arrTextTypography(0.6875rem, 600, 1);
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+
+    &:focus-visible {
+      outline: 2px solid #3b82f6;
+      outline-offset: 2px;
+      border-radius: 36px;
+    }
+
+    &.category {
+      padding: 0.5rem 0.25rem;
+      @include arrHover {
+        opacity: 0.75;
+      }
+    }
+
+    &.tag {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid color-mix(in srgb, var(--color-white) 20%, transparent);
+      padding: 0.65rem 0.875rem;
+      border-radius: 50px;
+
+      @include arrHover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      &.selected {
+        background: var(--color-white);
+        color: var(--color-dark);
+        border: 1px solid var(--color-white);
+        box-shadow: 0px 0px 16px 0px #ffffff4d;
+      }
+    }
+  }
+}

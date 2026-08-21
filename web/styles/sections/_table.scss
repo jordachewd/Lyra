@@ -1,0 +1,20 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+.arrTableSection {
+  &-wrapper {
+    flex-direction: column;
+    &.centered > div,
+    &.revCentered > div {
+      margin: 0 auto;
+      width: 100%;
+    }
+    &.reversed {
+      flex-direction: column;
+    }
+  }
+
+  &-content {
+    max-width: 100% !important;
+  }
+}

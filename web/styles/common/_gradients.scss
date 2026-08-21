@@ -1,0 +1,52 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+.arrGradient {
+  &-banner {
+    background: #4e8199;
+    background: -webkit-linear-gradient(111deg, #0018f3 0.05%, #4e8199 55.93%);
+    background: linear-gradient(111deg, #0018f3 0.05%, #4e8199 55.93%);
+  }
+
+  &-flare {
+    background: #f12711;
+    background: -webkit-linear-gradient(to left, #f5af19, #f12711);
+    background: linear-gradient(to left, #f5af19, #f12711);
+  }
+
+  &-lunada {
+    background: #5433ff;
+    background: -webkit-linear-gradient(to left, #a5fecb, #20bdff, #5433ff);
+    background: linear-gradient(to left, #a5fecb, #20bdff, #5433ff);
+  }
+
+  &-mojito {
+    background: #1d976c;
+    background: -webkit-linear-gradient(to left, #93f9b9, #1d976c);
+    background: linear-gradient(to left, #93f9b9, #1d976c);
+  }
+
+  &-ohhappiness {
+    background: #00b09b;
+    background: -webkit-linear-gradient(to left, #96c93d, #00b09b);
+    background: linear-gradient(to left, #96c93d, #00b09b);
+  }
+
+  &-sulphur {
+    background: #cac531;
+    background: -webkit-linear-gradient(to left, #f3f9a7, #cac531);
+    background: linear-gradient(to left, #f3f9a7, #cac531);
+  }
+
+  &-lemontwist {
+    background: #3ca55c;
+    background: -webkit-linear-gradient(to left, #b5ac49, #3ca55c);
+    background: linear-gradient(to left, #b5ac49, #3ca55c);
+  }
+
+  &-darkblue {
+    background: rgb(10, 15, 46);
+    background: -webkit-linear-gradient(135deg, rgb(10, 15, 46) 0%, rgb(30, 58, 138) 100%);
+    background: linear-gradient(135deg, rgb(10, 15, 46) 0%, rgb(30, 58, 138) 100%);
+  }
+}

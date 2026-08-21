@@ -1,0 +1,212 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+.arrPost {
+  &-header {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 2rem 1rem;
+    margin: 0;
+
+    &.ptb {
+      &_normal {
+        @include arrMediaQuery($site-width) {
+          padding-top: 4rem;
+          padding-bottom: 4rem;
+        }
+      }
+
+      &_medium {
+        @include arrMediaQuery($site-width) {
+          padding-top: 3rem;
+          padding-bottom: 3rem;
+        }
+      }
+
+      &_half {
+        @include arrMediaQuery($site-width) {
+          padding-top: 2rem;
+          padding-bottom: 2rem;
+        }
+      }
+
+      &_small {
+        @include arrMediaQuery($site-width) {
+          padding-top: 1rem;
+          padding-bottom: 1rem;
+        }
+      }
+    }
+
+    &.pdd {
+      &_top {
+        padding-bottom: 0;
+      }
+      &_bottom {
+        padding-top: 0;
+      }
+      &_none {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
+  }
+
+  &-title {
+    max-width: $mq-slarge;
+    margin: 0 auto;
+  }
+
+  &-featImage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    gap: 1.5rem;
+    padding: 0 1rem;
+
+    @include arrMediaQuery($site-width) {
+      padding: 0;
+    }
+
+    &-image {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      width: 100%;
+      max-width: $mq-slarge;
+      margin: 0 auto;
+
+      & > img {
+        display: block;
+        object-fit: cover;
+        max-width: 100%;
+        height: auto;
+      }
+
+      &.rounded > img {
+        border-radius: 1.5rem;
+      }
+
+      &.disc > img {
+        border-radius: 100%;
+        border: 3px solid var(--color-white);
+        box-shadow: 0 0 1rem 0 #ffffff4d;
+      }
+
+      &-meta {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin-top: 1rem;
+        gap: 0.5rem;
+
+        & > div {
+          @include arrTextTypography(1rem, 400, 1.2);
+        }
+      }
+
+      &-caption {
+        &-sub {
+          font-size: 0.75rem !important;
+          font-weight: 300 !important;
+        }
+      }
+
+      &-credit {
+        font-style: italic;
+        font-size: 0.675rem !important;
+        font-weight: 300 !important;
+        color: var(--storm-60) !important;
+        & > span {
+          margin-right: 0.25rem;
+          font-style: normal;
+          font-weight: 400;
+        }
+      }
+    }
+
+    &-widgets {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      width: 100%;
+      max-width: $mq-slarge;
+      margin: 0 auto;
+      gap: 1.5em;
+      font-size: 0.875rem;
+
+      @include arrMediaQuery($mq-tablet) {
+        flex-direction: row;
+      }
+    }
+
+    &-authors {
+      gap: 1em;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: $mq-slarge;
+      margin: 0 auto;
+
+      &-item {
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        padding: 0 0.25em;
+        gap: 0.65em;
+
+        img,
+        span {
+          display: flex;
+          position: relative;
+        }
+        img {
+          border-radius: 50%;
+        }
+        span {
+          @include arrTextTypography(12px, 300, 1);
+          text-decoration: none;
+        }
+      }
+    }
+
+    &-date {
+      display: flex;
+      min-width: 82px;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--text-primary);
+    }
+  }
+
+  &-body {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    max-width: $mq-slarge;
+
+    @include arrMediaQuery($mq-tablet) {
+      padding: 3rem 0;
+    }
+
+    @include arrMediaQuery($site-width) {
+      padding: 2rem 0;
+    }
+  }
+
+  &-sections {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}

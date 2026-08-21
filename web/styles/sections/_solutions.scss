@@ -1,0 +1,240 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+.arrSolutions {
+  &-wrapper {
+    flex-direction: column;
+    &.centered > div,
+    &.revCentered > div {
+      margin: 0 auto;
+    }
+    &.reversed {
+      flex-direction: column;
+    }
+  }
+
+  &-cards {
+    max-width: 100% !important;
+    display: grid !important;
+    grid-template-columns: 1fr;
+    width: 100%;
+    gap: 1.5rem;
+
+    &.vertical {
+      @include arrMediaQuery($mq-tablet) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      @include arrMediaQuery($mq-desktop) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      @include arrMediaQuery($mq-screen) {
+        gap: 1.5rem;
+      }
+    }
+  }
+
+  &-card {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: var(--solutionCard-bg, var(--color-dark));
+    overflow: hidden;
+    color: #fff;
+    margin: 0;
+    padding: 0;
+
+    & > div {
+      display: flex;
+      position: relative;
+    }
+
+    &.rounded {
+      border-radius: 1.5rem;
+    }
+
+    @include arrMediaQuery($mq-tablet) {
+      flex-direction: row;
+
+      &.vertical {
+        flex-direction: column;
+      }
+
+      &.horizontal > div {
+        width: 50%;
+      }
+
+      &:nth-child(even) .arrSolutions-card-image.horizontal {
+        order: 2;
+        border-right: none;
+        border-left: 1px solid rgba(255, 255, 255, 0.2);
+      }
+    }
+
+    &-image {
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+      & > img {
+        display: block;
+        max-width: 100%;
+        max-height: 100%;
+      }
+
+      @include arrMediaQuery($mq-tablet) {
+        border-bottom: none;
+
+        &.horizontal {
+          border-right: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        &.vertical {
+          height: 300px;
+        }
+      }
+    }
+
+    &-content {
+      height: 100%;
+      flex-direction: column;
+      align-items: center;
+
+      & > div {
+        width: 100%;
+        display: flex;
+      }
+
+      @include arrMediaQuery($mq-tablet) {
+        &.vertical {
+          height: auto;
+          flex-grow: 1;
+        }
+      }
+
+      &-header {
+        gap: 1rem;
+        padding: 2rem;
+        flex-direction: column;
+
+        &-title {
+          @include arrTextTypography(1.825rem, 300, 1.2);
+          color: var(--solutionCard-txt, var(--text-primary));
+        }
+
+        &-desc {
+          color: var(--solutionCard-txt, var(--text-primary));
+          p {
+            line-height: 1.4 !important;
+            color: var(--solutionCard-txt, var(--text-primary));
+          }
+        }
+
+        @include arrMediaQuery($mq-tablet) {
+          gap: 1.5rem;
+
+          &-title {
+            font-size: 2.5rem;
+          }
+
+          &.horizontal {
+            padding: 3rem 3rem 2rem;
+          }
+
+          &.vertical .arrSolutions-card-content-header-title {
+            font-size: 1.825rem;
+          }
+        }
+      }
+    }
+
+    &-feature {
+      gap: 1.25rem;
+      flex-direction: column;
+      padding: 0 2rem 2rem 2rem;
+
+      @include arrMediaQuery($mq-tablet) {
+        &.horizontal {
+          padding: 0 3rem 3rem 3rem;
+        }
+      }
+
+      &-badge {
+        height: 26px;
+        width: fit-content;
+        border-radius: 28px;
+        padding: 8px 12px 8px 8px;
+        display: flex;
+        position: relative;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        @include arrBackdropBlur;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 10px;
+          transform: translateY(-50%);
+          width: 10px;
+          height: 10px;
+          background-color: #0018f3;
+          border-radius: 50%;
+        }
+
+        &-text {
+          padding-left: 1.25rem;
+          text-transform: uppercase;
+          @include arrTextTypography(0.75rem, 600, 1);
+          color: var(--solutionFeat-txt, var(--text-primary));
+        }
+      }
+
+      &-title {
+        margin-top: -0.75rem;
+        @include arrTextTypography(1.25rem, 300, 1.25);
+        color: var(--solutionFeat-txt, var(--text-primary));
+        @include arrMediaQuery($mq-tablet) {
+          font-size: 1.5rem;
+        }
+      }
+
+      &-subtitle {
+        @include arrTextTypography(1rem, 400, 1.25);
+        color: var(--solutionFeat-txt, var(--text-primary));
+      }
+    }
+
+    &-footer {
+      margin-top: auto;
+      padding: 2rem;
+
+      @include arrMediaQuery($mq-tablet) {
+        &.horizontal {
+          padding: 3rem;
+        }
+      }
+
+      &.vertical {
+        .arrCardFooter-btn {
+          flex: 1 1 auto;
+          & > .arrButton {
+            flex: 1;
+          }
+        }
+      }
+    }
+  }
+
+  &:has(&-wrapper.centered) &-card-content,
+  &:has(&-wrapper.revCentered) &-card-content {
+    text-align: left;
+  }
+}
