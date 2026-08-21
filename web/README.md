@@ -1,4 +1,4 @@
-# Lyra — Website
+# Lyra • Website
 
 The public-facing website for Lyra: a server-rendered Next.js application that
 turns content authored in [Sanity](https://www.sanity.io/) into a fast,
@@ -77,6 +77,8 @@ themselves cleanly when their variable is unset.
 
 ## License
 
-This project is **not** open source. It is published for reference and
-evaluation purposes only - see [LICENSE](../LICENSE) at the repository root
-for the full terms.
+This source code is published for reference and evaluation purposes only.
+
+> No permission is granted to use, copy, modify, merge, publish, distribute, sublicense, or sell copies of this software, in whole or in part.
+
+See [LICENSE](LICENSE) for the full terms.

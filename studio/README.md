@@ -1,4 +1,4 @@
-# Lyra — Content Studio
+# Lyra • Content Studio (CMS)
 
 The editorial home of the Lyra website, built on
 [Sanity Studio v6](https://www.sanity.io/studio). Everything the site shows -
@@ -59,6 +59,8 @@ stored in the source code.
 
 ## License
 
-This project is **not** open source. It is published for reference and
-evaluation purposes only - see [LICENSE](../LICENSE) at the repository root
-for the full terms.
+This source code is published for reference and evaluation purposes only.
+
+> No permission is granted to use, copy, modify, merge, publish, distribute, sublicense, or sell copies of this software, in whole or in part.
+
+See [LICENSE](LICENSE) for the full terms.
