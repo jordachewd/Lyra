@@ -1,0 +1,45 @@
+import {PORTAL_CURATED_TYPES} from './portal-curated-types'
+
+export const CURATED_TYPES = [
+  ...PORTAL_CURATED_TYPES,
+  'media.tag',
+  'page',
+
+  'post',
+  'postSettings',
+  'author',
+  'category',
+  'tag',
+
+  'webinarPage',
+  'webinarCat',
+
+  'aboutInfoType',
+  'accordionType',
+  'accreditationType',
+  'blogSection',
+  'ctaBannerType',
+  'comparisonType',
+  'contentBlocks',
+  'formType',
+  'keyFeaturesType',
+  'mapType',
+  'productsType',
+  'solutionsType',
+  'stepperType',
+  'tableType',
+  'teamOverviewType',
+  'textImageType',
+  'textBlocksType',
+  'textCardsType',
+  'textOnlyType',
+  'topHeroType',
+
+  'menu',
+  'siteHeader',
+  'siteFooter',
+  'generalSettings',
+  'readingSettings',
+  'seoSettings',
+  'trackingSettings',
+] as const
