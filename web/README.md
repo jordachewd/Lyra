@@ -428,6 +428,23 @@ Adding a third-party host means editing the relevant directive in `proxy.ts`.
   artwork, pending real Lyra branding.
 - **No deployment configuration.** `output: 'standalone'` is set as a portable
   default; no hosting target is configured.
+- **Rendering is unverified against real content.** At the time of writing the
+  dataset holds only two `page` documents and none of the required singletons,
+  so `getGlobals()` returns null and every content route 404s. The build,
+  typecheck, lint, knip, section-registry consistency, SEO routes
+  (robots/sitemap/manifest), CSP, and the full webhook path are all verified.
+  These are **not**:
+  - the globals GROQ/Zod chain against a populated dataset
+  - any of the 18 section components rendering real data, including the
+    accreditation grid/carousel modes and contentBlocks block types
+  - `/`, `/[slug]`, `/blog`, `/blog/[slug]` rendering, and the four blog
+    search params (`page`, `tag`, `category`, `author`)
+  - page `<title>` and JSON-LD appearing in served HTML
+  - the consent dialog, conditional GTM/HubSpot loading, and both form modes
+  - the Stepper's 7-per-row connector geometry at >=1024px
+
+  Populate the Studio as described in [Required content](#required-content),
+  then work through that list.
 
 ## License
 

@@ -36,15 +36,28 @@ export async function POST(req: NextRequest) {
     const pubId = body._id.replace(/^drafts\./, '')
     const ids = [pubId, draftId]
 
+    // The documented webhook projection is `{_type, _id, "slug": slug.current}`,
+    // which sends `slug` as a string. A webhook configured without that
+    // projection sends the raw `slug` object instead, which would otherwise
+    // stringify into tags like `page:[object Object]` and still return 200 --
+    // a silent failure that looks like success. Accept both shapes.
+    const rawSlug: unknown = body.slug
+    const incomingSlug =
+      typeof rawSlug === 'string'
+        ? rawSlug
+        : typeof (rawSlug as {current?: unknown})?.current === 'string'
+          ? ((rawSlug as {current: string}).current)
+          : undefined
+
     const isSlugDocument = body._type === 'page' || body._type === 'post'
-    const needsSlug = !body.slug && isSlugDocument
+    const needsSlug = !incomingSlug && isSlugDocument
     const slugCurrent = `*[_id in $ids][0]{ "slug": slug.current }`
 
     const slugDoc = needsSlug ? ((await client.fetch(slugCurrent, {ids})) ?? {}) : {}
 
     const bodyTags: RevalidateBody = {
       ...body,
-      slug: body.slug ?? (slugDoc as {slug?: string}).slug,
+      slug: incomingSlug ?? (slugDoc as {slug?: string}).slug,
     }
 
     const {tags, paths} = await revalidateBodyTags(bodyTags)

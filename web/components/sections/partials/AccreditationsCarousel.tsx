@@ -63,13 +63,16 @@ export default function AccreditationsCarousel({items, settings}: Props) {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     const id = window.setInterval(() => {
-      setPage((prev) => (prev + 1) % pages)
+      setPage((prev) => (Math.min(prev, pages - 1) + 1) % pages)
     }, autoplayMs)
     return () => window.clearInterval(id)
   }, [autoplay, hasControls, paused, pages, autoplayMs])
 
-  const goPrev = () => setPage((prev) => (prev - 1 + pages) % pages)
-  const goNext = () => setPage((prev) => (prev + 1) % pages)
+  // Step from the clamped index, not the raw one: after a breakpoint change
+  // shrinks `pages`, a stale `page` past the end would otherwise send the first
+  // arrow click somewhere unrelated to the slide on screen.
+  const goPrev = () => setPage((prev) => (Math.min(prev, pages - 1) - 1 + pages) % pages)
+  const goNext = () => setPage((prev) => (Math.min(prev, pages - 1) + 1) % pages)
 
   const trackStyle = {'--lyra-page': safePage} as CSSProperties
 
