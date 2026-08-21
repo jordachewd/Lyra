@@ -13,19 +13,6 @@ export const READING_SETTINGS_QUERY = groq`
       "showTags": coalesce(blogSettings.showTags, true),
       "showAuthor": coalesce(blogSettings.showAuthor, true),
       "showDate": coalesce(blogSettings.showDate, true)
-    },
-    "webinars": select(
-      defined(webinars.page) => {
-        "page": webinars.page->{ _id, title, "slug": slug.current },
-        "settings": {
-          "showExcerpt": coalesce(webinars.settings.showExcerpt, true),
-          "excerptLength": coalesce(webinars.settings.excerptLength, 360),
-          "perPage": coalesce(webinars.settings.perPage, 9),
-          "showFilter": coalesce(webinars.settings.showFilter, true),
-          "showCats": coalesce(webinars.settings.showCats, true),
-          "showDate": coalesce(webinars.settings.showDate, true)
-        }
-      }
-    )
+    }
   }
 `

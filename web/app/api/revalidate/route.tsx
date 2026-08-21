@@ -36,8 +36,7 @@ export async function POST(req: NextRequest) {
     const pubId = body._id.replace(/^drafts\./, '')
     const ids = [pubId, draftId]
 
-    const isSlugDocument =
-      body._type === 'page' || body._type === 'post' || body._type === 'webinarPage'
+    const isSlugDocument = body._type === 'page' || body._type === 'post'
     const needsSlug = !body.slug && isSlugDocument
     const slugCurrent = `*[_id in $ids][0]{ "slug": slug.current }`
 

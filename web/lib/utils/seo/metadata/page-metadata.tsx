@@ -8,10 +8,9 @@ import {lyraNoMetadata} from './no-metadata'
 import {getSectionMetadata} from './section-metadata'
 import {urlFor} from '@/lib/utils/sanity/image'
 import {PageJsonLdData} from '@/lib/types/seo'
-import {WebinarDetail} from '@/lib/zod/website/content/webinar'
 
 type PgMetaProps = {
-  page: PageBySlug | WebinarDetail | null
+  page: PageBySlug | null
   canonical?: string
   data?: 'jsonld' | 'metadata'
 }

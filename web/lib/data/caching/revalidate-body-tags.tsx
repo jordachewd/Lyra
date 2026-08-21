@@ -11,7 +11,6 @@ const pathFor = async (tag: string, slug?: string | null) => {
     return slug === homeslug ? '/' : `/${slug}`
   }
   if (tag === 'post') return `/blog/${slug}`
-  if (tag === 'webinar') return `/webinars/${slug}`
   return null
 }
 
@@ -55,32 +54,10 @@ export async function revalidateBodyTags(doc: RevalidateBody): Promise<Revalidat
     if (p) paths.add(p)
   }
 
-  // Webinars
-  if (_type === 'webinarPage') {
-    tags.add('webinar:list')
-
-    if (slug) {
-      tags.add(`webinar:${slug}`)
-
-      const p = await pathFor('webinar', slug)
-      if (p) {
-        paths.add(p)
-        paths.add(`${p}/thank-you`)
-      }
-    }
-  }
-
-  // Webinar categories
-  if (_type === 'webinarCat') {
-    tags.add('webinar:list')
-    paths.add('/webinars')
-  }
-
   // Sections
   if (isSectionType) {
     tags.add('page:list')
     tags.add('post:list')
-    tags.add('webinar:list')
   }
 
   return {tags: Array.from(tags), paths: Array.from(paths)}
