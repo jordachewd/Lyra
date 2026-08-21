@@ -1,22 +1,17 @@
 import {StructureResolver} from 'sanity/structure'
 import {websiteStructure} from './structure/website-structure'
-import {portalStructure} from './structure/portal-structure'
 import {CURATED_TYPES} from './consts/curated/curated-types'
 
-const arratechDesk: StructureResolver = (S) =>
+const lyraDesk: StructureResolver = (S) =>
   S.list()
-    .title('Arratech Desk - PRODUCTION')
+    .title('Lyra Desk')
     .items([
-      // Arratech Website (Marketing)
-      websiteStructure(S),
+      ...websiteStructure(S),
 
-      // Arratech Connect (Portal)
-      portalStructure(S),
-
-      // Default fallback list
+      // Default fallback list — should render empty when CURATED_TYPES is complete
       ...S.documentTypeListItems().filter(
         (item) => !CURATED_TYPES.includes((item.getId() ?? '') as any),
       ),
     ])
 
-export default arratechDesk
+export default lyraDesk
