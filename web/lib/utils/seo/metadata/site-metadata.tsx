@@ -1,10 +1,10 @@
-import {isStaging, isProduction, siteUrl as defaultUrl} from '@/lib/const/env'
+import {isProduction, siteUrl as defaultUrl} from '@/lib/const/env'
 import {getGlobals} from '@/lib/data/globals'
 import {urlFor} from '@/lib/utils/sanity/image'
 import type {GeneralSettings} from '@/lib/zod/website/settings/general'
 import type {SeoSettings} from '@/lib/zod/website/settings/seo'
 import type {SiteMetadata} from '@/lib/types/metadata-site'
-import {noIndexRobots, indexRobots} from '../const/robots'
+import {indexRobots} from '../const/robots'
 import {SEO_DEFAULTS} from '../const/defaults'
 import type {AnyImageField} from '@/lib/images/types'
 
@@ -36,7 +36,7 @@ export async function getSiteMeta(): Promise<SiteMetadata> {
   const twitter = seo?.twitterHandle ?? undefined
   const linkedin = seo?.linkedinHandle ?? undefined
 
-  const robots = isStaging ? noIndexRobots : indexRobots
+  const robots = indexRobots
   const gSiteVf = seo?.gSiteVerification ?? undefined
   const verification = {
     google: isProduction && gSiteVf ? gSiteVf : undefined,

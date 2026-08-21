@@ -6,7 +6,7 @@ import {POSTS_Q} from '@/lib/queries/fragments/posts.groq'
 import {getHomeSlug} from '@/lib/data/utils/get-home-slug'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const base = (defaultBase || 'https://www.lyra.com').replace(/\/+$/, '')
+  const base = (defaultBase || 'https://lyra.jwd-apps.com').replace(/\/+$/, '')
   const homeslug = await getHomeSlug()
   const client = await getSanityClient()
 
@@ -16,30 +16,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 1,
-    },
-    {
-      url: `${base}/about`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${base}/contactus`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `https://dev.lyra.com/signup`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.9,
-    },
-    {
-      url: `${base}/requestdemo`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.9,
     },
   ]
 

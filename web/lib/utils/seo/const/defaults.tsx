@@ -1,64 +1,26 @@
+/**
+ * Last-resort SEO fallbacks.
+ *
+ * These are only used when the Studio's `generalSettings` / `seoSettings`
+ * singletons leave a field empty, so they should stay generic. Replace the
+ * placeholder copy below once Lyra's real positioning, social handles, and
+ * keyword set are settled.
+ */
 export const SEO_DEFAULTS = {
   name: 'Lyra',
-  title: 'Connect to the Peppol Network | Access Point Solution',
-  description: 'Connect to the Peppol Network | Access Point Solution',
+  title: 'Lyra',
+  description: 'Lyra',
 
   logoPng: '/logos/lyra_logo.png',
-  orgLogo: 'https://www.lyra.com/assets/lyra-logo-hor.svg',
-  orgImage: 'https://www.lyra.com/logos/lyra_logo.png',
+  orgLogo: 'https://lyra.jwd-apps.com/assets/lyra-logo-hor.svg',
+  orgImage: 'https://lyra.jwd-apps.com/logos/lyra_logo.png',
 
-  twitter: '@lyra',
-  linkedin: 'https://www.linkedin.com/company/lyra',
+  twitter: '',
+  linkedin: '',
 
   category: 'Technology',
   classification: 'Business Software',
-  email: 'info@lyra.com',
+  email: 'info@lyra.jwd-apps.com',
 
-  keywords: [
-    'Lyra',
-    'Lyra API',
-    'Lyra Peppol',
-    'B2B communication',
-    'CTC',
-    'GDPR compliance',
-    'Insomnia',
-    'PEPPOL',
-    'PEPPOL consultation',
-    'PEPPOL demonstration',
-    'PEPPOL help',
-    'PEPPOL provider',
-    'PEPPOL setup',
-    'PEPPOL updates',
-    'Peppol API',
-    'Peppol ID',
-    'Peppol Network',
-    'SMP',
-    'SMP assistance',
-    'SMP implementation',
-    'SMP integration',
-    'SMP showcase',
-    'SMP solutions',
-    'API testing',
-    'Lyra blog',
-    'business automation',
-    'business inquiry',
-    'contact Lyra',
-    'customer support',
-    'data protection',
-    'digital transformation',
-    'e-invoicing',
-    'e-invoicing company',
-    'e-invoicing demo',
-    'e-invoicing implementation',
-    'e-invoicing news',
-    'e-invoicing support',
-    'electronic invoicing',
-    'how to Peppol',
-    'request demo',
-    'service agreement',
-    'service terms',
-    'solution preview',
-    'Swedish privacy law',
-    'Swedish tech company',
-  ],
+  keywords: ['Lyra'],
 }

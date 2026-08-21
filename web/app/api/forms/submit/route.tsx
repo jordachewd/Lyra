@@ -1,4 +1,4 @@
-import {recaptchaVerifyUrl, recaptchaSecretKey} from '@/lib/const/env'
+import {recaptchaVerifyUrl, recaptchaSecretKey, leadRelayUrl} from '@/lib/const/env'
 import {NextRequest, NextResponse} from 'next/server'
 import {toRecaptchaAction} from '@/lib/utils/forms/recaptcha-action'
 
@@ -95,7 +95,12 @@ export async function POST(req: NextRequest) {
       extra_values: values,
     }
 
-    const hubspotRes = await fetch('https://api.lyra.com/internal/addhubspotlead', {
+    if (!leadRelayUrl) {
+      console.warn('[forms/submit] LEAD_RELAY_URL is not configured; lead not forwarded')
+      return jsonError('Lead relay is not configured', 503)
+    }
+
+    const hubspotRes = await fetch(leadRelayUrl, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(payload),

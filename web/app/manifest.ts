@@ -5,7 +5,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: 'Lyra',
     short_name: 'Lyra',
-    description: 'Connect to the Peppol Network | Access Point Solution',
+    description: 'Lyra',
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',
