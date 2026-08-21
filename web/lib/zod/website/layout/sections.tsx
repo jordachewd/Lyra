@@ -9,10 +9,8 @@ import {ProductsSectionSchema} from '../../sections/content/products'
 import {SolutionsSectionSchema} from '../../sections/content/solutions'
 import {TeamOverviewSectionSchema} from '../../sections/content/team-overview'
 import {TextImageSectionSchema} from '../../sections/content/text-image'
-import {TextBlocksSectionSchema} from '../../sections/content/text-blocks'
 import {UnknownSectionSchema} from '../../sections/content/unknown'
 import {StepperSectionSchema} from '../../sections/content/stepper'
-import {TextCardsSectionSchema} from '../../sections/content/text-cards'
 import {FormSectionSchema} from '../../sections/content/form'
 import {ComparisonSectionSchema} from '../../sections/content/comparison'
 import {TableSectionSchema} from '../../sections/content/table'
@@ -38,8 +36,6 @@ export const PageSectionSchema = z.discriminatedUnion('kind', [
   StepperSectionSchema,
   TableSectionSchema,
   TeamOverviewSectionSchema,
-  TextCardsSectionSchema,
-  TextBlocksSectionSchema,
   TextImageSectionSchema,
   TextOnlySectionSchema,
   UnknownSectionSchema,

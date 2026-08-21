@@ -14,8 +14,6 @@ import Solutions from '@/components/sections/Solutions'
 import Stepper from '@/components/sections/Stepper'
 import Table from '@/components/sections/Table'
 import TeamSection from '@/components/sections/Team'
-import TextBlocks from '@/components/sections/TextBlocks'
-import TextCards from '@/components/sections/TextCards'
 import TextImage from '@/components/sections/TextImage'
 import TextOnly from '@/components/sections/TextOnly'
 
@@ -36,8 +34,6 @@ export const sectionRegistry = {
   stepper: Stepper,
   table: Table,
   teamOverview: TeamSection,
-  textCards: TextCards,
-  textBlocks: TextBlocks,
   textImage: TextImage,
   text: TextOnly,
 } as const

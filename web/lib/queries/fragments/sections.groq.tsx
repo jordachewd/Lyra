@@ -12,8 +12,6 @@ import {SOLUTIONS_SECTION} from './sections/solutions.groq'
 import {STEPPER_SECTION} from './sections/stepper.groq'
 import {TABLE_SECTION} from './sections/table.groq'
 import {TEAM_SECTION} from './sections/team.groq'
-import {TEXT_BLOCKS_SECTION} from './sections/text-blocks.groq'
-import {TEXT_CARDS_SECTION} from './sections/text-cards.groq'
 import {TEXT_IMAGE_SECTION} from './sections/text-image.groq'
 import {TEXT_ONLY_SECTION} from './sections/text-only.groq'
 import {MAP_SECTION} from './sections/map.groq'
@@ -40,8 +38,6 @@ export const SECTIONS_PROJECTION = groq`coalesce(
 		${STEPPER_SECTION},
     ${TABLE_SECTION},
     ${TEAM_SECTION},
-    ${TEXT_BLOCKS_SECTION}, 
-    ${TEXT_CARDS_SECTION},
     ${TEXT_IMAGE_SECTION},    
     ${TEXT_ONLY_SECTION}       
   }, [])`

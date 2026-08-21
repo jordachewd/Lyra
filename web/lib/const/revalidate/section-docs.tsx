@@ -15,8 +15,6 @@ export const SECTION_DOC_TYPES = [
   'stepperType',
   'tableType',
   'teamOverviewType',
-  'textBlocksType',
-  'textCardsType',
   'textImageType',
   'textOnlyType',
 ] as const

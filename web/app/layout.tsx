@@ -2,7 +2,7 @@ import ConsentManager from '@/components/consent/ConsentManager'
 import BodyClassManager from '@/components/layout/body/BodyClassManager'
 import Footer from '@/components/layout/Footer'
 import Header from '@/components/layout/Header'
-import {isProduction, isStaging} from '@/lib/const/env'
+import {isProduction} from '@/lib/const/env'
 import {getGlobals} from '@/lib/data/globals'
 import {lyraBuildMetadata} from '@/lib/utils/seo/metadata/build-metadata'
 import RootJsonLd from '@/components/seo/RootJsonLd'
@@ -14,7 +14,6 @@ import {cookies} from 'next/headers'
 import {notFound} from 'next/navigation'
 import {ReactNode} from 'react'
 import {inter} from './fonts'
-import StagingBanner from '@/components/layout/StagingBanner'
 import LyraGtm from '@/components/analytics/LyraGtm'
 import LyraHubSpot from '@/components/analytics/LyraHubSpot'
 import ConsentDefaults from '@/components/consent/ConsentDefaults'
@@ -77,9 +76,6 @@ export default async function RootLayout({children}: RootLayoutProps) {
         {header && <Header data={header} />}
         {children}
         {footer && <Footer data={footer} />}
-
-        {/* Staging Banner */}
-        {isStaging && <StagingBanner />}
 
         {/* Consent Manager */}
         <ConsentManager />
