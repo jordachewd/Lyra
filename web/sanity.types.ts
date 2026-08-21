@@ -14,7 +14,1398 @@
 
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
+type ArrayOf<T> = Array<
+  T & {
+    _key: string;
+  }
+>;
+
 // Source: schema.json
+export type HubspotTracking = {
+  _type: "hubspotTracking";
+  enabled?: boolean;
+  portalId?: string;
+};
+
+export type GoogleTracking = {
+  _type: "googleTracking";
+  enabled?: boolean;
+  gTagManagerId?: string;
+};
+
+export type TrackingSettings = {
+  _id: string;
+  _type: "trackingSettings";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  google?: GoogleTracking;
+  hubspot?: HubspotTracking;
+};
+
+export type SeoSettings = {
+  _id: string;
+  _type: "seoSettings";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  category?: string;
+  classification?: string;
+  keywords?: string;
+  twitterHandle?: string;
+  linkedinHandle?: string;
+  gSiteVerification?: string;
+  noindex?: boolean;
+};
+
+export type BlogSettings = {
+  _type: "blogSettings";
+  showExcerpt?: boolean;
+  excerptLength?: number;
+  perPage?: number;
+  filterBy?: "tags" | "categories" | "none";
+  showCats?: boolean;
+  showTags?: boolean;
+  showAuthor?: boolean;
+  showDate?: boolean;
+};
+
+export type PageReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "page";
+};
+
+export type ReadingSettings = {
+  _id: string;
+  _type: "readingSettings";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  homePage?: PageReference;
+  blogPage?: PageReference;
+  blogSettings?: BlogSettings;
+};
+
+export type GeneralSettings = {
+  _id: string;
+  _type: "generalSettings";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  siteName?: string;
+  siteTitle?: string;
+  siteImage?: ImageIcon;
+  siteDescription?: string;
+  siteUrl?: string;
+  siteEmail?: string;
+};
+
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
+
+export type ImageIcon = {
+  _type: "imageIcon";
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  alt?: string;
+};
+
+export type PostReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "post";
+};
+
+export type AboveMenuItem = {
+  _type: "aboveMenuItem";
+  title?: string;
+  linkType?: "internal" | "custom" | "none";
+  pageRef?: PageReference | PostReference;
+  href?: string;
+  newTab?: boolean;
+  icon?: ImageIcon;
+  hideOnMobile?: boolean;
+};
+
+export type MenuChildChildItem = {
+  _type: "menuChildChildItem";
+  title?: string;
+  description?: string;
+  linkType?: "internal" | "custom" | "none";
+  pageRef?: PageReference | PostReference;
+  href?: string;
+  newTab?: boolean;
+  icon?: ImageIcon;
+};
+
+export type MenuChildItem = {
+  _type: "menuChildItem";
+  title?: string;
+  description?: string;
+  linkType?: "internal" | "custom" | "none";
+  pageRef?: PageReference | PostReference;
+  href?: string;
+  newTab?: boolean;
+  icon?: ImageIcon;
+  children?: Array<
+    {
+      _key: string;
+    } & MenuChildChildItem
+  >;
+};
+
+export type MenuItem = {
+  _type: "menuItem";
+  title?: string;
+  linkType?: "internal" | "custom" | "none";
+  pageRef?: PageReference | PostReference;
+  href?: string;
+  newTab?: boolean;
+  children?: Array<
+    {
+      _key: string;
+    } & MenuChildItem
+  >;
+};
+
+export type MenuReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "menu";
+};
+
+export type SiteFooter = {
+  _id: string;
+  _type: "siteFooter";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  footerLogo?: ImageIcon;
+  footerMenu?: MenuReference;
+  footerCopyright?: string;
+  textColor?: Color;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type CmmBgSettings = {
+  _type: "cmmBgSettings";
+  type?: "none" | "color" | "image" | "gradient";
+  color?: Color;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  ovlColor?: Color;
+  ovlBlend?:
+    | "normal"
+    | "darken"
+    | "multiply"
+    | "color-burn"
+    | "lighten"
+    | "screen"
+    | "color-dodge"
+    | "overlay"
+    | "soft-light"
+    | "hard-light"
+    | "difference"
+    | "exclusion"
+    | "hue"
+    | "saturation"
+    | "color"
+    | "luminosity";
+  ovlOpacity?: number;
+  gradient?:
+    | "none"
+    | "banner"
+    | "flare"
+    | "lemontwist"
+    | "lunada"
+    | "mojito"
+    | "ohhappiness"
+    | "sulphur"
+    | "darkblue";
+};
+
+export type CmmLySettings = {
+  _type: "cmmLySettings";
+  pdDisplay?: "both" | "top" | "bottom" | "none";
+  pdTopBottom?: "normal" | "medium" | "half" | "small";
+  template?: "normal" | "centered" | "reversed" | "revCentered";
+  columns?: "normal" | "firstBig" | "lastBig";
+  width?: "normal" | "full";
+};
+
+export type Color = {
+  _type: "color";
+  hex?: string;
+  alpha?: number;
+  hsl?: HslaColor;
+  hsv?: HsvaColor;
+  rgb?: RgbaColor;
+};
+
+export type SiteHeader = {
+  _id: string;
+  _type: "siteHeader";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  headerLogo?: ImageIcon;
+  aboveMenu?: Array<
+    {
+      _key: string;
+    } & AboveMenuItem
+  >;
+  headerMenu?: MenuReference;
+  menuType?: "dropdown" | "megamenu";
+  headerButtons?: Array<
+    {
+      _key: string;
+    } & CtaButton
+  >;
+};
+
+export type Menu = {
+  _id: string;
+  _type: "menu";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  children?: Array<
+    {
+      _key: string;
+    } & MenuItem
+  >;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
+export type CmmTtlDescSettings = {
+  _type: "cmmTtlDescSettings";
+  showTitle?: boolean;
+  showDesc?: boolean;
+  shrinkTitle?: boolean;
+  titleTag?: "h1" | "h2" | "h3" | "h4";
+  textColor?: Color;
+  accentColor?: Color;
+};
+
+export type SanityFileAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+};
+
+export type LinkField = {
+  _type: "linkField";
+  linkType?: "none" | "internal" | "file" | "custom";
+  pageRef?: PageReference | PostReference;
+  href?: string;
+  file?: {
+    asset?: SanityFileAssetReference;
+    media?: unknown;
+    _type: "file";
+  };
+  newTab?: boolean;
+};
+
+export type TeamMember = {
+  _type: "teamMember";
+  name?: string;
+  position?: string;
+  image?: ImageNoMeta;
+  bio?: BlockContentMini;
+  textColor?: Color;
+  background?: Color;
+};
+
+export type SolutionItem = {
+  _type: "solutionItem";
+  title?: string;
+  subtitle?: string;
+  tag?: string;
+  features?: BlockContentMedi;
+};
+
+export type SolutionCard = {
+  _type: "solutionCard";
+  title?: string;
+  content?: BlockContentMini;
+  image?: ImageNoMeta;
+  items?: Array<
+    {
+      _key: string;
+    } & SolutionItem
+  >;
+  footer?: CardFooter;
+  textColor?: Color;
+  background?: Color;
+  rounded?: boolean;
+};
+
+export type ProductCard = {
+  _type: "productCard";
+  title?: string;
+  icon?: ImageIcon;
+  description?: BlockContentMini;
+  features?: Array<
+    {
+      _key: string;
+    } & FeatureItem
+  >;
+  featDisplay?: "vertical" | "horizontal";
+  addons?: BlockContentMedi;
+  footer?: CardFooter;
+  textColor?: Color;
+  background?: Color;
+};
+
+export type ImageWithMeta = {
+  _type: "imageWithMeta";
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  alt?: string;
+  caption?: string;
+  captionSub?: string;
+  credit?: string;
+  widthSize?: "normal" | "medium" | "small";
+  shape?: "rounded" | "squared" | "disc";
+};
+
+export type ImageNoMeta = {
+  _type: "imageNoMeta";
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  alt?: string;
+  widthSize?: "normal" | "medium" | "small";
+  shape?: "rounded" | "squared" | "disc";
+};
+
+export type StepperItem = {
+  _type: "stepperItem";
+  label?: string;
+  title?: string;
+  description?: BlockContentMini;
+  layout?: "card" | "text";
+  textColor?: Color;
+  descColor?: Color;
+  background?: Color;
+};
+
+export type FormHubSpot = {
+  _type: "formHubSpot";
+  region?: string;
+  portalId?: string;
+  formId?: string;
+};
+
+export type FormCheckboxOption = {
+  _type: "formCheckboxOption";
+  label?: BlockContentMini;
+  value?: string;
+  required?: boolean;
+  checked?: boolean;
+};
+
+export type FormInput = {
+  _type: "formInput";
+  title?: string;
+  hubspotKey?: string;
+  info?: string;
+  type?:
+    "checkbox" | "email" | "radio" | "tel" | "text" | "textarea" | "select";
+  options?: Array<string>;
+  cbxOptions?: Array<
+    {
+      _key: string;
+    } & FormCheckboxOption
+  >;
+  optLayout?: "vertical" | "horizontal";
+  placeholder?: string;
+  required?: boolean;
+  size?: "full" | "half";
+};
+
+export type FeatureItem = {
+  _type: "featureItem";
+  eyebrow?: string;
+  title?: string;
+  icon?: ImageIcon;
+  description?: string;
+  ttlSize?: "small" | "medium" | "large";
+  layout?: "text" | "card";
+};
+
+export type FeatureCard = {
+  _type: "featureCard";
+  title?: string;
+  icon?: ImageIcon;
+  description?: BlockContentMini;
+};
+
+export type FileWithMeta = {
+  _type: "fileWithMeta";
+  file?: {
+    asset?: SanityFileAssetReference;
+    media?: unknown;
+    _type: "file";
+  };
+  title?: string;
+  description?: string;
+};
+
+export type CtaMessage = {
+  _type: "ctaMessage";
+  info?: string;
+  subtitle?: string;
+  icon?: ImageIcon;
+  linkType?: "none" | "internal" | "custom";
+  pageRef?: PageReference | PostReference;
+  href?: string;
+  newTab?: boolean;
+};
+
+export type CtaButton = {
+  _type: "ctaButton";
+  text?: string;
+  type?: "internal" | "custom";
+  href?: string;
+  pageRef?: PageReference;
+  highlight?: boolean;
+  target?: boolean;
+};
+
+export type ContentBlock = {
+  _type: "contentBlock";
+  title?: string;
+  tagline?: string;
+  description?: BlockContentMini;
+  icon?: ImageIcon;
+};
+
+export type ComparisonItem = {
+  _type: "comparisonItem";
+  title?: string;
+  boxes?: Array<
+    {
+      _key: string;
+    } & ComparisonBox
+  >;
+};
+
+export type ComparisonBox = {
+  _type: "comparisonBox";
+  title?: string;
+  description?: BlockContentMini;
+  textColor?: Color;
+  background?: Color;
+};
+
+export type CardFooter = Array<
+  | ({
+      _key: string;
+    } & CtaMessage)
+  | ({
+      _key: string;
+    } & CtaButton)
+>;
+
+export type BlockContentExcerpt = Array<{
+  children?: Array<{
+    marks?: Array<string>;
+    text?: string;
+    _type: "span";
+    _key: string;
+  }>;
+  style?: "normal";
+  listItem?: never;
+  markDefs?: null;
+  level?: number;
+  _type: "block";
+  _key: string;
+}>;
+
+export type BlockContentPlus = Array<
+  | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?:
+        | "normal"
+        | "pCenter"
+        | "pRight"
+        | "quotenormal"
+        | "h1"
+        | "h2"
+        | "h3"
+        | "h4"
+        | "h5"
+        | "h6";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        blank?: boolean;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }
+  | ({
+      _key: string;
+    } & Table)
+>;
+
+export type BlockContentMini = Array<{
+  children?: Array<{
+    marks?: Array<string>;
+    text?: string;
+    _type: "span";
+    _key: string;
+  }>;
+  style?: "normal";
+  listItem?: never;
+  markDefs?: Array<{
+    href?: string;
+    blank?: boolean;
+    _type: "link";
+    _key: string;
+  }>;
+  level?: number;
+  _type: "block";
+  _key: string;
+}>;
+
+export type BlockContentMedi = Array<{
+  children?: Array<{
+    marks?: Array<string>;
+    text?: string;
+    _type: "span";
+    _key: string;
+  }>;
+  style?:
+    | "normal"
+    | "pCenter"
+    | "pRight"
+    | "quotenormal"
+    | "h1"
+    | "h2"
+    | "h3"
+    | "h4"
+    | "h5"
+    | "h6";
+  listItem?: "bullet" | "number";
+  markDefs?: Array<{
+    href?: string;
+    blank?: boolean;
+    _type: "link";
+    _key: string;
+  }>;
+  level?: number;
+  _type: "block";
+  _key: string;
+}>;
+
+export type BlockContentMaxi = Array<
+  | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?:
+        | "normal"
+        | "pCenter"
+        | "pRight"
+        | "blockquote"
+        | "quotenormal"
+        | "h1"
+        | "h2"
+        | "h3"
+        | "h4"
+        | "h5"
+        | "h6";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        linkStyle?: "inline" | "button";
+        btnAlign?: "left" | "center" | "right";
+        btnSize?: "normal" | "half" | "full";
+        highlighted?: boolean;
+        blank?: boolean;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }
+  | {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      caption?: string;
+      credit?: string;
+      link?: string;
+      blank?: boolean;
+      align?: "left" | "center" | "right" | "none";
+      widthSize?: "normal" | "medium" | "small" | "tiny";
+      _type: "image";
+      _key: string;
+    }
+  | ({
+      _key: string;
+    } & Table)
+>;
+
+export type AccreditationSettings = {
+  _type: "accreditationSettings";
+  showTitles?: boolean;
+  showTags?: boolean;
+  displayType?: "grid" | "carousel";
+  showArrows?: boolean;
+  showDots?: boolean;
+  autoplay?: boolean;
+  autoplayInterval?: number;
+  itemsPerView?: 1 | 2 | 3 | 4 | 5 | 6;
+};
+
+export type AccreditationItem = {
+  _type: "accreditationItem";
+  title?: string;
+  tag?: string;
+  image?: ImageNoMeta;
+  link?: LinkField;
+};
+
+export type AccordionItem = {
+  _type: "accordionItem";
+  title?: string;
+  description?: BlockContentPlus;
+};
+
+export type AboutInfoCard = {
+  _type: "aboutInfoCard";
+  title?: string;
+  icon?: ImageIcon;
+  content?: BlockContentMini;
+};
+
+export type PostSettings = {
+  _type: "postSettings";
+  showCats?: boolean;
+  showTags?: boolean;
+  showAuthor?: boolean;
+  showDate?: boolean;
+  alignTitle?: "center" | "left" | "right";
+  pdDisplay?: "both" | "top" | "bottom" | "none";
+  pdTopBottom?: "normal" | "medium" | "half" | "small";
+  textColor?: Color;
+  gradientBg?:
+    | "none"
+    | "home"
+    | "page"
+    | "pageblue"
+    | "post"
+    | "product"
+    | "solution"
+    | "guideblue"
+    | "guidegreen"
+    | "guidegray";
+};
+
+export type TopHeroType = {
+  _id: string;
+  _type: "topHeroType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  aboveHeadline?: string;
+  headline?: string;
+  belowHeadline?: string;
+  subheadline?: BlockContentMedi;
+  image?: ImageNoMeta;
+  eyebrowImage?: ImageNoMeta;
+  features?: Array<
+    {
+      _key: string;
+    } & FeatureItem
+  >;
+  featDisplay?: "vertical" | "horizontal";
+  buttons?: Array<
+    {
+      _key: string;
+    } & CtaButton
+  >;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type TextOnlyType = {
+  _id: string;
+  _type: "textOnlyType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  aboveTitle?: string;
+  title?: string;
+  belowTitle?: string;
+  content?: BlockContentMaxi;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type TextImageType = {
+  _id: string;
+  _type: "textImageType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  aboveTitle?: string;
+  title?: string;
+  belowTitle?: string;
+  description?: BlockContentMedi;
+  image?: ImageWithMeta;
+  chips?: Array<string>;
+  buttons?: Array<
+    {
+      _key: string;
+    } & CtaButton
+  >;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type TeamOverviewType = {
+  _id: string;
+  _type: "teamOverviewType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  title?: string;
+  subtitle?: string;
+  description?: BlockContentMedi;
+  members?: Array<
+    {
+      _key: string;
+    } & TeamMember
+  >;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type TableType = {
+  _id: string;
+  _type: "tableType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  aboveEyebrow?: string;
+  title?: string;
+  belowEyebrow?: string;
+  description?: BlockContentMedi;
+  table?: Table;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type Table = {
+  _type: "table";
+  rows?: Array<
+    {
+      _key: string;
+    } & TableRow
+  >;
+};
+
+export type StepperType = {
+  _id: string;
+  _type: "stepperType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  eyebrow?: string;
+  title?: string;
+  description?: BlockContentMedi;
+  steps?: Array<
+    {
+      _key: string;
+    } & StepperItem
+  >;
+  buttons?: Array<
+    {
+      _key: string;
+    } & CtaButton
+  >;
+  disclaimer?: string;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type SolutionsType = {
+  _id: string;
+  _type: "solutionsType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  title?: string;
+  description?: BlockContentMedi;
+  cards?: Array<
+    {
+      _key: string;
+    } & SolutionCard
+  >;
+  display?: "horizontal" | "vertical";
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type ProductsType = {
+  _id: string;
+  _type: "productsType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  title?: string;
+  description?: BlockContentMedi;
+  cards?: Array<
+    {
+      _key: string;
+    } & ProductCard
+  >;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type MapType = {
+  _id: string;
+  _type: "mapType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  title?: string;
+  subtitle?: string;
+  description?: BlockContentMedi;
+  embedUrl?: string;
+  fullScreen?: boolean;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type KeyFeaturesType = {
+  _id: string;
+  _type: "keyFeaturesType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  topHeadline?: string;
+  description?: BlockContentMedi;
+  bottomHeadline?: string;
+  cards?: Array<
+    {
+      _key: string;
+    } & FeatureCard
+  >;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type FormType = {
+  _id: string;
+  _type: "formType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  title?: string;
+  subtitle?: string;
+  description?: BlockContentMedi;
+  features?: Array<
+    {
+      _key: string;
+    } & FeatureItem
+  >;
+  featDisplay?: "vertical" | "horizontal";
+  formTitle?: string;
+  form?: "customForm" | "hubSpotForm";
+  fields?: Array<
+    {
+      _key: string;
+    } & FormInput
+  >;
+  btnLabel?: string;
+  hubspot?: FormHubSpot;
+  footer?: BlockContentMini;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type CtaBannerSettings = {
+  _type: "ctaBannerSettings";
+  innerPadding?: "normal" | "medium" | "half" | "small" | "none";
+  ctaGradient?:
+    | "banner"
+    | "flare"
+    | "lemontwist"
+    | "lunada"
+    | "mojito"
+    | "ohhappiness"
+    | "sulphur"
+    | "custom"
+    | "none";
+  ctaBgColor?: Color;
+};
+
+export type CtaBannerType = {
+  _id: string;
+  _type: "ctaBannerType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  eyebrow?: string;
+  headline?: string;
+  tagline?: string;
+  subheadline?: BlockContentMini;
+  image?: ImageIcon;
+  buttons?: Array<
+    {
+      _key: string;
+    } & CtaButton
+  >;
+  ctaSettings?: CtaBannerSettings;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type ContentBlocksSettings = {
+  _type: "contentBlocksSettings";
+  type?: "box" | "card" | "text";
+  gap?: "normal" | "medium" | "bigger";
+  showIcon?: boolean;
+  iconTitle?: "stacked" | "samerow";
+  collapsible?: boolean;
+  perRow?: 1 | 2 | 3 | 4;
+  textColor?: Color;
+  accentColor?: Color;
+  background?: Color;
+  iconBg?: Color;
+};
+
+export type ContentBlocks = {
+  _id: string;
+  _type: "contentBlocks";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  aboveEyebrow?: string;
+  headline?: string;
+  belowEyebrow?: string;
+  description?: BlockContentMini;
+  blocks?: Array<
+    {
+      _key: string;
+    } & ContentBlock
+  >;
+  titleDesc?: CmmTtlDescSettings;
+  blocksSettings?: ContentBlocksSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type ComparisonType = {
+  _id: string;
+  _type: "comparisonType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  title?: string;
+  description?: BlockContentMedi;
+  steps?: Array<
+    {
+      _key: string;
+    } & ComparisonItem
+  >;
+  buttons?: Array<
+    {
+      _key: string;
+    } & CtaButton
+  >;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type BlogOverviewSettings = {
+  _type: "blogOverviewSettings";
+  limit?: number;
+  showExcerpt?: boolean;
+  showCats?: boolean;
+  showTags?: boolean;
+  showAuthor?: boolean;
+  showDate?: boolean;
+};
+
+export type BlogSection = {
+  _id: string;
+  _type: "blogSection";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  title?: string;
+  description?: BlockContentMedi;
+  button?: Array<
+    {
+      _key: string;
+    } & CtaButton
+  >;
+  blogOverviewSettings?: BlogOverviewSettings;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type AccordionSettings = {
+  _type: "accordionSettings";
+  design?: "faq" | "glossary";
+  ordered?: boolean;
+  firstExpanded?: boolean;
+  textColor?: Color;
+  accentColor?: Color;
+  background?: Color;
+};
+
+export type AccreditationType = {
+  _id: string;
+  _type: "accreditationType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  title?: string;
+  description?: BlockContentMedi;
+  items?: Array<
+    {
+      _key: string;
+    } & AccreditationItem
+  >;
+  accrSettings?: AccreditationSettings;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type AccordionType = {
+  _id: string;
+  _type: "accordionType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+  description?: BlockContentMedi;
+  image?: ImageNoMeta;
+  items?: Array<
+    {
+      _key: string;
+    } & AccordionItem
+  >;
+  settings?: AccordionSettings;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
+export type AboutInfoType = {
+  _id: string;
+  _type: "aboutInfoType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  title?: string;
+  description?: BlockContentMedi;
+  buttons?: Array<
+    {
+      _key: string;
+    } & CtaButton
+  >;
+  collapsibles?: Array<
+    {
+      _key: string;
+    } & AboutInfoCard
+  >;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type Tag = {
+  _id: string;
+  _type: "tag";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  description?: BlockContentExcerpt;
+};
+
+export type Category = {
+  _id: string;
+  _type: "category";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  description?: BlockContentExcerpt;
+};
+
+export type Author = {
+  _id: string;
+  _type: "author";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  image?: ImageIcon;
+  role?: string;
+  bio?: BlockContentExcerpt;
+};
+
+export type CategoryReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "category";
+};
+
+export type TagReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "tag";
+};
+
+export type AuthorReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "author";
+};
+
+export type AboutInfoTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "aboutInfoType";
+};
+
+export type AccordionTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "accordionType";
+};
+
+export type AccreditationTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "accreditationType";
+};
+
+export type BlogSectionReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "blogSection";
+};
+
+export type CtaBannerTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "ctaBannerType";
+};
+
+export type ComparisonTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "comparisonType";
+};
+
+export type ContentBlocksReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "contentBlocks";
+};
+
+export type FormTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "formType";
+};
+
+export type TopHeroTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "topHeroType";
+};
+
+export type KeyFeaturesTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "keyFeaturesType";
+};
+
+export type MapTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "mapType";
+};
+
+export type ProductsTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "productsType";
+};
+
+export type SolutionsTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "solutionsType";
+};
+
+export type StepperTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "stepperType";
+};
+
+export type TableTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "tableType";
+};
+
+export type TeamOverviewTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "teamOverviewType";
+};
+
+export type TextImageTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "textImageType";
+};
+
+export type TextOnlyTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "textOnlyType";
+};
+
 export type Post = {
   _id: string;
   _type: "post";
@@ -23,30 +1414,178 @@ export type Post = {
   _rev: string;
   title?: string;
   slug?: Slug;
-  body?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
+  image?: ImageWithMeta;
+  body?: BlockContentMaxi;
+  excerpt?: BlockContentExcerpt;
+  categories?: Array<
+    {
       _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
+    } & CategoryReference
+  >;
+  tag?: Array<
+    {
       _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
+    } & TagReference
+  >;
+  author?: Array<
+    {
+      _key: string;
+    } & AuthorReference
+  >;
+  sections?: ArrayOf<
+    | AboutInfoTypeReference
+    | AccordionTypeReference
+    | AccreditationTypeReference
+    | BlogSectionReference
+    | CtaBannerTypeReference
+    | ComparisonTypeReference
+    | ContentBlocksReference
+    | FormTypeReference
+    | TopHeroTypeReference
+    | KeyFeaturesTypeReference
+    | MapTypeReference
+    | ProductsTypeReference
+    | SolutionsTypeReference
+    | StepperTypeReference
+    | TableTypeReference
+    | TeamOverviewTypeReference
+    | TextImageTypeReference
+    | TextOnlyTypeReference
+  >;
+  publishedAt?: string;
+  settings?: PostSettings;
+  seo?: SeoMeta;
+  archivedAt?: string;
 };
 
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
+export type SeoMeta = {
+  _type: "seoMeta";
+  mode?: "auto" | "override" | "ignore";
+  title?: string;
+  description?: string;
+  image?: ImageIcon;
+  keywords?: string;
+  noindex?: boolean;
+};
+
+export type PageSettings = {
+  _type: "pageSettings";
+  showTitle?: boolean;
+  showDesc?: boolean;
+  shrinkTitle?: boolean;
+  alignTitle?: "left" | "center" | "right";
+  pdDisplay?: "both" | "top" | "bottom" | "none";
+  pdTopBottom?: "normal" | "medium" | "half" | "small";
+  width?: "normal" | "full";
+  textColor?: Color;
+  gradientBg?:
+    | "none"
+    | "home"
+    | "page"
+    | "pageblue"
+    | "post"
+    | "product"
+    | "solution"
+    | "guideblue"
+    | "guidegreen"
+    | "guidegray";
+};
+
+export type Page = {
+  _id: string;
+  _type: "page";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  description?: BlockContentMini;
+  sections?: ArrayOf<
+    | AboutInfoTypeReference
+    | AccordionTypeReference
+    | AccreditationTypeReference
+    | BlogSectionReference
+    | CtaBannerTypeReference
+    | ComparisonTypeReference
+    | ContentBlocksReference
+    | FormTypeReference
+    | TopHeroTypeReference
+    | KeyFeaturesTypeReference
+    | MapTypeReference
+    | ProductsTypeReference
+    | SolutionsTypeReference
+    | StepperTypeReference
+    | TableTypeReference
+    | TeamOverviewTypeReference
+    | TextImageTypeReference
+    | TextOnlyTypeReference
+  >;
+  settings?: PageSettings;
+  seo?: SeoMeta;
+  archivedAt?: string;
+};
+
+export type TableRow = {
+  _type: "tableRow";
+  cells?: Array<string>;
+};
+
+export type RgbaColor = {
+  _type: "rgbaColor";
+  r?: number;
+  g?: number;
+  b?: number;
+  a?: number;
+};
+
+export type HsvaColor = {
+  _type: "hsvaColor";
+  h?: number;
+  s?: number;
+  v?: number;
+  a?: number;
+};
+
+export type HslaColor = {
+  _type: "hslaColor";
+  h?: number;
+  s?: number;
+  l?: number;
+  a?: number;
+};
+
+export type Code = {
+  _type: "code";
+  language?: string;
+  filename?: string;
+  code?: string;
+  highlightedLines?: Array<number>;
+};
+
+export type MediaFolderReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "media.folder";
+};
+
+export type MediaFolder = {
+  _id: string;
+  _type: "media.folder";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  parent?: MediaFolderReference;
+};
+
+export type MediaTag = {
+  _id: string;
+  _type: "media.tag";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: Slug;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -85,22 +1624,6 @@ export type SanityImageMetadata = {
   thumbHash?: string;
   hasAlpha?: boolean;
   isOpaque?: boolean;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
 };
 
 export type SanityFileAsset = {
@@ -163,14 +1686,126 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
-  | Post
+  | HubspotTracking
+  | GoogleTracking
+  | TrackingSettings
+  | SeoSettings
+  | BlogSettings
+  | PageReference
+  | ReadingSettings
+  | GeneralSettings
+  | SanityImageAssetReference
+  | ImageIcon
+  | PostReference
+  | AboveMenuItem
+  | MenuChildChildItem
+  | MenuChildItem
+  | MenuItem
+  | MenuReference
+  | SiteFooter
+  | CmmBgSettings
+  | CmmLySettings
+  | Color
+  | SiteHeader
+  | Menu
   | Slug
+  | CmmTtlDescSettings
+  | SanityFileAssetReference
+  | LinkField
+  | TeamMember
+  | SolutionItem
+  | SolutionCard
+  | ProductCard
+  | ImageWithMeta
+  | ImageNoMeta
+  | StepperItem
+  | FormHubSpot
+  | FormCheckboxOption
+  | FormInput
+  | FeatureItem
+  | FeatureCard
+  | FileWithMeta
+  | CtaMessage
+  | CtaButton
+  | ContentBlock
+  | ComparisonItem
+  | ComparisonBox
+  | CardFooter
+  | BlockContentExcerpt
+  | BlockContentPlus
+  | BlockContentMini
+  | BlockContentMedi
+  | BlockContentMaxi
+  | AccreditationSettings
+  | AccreditationItem
+  | AccordionItem
+  | AboutInfoCard
+  | PostSettings
+  | TopHeroType
+  | TextOnlyType
+  | TextImageType
+  | TeamOverviewType
+  | TableType
+  | Table
+  | StepperType
+  | SolutionsType
+  | ProductsType
+  | MapType
+  | KeyFeaturesType
+  | FormType
+  | CtaBannerSettings
+  | CtaBannerType
+  | ContentBlocksSettings
+  | ContentBlocks
+  | ComparisonType
+  | BlogOverviewSettings
+  | BlogSection
+  | AccordionSettings
+  | AccreditationType
+  | AccordionType
+  | SanityImageCrop
+  | SanityImageHotspot
+  | AboutInfoType
+  | Tag
+  | Category
+  | Author
+  | CategoryReference
+  | TagReference
+  | AuthorReference
+  | AboutInfoTypeReference
+  | AccordionTypeReference
+  | AccreditationTypeReference
+  | BlogSectionReference
+  | CtaBannerTypeReference
+  | ComparisonTypeReference
+  | ContentBlocksReference
+  | FormTypeReference
+  | TopHeroTypeReference
+  | KeyFeaturesTypeReference
+  | MapTypeReference
+  | ProductsTypeReference
+  | SolutionsTypeReference
+  | StepperTypeReference
+  | TableTypeReference
+  | TeamOverviewTypeReference
+  | TextImageTypeReference
+  | TextOnlyTypeReference
+  | Post
+  | SeoMeta
+  | PageSettings
+  | Page
+  | TableRow
+  | RgbaColor
+  | HsvaColor
+  | HslaColor
+  | Code
+  | MediaFolderReference
+  | MediaFolder
+  | MediaTag
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
   | SanityImageMetadata
-  | SanityImageHotspot
-  | SanityImageCrop
   | SanityFileAsset
   | SanityAssetSourceData
   | SanityImageAsset
@@ -182,24 +1817,7 @@ export type AllSanitySchemaTypes =
 export type POST_QUERY_RESULT = {
   _id: string;
   title: string | null;
-  body: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }> | null;
+  body: BlockContentMaxi | null;
 } | null;
 
 // Source: ../web/src/app/page.tsx
