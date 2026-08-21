@@ -1,4 +1,5 @@
-const path = require('path')
+import path from 'node:path'
+
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 
 /** @type {import('next').NextConfig} */
@@ -41,4 +42,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+export default nextConfig

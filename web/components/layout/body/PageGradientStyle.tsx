@@ -5,18 +5,18 @@ type PageGradientResult = {
 }
 
 const map: Record<Exclude<LyraPageGradientsTypes, 'none'>, string> = {
-  home: 'var(--arr-home-gradient)',
-  page: 'var(--arr-page-gradient)',
-  pageblue: 'var(--arr-pageblue-gradient)',
-  post: 'var(--arr-post-gradient)',
-  product: 'var(--arr-product-gradient)',
-  solution: 'var(--arr-solution-gradient)',
-  guideblue: 'var(--arr-guideblue-gradient)',
-  guidegreen: 'var(--arr-guidegreen-gradient)',
-  guidegray: 'var(--arr-guidegray-gradient)',
+  home: 'var(--lyra-home-gradient)',
+  page: 'var(--lyra-page-gradient)',
+  pageblue: 'var(--lyra-pageblue-gradient)',
+  post: 'var(--lyra-post-gradient)',
+  product: 'var(--lyra-product-gradient)',
+  solution: 'var(--lyra-solution-gradient)',
+  guideblue: 'var(--lyra-guideblue-gradient)',
+  guidegreen: 'var(--lyra-guidegreen-gradient)',
+  guidegray: 'var(--lyra-guidegray-gradient)',
 }
 
 export default function PageGradientStyle({type}: PageGradientResult) {
   const value = type === 'none' ? 'var(--color-dark)' : map[type]
-  return <style>{`:root{--arr-active-gradient:${value};}`}</style>
+  return <style>{`:root{--lyra-active-gradient:${value};}`}</style>
 }

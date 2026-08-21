@@ -14,13 +14,13 @@
   }
 
   &-grid {
-    --arr-row-h: 18rem;
+    --lyra-row-h: 18rem;
 
     max-width: 100% !important;
     display: grid !important;
     position: relative;
     grid-template-columns: 1fr;
-    grid-auto-rows: var(--arr-row-h);
+    grid-auto-rows: var(--lyra-row-h);
 
     @include lyraMediaQuery($mq-tablet) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -44,7 +44,7 @@
         #37464d 0,
         #37464d 1px,
         transparent 1px,
-        transparent var(--arr-row-h)
+        transparent var(--lyra-row-h)
       );
       -webkit-mask-image: linear-gradient(to right, transparent, #000 20%, #000 80%, transparent);
       mask-image: linear-gradient(to right, transparent, #000 20%, #000 80%, transparent);
@@ -209,7 +209,7 @@
 
     &-track {
       display: flex;
-      transform: translateX(calc(var(--arr-page, 0) * -100%));
+      transform: translateX(calc(var(--lyra-page, 0) * -100%));
       @include lyraTransition(transform, 0.5s, ease);
 
       > .lyraAccreditations-item {
@@ -220,7 +220,7 @@
         }
 
         @include lyraMediaQuery($mq-desktop) {
-          flex-basis: calc(100% / var(--arr-per-view, 4));
+          flex-basis: calc(100% / var(--lyra-per-view, 4));
         }
       }
     }

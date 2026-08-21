@@ -1,5 +1,5 @@
 {
   "$schema": "https://unpkg.com/knip@6/schema.json",
   "ignoreDependencies": ["@svgr/webpack"],
-  "ignore": ["lib/zod/sections/content/unknown.tsx"]
+  "ignore": ["sanity.types.ts"]
 }

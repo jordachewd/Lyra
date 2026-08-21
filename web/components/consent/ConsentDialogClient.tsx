@@ -44,7 +44,7 @@ export default function ConsentDialogClient({initial, show}: Props) {
       })
 
       // Notify loaders (HubSpot, anything else) that consent changed
-      window.dispatchEvent(new CustomEvent('arr-consent-updated', {detail: {state: next}}))
+      window.dispatchEvent(new CustomEvent('lyra-consent-updated', {detail: {state: next}}))
 
       setView('hidden')
     } catch {

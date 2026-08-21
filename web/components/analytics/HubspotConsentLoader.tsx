@@ -20,8 +20,8 @@ export default function HubspotConsentLoader({portalId, nonce, initialMarketing}
       if (detail?.state?.marketing) setShouldLoad(true)
     }
 
-    window.addEventListener('arr-consent-updated', onUpdate)
-    return () => window.removeEventListener('arr-consent-updated', onUpdate)
+    window.addEventListener('lyra-consent-updated', onUpdate)
+    return () => window.removeEventListener('lyra-consent-updated', onUpdate)
   }, [shouldLoad])
 
   return shouldLoad ? (

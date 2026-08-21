@@ -68,71 +68,71 @@
   --error: #ff9595;
 
   /* Background Colors / Gradients */
-  --arr-bg-gradient-h: 1060px;
+  --lyra-bg-gradient-h: 1060px;
 
   /* Home Gradient */
-  --arr-home-gradient: linear-gradient(
+  --lyra-home-gradient: linear-gradient(
     to bottom,
     var(--color-blue) 3%,
-    var(--color-dark) var(--arr-bg-gradient-h),
-    var(--color-dark) calc(var(--arr-bg-gradient-h) + 9%),
-    var(--color-green) calc(var(--arr-bg-gradient-h) + 14%),
-    var(--color-gray) calc(var(--arr-bg-gradient-h) + 19%),
-    var(--color-dark) calc(var(--arr-bg-gradient-h) + 42%),
-    var(--color-dark) calc(100% - var(--arr-bg-gradient-h) - 30rem),
+    var(--color-dark) var(--lyra-bg-gradient-h),
+    var(--color-dark) calc(var(--lyra-bg-gradient-h) + 9%),
+    var(--color-green) calc(var(--lyra-bg-gradient-h) + 14%),
+    var(--color-gray) calc(var(--lyra-bg-gradient-h) + 19%),
+    var(--color-dark) calc(var(--lyra-bg-gradient-h) + 42%),
+    var(--color-dark) calc(100% - var(--lyra-bg-gradient-h) - 30rem),
     var(--color-light) 100%
   );
 
   /* Page Gradient */
-  --arr-page-gradient: linear-gradient(
+  --lyra-page-gradient: linear-gradient(
     to bottom,
     var(--color-dark),
-    var(--color-dark) calc(100% - var(--arr-bg-gradient-h)),
+    var(--color-dark) calc(100% - var(--lyra-bg-gradient-h)),
     var(--color-light) 100%
   );
 
   /* Page Blue Gradient */
-  --arr-pageblue-gradient: linear-gradient(
+  --lyra-pageblue-gradient: linear-gradient(
     to bottom,
     var(--color-blue) 3%,
-    var(--color-dark) var(--arr-bg-gradient-h),
+    var(--color-dark) var(--lyra-bg-gradient-h),
     var(--color-dark) 100%
   );
 
   /* Post Gradient */
-  --arr-post-gradient: linear-gradient(
+  --lyra-post-gradient: linear-gradient(
     to bottom,
     var(--color-light),
-    var(--color-dark) var(--arr-bg-gradient-h),
+    var(--color-dark) var(--lyra-bg-gradient-h),
     var(--color-dark) 100%
   );
 
   /* Product Gradient */
-  --arr-product-gradient: linear-gradient(
+  --lyra-product-gradient: linear-gradient(
     to bottom,
     var(--color-dark) 8%,
-    var(--color-green) calc(var(--arr-bg-gradient-h) + 16%),
-    var(--color-gray) calc(var(--arr-bg-gradient-h) + 28%),
-    var(--color-dark) calc(var(--arr-bg-gradient-h) + 46%),
+    var(--color-green) calc(var(--lyra-bg-gradient-h) + 16%),
+    var(--color-gray) calc(var(--lyra-bg-gradient-h) + 28%),
+    var(--color-dark) calc(var(--lyra-bg-gradient-h) + 46%),
     var(--color-dark) 100%
   );
 
   /* Solution Gradient */
-  --arr-solution-gradient: linear-gradient(
+  --lyra-solution-gradient: linear-gradient(
     to bottom,
     var(--color-green) 3%,
-    var(--color-dark) calc(var(--arr-bg-gradient-h) - 2%),
-    var(--color-dark) calc(var(--arr-bg-gradient-h) + 18%),
-    var(--color-gray) calc(var(--arr-bg-gradient-h) + 38%),
-    var(--color-dark) calc(100% - var(--arr-bg-gradient-h) - 10%),
+    var(--color-dark) calc(var(--lyra-bg-gradient-h) - 2%),
+    var(--color-dark) calc(var(--lyra-bg-gradient-h) + 18%),
+    var(--color-gray) calc(var(--lyra-bg-gradient-h) + 38%),
+    var(--color-dark) calc(100% - var(--lyra-bg-gradient-h) - 10%),
     var(--color-dark) 100%
   );
 
   /* Resource Blue Gradient */
-  --arr-guideblue-gradient: linear-gradient(
+  --lyra-guideblue-gradient: linear-gradient(
     to bottom,
     var(--color-blue) 3%,
-    var(--color-dark) var(--arr-bg-gradient-h),
+    var(--color-dark) var(--lyra-bg-gradient-h),
     var(--color-dark),
     var(--color-dark),
     var(--color-dark) calc(100% - 30rem),
@@ -140,10 +140,10 @@
   );
 
   /* Resource Green Gradient */
-  --arr-guidegreen-gradient: linear-gradient(
+  --lyra-guidegreen-gradient: linear-gradient(
     to bottom,
     var(--color-green) 3%,
-    var(--color-dark) var(--arr-bg-gradient-h),
+    var(--color-dark) var(--lyra-bg-gradient-h),
     var(--color-dark),
     var(--color-dark),
     var(--color-dark) calc(100% - 30rem),
@@ -151,17 +151,17 @@
   );
 
   /* Resource Gray Gradient */
-  --arr-guidegray-gradient: linear-gradient(
+  --lyra-guidegray-gradient: linear-gradient(
     to bottom,
     var(--color-light) 3%,
-    var(--color-dark) var(--arr-bg-gradient-h),
+    var(--color-dark) var(--lyra-bg-gradient-h),
     var(--color-dark),
     var(--color-dark),
     var(--color-dark) calc(100% - 30rem),
     var(--color-light) 100%
   );
 
-  --arr-card-gradient: linear-gradient(to bottom, #06608e 0%, #505f66 100%);
+  --lyra-card-gradient: linear-gradient(to bottom, #06608e 0%, #505f66 100%);
 
   /* Offset for sticky header when jumping to in-page anchors. */
   --header-offset: 128px; /* adjust to Header height */

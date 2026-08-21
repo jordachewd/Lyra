@@ -1,5 +1,5 @@
 // Environment
-export const nodeEnv = process.env.NODE_ENV
+const nodeEnv = process.env.NODE_ENV
 
 // Environment flags
 export const isDevelopment = nodeEnv === 'development'

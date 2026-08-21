@@ -53,9 +53,10 @@ export default function AccreditationsCarousel({items, settings}: Props) {
     }
   }, [itemsPerView])
 
-  useEffect(() => {
-    setPage((prev) => Math.min(prev, pages - 1))
-  }, [pages])
+  // Clamp during render rather than in an effect: when a breakpoint change
+  // shrinks `pages`, a stored `page` past the new end would otherwise render one
+  // frame out of range before an effect could correct it.
+  const safePage = Math.min(page, pages - 1)
 
   useEffect(() => {
     if (!autoplay || !hasControls || paused) return
@@ -70,7 +71,7 @@ export default function AccreditationsCarousel({items, settings}: Props) {
   const goPrev = () => setPage((prev) => (prev - 1 + pages) % pages)
   const goNext = () => setPage((prev) => (prev + 1) % pages)
 
-  const trackStyle = {'--arr-page': page} as CSSProperties
+  const trackStyle = {'--lyra-page': safePage} as CSSProperties
 
   const pauseHandlers = hasControls
     ? {
@@ -90,7 +91,7 @@ export default function AccreditationsCarousel({items, settings}: Props) {
       aria-roledescription="carousel"
       aria-label="Accreditations"
       data-per-view={itemsPerView}
-      style={{'--arr-per-view': itemsPerView} as CSSProperties}
+      style={{'--lyra-per-view': itemsPerView} as CSSProperties}
       {...pauseHandlers}
     >
       <div className="lyraAccreditations-carousel-track" style={trackStyle} aria-live="off">
@@ -123,10 +124,10 @@ export default function AccreditationsCarousel({items, settings}: Props) {
               key={index}
               type="button"
               className={classNames('lyraAccreditations-carousel-dot', {
-                'is-active': index === page,
+                'is-active': index === safePage,
               })}
               aria-label={`Go to page ${index + 1}`}
-              aria-current={index === page}
+              aria-current={index === safePage}
               onClick={() => setPage(index)}
             />
           ))}
