@@ -67,13 +67,13 @@ export async function lyraGetPostMetadata({
 
   if (seoMeta?.mode === ('ignore' as SeoModeSchema))
     return await lyraNoMetadata({
-      title,
+      title: `${title} · Lyra`,
       noIndex: seoMeta?.noindex ?? false,
     })
 
   return await lyraBuildMetadata({
     pathname: `/blog/${post.slug}`,
-    title,
+    title: `${title} · Lyra`,
     description,
     image,
     keywords,

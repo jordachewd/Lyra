@@ -56,7 +56,7 @@ export async function generateMetadata({searchParams}: BlogPageProps): Promise<M
 
     return {
       ...baseMetadata,
-      title: `${suffix} · Lyra`,
+      title: {absolute: `${suffix} · Lyra`},
     }
   }
 

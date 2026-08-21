@@ -1,25 +1,51 @@
 # Lyra
 
-Company website with blog, backed by a headless CMS (Sanity).
+A modern company website with a built-in blog, fully driven by a headless CMS.
+Every page, menu, and setting is authored in [Sanity](https://www.sanity.io/)
+and rendered by a fast, SEO-friendly [Next.js](https://nextjs.org/) frontend —
+no code changes needed to publish new content.
 
-A two-package monorepo:
+## What's inside
 
-| Package | What it is | Dev port |
-| --- | --- | --- |
-| [`web/`](web) | Next.js 16 frontend — App Router, React 19 Server Components, Sass | 3000 |
-| [`studio/`](studio) | Sanity Studio v6 — content models, desk structure, editorial workflows | 3333 |
+| Package | What it is |
+| --- | --- |
+| [`web/`](web) | The public website — Next.js 16, React 19 Server Components, Sass |
+| [`studio/`](studio) | The content studio — Sanity Studio v6, where editors manage everything |
 
-Both share the Sanity project and dataset. The site reads
-that dataset over GROQ and validates every response with hand-written Zod
-schemas before rendering.
+## Features
 
-## Quick start
+- **Composable pages** — editors build pages from a library of 18 reusable
+  content sections (heroes, feature grids, steppers, comparisons, forms,
+  maps, team overviews, and more) that can be shared across pages
+- **Full blog** — posts with authors, categories, and tags, plus filtering
+  and pagination out of the box
+- **Editor-friendly studio** — organized desk structure, singleton settings,
+  soft archiving, and protected core pages that can't be accidentally deleted
+- **SEO built in** — per-page metadata, Open Graph and Twitter cards, JSON-LD
+  structured data, sitemap, robots, and web manifest
+- **Privacy-aware analytics** — Google Tag Manager and HubSpot load only
+  according to the visitor's cookie consent choices
+- **Lead capture** — custom forms with reCAPTCHA protection, or embedded
+  HubSpot forms
+- **Fast by design** — server-rendered pages with tag-based caching and
+  instant cache invalidation when content changes in the CMS
 
-Each package installs and runs independently, and each needs its own
-`.env.local`.
+## Technology
+
+- **Frontend**: Next.js 16 (App Router), React 19, TypeScript, Sass
+- **CMS**: Sanity Studio v6 with GROQ queries
+- **Validation**: Zod runtime schemas guard every piece of CMS content before
+  it renders
+- **Security**: Content Security Policy with per-request nonces
+- **Quality**: ESLint, strict TypeScript, unused-code audits
+
+## Running locally
+
+Each package installs and runs independently. Both need a `.env.local` created
+from their `.env.example` template, pointing at your own Sanity project.
 
 ```bash
-# Studio — content authoring
+# Content studio
 cd studio
 npm install
 npm run dev          # http://localhost:3333
@@ -30,43 +56,8 @@ npm install
 npm run dev          # http://localhost:3000
 ```
 
-`web/.env.example` is the template for the site's environment. The Studio needs
-`SANITY_STUDIO_PROJECT_ID`, `SANITY_STUDIO_DATASET`, and
-`SANITY_STUDIO_APP_ID`.
-
-## Before the site will render
-
-The website calls `notFound()` for the entire site when its globals query comes
-back empty, so the dataset needs these documents **created and published** in
-the Studio first:
-
-- **Reading Settings** — `homePage` and `blogPage`, both required
-- **General Settings**, **SEO Settings**, **Tracking Settings**
-- **Site Header** (with a Menu) and **Site Footer**
-- At least one published `page` matching the Home Page reference
-
-## How the two connect
-
-- Content is authored in `studio/` and read by `web/` through GROQ queries in
-  `web/lib/queries/`.
-- `studio/consts/website-section-types.ts` is the authoritative list of the 18
-  reusable section types. Each one has to line up across six layers in `web/` —
-  see the table in [`web/README.md`](web/README.md#section-system).
-- Cache revalidation runs through a Sanity webhook pointed at
-  `web/app/api/revalidate/`. Setup is documented in `docs/`.
-- `cd studio && npm run typegen` writes `web/sanity.types.ts` as a reference
-  artifact. No runtime code imports it — Zod is the type source.
-
-## Repository layout
-
-```text
-web/        Next.js frontend
-studio/     Sanity Studio
-docs/       Planning specs, implementation plans, operational guides (local-only)
-model/      Read-only reference implementation (local-only)
-```
-
-`docs/` and `model/` are gitignored and never published.
+The website renders once the studio's core content (site settings, header,
+footer, and a home page) has been created and published.
 
 ---
 
@@ -74,7 +65,7 @@ model/      Read-only reference implementation (local-only)
 
 ## License
 
-This source code is published for reference and evaluation purposes only. 
+This source code is published for reference and evaluation purposes only.
 
 > No permission is granted to use, copy, modify, merge, publish, distribute, sublicense, or sell copies of this software, in whole or in part.
 

@@ -17,7 +17,9 @@ export async function lyraNoMetadata(args: NoMetadataArgs = {}): Promise<Metadat
 
   const metadata: Metadata = {
     metadataBase: new URL(baseUrl),
-    title: {default: title, template: `%s · Lyra`},
+    // Same absolute-title rule as lyraBuildMetadata: an explicit title is
+    // already suffixed, so keep parent templates from reapplying the site name.
+    title: args.title ? {absolute: args.title} : {default: title, template: `%s · Lyra`},
     description: undefined,
     applicationName: undefined,
     authors: undefined,

@@ -62,7 +62,9 @@ export async function lyraBuildMetadata(args: MetadataArgs = {}): Promise<Metada
 
   const metadata: Metadata = {
     metadataBase: new URL(baseUrl),
-    title: {default: title, template: `%s · ${meta.siteName}`},
+    // Page-level titles arrive fully suffixed; mark them absolute so the root
+    // layout's template does not append the site name a second time.
+    title: args.title ? {absolute: args.title} : {default: title, template: `%s · ${meta.siteName}`},
     description,
     applicationName: meta.siteName,
     authors: [{name: meta.siteName, url: baseUrl}],

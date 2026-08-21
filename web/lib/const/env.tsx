@@ -9,9 +9,9 @@ export const isProduction = nodeEnv === 'production'
 const publicUrl = process.env.NEXT_PUBLIC_SITE_URL
 export const siteUrl = publicUrl ?? 'https://lyra.jwd-apps.com'
 
-// Sanity (public)
-const projId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
-export const projectId = projId ?? 'pg4jpzc7'
+// Sanity (public). No fallback on purpose: the project id is deployment
+// configuration, not source code. Missing value fails fast at client creation.
+export const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 
 const projData = process.env.NEXT_PUBLIC_SANITY_DATASET
 export const dataset = projData ?? 'production'
