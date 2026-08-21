@@ -1,0 +1,236 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+.lyraAccordion {
+  &-content {
+    display: flex;
+    gap: 1.25rem;
+    flex-direction: column;
+    @include lyraTextTypography(16px, 300, 1.3);
+    @include lyraMediaQuery($mq-tablet) {
+      gap: 1.75rem;
+    }
+  }
+
+  &:has(&-wrapper.centered) &-content,
+  &:has(&-wrapper.centered) &-image,
+  &:has(&-wrapper.revCentered) &-content,
+  &:has(&-wrapper.revCentered) &-image {
+    margin: 0 auto;
+  }
+
+  &:has(&-wrapper.reversed) &-content {
+    .lyraTitleDesc {
+      &.right.shrink {
+        margin-left: 0;
+      }
+      &-title,
+      &-eyebrow,
+      &-desc {
+        text-align: left;
+        justify-content: flex-start;
+      }
+    }
+  }
+
+  &-items {
+    display: flex;
+    flex-direction: column;
+    &:not(.ordered) {
+      gap: 0.65rem;
+    }
+  }
+
+  &-group {
+    gap: 2rem;
+    display: flex;
+    padding: 1.5rem 0;
+    flex-direction: column;
+    border-top: 1px solid rgba(255, 255, 255, 0.125);
+
+    & > div {
+      display: flex;
+    }
+
+    @include lyraMediaQuery($mq-tablet) {
+      flex-direction: row;
+    }
+
+    &-letter {
+      @include lyraTextTypography(3rem, 300, 1);
+      color: var(--accordionItem-txt, var(--text-primary));
+      min-width: 3.5rem;
+    }
+
+    &-items {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+
+  &-item {
+    position: relative;
+    cursor: pointer;
+
+    &:focus-visible {
+      outline: 2px solid #3b82f6;
+      outline-offset: 2px;
+      border-radius: 0.75rem;
+    }
+
+    &.faq {
+      @include lyraTransition(border-color, 0.25s);
+      @include lyraBackdropBlur(8px, rgba(var(--accordionItem-bgRgb, 255, 255, 255), 0.15));
+      padding: 1rem;
+      min-height: 56px;
+      border-radius: 0.75rem;
+      border: 1px solid rgba(var(--accordionItem-accentRgb, 255, 255, 255), 0.1);
+      &:hover {
+        border-color: rgba(var(--accordionItem-accentRgb, 255, 255, 255), 0.3);
+      }
+    }
+
+    &.glossary .lyraAccordion {
+      &-question {
+        justify-content: flex-start;
+        &-text {
+          order: 1;
+        }
+        &-icon {
+          order: 0;
+        }
+      }
+      &-answerWrap {
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 0.75rem;
+        padding: 0 1rem;
+        margin-left: 2.25rem;
+        @include lyraBackdropBlur(8px, rgba(var(--accordionItem-bgRgb, 255, 255, 255), 0.15));
+        &.open {
+          padding: 1rem;
+        }
+      }
+    }
+  }
+
+  &-question {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    width: 100%;
+
+    &-text {
+      font-size: 1rem;
+      font-weight: 400;
+      max-width: calc(100% - 40px);
+      color: var(--accordionItem-txt, var(--text-primary));
+    }
+
+    &-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 1px solid rgba(var(--accordionItem-accentRgb, 255, 255, 255), 0.35);
+      position: relative;
+      transition:
+        transform 0.25s ease,
+        border-color 0.25s ease;
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(var(--accordionItem-accentRgb, 255, 255, 255), 0.85);
+        transition: opacity 0.2s ease;
+      }
+      &::before {
+        width: 10px;
+        height: 2px;
+      }
+
+      &::after {
+        width: 2px;
+        height: 10px;
+      }
+    }
+  }
+
+  &-answerWrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    overflow: hidden;
+    margin-top: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      grid-template-rows 0.34s ease,
+      opacity 0.24s ease,
+      margin-top 0.24s ease,
+      padding 0.24s ease,
+      visibility 0s linear 0.24s;
+    will-change: grid-template-rows, opacity, margin-top;
+
+    &.open {
+      grid-template-rows: 1fr;
+      margin-top: 1rem;
+      opacity: 1;
+      visibility: visible;
+      transition:
+        grid-template-rows 0.34s ease,
+        opacity 0.24s ease,
+        margin-top 0.24s ease,
+        padding 0.24s ease,
+        visibility 0s;
+    }
+  }
+
+  &-answer {
+    overflow: hidden;
+    p {
+      font-size: 0.9375rem;
+      line-height: 1.35;
+    }
+  }
+
+  &-answerWrap.open .lyraAccordion-answer {
+    transform: translateY(0);
+  }
+
+  &-item.faq:has(&-answerWrap.open) &-question-icon,
+  &-item.glossary:has(&-answerWrap.open) &-question-icon {
+    background: var(--accordionItem-accent, var(--color-white));
+    border-color: var(--accordionItem-accent, var(--color-white));
+    transform: rotate(180deg);
+    &::before,
+    &::after {
+      background: var(--accordionItem-bg, var(--color-dark));
+    }
+    &::after {
+      opacity: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    &-answerWrap {
+      transition: none;
+    }
+    &-question-icon {
+      transition: none;
+    }
+    &-answerBody {
+      transition: none;
+    }
+  }
+
+  &-noItems {
+    display: flex;
+    font-style: italic;
+    font-size: 0.875rem;
+    color: var(--grey-60);
+  }
+}

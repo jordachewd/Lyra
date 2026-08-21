@@ -1,0 +1,11 @@
+export type LyraPageGradientsTypes =
+  | 'none'
+  | 'home'
+  | 'page'
+  | 'pageblue'
+  | 'post'
+  | 'product'
+  | 'solution'
+  | 'guideblue'
+  | 'guidegreen'
+  | 'guidegray'

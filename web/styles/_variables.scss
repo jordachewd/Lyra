@@ -1,0 +1,48 @@
+/************************************
+
+ * RESPONSIVE BREAKPOINTS
+ * ====================================
+ * Mobile-first breakpoint system using em units.
+ * Usage: @include lyraMediaQuery($mq-tablet) { ... }
+ * 
+ * BREAKPOINT GUIDE:
+ * - Base mobile:  < 320px  (default styles, no media query needed)
+ * - Mobile SM:    320px+   ($mq-small)   - Very small mobile
+ * - Mobile LG:    480px+   ($mq-xsmall)  - Mobile landscape
+ * - Tablet SM:    640px+   ($mq-smedium) - Small tablets / large phones
+ * - Tablet:       768px+   ($mq-tablet)  - Tablets portrait
+ * - Tablet LG:    800px+   ($mq-xmedium) - Medium devices
+ * - Desktop SM:   960px+   ($mq-slarge)  - Small desktop / large tablets
+ * - Desktop:      1024px+  ($mq-desktop)   - Standard desktop
+ * - Desktop MD:   1080px+  ($mq-xlarge)  - Desktop
+ * - Desktop LG:   1280px+  ($mq-screen)  - Large desktop
+ * - Desktop XL:   1360px+  ($mq-lscreen) - Large desktop
+ * - Site width:   1408px+  ($site-width) - Max content width
+ * - Desktop XXL:  1440px+  ($mq-xscreen) - Extra large desktop
+ * - Max width:    1600px+  ($mq-max)     - Maximum
+
+ ************************************/
+
+$mq-small: 20em; /*       320px - Very small mobile                 */
+$mq-xsmall: 30em; /*      480px - Mobile landscape                  */
+$mq-smedium: 40em; /*     640px - Small tablets / large phones      */
+$mq-tablet: 48em; /*      768px - Tablets portrait                  */
+$mq-xmedium: 50em; /*     800px - Medium devices                    */
+$mq-slarge: 60em; /*      960px - Small desktop / large tablets     */
+$mq-desktop: 64em; /*    1024px - Standard desktop                  */
+$mq-xlarge: 67.5em; /*   1080px - Desktop                           */
+$mq-screen: 80em; /*     1280px - Large desktop                     */
+$mq-lscreen: 85em; /*    1360px - Large desktop                     */
+$site-width: 88em; /*    1408px - Max content container width       */
+$mq-xscreen: 90em; /*    1440px - Extra large desktop               */
+$mq-max: 100em; /*       1600px - Maximum                           */
+
+/* Header / main nav desktop switch.
+   The desktop header row (logo + menu + CTA buttons) needs ~1000px to fit,
+   so the hamburger layout is kept until $mq-desktop. Keep in sync with the
+   matchMedia checks in components/layout/partials/NavClientLogic.tsx. */
+$mq-nav: $mq-desktop; /* 1024px */
+
+/* No Media Query Support (for very old browsers) */
+$no-mq-support: false !default;
+$serve-to-nomq-max-width: $mq-desktop;

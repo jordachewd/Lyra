@@ -1,0 +1,184 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+.lyraBlog {
+  &-wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 0 1rem;
+    gap: 2.5rem;
+
+    &.normal {
+      max-width: $site-width;
+      @include lyraMediaQuery($site-width) {
+        padding: 0;
+      }
+    }
+
+    &.full {
+      @include lyraMediaQuery($mq-max) {
+        padding-left: 4rem;
+        padding-right: 4rem;
+      }
+    }
+  }
+
+  &-hero {
+    display: grid;
+    grid-template-columns: 1fr;
+    background: var(--color-green);
+    border-radius: 1rem;
+    overflow: hidden;
+
+    @include lyraMediaQuery($mq-tablet) {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    &.noImage {
+      grid-template-columns: 1fr;
+    }
+
+    &-media {
+      display: flex;
+      overflow: hidden;
+
+      & > img {
+        width: 100%;
+        height: auto;
+        display: block;
+        object-fit: cover;
+        max-height: 100%;
+      }
+    }
+
+    &-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 1.5em;
+      gap: 1.25rem;
+      background: linear-gradient(111deg, #0018f3 0.05%, #4e8199 55.93%);
+      @include lyraMediaQuery($mq-tablet) {
+        padding: 2.5em;
+      }
+
+      @include lyraMediaQuery($mq-desktop) {
+        padding: 3.5em;
+      }
+    }
+
+    &-categories {
+      gap: 1rem;
+    }
+
+    &-headline {
+      display: flex;
+      width: 100%;
+      & a {
+        text-decoration: none;
+        @include lyraTransition();
+        @include lyraTextTypography(1.6rem, 300, 1.2);
+
+        @include lyraMediaQuery($mq-tablet) {
+          font-size: 2.1rem;
+        }
+
+        @include lyraMediaQuery($mq-desktop) {
+          font-size: 2.6rem;
+        }
+
+        &:hover {
+          opacity: 0.75;
+        }
+      }
+    }
+
+    &-excerpt {
+      display: flex;
+      flex-direction: column;
+      margin: 1rem 0;
+    }
+
+    &-authors {
+      display: flex;
+      gap: 0.75rem;
+      align-items: center;
+    }
+
+    &-meta {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: auto;
+      padding-top: 1rem;
+    }
+
+    &-date {
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  &-filters {
+    display: flex;
+    position: relative;
+    justify-content: center;
+  }
+
+  &-posts {
+    padding-bottom: 3rem;
+  }
+
+  &-pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+
+    &-btn {
+      @include lyraTextTypography(0.875rem, 400, 1);
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 0.5rem;
+      padding: 0.75rem 1rem;
+      min-width: 44px;
+      min-height: 44px;
+      text-align: center;
+      cursor: pointer;
+      @include lyraTransition;
+
+      &:focus-visible {
+        outline: 2px solid #3b82f6;
+        outline-offset: 2px;
+      }
+
+      @include lyraHover {
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      &[aria-current='page'] {
+        background: rgba(255, 255, 255, 0.2);
+        font-weight: 600;
+      }
+
+      &[aria-disabled='true'] {
+        opacity: 0.5;
+        cursor: not-allowed;
+        &:hover {
+          background: rgba(255, 255, 255, 0.06);
+        }
+      }
+    }
+  }
+
+  &-noPosts {
+    text-align: center;
+    @include lyraTextTypography(0.85rem, 300);
+    font-style: italic;
+    color: var(--color-gray);
+  }
+}

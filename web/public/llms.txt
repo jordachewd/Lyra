@@ -1,0 +1,11 @@
+version: 0.1
+contact: info@lyra.jwd-apps.com
+policy:
+  crawl: allow
+  cache: allow
+  train: disallow
+  summarize: allow
+  attribute: require
+  rate_limit: 1 rps
+  commercial_use: disallow
+notes: Please link back to https://lyra.jwd-apps.com when quoting.

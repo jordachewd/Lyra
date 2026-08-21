@@ -1,0 +1,40 @@
+export const CURATED_TYPES = [
+  // Owned by sanity-plugin-media. v6 added media.folder alongside media.tag;
+  // both must be listed or they surface as stray root-level desk items.
+  'media.tag',
+  'media.folder',
+  'page',
+
+  'post',
+  'postSettings',
+  'author',
+  'category',
+  'tag',
+
+  'aboutInfoType',
+  'accordionType',
+  'accreditationType',
+  'blogSection',
+  'ctaBannerType',
+  'comparisonType',
+  'contentBlocks',
+  'formType',
+  'keyFeaturesType',
+  'mapType',
+  'productsType',
+  'solutionsType',
+  'stepperType',
+  'tableType',
+  'teamOverviewType',
+  'textImageType',
+  'textOnlyType',
+  'topHeroType',
+
+  'menu',
+  'siteHeader',
+  'siteFooter',
+  'generalSettings',
+  'readingSettings',
+  'seoSettings',
+  'trackingSettings',
+] as const

@@ -1,0 +1,97 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+.lyraTextImage {
+  &-wrapper {
+    &.normal,
+    &.reversed {
+      align-items: center;
+    }
+  }
+
+  &-content {
+    flex-direction: column;
+    gap: 2rem;
+    .lyraTitleDesc.center:not(.shrink) {
+      max-width: 100%;
+    }
+  }
+
+  &-image {
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    & > img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    &.rounded > img {
+      border-radius: 1.5rem;
+    }
+
+    &.disc {
+      padding: 1rem 0;
+      & > img {
+        position: relative;
+        object-fit: cover;
+        border-radius: 100%;
+        border: 3px solid var(--color-white);
+        box-shadow: 0 0 1rem 0 #ffffff4d;
+      }
+    }
+
+    &-meta {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      margin-top: 0.75rem;
+      gap: 0.35rem;
+
+      & > div {
+        @include lyraTextTypography(1.125rem, 400, 1.2);
+      }
+    }
+
+    &-caption-sub {
+      font-size: 0.825rem !important;
+      font-weight: 300 !important;
+    }
+
+    &-credit {
+      font-style: italic;
+      font-size: 0.675rem !important;
+      font-weight: 300 !important;
+      color: var(--storm-50) !important;
+    }
+  }
+
+  &-chips > .cattag-chip {
+    color: var(--textImgColor-txt, inherit);
+  }
+
+  &-actions {
+    display: flex;
+    gap: 1rem;
+    &.center {
+      justify-content: center;
+    }
+  }
+
+  &:has(&-wrapper.centered) &-content,
+  &:has(&-wrapper.revCentered) &-content,
+  &:has(&-wrapper.centered) &-image,
+  &:has(&-wrapper.revCentered) &-image {
+    margin: 0 auto;
+  }
+
+  &:has(&-wrapper.centered) &-content,
+  &:has(&-wrapper.revCentered) &-content {
+    ul,
+    ol {
+      text-align: left;
+    }
+  }
+}

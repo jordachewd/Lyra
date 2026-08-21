@@ -1,0 +1,117 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+.lyraMain {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+
+    & .lyraSection:first-child,
+    & .lyraPost-header:first-child {
+      &.ptb {
+        &_normal {
+          padding-top: 7rem;
+
+          @include lyraMediaQuery($mq-tablet) {
+            padding-top: 9.05rem;
+            body:has(> .lyraHeader.has-above-menu) & {
+              padding-top: 10.75rem;
+            }
+          }
+
+          @include lyraMediaQuery($site-width) {
+            padding-top: 11rem;
+            body:has(> .lyraHeader.has-above-menu) & {
+              padding-top: 12.75rem;
+            }
+          }
+        }
+
+        &_medium {
+          padding-top: 6rem;
+
+          @include lyraMediaQuery($mq-tablet) {
+            padding-top: 7.55rem;
+            body:has(> .lyraHeader.has-above-menu) & {
+              padding-top: 9.25rem;
+            }
+          }
+
+          @include lyraMediaQuery($site-width) {
+            padding-top: 9rem;
+            body:has(> .lyraHeader.has-above-menu) & {
+              padding-top: 10.75rem;
+            }
+          }
+        }
+
+        &_half {
+          padding-top: 5.5rem;
+
+          @include lyraMediaQuery($mq-tablet) {
+            padding-top: 6.8rem;
+            body:has(> .lyraHeader.has-above-menu) & {
+              padding-top: 8.5rem;
+            }
+          }
+
+          @include lyraMediaQuery($site-width) {
+            padding-top: 8rem;
+            body:has(> .lyraHeader.has-above-menu) & {
+              padding-top: 9.75rem;
+            }
+          }
+        }
+
+        &_small {
+          padding-top: 5rem;
+
+          @include lyraMediaQuery($mq-tablet) {
+            padding-top: 5.8rem;
+            body:has(> .lyraHeader.has-above-menu) & {
+              padding-top: 7.55rem;
+            }
+          }
+
+          @include lyraMediaQuery($site-width) {
+            padding-top: 7rem;
+            body:has(> .lyraHeader.has-above-menu) & {
+              padding-top: 8.25rem;
+            }
+          }
+        }
+      }
+
+      &.pdd {
+        &_bottom,
+        &_none {
+          padding-top: 3.9rem;
+
+          @include lyraMediaQuery($mq-tablet) {
+            padding-top: 4.55rem;
+            body:has(> .lyraHeader.has-above-menu) & {
+              padding-top: 6.4rem;
+            }
+          }
+
+          @include lyraMediaQuery($site-width) {
+            padding-top: 5rem;
+            body:has(> .lyraHeader.has-above-menu) & {
+              padding-top: 6.75rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  &-pgHead {
+    color: var(--pgHeadColor-txt, inherit);
+  }
+}

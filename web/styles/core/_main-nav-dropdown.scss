@@ -1,0 +1,84 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+.lyraMainNav--dropdown {
+  --main-nav-list-width: min(580px, 90vw);
+  --main-nav-left-panel-width: min(360px, 60vw);
+
+  .grandchild-list {
+    max-height: 0;
+    padding: 0 0 0 2rem;
+    overflow: hidden;
+  }
+
+  .child-toggle:checked ~ .grandchild-list {
+    max-height: var(--main-nav-list-max-height);
+    padding: 1rem 0 1rem 2rem;
+  }
+
+  @include lyraMediaQuery($mq-nav) {
+    .menu-list {
+      position: absolute;
+      top: calc(100% + 1.25rem);
+      left: 0;
+      min-width: var(--main-nav-list-width);
+    }
+
+    .child-list {
+      position: relative;
+      width: var(--main-nav-left-panel-width);
+      padding: 12px;
+      border: 1px solid var(--header-border);
+      border-radius: 16px;
+      box-shadow: var(--main-nav-shadow);
+      background-color: color-mix(in srgb, var(--color-accent-dark) 90%, transparent);
+    }
+
+    .child-label .chev,
+    .child-link .chev {
+      transform: rotate(-45deg);
+    }
+
+    .child-toggle:checked ~ .grandchild-list {
+      max-height: none;
+      padding: 8px;
+    }
+
+    .grandchild-list {
+      position: absolute;
+      top: 0;
+      left: var(--main-nav-left-panel-width);
+      width: calc(var(--main-nav-list-width) - var(--main-nav-left-panel-width) - 32px);
+      max-height: none;
+      padding: 8px;
+      overflow: visible;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateX(12px);
+      transition:
+        opacity 0.18s var(--main-nav-easing),
+        transform 0.18s var(--main-nav-easing),
+        visibility 0.18s var(--main-nav-easing);
+      border: 1px solid var(--header-border);
+      border-radius: 16px;
+      box-shadow: var(--main-nav-shadow);
+      background-color: color-mix(in srgb, var(--color-blue) 90%, transparent);
+
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -23px;
+        width: 24px;
+        height: 100%;
+      }
+    }
+
+    .child-item:hover > .grandchild-list,
+    .child-item:focus-within > .grandchild-list {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(0);
+    }
+  }
+}

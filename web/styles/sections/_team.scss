@@ -1,0 +1,129 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+.lyraTeamOverview {
+  &-wrapper {
+    flex-direction: column;
+    &.centered,
+    &.revCentered {
+      .lyraTeamOverview {
+        &-title {
+          margin: 0 auto;
+        }
+      }
+    }
+    &.reversed {
+      flex-direction: column;
+    }
+  }
+
+  &-cards {
+    max-width: 100% !important;
+    display: grid !important;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+
+    @include lyraMediaQuery($mq-tablet) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @include lyraMediaQuery($mq-desktop) {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  &-card {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 1rem;
+    padding: 3rem 1rem;
+    min-height: 368px;
+    background: var(--teamMember-bg, var(--lyra-card-gradient));
+
+    & > div {
+      display: flex;
+    }
+
+    @include lyraTransition;
+
+    &-image {
+      overflow: hidden;
+      border-radius: 100px;
+      border: 3px solid var(--color-white);
+      box-shadow: 0px 0px 16px 0px #ffffff4d;
+      background-color: var(--color-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 160px;
+      max-height: 160px;
+
+      & > img {
+        position: relative;
+        object-fit: cover;
+      }
+    }
+
+    &-name,
+    &-position {
+      text-align: center;
+      @include lyraTextTypography(1rem, 600, 1.2);
+      color: var(--teamMember-txt, var(--text-primary));
+    }
+
+    &-name {
+      margin-top: 1rem;
+      text-transform: uppercase;
+    }
+
+    &-position {
+      font-size: 0.825rem;
+      font-weight: 400;
+      margin-top: 0.5rem;
+    }
+
+    &-bio {
+      color: var(--teamMember-txt, var(--text-primary));
+
+      &-preview {
+        max-height: 0;
+        display: grid;
+        grid-template-rows: 0fr;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+          grid-template-rows 0.54s ease,
+          opacity 0.44s ease,
+          margin-top 0.44s ease,
+          height 0.44s ease,
+          max-height 0.44s ease,
+          padding 0.44s ease,
+          visibility 0s linear 0.24s;
+        will-change: grid-template-rows, opacity, margin-top;
+
+        &.open {
+          margin-top: 1.5rem;
+          max-height: 1000px;
+          grid-template-rows: 1fr;
+          opacity: 1;
+          visibility: visible;
+          transition:
+            grid-template-rows 0.54s ease,
+            opacity 0.44s ease,
+            margin-top 0.44s ease,
+            height 0.44s ease,
+            max-height 0.44s ease,
+            padding 0.44s ease,
+            visibility 0s;
+        }
+      }
+    }
+  }
+
+  &-button {
+    margin-top: 1.5rem;
+  }
+}

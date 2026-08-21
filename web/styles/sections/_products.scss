@@ -1,0 +1,107 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+.lyraProducts {
+  &-wrapper {
+    flex-direction: column;
+    &.centered,
+    &.revCentered {
+      .lyraProducts {
+        &-title {
+          margin: 0 auto;
+        }
+        &-cards {
+          text-align: left;
+        }
+      }
+    }
+    &.reversed {
+      flex-direction: column;
+    }
+  }
+
+  &-cards {
+    max-width: 100% !important;
+    display: grid !important;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+
+    @include lyraMediaQuery($mq-tablet) {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+  }
+
+  &-card {
+    height: 100%;
+    gap: 1.5rem;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    border-radius: 1.5rem;
+    padding: 1.5rem 0;
+    background: var(--prodCard-bg, var(--lyra-card-gradient));
+
+    & > div {
+      padding: 0 1.5rem;
+    }
+
+    &-heading {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+
+      @include lyraMediaQuery($mq-tablet) {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      &-icon {
+        width: 64px;
+        height: 64px;
+        background: #fff;
+        border-radius: 1rem;
+        box-shadow: 0px 0px 16px 0px #ffffff4d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          max-width: 50%;
+          max-height: 50%;
+          display: block;
+        }
+      }
+
+      &-title {
+        @include lyraTextTypography(2rem, 300, 1.2);
+        color: var(--prodCard-txt, var(--text-primary));
+      }
+    }
+
+    &-desc p {
+      line-height: 1.4;
+      color: var(--prodCard-txt, var(--text-primary));
+    }
+
+    &-features {
+      gap: 1rem;
+      display: flex;
+      flex-direction: column;
+      &-title {
+        @include lyraTextTypography(0.8rem, 600, 1);
+        color: var(--prodCard-txt, var(--text-primary));
+        text-transform: uppercase;
+      }
+
+      & > .lyraFeatures.horizontal .lyraFeatures-item {
+        flex: 1 1 calc(100% / 3 - 1.5rem);
+      }
+    }
+
+    &-footer {
+      margin-top: auto;
+      padding-top: 1.5rem !important;
+    }
+  }
+}

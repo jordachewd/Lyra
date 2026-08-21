@@ -1,0 +1,246 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+// Inline SVG caret
+$caret-svg: '%3Csvg xmlns%3D%22http%3A//www.w3.org/2000/svg%22 viewBox%3D%220 0 24 24%22 fill%3D%22none%22%3E%3Cpath d%3D%22M6 9l6 6 6-6%22 stroke%3D%22%23ffffff%22 stroke-width%3D%222%22 stroke-linecap%3D%22round%22 stroke-linejoin%3D%22round%22/%3E%3C/svg%3E';
+
+.lyraFormField {
+  gap: 0.75rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  @include lyraMediaQuery($mq-tablet) {
+    &.half {
+      width: calc(50% - 0.9rem);
+    }
+  }
+
+  & > * {
+    display: flex;
+    @include lyraTextTypography(1rem, 400, 1.25, 0);
+  }
+
+  label {
+    font-weight: 600;
+    & span {
+      position: relative;
+      margin-left: 0.25rem;
+      &.hasError {
+        color: var(--error);
+      }
+    }
+  }
+
+  &-info,
+  &-error {
+    margin-top: -0.25rem;
+    font-size: 0.8125rem;
+    color: var(--color-light);
+  }
+
+  &-error {
+    color: var(--error);
+  }
+
+  &.fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+
+    & > legend {
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+      display: table;
+      & span {
+        position: relative;
+        margin-left: 0.25rem;
+      }
+    }
+  }
+
+  &-options {
+    gap: 1rem;
+    display: flex;
+
+    &.vertical {
+      flex-direction: column;
+    }
+
+    &.horizontal {
+      flex-direction: row;
+      flex-wrap: wrap;
+    }
+  }
+
+  &-option {
+    display: flex;
+    gap: 0.75rem;
+
+    & > input,
+    & > label {
+      cursor: pointer;
+      display: flex;
+    }
+
+    & > label {
+      font-weight: 400;
+      font-size: 0.875rem;
+      margin-top: 0.125rem;
+      flex: 1 1 calc(100% - 1rem - 20px);
+
+      .lyraPortableText {
+        line-height: 1;
+        font-weight: 400;
+        font-size: 0.875rem;
+      }
+    }
+
+    & > input {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+
+    &.radio {
+      gap: 0.75rem;
+      align-items: center;
+
+      & > input,
+      & > label {
+        line-height: 1;
+      }
+    }
+
+    &.checkbox {
+      & > label {
+        gap: 0.5rem;
+        & > span {
+          margin: 0;
+          line-height: 0.75rem;
+        }
+        .lyraPortableText {
+          line-height: 1.3;
+        }
+      }
+    }
+  }
+
+  input,
+  textarea {
+    outline: none;
+    padding: 0.875rem 1rem;
+    min-height: 48px; /* Touch target */
+    border-radius: 0.5rem;
+    border: 1px solid var(--color-light);
+    background-color: rgba(255, 255, 255, 0.1);
+    @include lyraTransition(all, 0.25s);
+    @include lyraHover {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    &:focus,
+    &:focus-visible {
+      border: 2px solid var(--color-white);
+      background-color: rgba(255, 255, 255, 0.08);
+      outline: none;
+    }
+
+    &.hasError {
+      border: 2px solid var(--error);
+    }
+  }
+
+  textarea {
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  select {
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    min-height: 48px; /* Touch target */
+
+    background-color: rgba(255, 255, 255, 0.1);
+    background-image: url('data:image/svg+xml,#{$caret-svg}');
+    background-repeat: no-repeat;
+    background-position: right 0.85rem center;
+    background-size: 1rem;
+
+    padding: 0.75rem 2.25rem 0.75rem 0.85rem;
+    border: 1.5px solid rgba(255, 255, 255, 0.18);
+    border-radius: 0.5rem;
+    box-shadow: none;
+    outline: none;
+    transition:
+      border-color 0.25s ease-in-out,
+      background-color 0.25s ease-in-out;
+
+    &.hasError {
+      border-color: var(--error);
+      &:has(option:first-child:checked) {
+        color: var(--error);
+      }
+    }
+
+    @include lyraHover {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    &:focus,
+    &:focus-visible {
+      border: 1.5px solid var(--color-white);
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+
+    option {
+      font-size: 0.875rem;
+      color: var(--color-white);
+      background-color: var(--color-dark);
+      &:first-child {
+        font-weight: 300;
+        font-style: italic;
+        color: rgba(255, 255, 255, 0.3);
+      }
+    }
+
+    &:has(option:first-child:checked) {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    &:disabled {
+      color: #b5c2d9;
+      background-color: #0b1220;
+      cursor: not-allowed;
+      opacity: 0.8;
+    }
+
+    @media (forced-colors: active) {
+      background-image: none;
+    }
+  }
+
+  select::-ms-expand {
+    display: none;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: var(--color-white);
+    box-shadow: inset 0 0 20px 20px #ffffff10 !important;
+  }
+
+  body:not(:-moz-handler-blocked) fieldset {
+    display: table-cell;
+  }
+
+  textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+}

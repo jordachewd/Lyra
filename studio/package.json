@@ -1,14 +1,18 @@
 {
-  "name": "lyra",
+  "name": "lyra-sanity-studio",
   "private": true,
   "version": "1.0.0",
   "main": "package.json",
   "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22.12"
+  },
   "scripts": {
     "build": "sanity build",
     "deploy": "npm run build && sanity deploy",
     "deploy-graphql": "sanity graphql deploy",
     "dev": "sanity dev",
+    "lint": "eslint .",
     "start": "sanity start",
     "typegen": "sanity schemas extract --force && sanity typegen generate"
   },
@@ -16,6 +20,7 @@
     "sanity"
   ],
   "dependencies": {
+    "@portabletext/types": "^4.0.2",
     "@sanity/code-input": "^7.3.7",
     "@sanity/color-input": "^6.1.4",
     "@sanity/icons": "^5.2.1",

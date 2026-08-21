@@ -1,0 +1,223 @@
+/* ================================
+   GLOBALS
+==================================*/
+
+/* CSS Variables */
+:root {
+  /* Primary Colors */
+  --color-blue: #0018f3;
+  --color-blue-rgb: 0, 24, 243;
+
+  --color-green: #00527c;
+  --color-green-rgb: 0, 82, 124;
+
+  --color-gray: #899aa1;
+  --color-gray-rgb: 137, 154, 161;
+
+  --color-light: #4e8199;
+  --color-light-rgb: 78, 129, 153;
+
+  --color-white: #ffffff;
+  --color-white-rgb: 255, 255, 255;
+
+  --color-dark: #1a2b33;
+  --color-dark-rgb: 26, 43, 51;
+
+  --color-black: #000000;
+  --color-black-rgb: 0, 0, 0;
+
+  /* Accent Colors */
+  --color-accent-light: #a9caff;
+  --color-accent-light-rgb: 169, 202, 255;
+
+  --color-accent: #00a2ff;
+  --color-accent-rgb: 0, 162, 255;
+
+  --color-accent-dark: #293ce9;
+  --color-accent-dark-rgb: 41, 60, 233;
+
+  /* Text Colors */
+  --text-primary: var(--color-white);
+  --text-secondary: var(--color-blue);
+
+  /* Storm Colors */
+  --storm-10: #e5f6ff;
+  --storm-20: #cdebfa;
+  --storm-30: #acd2e5;
+  --storm-40: #99bbcc;
+  --storm-50: #84a3b2;
+  --storm-60: #6e8d9b;
+  --storm-70: #637680;
+  --storm-80: #505f66;
+  --storm-90: #3c474d;
+  --storm-100: #1a2b33;
+
+  /* Grey Colors */
+  --grey-10: #edf0f2;
+  --grey-20: #e0e3e4;
+  --grey-30: #d2d7da;
+  --grey-40: #c2c9cc;
+  --grey-50: #b1babe;
+  --grey-60: #9ea8ad;
+  --grey-70: #87949b;
+  --grey-80: #5f6b70;
+  --grey-90: #3e474b;
+  --grey-100: #293033;
+
+  /* Error */
+  --error: #ff9595;
+
+  /* Background Colors / Gradients */
+  --lyra-bg-gradient-h: 1060px;
+
+  /* Home Gradient */
+  --lyra-home-gradient: linear-gradient(
+    to bottom,
+    var(--color-blue) 3%,
+    var(--color-dark) var(--lyra-bg-gradient-h),
+    var(--color-dark) calc(var(--lyra-bg-gradient-h) + 9%),
+    var(--color-green) calc(var(--lyra-bg-gradient-h) + 14%),
+    var(--color-gray) calc(var(--lyra-bg-gradient-h) + 19%),
+    var(--color-dark) calc(var(--lyra-bg-gradient-h) + 42%),
+    var(--color-dark) calc(100% - var(--lyra-bg-gradient-h) - 30rem),
+    var(--color-light) 100%
+  );
+
+  /* Page Gradient */
+  --lyra-page-gradient: linear-gradient(
+    to bottom,
+    var(--color-dark),
+    var(--color-dark) calc(100% - var(--lyra-bg-gradient-h)),
+    var(--color-light) 100%
+  );
+
+  /* Page Blue Gradient */
+  --lyra-pageblue-gradient: linear-gradient(
+    to bottom,
+    var(--color-blue) 3%,
+    var(--color-dark) var(--lyra-bg-gradient-h),
+    var(--color-dark) 100%
+  );
+
+  /* Post Gradient */
+  --lyra-post-gradient: linear-gradient(
+    to bottom,
+    var(--color-light),
+    var(--color-dark) var(--lyra-bg-gradient-h),
+    var(--color-dark) 100%
+  );
+
+  /* Product Gradient */
+  --lyra-product-gradient: linear-gradient(
+    to bottom,
+    var(--color-dark) 8%,
+    var(--color-green) calc(var(--lyra-bg-gradient-h) + 16%),
+    var(--color-gray) calc(var(--lyra-bg-gradient-h) + 28%),
+    var(--color-dark) calc(var(--lyra-bg-gradient-h) + 46%),
+    var(--color-dark) 100%
+  );
+
+  /* Solution Gradient */
+  --lyra-solution-gradient: linear-gradient(
+    to bottom,
+    var(--color-green) 3%,
+    var(--color-dark) calc(var(--lyra-bg-gradient-h) - 2%),
+    var(--color-dark) calc(var(--lyra-bg-gradient-h) + 18%),
+    var(--color-gray) calc(var(--lyra-bg-gradient-h) + 38%),
+    var(--color-dark) calc(100% - var(--lyra-bg-gradient-h) - 10%),
+    var(--color-dark) 100%
+  );
+
+  /* Resource Blue Gradient */
+  --lyra-guideblue-gradient: linear-gradient(
+    to bottom,
+    var(--color-blue) 3%,
+    var(--color-dark) var(--lyra-bg-gradient-h),
+    var(--color-dark),
+    var(--color-dark),
+    var(--color-dark) calc(100% - 30rem),
+    var(--color-light) 100%
+  );
+
+  /* Resource Green Gradient */
+  --lyra-guidegreen-gradient: linear-gradient(
+    to bottom,
+    var(--color-green) 3%,
+    var(--color-dark) var(--lyra-bg-gradient-h),
+    var(--color-dark),
+    var(--color-dark),
+    var(--color-dark) calc(100% - 30rem),
+    var(--color-light) 100%
+  );
+
+  /* Resource Gray Gradient */
+  --lyra-guidegray-gradient: linear-gradient(
+    to bottom,
+    var(--color-light) 3%,
+    var(--color-dark) var(--lyra-bg-gradient-h),
+    var(--color-dark),
+    var(--color-dark),
+    var(--color-dark) calc(100% - 30rem),
+    var(--color-light) 100%
+  );
+
+  --lyra-card-gradient: linear-gradient(to bottom, #06608e 0%, #505f66 100%);
+
+  /* Offset for sticky header when jumping to in-page anchors. */
+  --header-offset: 128px; /* adjust to Header height */
+}
+
+/* ================================
+     RESET
+  ==================================*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+[id] {
+  scroll-margin-top: var(--header-offset);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  @extend .sr-only;
+  z-index: 9999;
+
+  &:focus {
+    position: fixed;
+    top: 8px;
+    left: 8px;
+    width: auto;
+    height: auto;
+    padding: 12px 24px;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+    background: var(--color-blue);
+    color: var(--color-white);
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    outline: 2px solid var(--color-accent-light);
+    outline-offset: 2px;
+  }
+}
+
+.gtm-iframe-hidden {
+  display: none;
+  visibility: hidden;
+}

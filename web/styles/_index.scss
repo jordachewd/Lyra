@@ -1,0 +1,57 @@
+/* Core */
+@forward 'core/base';
+@forward 'core/typography';
+@forward 'core/header';
+@forward 'core/main-nav';
+@forward 'core/main-nav-dropdown';
+@forward 'core/main-nav-megamenu';
+@forward 'core/footer';
+
+/* Common */
+@forward 'common/sections';
+@forward 'common/portable-text';
+@forward 'common/portable-table';
+@forward 'common/title-desc';
+@forward 'common/buttons';
+@forward 'common/image-box';
+@forward 'common/card-footer';
+@forward 'common/show-addons';
+@forward 'common/feature-item';
+@forward 'common/form-elements';
+@forward 'common/form-hubspot';
+@forward 'common/gradients';
+
+/* Sections */
+@forward 'sections/about-info';
+@forward 'sections/accordion';
+@forward 'sections/accreditations';
+@forward 'sections/blog-overview';
+@forward 'sections/comparison';
+@forward 'sections/content-blocks';
+@forward 'sections/cta-banner';
+@forward 'sections/form-section';
+@forward 'sections/hero';
+@forward 'sections/key-features';
+@forward 'sections/map';
+@forward 'sections/products';
+@forward 'sections/solutions';
+@forward 'sections/stepper';
+@forward 'sections/table';
+@forward 'sections/team';
+@forward 'sections/text-image';
+@forward 'sections/text-only';
+
+/* Blog */
+@forward 'blog/blog-elements';
+@forward 'blog/blog-styles';
+@forward 'blog/post-styles';
+
+/* Pages */
+@forward 'pages/page-styles';
+@forward 'pages/not-found';
+
+/** 
+ * OLD STYLES --- To be removed after migration is complete
+ **/
+
+@forward 'sections/consent';

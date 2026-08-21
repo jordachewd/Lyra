@@ -1,0 +1,24 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+.lyraHubspotForm {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+
+  & > .hs-form-frame {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border: none;
+    min-height: 500px;
+
+    & > iframe {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}

@@ -14,7 +14,1398 @@
 
 export declare const internalGroqTypeReferenceTo: unique symbol;
 
+type ArrayOf<T> = Array<
+  T & {
+    _key: string;
+  }
+>;
+
 // Source: schema.json
+export type HubspotTracking = {
+  _type: "hubspotTracking";
+  enabled?: boolean;
+  portalId?: string;
+};
+
+export type GoogleTracking = {
+  _type: "googleTracking";
+  enabled?: boolean;
+  gTagManagerId?: string;
+};
+
+export type TrackingSettings = {
+  _id: string;
+  _type: "trackingSettings";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  google?: GoogleTracking;
+  hubspot?: HubspotTracking;
+};
+
+export type SeoSettings = {
+  _id: string;
+  _type: "seoSettings";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  category?: string;
+  classification?: string;
+  keywords?: string;
+  twitterHandle?: string;
+  linkedinHandle?: string;
+  gSiteVerification?: string;
+  noindex?: boolean;
+};
+
+export type BlogSettings = {
+  _type: "blogSettings";
+  showExcerpt?: boolean;
+  excerptLength?: number;
+  perPage?: number;
+  filterBy?: "tags" | "categories" | "none";
+  showCats?: boolean;
+  showTags?: boolean;
+  showAuthor?: boolean;
+  showDate?: boolean;
+};
+
+export type PageReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "page";
+};
+
+export type ReadingSettings = {
+  _id: string;
+  _type: "readingSettings";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  homePage?: PageReference;
+  blogPage?: PageReference;
+  blogSettings?: BlogSettings;
+};
+
+export type GeneralSettings = {
+  _id: string;
+  _type: "generalSettings";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  siteName?: string;
+  siteTitle?: string;
+  siteImage?: ImageIcon;
+  siteDescription?: string;
+  siteUrl?: string;
+  siteEmail?: string;
+};
+
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
+
+export type ImageIcon = {
+  _type: "imageIcon";
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  alt?: string;
+};
+
+export type PostReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "post";
+};
+
+export type AboveMenuItem = {
+  _type: "aboveMenuItem";
+  title?: string;
+  linkType?: "internal" | "custom" | "none";
+  pageRef?: PageReference | PostReference;
+  href?: string;
+  newTab?: boolean;
+  icon?: ImageIcon;
+  hideOnMobile?: boolean;
+};
+
+export type MenuChildChildItem = {
+  _type: "menuChildChildItem";
+  title?: string;
+  description?: string;
+  linkType?: "internal" | "custom" | "none";
+  pageRef?: PageReference | PostReference;
+  href?: string;
+  newTab?: boolean;
+  icon?: ImageIcon;
+};
+
+export type MenuChildItem = {
+  _type: "menuChildItem";
+  title?: string;
+  description?: string;
+  linkType?: "internal" | "custom" | "none";
+  pageRef?: PageReference | PostReference;
+  href?: string;
+  newTab?: boolean;
+  icon?: ImageIcon;
+  children?: Array<
+    {
+      _key: string;
+    } & MenuChildChildItem
+  >;
+};
+
+export type MenuItem = {
+  _type: "menuItem";
+  title?: string;
+  linkType?: "internal" | "custom" | "none";
+  pageRef?: PageReference | PostReference;
+  href?: string;
+  newTab?: boolean;
+  children?: Array<
+    {
+      _key: string;
+    } & MenuChildItem
+  >;
+};
+
+export type MenuReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "menu";
+};
+
+export type SiteFooter = {
+  _id: string;
+  _type: "siteFooter";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  footerLogo?: ImageIcon;
+  footerMenu?: MenuReference;
+  footerCopyright?: string;
+  textColor?: Color;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type CmmBgSettings = {
+  _type: "cmmBgSettings";
+  type?: "none" | "color" | "image" | "gradient";
+  color?: Color;
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  ovlColor?: Color;
+  ovlBlend?:
+    | "normal"
+    | "darken"
+    | "multiply"
+    | "color-burn"
+    | "lighten"
+    | "screen"
+    | "color-dodge"
+    | "overlay"
+    | "soft-light"
+    | "hard-light"
+    | "difference"
+    | "exclusion"
+    | "hue"
+    | "saturation"
+    | "color"
+    | "luminosity";
+  ovlOpacity?: number;
+  gradient?:
+    | "none"
+    | "banner"
+    | "flare"
+    | "lemontwist"
+    | "lunada"
+    | "mojito"
+    | "ohhappiness"
+    | "sulphur"
+    | "darkblue";
+};
+
+export type CmmLySettings = {
+  _type: "cmmLySettings";
+  pdDisplay?: "both" | "top" | "bottom" | "none";
+  pdTopBottom?: "normal" | "medium" | "half" | "small";
+  template?: "normal" | "centered" | "reversed" | "revCentered";
+  columns?: "normal" | "firstBig" | "lastBig";
+  width?: "normal" | "full";
+};
+
+export type Color = {
+  _type: "color";
+  hex?: string;
+  alpha?: number;
+  hsl?: HslaColor;
+  hsv?: HsvaColor;
+  rgb?: RgbaColor;
+};
+
+export type SiteHeader = {
+  _id: string;
+  _type: "siteHeader";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  headerLogo?: ImageIcon;
+  aboveMenu?: Array<
+    {
+      _key: string;
+    } & AboveMenuItem
+  >;
+  headerMenu?: MenuReference;
+  menuType?: "dropdown" | "megamenu";
+  headerButtons?: Array<
+    {
+      _key: string;
+    } & CtaButton
+  >;
+};
+
+export type Menu = {
+  _id: string;
+  _type: "menu";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  children?: Array<
+    {
+      _key: string;
+    } & MenuItem
+  >;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
+};
+
+export type CmmTtlDescSettings = {
+  _type: "cmmTtlDescSettings";
+  showTitle?: boolean;
+  showDesc?: boolean;
+  shrinkTitle?: boolean;
+  titleTag?: "h1" | "h2" | "h3" | "h4";
+  textColor?: Color;
+  accentColor?: Color;
+};
+
+export type SanityFileAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+};
+
+export type LinkField = {
+  _type: "linkField";
+  linkType?: "none" | "internal" | "file" | "custom";
+  pageRef?: PageReference | PostReference;
+  href?: string;
+  file?: {
+    asset?: SanityFileAssetReference;
+    media?: unknown;
+    _type: "file";
+  };
+  newTab?: boolean;
+};
+
+export type TeamMember = {
+  _type: "teamMember";
+  name?: string;
+  position?: string;
+  image?: ImageNoMeta;
+  bio?: BlockContentMini;
+  textColor?: Color;
+  background?: Color;
+};
+
+export type SolutionItem = {
+  _type: "solutionItem";
+  title?: string;
+  subtitle?: string;
+  tag?: string;
+  features?: BlockContentMedi;
+};
+
+export type SolutionCard = {
+  _type: "solutionCard";
+  title?: string;
+  content?: BlockContentMini;
+  image?: ImageNoMeta;
+  items?: Array<
+    {
+      _key: string;
+    } & SolutionItem
+  >;
+  footer?: CardFooter;
+  textColor?: Color;
+  background?: Color;
+  rounded?: boolean;
+};
+
+export type ProductCard = {
+  _type: "productCard";
+  title?: string;
+  icon?: ImageIcon;
+  description?: BlockContentMini;
+  features?: Array<
+    {
+      _key: string;
+    } & FeatureItem
+  >;
+  featDisplay?: "vertical" | "horizontal";
+  addons?: BlockContentMedi;
+  footer?: CardFooter;
+  textColor?: Color;
+  background?: Color;
+};
+
+export type ImageWithMeta = {
+  _type: "imageWithMeta";
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  alt?: string;
+  caption?: string;
+  captionSub?: string;
+  credit?: string;
+  widthSize?: "normal" | "medium" | "small";
+  shape?: "rounded" | "squared" | "disc";
+};
+
+export type ImageNoMeta = {
+  _type: "imageNoMeta";
+  image?: {
+    asset?: SanityImageAssetReference;
+    media?: unknown;
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
+  alt?: string;
+  widthSize?: "normal" | "medium" | "small";
+  shape?: "rounded" | "squared" | "disc";
+};
+
+export type StepperItem = {
+  _type: "stepperItem";
+  label?: string;
+  title?: string;
+  description?: BlockContentMini;
+  layout?: "card" | "text";
+  textColor?: Color;
+  descColor?: Color;
+  background?: Color;
+};
+
+export type FormHubSpot = {
+  _type: "formHubSpot";
+  region?: string;
+  portalId?: string;
+  formId?: string;
+};
+
+export type FormCheckboxOption = {
+  _type: "formCheckboxOption";
+  label?: BlockContentMini;
+  value?: string;
+  required?: boolean;
+  checked?: boolean;
+};
+
+export type FormInput = {
+  _type: "formInput";
+  title?: string;
+  hubspotKey?: string;
+  info?: string;
+  type?:
+    "checkbox" | "email" | "radio" | "tel" | "text" | "textarea" | "select";
+  options?: Array<string>;
+  cbxOptions?: Array<
+    {
+      _key: string;
+    } & FormCheckboxOption
+  >;
+  optLayout?: "vertical" | "horizontal";
+  placeholder?: string;
+  required?: boolean;
+  size?: "full" | "half";
+};
+
+export type FeatureItem = {
+  _type: "featureItem";
+  eyebrow?: string;
+  title?: string;
+  icon?: ImageIcon;
+  description?: string;
+  ttlSize?: "small" | "medium" | "large";
+  layout?: "text" | "card";
+};
+
+export type FeatureCard = {
+  _type: "featureCard";
+  title?: string;
+  icon?: ImageIcon;
+  description?: BlockContentMini;
+};
+
+export type FileWithMeta = {
+  _type: "fileWithMeta";
+  file?: {
+    asset?: SanityFileAssetReference;
+    media?: unknown;
+    _type: "file";
+  };
+  title?: string;
+  description?: string;
+};
+
+export type CtaMessage = {
+  _type: "ctaMessage";
+  info?: string;
+  subtitle?: string;
+  icon?: ImageIcon;
+  linkType?: "none" | "internal" | "custom";
+  pageRef?: PageReference | PostReference;
+  href?: string;
+  newTab?: boolean;
+};
+
+export type CtaButton = {
+  _type: "ctaButton";
+  text?: string;
+  type?: "internal" | "custom";
+  href?: string;
+  pageRef?: PageReference;
+  highlight?: boolean;
+  target?: boolean;
+};
+
+export type ContentBlock = {
+  _type: "contentBlock";
+  title?: string;
+  tagline?: string;
+  description?: BlockContentMini;
+  icon?: ImageIcon;
+};
+
+export type ComparisonItem = {
+  _type: "comparisonItem";
+  title?: string;
+  boxes?: Array<
+    {
+      _key: string;
+    } & ComparisonBox
+  >;
+};
+
+export type ComparisonBox = {
+  _type: "comparisonBox";
+  title?: string;
+  description?: BlockContentMini;
+  textColor?: Color;
+  background?: Color;
+};
+
+export type CardFooter = Array<
+  | ({
+      _key: string;
+    } & CtaMessage)
+  | ({
+      _key: string;
+    } & CtaButton)
+>;
+
+export type BlockContentExcerpt = Array<{
+  children?: Array<{
+    marks?: Array<string>;
+    text?: string;
+    _type: "span";
+    _key: string;
+  }>;
+  style?: "normal";
+  listItem?: never;
+  markDefs?: null;
+  level?: number;
+  _type: "block";
+  _key: string;
+}>;
+
+export type BlockContentPlus = Array<
+  | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?:
+        | "normal"
+        | "pCenter"
+        | "pRight"
+        | "quotenormal"
+        | "h1"
+        | "h2"
+        | "h3"
+        | "h4"
+        | "h5"
+        | "h6";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        blank?: boolean;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }
+  | ({
+      _key: string;
+    } & Table)
+>;
+
+export type BlockContentMini = Array<{
+  children?: Array<{
+    marks?: Array<string>;
+    text?: string;
+    _type: "span";
+    _key: string;
+  }>;
+  style?: "normal";
+  listItem?: never;
+  markDefs?: Array<{
+    href?: string;
+    blank?: boolean;
+    _type: "link";
+    _key: string;
+  }>;
+  level?: number;
+  _type: "block";
+  _key: string;
+}>;
+
+export type BlockContentMedi = Array<{
+  children?: Array<{
+    marks?: Array<string>;
+    text?: string;
+    _type: "span";
+    _key: string;
+  }>;
+  style?:
+    | "normal"
+    | "pCenter"
+    | "pRight"
+    | "quotenormal"
+    | "h1"
+    | "h2"
+    | "h3"
+    | "h4"
+    | "h5"
+    | "h6";
+  listItem?: "bullet" | "number";
+  markDefs?: Array<{
+    href?: string;
+    blank?: boolean;
+    _type: "link";
+    _key: string;
+  }>;
+  level?: number;
+  _type: "block";
+  _key: string;
+}>;
+
+export type BlockContentMaxi = Array<
+  | {
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?:
+        | "normal"
+        | "pCenter"
+        | "pRight"
+        | "blockquote"
+        | "quotenormal"
+        | "h1"
+        | "h2"
+        | "h3"
+        | "h4"
+        | "h5"
+        | "h6";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        linkStyle?: "inline" | "button";
+        btnAlign?: "left" | "center" | "right";
+        btnSize?: "normal" | "half" | "full";
+        highlighted?: boolean;
+        blank?: boolean;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }
+  | {
+      asset?: SanityImageAssetReference;
+      media?: unknown;
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      alt?: string;
+      caption?: string;
+      credit?: string;
+      link?: string;
+      blank?: boolean;
+      align?: "left" | "center" | "right" | "none";
+      widthSize?: "normal" | "medium" | "small" | "tiny";
+      _type: "image";
+      _key: string;
+    }
+  | ({
+      _key: string;
+    } & Table)
+>;
+
+export type AccreditationSettings = {
+  _type: "accreditationSettings";
+  showTitles?: boolean;
+  showTags?: boolean;
+  displayType?: "grid" | "carousel";
+  showArrows?: boolean;
+  showDots?: boolean;
+  autoplay?: boolean;
+  autoplayInterval?: number;
+  itemsPerView?: 1 | 2 | 3 | 4 | 5 | 6;
+};
+
+export type AccreditationItem = {
+  _type: "accreditationItem";
+  title?: string;
+  tag?: string;
+  image?: ImageNoMeta;
+  link?: LinkField;
+};
+
+export type AccordionItem = {
+  _type: "accordionItem";
+  title?: string;
+  description?: BlockContentPlus;
+};
+
+export type AboutInfoCard = {
+  _type: "aboutInfoCard";
+  title?: string;
+  icon?: ImageIcon;
+  content?: BlockContentMini;
+};
+
+export type PostSettings = {
+  _type: "postSettings";
+  showCats?: boolean;
+  showTags?: boolean;
+  showAuthor?: boolean;
+  showDate?: boolean;
+  alignTitle?: "center" | "left" | "right";
+  pdDisplay?: "both" | "top" | "bottom" | "none";
+  pdTopBottom?: "normal" | "medium" | "half" | "small";
+  textColor?: Color;
+  gradientBg?:
+    | "none"
+    | "home"
+    | "page"
+    | "pageblue"
+    | "post"
+    | "product"
+    | "solution"
+    | "guideblue"
+    | "guidegreen"
+    | "guidegray";
+};
+
+export type TopHeroType = {
+  _id: string;
+  _type: "topHeroType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  aboveHeadline?: string;
+  headline?: string;
+  belowHeadline?: string;
+  subheadline?: BlockContentMedi;
+  image?: ImageNoMeta;
+  eyebrowImage?: ImageNoMeta;
+  features?: Array<
+    {
+      _key: string;
+    } & FeatureItem
+  >;
+  featDisplay?: "vertical" | "horizontal";
+  buttons?: Array<
+    {
+      _key: string;
+    } & CtaButton
+  >;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type TextOnlyType = {
+  _id: string;
+  _type: "textOnlyType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  aboveTitle?: string;
+  title?: string;
+  belowTitle?: string;
+  content?: BlockContentMaxi;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type TextImageType = {
+  _id: string;
+  _type: "textImageType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  aboveTitle?: string;
+  title?: string;
+  belowTitle?: string;
+  description?: BlockContentMedi;
+  image?: ImageWithMeta;
+  chips?: Array<string>;
+  buttons?: Array<
+    {
+      _key: string;
+    } & CtaButton
+  >;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type TeamOverviewType = {
+  _id: string;
+  _type: "teamOverviewType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  title?: string;
+  subtitle?: string;
+  description?: BlockContentMedi;
+  members?: Array<
+    {
+      _key: string;
+    } & TeamMember
+  >;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type TableType = {
+  _id: string;
+  _type: "tableType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  aboveEyebrow?: string;
+  title?: string;
+  belowEyebrow?: string;
+  description?: BlockContentMedi;
+  table?: Table;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type Table = {
+  _type: "table";
+  rows?: Array<
+    {
+      _key: string;
+    } & TableRow
+  >;
+};
+
+export type StepperType = {
+  _id: string;
+  _type: "stepperType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  eyebrow?: string;
+  title?: string;
+  description?: BlockContentMedi;
+  steps?: Array<
+    {
+      _key: string;
+    } & StepperItem
+  >;
+  buttons?: Array<
+    {
+      _key: string;
+    } & CtaButton
+  >;
+  disclaimer?: string;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type SolutionsType = {
+  _id: string;
+  _type: "solutionsType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  title?: string;
+  description?: BlockContentMedi;
+  cards?: Array<
+    {
+      _key: string;
+    } & SolutionCard
+  >;
+  display?: "horizontal" | "vertical";
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type ProductsType = {
+  _id: string;
+  _type: "productsType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  title?: string;
+  description?: BlockContentMedi;
+  cards?: Array<
+    {
+      _key: string;
+    } & ProductCard
+  >;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type MapType = {
+  _id: string;
+  _type: "mapType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  title?: string;
+  subtitle?: string;
+  description?: BlockContentMedi;
+  embedUrl?: string;
+  fullScreen?: boolean;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type KeyFeaturesType = {
+  _id: string;
+  _type: "keyFeaturesType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  topHeadline?: string;
+  description?: BlockContentMedi;
+  bottomHeadline?: string;
+  cards?: Array<
+    {
+      _key: string;
+    } & FeatureCard
+  >;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type FormType = {
+  _id: string;
+  _type: "formType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  title?: string;
+  subtitle?: string;
+  description?: BlockContentMedi;
+  features?: Array<
+    {
+      _key: string;
+    } & FeatureItem
+  >;
+  featDisplay?: "vertical" | "horizontal";
+  formTitle?: string;
+  form?: "customForm" | "hubSpotForm";
+  fields?: Array<
+    {
+      _key: string;
+    } & FormInput
+  >;
+  btnLabel?: string;
+  hubspot?: FormHubSpot;
+  footer?: BlockContentMini;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type CtaBannerSettings = {
+  _type: "ctaBannerSettings";
+  innerPadding?: "normal" | "medium" | "half" | "small" | "none";
+  ctaGradient?:
+    | "banner"
+    | "flare"
+    | "lemontwist"
+    | "lunada"
+    | "mojito"
+    | "ohhappiness"
+    | "sulphur"
+    | "custom"
+    | "none";
+  ctaBgColor?: Color;
+};
+
+export type CtaBannerType = {
+  _id: string;
+  _type: "ctaBannerType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  eyebrow?: string;
+  headline?: string;
+  tagline?: string;
+  subheadline?: BlockContentMini;
+  image?: ImageIcon;
+  buttons?: Array<
+    {
+      _key: string;
+    } & CtaButton
+  >;
+  ctaSettings?: CtaBannerSettings;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type ContentBlocksSettings = {
+  _type: "contentBlocksSettings";
+  type?: "box" | "card" | "text";
+  gap?: "normal" | "medium" | "bigger";
+  showIcon?: boolean;
+  iconTitle?: "stacked" | "samerow";
+  collapsible?: boolean;
+  perRow?: 1 | 2 | 3 | 4;
+  textColor?: Color;
+  accentColor?: Color;
+  background?: Color;
+  iconBg?: Color;
+};
+
+export type ContentBlocks = {
+  _id: string;
+  _type: "contentBlocks";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  aboveEyebrow?: string;
+  headline?: string;
+  belowEyebrow?: string;
+  description?: BlockContentMini;
+  blocks?: Array<
+    {
+      _key: string;
+    } & ContentBlock
+  >;
+  titleDesc?: CmmTtlDescSettings;
+  blocksSettings?: ContentBlocksSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type ComparisonType = {
+  _id: string;
+  _type: "comparisonType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  title?: string;
+  description?: BlockContentMedi;
+  steps?: Array<
+    {
+      _key: string;
+    } & ComparisonItem
+  >;
+  buttons?: Array<
+    {
+      _key: string;
+    } & CtaButton
+  >;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type BlogOverviewSettings = {
+  _type: "blogOverviewSettings";
+  limit?: number;
+  showExcerpt?: boolean;
+  showCats?: boolean;
+  showTags?: boolean;
+  showAuthor?: boolean;
+  showDate?: boolean;
+};
+
+export type BlogSection = {
+  _id: string;
+  _type: "blogSection";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  title?: string;
+  description?: BlockContentMedi;
+  button?: Array<
+    {
+      _key: string;
+    } & CtaButton
+  >;
+  blogOverviewSettings?: BlogOverviewSettings;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type AccordionSettings = {
+  _type: "accordionSettings";
+  design?: "faq" | "glossary";
+  ordered?: boolean;
+  firstExpanded?: boolean;
+  textColor?: Color;
+  accentColor?: Color;
+  background?: Color;
+};
+
+export type AccreditationType = {
+  _id: string;
+  _type: "accreditationType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  title?: string;
+  description?: BlockContentMedi;
+  items?: Array<
+    {
+      _key: string;
+    } & AccreditationItem
+  >;
+  accrSettings?: AccreditationSettings;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type AccordionType = {
+  _id: string;
+  _type: "accordionType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  eyebrow?: string;
+  title?: string;
+  subtitle?: string;
+  description?: BlockContentMedi;
+  image?: ImageNoMeta;
+  items?: Array<
+    {
+      _key: string;
+    } & AccordionItem
+  >;
+  settings?: AccordionSettings;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type SanityImageCrop = {
+  _type: "sanity.imageCrop";
+  top?: number;
+  bottom?: number;
+  left?: number;
+  right?: number;
+};
+
+export type SanityImageHotspot = {
+  _type: "sanity.imageHotspot";
+  x?: number;
+  y?: number;
+  height?: number;
+  width?: number;
+};
+
+export type AboutInfoType = {
+  _id: string;
+  _type: "aboutInfoType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  sectionName?: string;
+  title?: string;
+  description?: BlockContentMedi;
+  buttons?: Array<
+    {
+      _key: string;
+    } & CtaButton
+  >;
+  collapsibles?: Array<
+    {
+      _key: string;
+    } & AboutInfoCard
+  >;
+  titleDesc?: CmmTtlDescSettings;
+  layout?: CmmLySettings;
+  background?: CmmBgSettings;
+};
+
+export type Tag = {
+  _id: string;
+  _type: "tag";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  description?: BlockContentExcerpt;
+};
+
+export type Category = {
+  _id: string;
+  _type: "category";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  description?: BlockContentExcerpt;
+};
+
+export type Author = {
+  _id: string;
+  _type: "author";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  image?: ImageIcon;
+  role?: string;
+  bio?: BlockContentExcerpt;
+};
+
+export type CategoryReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "category";
+};
+
+export type TagReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "tag";
+};
+
+export type AuthorReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "author";
+};
+
+export type AboutInfoTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "aboutInfoType";
+};
+
+export type AccordionTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "accordionType";
+};
+
+export type AccreditationTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "accreditationType";
+};
+
+export type BlogSectionReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "blogSection";
+};
+
+export type CtaBannerTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "ctaBannerType";
+};
+
+export type ComparisonTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "comparisonType";
+};
+
+export type ContentBlocksReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "contentBlocks";
+};
+
+export type FormTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "formType";
+};
+
+export type TopHeroTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "topHeroType";
+};
+
+export type KeyFeaturesTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "keyFeaturesType";
+};
+
+export type MapTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "mapType";
+};
+
+export type ProductsTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "productsType";
+};
+
+export type SolutionsTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "solutionsType";
+};
+
+export type StepperTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "stepperType";
+};
+
+export type TableTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "tableType";
+};
+
+export type TeamOverviewTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "teamOverviewType";
+};
+
+export type TextImageTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "textImageType";
+};
+
+export type TextOnlyTypeReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "textOnlyType";
+};
+
 export type Post = {
   _id: string;
   _type: "post";
@@ -23,30 +1414,178 @@ export type Post = {
   _rev: string;
   title?: string;
   slug?: Slug;
-  body?: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
+  image?: ImageWithMeta;
+  body?: BlockContentMaxi;
+  excerpt?: BlockContentExcerpt;
+  categories?: Array<
+    {
       _key: string;
-    }>;
-    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
+    } & CategoryReference
+  >;
+  tag?: Array<
+    {
       _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }>;
+    } & TagReference
+  >;
+  author?: Array<
+    {
+      _key: string;
+    } & AuthorReference
+  >;
+  sections?: ArrayOf<
+    | AboutInfoTypeReference
+    | AccordionTypeReference
+    | AccreditationTypeReference
+    | BlogSectionReference
+    | CtaBannerTypeReference
+    | ComparisonTypeReference
+    | ContentBlocksReference
+    | FormTypeReference
+    | TopHeroTypeReference
+    | KeyFeaturesTypeReference
+    | MapTypeReference
+    | ProductsTypeReference
+    | SolutionsTypeReference
+    | StepperTypeReference
+    | TableTypeReference
+    | TeamOverviewTypeReference
+    | TextImageTypeReference
+    | TextOnlyTypeReference
+  >;
+  publishedAt?: string;
+  settings?: PostSettings;
+  seo?: SeoMeta;
+  archivedAt?: string;
 };
 
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
+export type SeoMeta = {
+  _type: "seoMeta";
+  mode?: "auto" | "override" | "ignore";
+  title?: string;
+  description?: string;
+  image?: ImageIcon;
+  keywords?: string;
+  noindex?: boolean;
+};
+
+export type PageSettings = {
+  _type: "pageSettings";
+  showTitle?: boolean;
+  showDesc?: boolean;
+  shrinkTitle?: boolean;
+  alignTitle?: "left" | "center" | "right";
+  pdDisplay?: "both" | "top" | "bottom" | "none";
+  pdTopBottom?: "normal" | "medium" | "half" | "small";
+  width?: "normal" | "full";
+  textColor?: Color;
+  gradientBg?:
+    | "none"
+    | "home"
+    | "page"
+    | "pageblue"
+    | "post"
+    | "product"
+    | "solution"
+    | "guideblue"
+    | "guidegreen"
+    | "guidegray";
+};
+
+export type Page = {
+  _id: string;
+  _type: "page";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  description?: BlockContentMini;
+  sections?: ArrayOf<
+    | AboutInfoTypeReference
+    | AccordionTypeReference
+    | AccreditationTypeReference
+    | BlogSectionReference
+    | CtaBannerTypeReference
+    | ComparisonTypeReference
+    | ContentBlocksReference
+    | FormTypeReference
+    | TopHeroTypeReference
+    | KeyFeaturesTypeReference
+    | MapTypeReference
+    | ProductsTypeReference
+    | SolutionsTypeReference
+    | StepperTypeReference
+    | TableTypeReference
+    | TeamOverviewTypeReference
+    | TextImageTypeReference
+    | TextOnlyTypeReference
+  >;
+  settings?: PageSettings;
+  seo?: SeoMeta;
+  archivedAt?: string;
+};
+
+export type TableRow = {
+  _type: "tableRow";
+  cells?: Array<string>;
+};
+
+export type RgbaColor = {
+  _type: "rgbaColor";
+  r?: number;
+  g?: number;
+  b?: number;
+  a?: number;
+};
+
+export type HsvaColor = {
+  _type: "hsvaColor";
+  h?: number;
+  s?: number;
+  v?: number;
+  a?: number;
+};
+
+export type HslaColor = {
+  _type: "hslaColor";
+  h?: number;
+  s?: number;
+  l?: number;
+  a?: number;
+};
+
+export type Code = {
+  _type: "code";
+  language?: string;
+  filename?: string;
+  code?: string;
+  highlightedLines?: Array<number>;
+};
+
+export type MediaFolderReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "media.folder";
+};
+
+export type MediaFolder = {
+  _id: string;
+  _type: "media.folder";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  parent?: MediaFolderReference;
+};
+
+export type MediaTag = {
+  _id: string;
+  _type: "media.tag";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: Slug;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -85,22 +1624,6 @@ export type SanityImageMetadata = {
   thumbHash?: string;
   hasAlpha?: boolean;
   isOpaque?: boolean;
-};
-
-export type SanityImageHotspot = {
-  _type: "sanity.imageHotspot";
-  x?: number;
-  y?: number;
-  height?: number;
-  width?: number;
-};
-
-export type SanityImageCrop = {
-  _type: "sanity.imageCrop";
-  top?: number;
-  bottom?: number;
-  left?: number;
-  right?: number;
 };
 
 export type SanityFileAsset = {
@@ -163,59 +1686,5137 @@ export type Geopoint = {
 };
 
 export type AllSanitySchemaTypes =
-  | Post
+  | HubspotTracking
+  | GoogleTracking
+  | TrackingSettings
+  | SeoSettings
+  | BlogSettings
+  | PageReference
+  | ReadingSettings
+  | GeneralSettings
+  | SanityImageAssetReference
+  | ImageIcon
+  | PostReference
+  | AboveMenuItem
+  | MenuChildChildItem
+  | MenuChildItem
+  | MenuItem
+  | MenuReference
+  | SiteFooter
+  | CmmBgSettings
+  | CmmLySettings
+  | Color
+  | SiteHeader
+  | Menu
   | Slug
+  | CmmTtlDescSettings
+  | SanityFileAssetReference
+  | LinkField
+  | TeamMember
+  | SolutionItem
+  | SolutionCard
+  | ProductCard
+  | ImageWithMeta
+  | ImageNoMeta
+  | StepperItem
+  | FormHubSpot
+  | FormCheckboxOption
+  | FormInput
+  | FeatureItem
+  | FeatureCard
+  | FileWithMeta
+  | CtaMessage
+  | CtaButton
+  | ContentBlock
+  | ComparisonItem
+  | ComparisonBox
+  | CardFooter
+  | BlockContentExcerpt
+  | BlockContentPlus
+  | BlockContentMini
+  | BlockContentMedi
+  | BlockContentMaxi
+  | AccreditationSettings
+  | AccreditationItem
+  | AccordionItem
+  | AboutInfoCard
+  | PostSettings
+  | TopHeroType
+  | TextOnlyType
+  | TextImageType
+  | TeamOverviewType
+  | TableType
+  | Table
+  | StepperType
+  | SolutionsType
+  | ProductsType
+  | MapType
+  | KeyFeaturesType
+  | FormType
+  | CtaBannerSettings
+  | CtaBannerType
+  | ContentBlocksSettings
+  | ContentBlocks
+  | ComparisonType
+  | BlogOverviewSettings
+  | BlogSection
+  | AccordionSettings
+  | AccreditationType
+  | AccordionType
+  | SanityImageCrop
+  | SanityImageHotspot
+  | AboutInfoType
+  | Tag
+  | Category
+  | Author
+  | CategoryReference
+  | TagReference
+  | AuthorReference
+  | AboutInfoTypeReference
+  | AccordionTypeReference
+  | AccreditationTypeReference
+  | BlogSectionReference
+  | CtaBannerTypeReference
+  | ComparisonTypeReference
+  | ContentBlocksReference
+  | FormTypeReference
+  | TopHeroTypeReference
+  | KeyFeaturesTypeReference
+  | MapTypeReference
+  | ProductsTypeReference
+  | SolutionsTypeReference
+  | StepperTypeReference
+  | TableTypeReference
+  | TeamOverviewTypeReference
+  | TextImageTypeReference
+  | TextOnlyTypeReference
+  | Post
+  | SeoMeta
+  | PageSettings
+  | Page
+  | TableRow
+  | RgbaColor
+  | HsvaColor
+  | HslaColor
+  | Code
+  | MediaFolderReference
+  | MediaFolder
+  | MediaTag
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
   | SanityImageMetadata
-  | SanityImageHotspot
-  | SanityImageCrop
   | SanityFileAsset
   | SanityAssetSourceData
   | SanityImageAsset
   | Geopoint;
 
-// Source: ../web/src/app/[slug]/page.tsx
-// Variable: POST_QUERY
-// Query: *[_type == "post" && slug.current == $slug][0]{ _id, title, body }
-export type POST_QUERY_RESULT = {
+// Source: ../web/lib/queries/blog-categories.tsx
+// Variable: BLOG_ALL_CATEGORIES_QUERY
+// Query: *[_type == "category"] {    _id,    _type,    title,    description,    "slug": slug.current,    "count": count(*[_type == "post" && !defined(archivedAt) && (!$excludeDrafts || !(_id in path("drafts.**"))) && references(^._id)])  } | order(title asc)
+export type BLOG_ALL_CATEGORIES_QUERY_RESULT = Array<{
   _id: string;
+  _type: "category";
   title: string | null;
-  body: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
+  description: BlockContentExcerpt | null;
+  slug: string | null;
+  count: number;
+}>;
+
+// Source: ../web/lib/queries/blog-posts.tsx
+// Variable: ALL_POSTS
+// Query: *[  _type == "post" &&  !defined(archivedAt) &&  (!$excludeDrafts || !(_id in path("drafts.**")))]
+export type ALL_POSTS_RESULT = Array<{
+  _id: string;
+  _type: "post";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  image?: ImageWithMeta;
+  body?: BlockContentMaxi;
+  excerpt?: BlockContentExcerpt;
+  categories?: Array<
+    {
       _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
-    listItem?: "bullet" | "number";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
+    } & CategoryReference
+  >;
+  tag?: Array<
+    {
       _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  }> | null;
+    } & TagReference
+  >;
+  author?: Array<
+    {
+      _key: string;
+    } & AuthorReference
+  >;
+  sections?: ArrayOf<
+    | AboutInfoTypeReference
+    | AccordionTypeReference
+    | AccreditationTypeReference
+    | BlogSectionReference
+    | ComparisonTypeReference
+    | ContentBlocksReference
+    | CtaBannerTypeReference
+    | FormTypeReference
+    | KeyFeaturesTypeReference
+    | MapTypeReference
+    | ProductsTypeReference
+    | SolutionsTypeReference
+    | StepperTypeReference
+    | TableTypeReference
+    | TeamOverviewTypeReference
+    | TextImageTypeReference
+    | TextOnlyTypeReference
+    | TopHeroTypeReference
+  >;
+  publishedAt?: string;
+  settings?: PostSettings;
+  seo?: SeoMeta;
+  archivedAt?: string;
+}>;
+
+// Source: ../web/lib/queries/blog-posts.tsx
+// Variable: FILTERED_POSTS
+// Query: *[  _type == "post" &&  !defined(archivedAt) &&  (!$excludeDrafts || !(_id in path("drafts.**"))) &&  (!defined($tagSlug) || $tagSlug in tag[]->slug.current) &&  (!defined($categorySlug) || $categorySlug in categories[]->slug.current) &&  (!defined($authorSlug) || $authorSlug in author[]->slug.current)]
+export type FILTERED_POSTS_RESULT = Array<{
+  _id: string;
+  _type: "post";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  image?: ImageWithMeta;
+  body?: BlockContentMaxi;
+  excerpt?: BlockContentExcerpt;
+  categories?: Array<
+    {
+      _key: string;
+    } & CategoryReference
+  >;
+  tag?: Array<
+    {
+      _key: string;
+    } & TagReference
+  >;
+  author?: Array<
+    {
+      _key: string;
+    } & AuthorReference
+  >;
+  sections?: ArrayOf<
+    | AboutInfoTypeReference
+    | AccordionTypeReference
+    | AccreditationTypeReference
+    | BlogSectionReference
+    | ComparisonTypeReference
+    | ContentBlocksReference
+    | CtaBannerTypeReference
+    | FormTypeReference
+    | KeyFeaturesTypeReference
+    | MapTypeReference
+    | ProductsTypeReference
+    | SolutionsTypeReference
+    | StepperTypeReference
+    | TableTypeReference
+    | TeamOverviewTypeReference
+    | TextImageTypeReference
+    | TextOnlyTypeReference
+    | TopHeroTypeReference
+  >;
+  publishedAt?: string;
+  settings?: PostSettings;
+  seo?: SeoMeta;
+  archivedAt?: string;
+}>;
+
+// Source: ../web/lib/queries/blog-posts.tsx
+// Variable: BLOG_OVERVIEW_QUERY
+// Query: {  "items": *[  _type == "post" &&  !defined(archivedAt) &&  (!$excludeDrafts || !(_id in path("drafts.**"))) &&  (!defined($tagSlug) || $tagSlug in tag[]->slug.current) &&  (!defined($categorySlug) || $categorySlug in categories[]->slug.current) &&  (!defined($authorSlug) || $authorSlug in author[]->slug.current)] | order(coalesce(publishedAt, _createdAt) desc)[$offset...$end]{    _id,    title,    "slug": slug.current,    image{       "image": select(        defined(image.asset) => {          "asset": image.asset->{            _id,            url,            metadata{              dimensions{width, height, aspectRatio},              lqip,              hasAlpha,              isOpaque            }          }        },        null      ),      "alt": coalesce(alt, "")    },            "publishedAt": coalesce(publishedAt, _createdAt),    "excerptText": coalesce(excerpt, null),    "categories": coalesce(categories[]->{ "slug": slug.current, title, _id, _type, description }, []),    "tags": coalesce(tag[]->{ "slug": slug.current, title, _id, _type, description }, []),    "authors": coalesce(author[]->{ "slug": slug.current, name, _id, _type, role, bio, image{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt } }, [])  },  "totalFiltered": count(*[  _type == "post" &&  !defined(archivedAt) &&  (!$excludeDrafts || !(_id in path("drafts.**"))) &&  (!defined($tagSlug) || $tagSlug in tag[]->slug.current) &&  (!defined($categorySlug) || $categorySlug in categories[]->slug.current) &&  (!defined($authorSlug) || $authorSlug in author[]->slug.current)]),  "totalUnfiltered": count(*[  _type == "post" &&  !defined(archivedAt) &&  (!$excludeDrafts || !(_id in path("drafts.**")))])}
+export type BLOG_OVERVIEW_QUERY_RESULT = {
+  items: Array<{
+    _id: string;
+    title: string | null;
+    slug: string | null;
+    image: {
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+          metadata: {
+            dimensions: {
+              width: number | null;
+              height: number | null;
+              aspectRatio: number | null;
+            } | null;
+            lqip: string | null;
+            hasAlpha: boolean | null;
+            isOpaque: boolean | null;
+          } | null;
+        };
+      } | null;
+      alt: string | "";
+    } | null;
+    publishedAt: string;
+    excerptText: BlockContentExcerpt | null;
+    categories:
+      | Array<{
+          slug: string | null;
+          title: string | null;
+          _id: string;
+          _type: "category";
+          description: BlockContentExcerpt | null;
+        }>
+      | Array<never>;
+    tags:
+      | Array<{
+          slug: string | null;
+          title: string | null;
+          _id: string;
+          _type: "tag";
+          description: BlockContentExcerpt | null;
+        }>
+      | Array<never>;
+    authors:
+      | Array<{
+          slug: string | null;
+          name: string | null;
+          _id: string;
+          _type: "author";
+          role: string | null;
+          bio: BlockContentExcerpt | null;
+          image: {
+            image: {
+              asset: {
+                _id: string;
+                url: string | null;
+                metadata: {
+                  dimensions: SanityImageDimensions | null;
+                };
+              } | null;
+            } | null;
+            alt: string | null;
+          } | null;
+        }>
+      | Array<never>;
+  }>;
+  totalFiltered: number;
+  totalUnfiltered: number;
+};
+
+// Source: ../web/lib/queries/blog-tags.tsx
+// Variable: BLOG_ALL_TAGS_QUERY
+// Query: *[_type == "tag"] {    _id,    _type,    title,    description,    "slug": slug.current,    "count": count(*[_type == "post" && !defined(archivedAt) && (!$excludeDrafts || !(_id in path("drafts.**"))) && references(^._id)])  } | order(title asc)
+export type BLOG_ALL_TAGS_QUERY_RESULT = Array<{
+  _id: string;
+  _type: "tag";
+  title: string | null;
+  description: BlockContentExcerpt | null;
+  slug: string | null;
+  count: number;
+}>;
+
+// Source: ../web/lib/queries/fragments/fields/button-first.groq.tsx
+// Variable: BUTTON_FIRST_PROJECTION
+// Query: select(	defined(button[0]) => {		"id": coalesce(button[0]._key, button[0]._id),		"highlight": coalesce(button[0].highlight, false),		"target": coalesce(button[0].target, false),		"text": button[0].text,		"href": select(			button[0].type == "internal" => "/" + button[0].pageRef->slug.current,			button[0].type == "custom" => button[0].href,			null		)	},	null)
+export type BUTTON_FIRST_PROJECTION_RESULT = null;
+
+// Source: ../web/lib/queries/fragments/fields/button-kind.groq.tsx
+// Variable: BUTTON_KIND_PROJECTION
+// Query: select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null )
+export type BUTTON_KIND_PROJECTION_RESULT = null;
+
+// Source: ../web/lib/queries/fragments/fields/buttons.groq.tsx
+// Variable: BUTTONS_PROJECTION
+// Query: coalesce(buttons[]{ 	"id": coalesce(_key, _id), 	"highlight": coalesce(highlight, false), 	"target": coalesce(target, false),	"text": text, 	"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) }, [])
+export type BUTTONS_PROJECTION_RESULT = Array<never>;
+
+// Source: ../web/lib/queries/fragments/fields/href.groq.tsx
+// Variable: HREF_PROJECTION
+// Query: select(       	linkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,		  	linkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,	linkType == "custom"   => href,	linkType == "file"     => file.asset->url,	linkType == "none"     => null)
+export type HREF_PROJECTION_RESULT = null;
+
+// Source: ../web/lib/queries/fragments/fields/imageIcon.groq.tsx
+// Variable: IMAGE_ICON_PROJECTION
+// Query: image{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), "alt": coalesce(alt, null) }
+export type IMAGE_ICON_PROJECTION_RESULT = never;
+
+// Source: ../web/lib/queries/fragments/fields/imageNoMeta.groq.tsx
+// Variable: IMAGE_NO_META_PROJECTION
+// Query: image{         	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	),        "alt": coalesce(alt, null),        "widthSize": coalesce(widthSize, "normal"),        "shape": coalesce(shape, "rounded")     }
+export type IMAGE_NO_META_PROJECTION_RESULT = never;
+
+// Source: ../web/lib/queries/fragments/fields/imageWithMeta.groq.tsx
+// Variable: IMAGE_WITH_META_PROJECTION
+// Query: image{         	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	),         "alt": coalesce(alt, null),         "caption": coalesce(caption, null),         "captionSub": coalesce(captionSub, null),         "credit": coalesce(credit, null),        "widthSize": coalesce(widthSize, "normal"),        "shape": coalesce(shape, "rounded") 		    }
+export type IMAGE_WITH_META_PROJECTION_RESULT = never;
+
+// Source: ../web/lib/queries/fragments/footer.groq.tsx
+// Variable: FOOTER_QUERY
+// Query: *[_id=="siteFooter"][0]{	"logo": footerLogo{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },    	"menu": footerMenu->{		_id,		"slug": slug.current,		"items": coalesce(children[]{			"label": title,      			"href": select(       	linkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,		  	linkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,	linkType == "custom"   => href,	linkType == "file"     => file.asset->url,	linkType == "none"     => null),			"newTab": coalesce(newTab, false),     			"children": coalesce(children[]{				"label": title,				"href": select(       	linkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,		  	linkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,	linkType == "custom"   => href,	linkType == "file"     => file.asset->url,	linkType == "none"     => null),				"newTab": coalesce(newTab, false),       				"children": coalesce(children[]{					"label": title,					"href": select(       	linkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,		  	linkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,	linkType == "custom"   => href,	linkType == "file"     => file.asset->url,	linkType == "none"     => null),					"newTab": coalesce(newTab, false)				}, [])			}, [])		}, []),	},	"copyright": footerCopyright,	"settings": {		"textColor": coalesce(textColor, undefined),		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),		    "image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}
+export type FOOTER_QUERY_RESULT =
+  | {
+      logo: null;
+      menu: null;
+      copyright: null;
+      settings: {
+        textColor: null;
+        layout: {
+          pdTopBottom: "medium";
+          pdDisplay: "both";
+          template: "normal";
+          columns: "normal";
+          width: "normal";
+        };
+        background: {
+          type: "none";
+          bgColor: null;
+          image: null;
+          ovlColor: null;
+          ovlBlend: "overlay";
+          ovlOpacity: 50;
+          gradient: "banner";
+        };
+      };
+    }
+  | {
+      logo: null;
+      menu: null;
+      copyright: null;
+      settings: {
+        textColor: null;
+        layout: {
+          pdTopBottom: "half" | "medium" | "normal" | "small";
+          pdDisplay: "both" | "bottom" | "none" | "top";
+          template: "centered" | "normal" | "revCentered" | "reversed";
+          columns: "firstBig" | "lastBig" | "normal";
+          width: "full" | "normal";
+        };
+        background: {
+          type: "color" | "gradient" | "image" | "none";
+          bgColor: Color | null;
+          image: {
+            image: {
+              asset: {
+                _id: string;
+                url: string | null;
+                metadata: {
+                  dimensions: SanityImageDimensions | null;
+                };
+              } | null;
+            } | null;
+          } | null;
+          ovlColor: Color | null;
+          ovlBlend:
+            | "color-burn"
+            | "color-dodge"
+            | "color"
+            | "darken"
+            | "difference"
+            | "exclusion"
+            | "hard-light"
+            | "hue"
+            | "lighten"
+            | "luminosity"
+            | "multiply"
+            | "normal"
+            | "overlay"
+            | "saturation"
+            | "screen"
+            | "soft-light";
+          ovlOpacity: number | 50;
+          gradient:
+            | "banner"
+            | "darkblue"
+            | "flare"
+            | "lemontwist"
+            | "lunada"
+            | "mojito"
+            | "none"
+            | "ohhappiness"
+            | "sulphur";
+        };
+      };
+    }
+  | {
+      logo: {
+        image: {
+          asset: {
+            _id: string;
+            url: string | null;
+            metadata: {
+              dimensions: SanityImageDimensions | null;
+            };
+          } | null;
+        } | null;
+        alt: string | null;
+      } | null;
+      menu: {
+        _id: string;
+        slug: string | null;
+        items:
+          | Array<{
+              label: string | null;
+              href: string | null;
+              newTab: boolean | false;
+              children:
+                | Array<{
+                    label: string | null;
+                    href: string | null;
+                    newTab: boolean | false;
+                    children:
+                      | Array<{
+                          label: string | null;
+                          href: string | null;
+                          newTab: boolean | false;
+                        }>
+                      | Array<never>;
+                  }>
+                | Array<never>;
+            }>
+          | Array<never>;
+      } | null;
+      copyright: string | null;
+      settings: {
+        textColor: Color | null;
+        layout: {
+          pdTopBottom: "half" | "medium" | "normal" | "small";
+          pdDisplay: "both" | "bottom" | "none" | "top";
+          template: "centered" | "normal" | "revCentered" | "reversed";
+          columns: "firstBig" | "lastBig" | "normal";
+          width: "full" | "normal";
+        };
+        background: {
+          type: "color" | "gradient" | "image" | "none";
+          bgColor: Color | null;
+          image: {
+            image: {
+              asset: {
+                _id: string;
+                url: string | null;
+                metadata: {
+                  dimensions: SanityImageDimensions | null;
+                };
+              } | null;
+            } | null;
+          } | null;
+          ovlColor: Color | null;
+          ovlBlend:
+            | "color-burn"
+            | "color-dodge"
+            | "color"
+            | "darken"
+            | "difference"
+            | "exclusion"
+            | "hard-light"
+            | "hue"
+            | "lighten"
+            | "luminosity"
+            | "multiply"
+            | "normal"
+            | "overlay"
+            | "saturation"
+            | "screen"
+            | "soft-light";
+          ovlOpacity: number | 50;
+          gradient:
+            | "banner"
+            | "darkblue"
+            | "flare"
+            | "lemontwist"
+            | "lunada"
+            | "mojito"
+            | "none"
+            | "ohhappiness"
+            | "sulphur";
+        };
+      };
+    }
+  | null;
+
+// Source: ../web/lib/queries/fragments/header.groq.tsx
+// Variable: HEADER_QUERY
+// Query: *[_id=="siteHeader"][0]{   	"logo": headerLogo{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },	"aboveMenu": coalesce(aboveMenu[]{		"id": coalesce(_key, _id),		title,		"href": select(       	linkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,		  	linkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,	linkType == "custom"   => href,	linkType == "file"     => file.asset->url,	linkType == "none"     => null),		"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },		"newTab": coalesce(newTab, false),		"hideOnMobile": coalesce(hideOnMobile, false) 	}, []),	"menu": headerMenu->{		_id,		"slug": slug.current,		"items": coalesce(children[]{			"label": title,      			"href": select(       	linkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,		  	linkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,	linkType == "custom"   => href,	linkType == "file"     => file.asset->url,	linkType == "none"     => null),			"newTab": coalesce(newTab, false),     			"children": coalesce(children[]{				"label": title,				"href": select(       	linkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,		  	linkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,	linkType == "custom"   => href,	linkType == "file"     => file.asset->url,	linkType == "none"     => null),        				"description": description,				"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },				"newTab": coalesce(newTab, false),       				"children": coalesce(children[]{					"label": title,					"href": select(       	linkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,		  	linkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,	linkType == "custom"   => href,	linkType == "file"     => file.asset->url,	linkType == "none"     => null),					"description": description,					"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },					"newTab": coalesce(newTab, false)				}, [])			}, [])		}, []),	},	"menuType": coalesce(menuType, "dropdown"),	"buttons": coalesce(headerButtons[]{   		"id": coalesce(_key, _id),		"text": text,    		"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ),		"target": coalesce(target, false),		"highlight": coalesce(highlight, false)	}, [])}
+export type HEADER_QUERY_RESULT =
+  | {
+      logo: {
+        image: {
+          asset: {
+            _id: string;
+            url: string | null;
+            metadata: {
+              dimensions: SanityImageDimensions | null;
+            };
+          } | null;
+        } | null;
+        alt: string | null;
+      } | null;
+      aboveMenu:
+        | Array<{
+            id: string;
+            title: string | null;
+            href: string | null;
+            icon: {
+              image: {
+                asset: {
+                  _id: string;
+                  url: string | null;
+                  metadata: {
+                    dimensions: SanityImageDimensions | null;
+                  };
+                } | null;
+              } | null;
+              alt: string | null;
+            } | null;
+            newTab: boolean | false;
+            hideOnMobile: boolean | false;
+          }>
+        | Array<never>;
+      menu: {
+        _id: string;
+        slug: string | null;
+        items:
+          | Array<{
+              label: string | null;
+              href: string | null;
+              newTab: boolean | false;
+              children:
+                | Array<{
+                    label: string | null;
+                    href: string | null;
+                    description: string | null;
+                    icon: {
+                      image: {
+                        asset: {
+                          _id: string;
+                          url: string | null;
+                          metadata: {
+                            dimensions: SanityImageDimensions | null;
+                          };
+                        } | null;
+                      } | null;
+                      alt: string | null;
+                    } | null;
+                    newTab: boolean | false;
+                    children:
+                      | Array<{
+                          label: string | null;
+                          href: string | null;
+                          description: string | null;
+                          icon: {
+                            image: {
+                              asset: {
+                                _id: string;
+                                url: string | null;
+                                metadata: {
+                                  dimensions: SanityImageDimensions | null;
+                                };
+                              } | null;
+                            } | null;
+                            alt: string | null;
+                          } | null;
+                          newTab: boolean | false;
+                        }>
+                      | Array<never>;
+                  }>
+                | Array<never>;
+            }>
+          | Array<never>;
+      } | null;
+      menuType: "dropdown" | "megamenu";
+      buttons:
+        | Array<{
+            id: string;
+            text: string | null;
+            href: string | null;
+            target: boolean | false;
+            highlight: boolean | false;
+          }>
+        | Array<never>;
+    }
+  | {
+      logo: null;
+      aboveMenu: Array<never>;
+      menu: null;
+      menuType: "dropdown";
+      buttons: Array<never>;
+    }
+  | null;
+
+// Source: ../web/lib/queries/fragments/pages.groq.tsx
+// Variable: PAGES_Q
+// Query: *[  _type == "page" &&  defined(slug.current) &&  !(_id in path("drafts.**"))]{  "slug": slug.current,  "lastmod": coalesce(_updatedAt, _createdAt)}
+export type PAGES_Q_RESULT = Array<{
+  slug: string | null;
+  lastmod: string;
+}>;
+
+// Source: ../web/lib/queries/fragments/posts.groq.tsx
+// Variable: POSTS_Q
+// Query: *[  _type == "post" &&  defined(slug.current) &&  !(_id in path("drafts.**"))]{  "slug": slug.current,  "lastmod": coalesce(publishedAt, _updatedAt, _createdAt)} | order(lastmod desc)
+export type POSTS_Q_RESULT = Array<{
+  slug: string | null;
+  lastmod: string;
+}>;
+
+// Source: ../web/lib/queries/fragments/sections.groq.tsx
+// Variable: SECTIONS_PROJECTION
+// Query: coalesce(  sections[]->{    _id,    _type,		     ...select(_type=="aboutInfoType" => {	_id,	"kind": "aboutInfo",	title,	"description": coalesce(description, []),	"buttons": coalesce(buttons[]{ 	"id": coalesce(_key, _id), 	"highlight": coalesce(highlight, false), 	"target": coalesce(target, false),	"text": text, 	"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) }, []),	"collapsibles": coalesce(collapsibles[]{		"id": coalesce(_key, _id),		title,		"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },		"content": coalesce(content, [])	}, []),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),    ...select(_type == "accordionType" => {		_id,		"kind": "accordion",		"eyebrow": coalesce(eyebrow, null),		title,		"subtitle": coalesce(subtitle, ""),		"description": coalesce(description, []),		"image": image{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt, "widthSize": coalesce(widthSize, "normal"), "shape": coalesce(shape, "rounded") },			"items": coalesce(			items[]{				"id": coalesce(_key, _id),				title,				"description": coalesce(description, [])       			},			[]		),		"accSettings": {				"design": coalesce(settings.design, "faq"),			"ordered": coalesce(settings.ordered, false),			"firstExpanded": coalesce(settings.firstExpanded, false),			"textColor": coalesce(settings.textColor, undefined),			"accentColor": coalesce(settings.accentColor, undefined),			"bgColor": coalesce(settings.background, undefined)		},		"settings": {			"titleDesc": {				"showTitle": coalesce(titleDesc.showTitle, true),				"showDesc": coalesce(titleDesc.showDesc, false),					"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),				"titleTag": coalesce(titleDesc.titleTag, "h2"),				"textColor": coalesce(titleDesc.textColor, undefined),				"accentColor": coalesce(titleDesc.accentColor, undefined)			},			"layout": {				"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),				"pdDisplay": coalesce(layout.pdDisplay, "both"),				"template": coalesce(layout.template, "normal"),				"columns": coalesce(layout.columns, "normal"),				"width": coalesce(layout.width, "normal")			},			"background": {				"type": coalesce(background.type, "none"),				"bgColor": coalesce(background.color, undefined),				"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),				"ovlColor": coalesce(background.ovlColor, undefined),				"ovlBlend": coalesce(background.ovlBlend, "overlay"),				"ovlOpacity": coalesce(background.ovlOpacity, 50),				"gradient": coalesce(background.gradient, "banner")			}		}	}),    ...select(_type=="accreditationType" => {	_id,	"kind": "accreditation",	title,    "description": coalesce(description, []),		"items": coalesce(items[]{		title,		tag,		"id": coalesce(_key, _id), 		"image": image{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt, "widthSize": coalesce(widthSize, "normal") },	 			"link": link{ "href": select(       	linkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,		  	linkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,	linkType == "custom"   => href,	linkType == "file"     => file.asset->url,	linkType == "none"     => null), "newTab": coalesce(newTab, false) }		}, []),	"accrSettings": {		"showTitles": coalesce(accrSettings.showTitles, false),		"showTags": coalesce(accrSettings.showTags, true),		"displayType": coalesce(accrSettings.displayType, "grid"),		"showArrows": coalesce(accrSettings.showArrows, true),		"showDots": coalesce(accrSettings.showDots, true),		"autoplay": coalesce(accrSettings.autoplay, true),		"autoplayInterval": coalesce(accrSettings.autoplayInterval, 7),		"itemsPerView": coalesce(accrSettings.itemsPerView, 4)	},	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),    ...select(_type=="blogSection" => {	_id,	"kind": "blogSection",	title,	"description": coalesce(description, []),	"button": select(	defined(button[0]) => {		"id": coalesce(button[0]._key, button[0]._id),		"highlight": coalesce(button[0].highlight, false),		"target": coalesce(button[0].target, false),		"text": button[0].text,		"href": select(			button[0].type == "internal" => "/" + button[0].pageRef->slug.current,			button[0].type == "custom" => button[0].href,			null		)	},	null),  		"blogSettings": {		"limit": coalesce(blogOverviewSettings.limit, 3),      		"showExcerpt": coalesce(blogOverviewSettings.showExcerpt, true),		"showCats": coalesce(blogOverviewSettings.showCats, true),		"showTags": coalesce(blogOverviewSettings.showTags, false),		"showAuthor": coalesce(blogOverviewSettings.showAuthor, false),		"showDate": coalesce(blogOverviewSettings.showDate, true),	},		"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}   }),    ...select(_type=="comparisonType" => {	_id,	"kind": "comparison",   	 	title,		"description": coalesce(description, []),    "buttons": coalesce(buttons[]{ 	"id": coalesce(_key, _id), 	"highlight": coalesce(highlight, false), 	"target": coalesce(target, false),	"text": text, 	"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) }, []),	"steps": coalesce(steps[]{ 		"id": coalesce(_key, _id), 		title, 		"boxes": coalesce(boxes[]{ 			"id": coalesce(_key, _id), 			title, 			"description": coalesce(description, []), 			"textColor": coalesce(textColor, "#ffffff"), 			"background": coalesce(background, "#4E8199")		}, []),	}, []),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	} }),    ...select(_type=="contentBlocks" => {	_id,	"kind": "contentBlocks",	"aboveEyebrow": coalesce(aboveEyebrow, null),		 	"headline": headline,		"belowEyebrow": coalesce(belowEyebrow, null),	  	"description": coalesce(description, []), 		"blocks": coalesce(blocks[]{		"id": coalesce(_key, _id),		title,				"tagline": coalesce(tagline, null),		"description": coalesce(description, []),		"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt }		}, []),		"blocksSettings": {		"type": coalesce(blocksSettings.type, "box"),		"showIcon": coalesce(blocksSettings.showIcon, true),		"iconTitle": coalesce(blocksSettings.iconTitle, "stacked"),		"perRow": coalesce(blocksSettings.perRow, 3),		"collapsible": coalesce(blocksSettings.collapsible, false),		"gap": coalesce(blocksSettings.gap, "normal"),		"textColor": coalesce(blocksSettings.textColor, undefined),		"accentColor": coalesce(blocksSettings.accentColor, undefined),		"bgColor": coalesce(blocksSettings.background, undefined),		"iconBg": coalesce(blocksSettings.iconBg, undefined)	},	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),    ...select(_type=="ctaBannerType" => {	_id,	"kind": "ctaBanner",   	"eyebrow": coalesce(eyebrow, null),   	 	"title": headline,	    	"tagline": coalesce(tagline, null),  	  	"subheadline": coalesce(subheadline, []),       	"image": image{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), "alt": coalesce(alt, null) },     	"buttons": coalesce(buttons[]{ 	"id": coalesce(_key, _id), 	"highlight": coalesce(highlight, false), 	"target": coalesce(target, false),	"text": text, 	"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) }, []), 	"ctaSettings": {		"innerPadding": coalesce(ctaSettings.innerPadding, "normal"),		"ctaGradient": coalesce(ctaSettings.ctaGradient, "banner"),		"ctaBgColor": coalesce(ctaSettings.ctaBgColor, undefined)	},	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),        ...select(_type=="formType" => {	_id,	"kind": "form",	title,	"subtitle": coalesce(subtitle, ""),		"description": coalesce(description, []), 	"features": coalesce(features[]{		"id": coalesce(_key, _id), 		title, 		"description": coalesce(description, ""),		"ttlSize": coalesce(ttlSize, "small"),		"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt, "widthSize": coalesce(widthSize, "normal") } 	}, []),	"featDisplay": coalesce(featDisplay, "vertical"),	"form": coalesce(form, "customForm"),    "formTitle": coalesce(formTitle, ""),	"hubspot": select(      form == "hubSpotForm" => hubspot{        "region": coalesce(region, "na1"),        portalId,        formId      },         null    ),	"fields": coalesce(fields[]{     		"id": coalesce(_key, _id),		title,		"hubspotKey": coalesce(hubspotKey, null),		"info": coalesce(info, null),		"type": coalesce(type, "text"),		"placeholder": coalesce(placeholder, null),       		"options": coalesce(options[], []),		"cbxOptions": coalesce(cbxOptions[]{			"id": coalesce(_key, _id),			"label": coalesce(label, []),			"value": coalesce(value, ""),			"required": coalesce(required, false),			"checked": coalesce(checked, false)		}, []),		"optLayout": coalesce(optLayout, "vertical"),		"required": coalesce(required, false),		"size": coalesce(size, "full")	}, []),	"btnLabel": coalesce(btnLabel, "Send Message"),    	"footer": coalesce(footer, []),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),      ...select(_type=="topHeroType" => {	_id,	"kind": "hero",	"aboveTitle": coalesce(aboveHeadline, null),		 	"title": headline,		"belowTitle": coalesce(belowHeadline, null),	  	"subheadline": coalesce(subheadline, []), 	"features": coalesce(features[]{ 		"id": coalesce(_key, _id), 		"eyebrow": coalesce(eyebrow, null),		title, 		"description": coalesce(description, ""), 		"ttlSize": coalesce(ttlSize, "small"),		"layout": coalesce(layout, "text"),		"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt } 	}, []),	"featDisplay": coalesce(featDisplay, "vertical"),	"image": image{         	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	),        "alt": coalesce(alt, null),        "widthSize": coalesce(widthSize, "normal"),        "shape": coalesce(shape, "rounded")     },	"eyebrowImage": eyebrowImage{         	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	),        "alt": coalesce(alt, null),        "widthSize": coalesce(widthSize, "normal"),        "shape": coalesce(shape, "rounded")     },	"buttons": coalesce(buttons[]{ 	"id": coalesce(_key, _id), 	"highlight": coalesce(highlight, false), 	"target": coalesce(target, false),	"text": text, 	"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) }, []),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),     ...select(_type=="keyFeaturesType" => {	_id,	"kind": "keyFeatures",	"topHeadline": topHeadline,	"description": coalesce(description, []),	"bottomHeadline": bottomHeadline,	"cards": coalesce(cards[]{        		title,		"id": coalesce(_key, _id), 		"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },		"description": coalesce(description, [])	}, []),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),    ...select(_type=="mapType" => {    _id,    "kind": "mapSection",    title,    "subtitle": coalesce(subtitle, ""),    "description": coalesce(description, []),    "embedUrl": coalesce(embedUrl, ""),    "fullScreen": coalesce(fullScreen, false),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}      }),    ...select(_type=="productsType" => {	_id,	"kind": "products",	title,	"description": coalesce(description, []),	"cards": coalesce(cards[]{		"id": coalesce(_key, _id),		title,		"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },		"description": coalesce(description, []),		"features": coalesce(features[]{			"id": coalesce(_key, _id), 			title, 			"description": coalesce(description, ""),			"ttlSize": coalesce(ttlSize, "small"),			"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt } 		}, []),		"featDisplay": coalesce(featDisplay, "vertical"),		"addons": coalesce(addons, []),		"footer": coalesce(footer[]{			_type=="ctaMessage" => {				"_kind": "message",				"info": info,				"subtitle": subtitle,				"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },			    "href": select(       	linkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,		  	linkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,	linkType == "custom"   => href,	linkType == "file"     => file.asset->url,	linkType == "none"     => null),				"newTab": coalesce(newTab, false), 			},			_type=="ctaButton" => {				"_kind": "button",				"id": coalesce(_key, _id),				"highlight": coalesce(highlight, false),				"target": coalesce(target, false),				"text": text,				"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ),			}		}, []),    		"textColor": coalesce(textColor, "#ffffff"),   		"background": coalesce(background, "#505f66")        	}, []),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),    ...select(_type=="solutionsType" => {	_id,	"kind": "solutions",	title,	"description": coalesce(description, []),	"content": coalesce(content, []),	"cards": coalesce(cards[]{		"id": coalesce(_key, _id),		title,		"content": coalesce(content, []),		"image": image{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt, "widthSize": coalesce(widthSize, "normal") },		"items": coalesce(items[]{ 			"id": coalesce(_key, _id), 			title, 			subtitle, 			tag, 			"features": coalesce(features, []) 		}, []),		"footer": coalesce(footer[]{			_type=="ctaMessage" => {				"_kind": "message",				"info": info,				"subtitle": subtitle,				"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt, "widthSize": coalesce(widthSize, "normal") },				"href": select(       	linkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,		  	linkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,	linkType == "custom"   => href,	linkType == "file"     => file.asset->url,	linkType == "none"     => null),				"newTab": coalesce(newTab, false), 			},			_type=="ctaButton" => {				"_kind": "button",				"id": coalesce(_key, _id),				"highlight": coalesce(highlight, false),				"target": coalesce(target, false),				"text": text,				"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null )			}		}, []),		"textColor": coalesce(textColor, "#ffffff"),		"background": coalesce(background, "#505f66"),		"rounded": coalesce(rounded, true)	}, []),	"display": coalesce(display, "horizontal"),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),		...select(_type=="stepperType" => {	_id,	"kind": "stepper",   	 	title,		"eyebrow": coalesce(eyebrow, null),	"description": coalesce(description, []),	"steps": coalesce(steps[]{ 		"id": coalesce(_key, _id), 		label, 		title, 		"description": coalesce(description, []),  		"textColor": coalesce(textColor, undefined), 		"descColor": coalesce(descColor, undefined),		"background": coalesce(background, undefined),		"layout": coalesce(layout, "card")	}, []),	"buttons": coalesce(buttons[]{ 	"id": coalesce(_key, _id), 	"highlight": coalesce(highlight, false), 	"target": coalesce(target, false),	"text": text, 	"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) }, []),	"disclaimer": coalesce(disclaimer, null),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),    ...select(_type=="tableType" => {	_id,	"kind": "table",	"aboveEyebrow": coalesce(aboveEyebrow, null),	title,		"belowEyebrow": coalesce(belowEyebrow, null),	"description": coalesce(description, []),	"table": coalesce(table.rows[].cells, []),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),    ...select(_type=="teamOverviewType" => {	_id,	"kind": "teamOverview",	title,	subtitle,    "description": coalesce(description, []),	"members": coalesce(members[]{		"id": coalesce(_key, _id),		name,		position,		"image": image{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt, "widthSize": coalesce(widthSize, "normal") },		"bio": coalesce(bio, []),		"textColor": coalesce(textColor, null),		"background": coalesce(background, null)			}, []),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	} }),    ...select(_type=="textImageType" => {	_id,	"kind": "textImage",	title,	"aboveTitle": coalesce(aboveTitle, null),		"belowTitle": coalesce(belowTitle, null),	"description": coalesce(description, []),	"chips": coalesce(chips, []),	"image": image{         	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	),         "alt": coalesce(alt, null),         "caption": coalesce(caption, null),         "captionSub": coalesce(captionSub, null),         "credit": coalesce(credit, null),        "widthSize": coalesce(widthSize, "normal"),        "shape": coalesce(shape, "rounded") 		    },	"buttons": coalesce(buttons[]{ 	"id": coalesce(_key, _id), 	"highlight": coalesce(highlight, false), 	"target": coalesce(target, false),	"text": text, 	"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) }, []),	 	 	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}	}),        ...select(_type=="textOnlyType" => {	_id,	"kind": "text",	title,	"aboveTitle": coalesce(aboveTitle, undefined),							"belowTitle": coalesce(belowTitle, undefined),	"content": coalesce(content, []),			"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}})         }, [])
+export type SECTIONS_PROJECTION_RESULT = Array<never>;
+
+// Source: ../web/lib/queries/fragments/seo-meta.groq.tsx
+// Variable: SEO_META_PROJECTION
+// Query: {	"mode": coalesce(seo.mode, "auto"),	"title": coalesce(seo.title, ""),	"description": coalesce(seo.description, ""),	"image": seo.image{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },	"keywords": coalesce(seo.keywords, ""),	"noindex": coalesce(seo.noindex, false) }
+export type SEO_META_PROJECTION_RESULT = {
+  mode: "auto";
+  title: "";
+  description: "";
+  image: never;
+  keywords: "";
+  noindex: false;
+};
+
+// Source: ../web/lib/queries/fragments/settings/general.groq.tsx
+// Variable: GENERAL_SETTINGS_QUERY
+// Query: *[_id=="generalSettings"][0]{    siteName,    siteTitle,    siteDescription,    "siteImage": siteImage{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },    "siteIcon":  siteIcon{  	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },    "siteUrl": coalesce(siteUrl, ""),    "siteEmail": coalesce(siteEmail, "")  }
+export type GENERAL_SETTINGS_QUERY_RESULT =
+  | {
+      siteName: null;
+      siteTitle: null;
+      siteDescription: null;
+      siteImage: null;
+      siteIcon: null;
+      siteUrl: "";
+      siteEmail: "";
+    }
+  | {
+      siteName: string | null;
+      siteTitle: string | null;
+      siteDescription: string | null;
+      siteImage: {
+        image: {
+          asset: {
+            _id: string;
+            url: string | null;
+            metadata: {
+              dimensions: SanityImageDimensions | null;
+            };
+          } | null;
+        } | null;
+        alt: string | null;
+      } | null;
+      siteIcon: null;
+      siteUrl: string | "";
+      siteEmail: string | "";
+    }
+  | null;
+
+// Source: ../web/lib/queries/fragments/settings/page.groq.tsx
+// Variable: PAGE_SETTINGS_QUERY
+// Query: {  "showTitle": coalesce(settings.showTitle, true),  "showDesc": coalesce(settings.showDesc, true),  "shrinkTitle": coalesce(settings.shrinkTitle, false),  "alignTitle": coalesce(settings.alignTitle, "left"),  "pdTopBottom": coalesce(settings.pdTopBottom, "normal"),  "pdDisplay": coalesce(settings.pdDisplay, "both"),  "width": coalesce(settings.width, "normal"),  "textColor": coalesce(settings.textColor, undefined),  "gradientBg": coalesce(settings.gradientBg, "page")}
+export type PAGE_SETTINGS_QUERY_RESULT = {
+  showTitle: true;
+  showDesc: true;
+  shrinkTitle: false;
+  alignTitle: "left";
+  pdTopBottom: "normal";
+  pdDisplay: "both";
+  width: "normal";
+  textColor: null;
+  gradientBg: "page";
+};
+
+// Source: ../web/lib/queries/fragments/settings/post.groq.tsx
+// Variable: POST_SETTINGS_QUERY
+// Query: {	"showCats": coalesce(settings.showCats, false),	"showTags": coalesce(settings.showTags, true),	"showAuthor": coalesce(settings.showAuthor, true),	"showDate": coalesce(settings.showDate, true),	"alignTitle": coalesce(settings.alignTitle, "center"),	"pdTopBottom": coalesce(settings.pdTopBottom, "normal"),	"pdDisplay": coalesce(settings.pdDisplay, "both"),	"textColor": coalesce(settings.textColor, undefined),	"gradientBg": coalesce(settings.gradientBg, "post")  }
+export type POST_SETTINGS_QUERY_RESULT = {
+  showCats: false;
+  showTags: true;
+  showAuthor: true;
+  showDate: true;
+  alignTitle: "center";
+  pdTopBottom: "normal";
+  pdDisplay: "both";
+  textColor: null;
+  gradientBg: "post";
+};
+
+// Source: ../web/lib/queries/fragments/settings/reading.groq.tsx
+// Variable: READING_SETTINGS_QUERY
+// Query: *[_id=="readingSettings"][0]{    "homePage": homePage->{ _id, title, "slug": slug.current },    "blogPage": blogPage->{ _id, title, "slug": slug.current },    "blogSettings": {      "showExcerpt": coalesce(blogSettings.showExcerpt, true),      "excerptLength": coalesce(blogSettings.excerptLength, 360),      "filterBy": coalesce(blogSettings.filterBy, "tags"),      "perPage": coalesce(blogSettings.perPage, 9),      "showCats": coalesce(blogSettings.showCats, true),      "showTags": coalesce(blogSettings.showTags, true),      "showAuthor": coalesce(blogSettings.showAuthor, true),      "showDate": coalesce(blogSettings.showDate, true)    }  }
+export type READING_SETTINGS_QUERY_RESULT =
+  | {
+      homePage: null;
+      blogPage: null;
+      blogSettings: {
+        showExcerpt: true;
+        excerptLength: 360;
+        filterBy: "tags";
+        perPage: 9;
+        showCats: true;
+        showTags: true;
+        showAuthor: true;
+        showDate: true;
+      };
+    }
+  | {
+      homePage: {
+        _id: string;
+        title: string | null;
+        slug: string | null;
+      } | null;
+      blogPage: {
+        _id: string;
+        title: string | null;
+        slug: string | null;
+      } | null;
+      blogSettings: {
+        showExcerpt: boolean | true;
+        excerptLength: number | 360;
+        filterBy: "categories" | "none" | "tags";
+        perPage: number | 9;
+        showCats: boolean | true;
+        showTags: boolean | true;
+        showAuthor: boolean | true;
+        showDate: boolean | true;
+      };
+    }
+  | null;
+
+// Source: ../web/lib/queries/fragments/settings/seo.groq.tsx
+// Variable: SEO_SETTINGS_QUERY
+// Query: *[_id=="seoSettings"][0]{				"category": coalesce(category, ""), 		"classification": coalesce(classification, ""),		"keywords": coalesce(keywords, ""),		"language": coalesce(language, "en-US"), 		"locale": coalesce(locale, "en_US"),	 		"twitterHandle": coalesce(twitterHandle, ""), 		"linkedinHandle": coalesce(linkedinHandle, ""),		        "gSiteVerification": coalesce(gSiteVerification, ""),  		"noindex": coalesce(noindex, false) 	}
+export type SEO_SETTINGS_QUERY_RESULT =
+  | {
+      category: string | "";
+      classification: string | "";
+      keywords: string | "";
+      language: "en-US";
+      locale: "en_US";
+      twitterHandle: string | "";
+      linkedinHandle: string | "";
+      gSiteVerification: string | "";
+      noindex: boolean | false;
+    }
+  | {
+      category: "";
+      classification: "";
+      keywords: "";
+      language: "en-US";
+      locale: "en_US";
+      twitterHandle: "";
+      linkedinHandle: "";
+      gSiteVerification: "";
+      noindex: false;
+    }
+  | null;
+
+// Source: ../web/lib/queries/fragments/settings/tracking.groq.tsx
+// Variable: TRACKING_SETTINGS_QUERY
+// Query: *[_id=="trackingSettings"][0]{			google{			"enabled": coalesce(enabled, false),			"gTagManagerId": coalesce(gTagManagerId, "")      		},		"hubspot": {			"enabled": coalesce(hubspot.enabled, false),			"portalId": coalesce(hubspot.portalId, "")		}		 	}
+export type TRACKING_SETTINGS_QUERY_RESULT =
+  | {
+      google: null;
+      hubspot: {
+        enabled: false;
+        portalId: string | "";
+      };
+    }
+  | {
+      google: null;
+      hubspot: {
+        enabled: false;
+        portalId: "";
+      };
+    }
+  | {
+      google: {
+        enabled: boolean | false;
+        gTagManagerId: string | "";
+      } | null;
+      hubspot: {
+        enabled: boolean | false;
+        portalId: string | "";
+      };
+    }
+  | null;
+
+// Source: ../web/lib/queries/globals.tsx
+// Variable: GLOBALS_QUERY
+// Query: {  "header": *[_id=="siteHeader"][0]{   	"logo": headerLogo{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },	"aboveMenu": coalesce(aboveMenu[]{		"id": coalesce(_key, _id),		title,		"href": select(       	linkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,		  	linkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,	linkType == "custom"   => href,	linkType == "file"     => file.asset->url,	linkType == "none"     => null),		"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },		"newTab": coalesce(newTab, false),		"hideOnMobile": coalesce(hideOnMobile, false) 	}, []),	"menu": headerMenu->{		_id,		"slug": slug.current,		"items": coalesce(children[]{			"label": title,      			"href": select(       	linkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,		  	linkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,	linkType == "custom"   => href,	linkType == "file"     => file.asset->url,	linkType == "none"     => null),			"newTab": coalesce(newTab, false),     			"children": coalesce(children[]{				"label": title,				"href": select(       	linkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,		  	linkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,	linkType == "custom"   => href,	linkType == "file"     => file.asset->url,	linkType == "none"     => null),        				"description": description,				"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },				"newTab": coalesce(newTab, false),       				"children": coalesce(children[]{					"label": title,					"href": select(       	linkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,		  	linkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,	linkType == "custom"   => href,	linkType == "file"     => file.asset->url,	linkType == "none"     => null),					"description": description,					"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },					"newTab": coalesce(newTab, false)				}, [])			}, [])		}, []),	},	"menuType": coalesce(menuType, "dropdown"),	"buttons": coalesce(headerButtons[]{   		"id": coalesce(_key, _id),		"text": text,    		"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ),		"target": coalesce(target, false),		"highlight": coalesce(highlight, false)	}, [])},  "footer": *[_id=="siteFooter"][0]{	"logo": footerLogo{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },    	"menu": footerMenu->{		_id,		"slug": slug.current,		"items": coalesce(children[]{			"label": title,      			"href": select(       	linkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,		  	linkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,	linkType == "custom"   => href,	linkType == "file"     => file.asset->url,	linkType == "none"     => null),			"newTab": coalesce(newTab, false),     			"children": coalesce(children[]{				"label": title,				"href": select(       	linkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,		  	linkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,	linkType == "custom"   => href,	linkType == "file"     => file.asset->url,	linkType == "none"     => null),				"newTab": coalesce(newTab, false),       				"children": coalesce(children[]{					"label": title,					"href": select(       	linkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,		  	linkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,	linkType == "custom"   => href,	linkType == "file"     => file.asset->url,	linkType == "none"     => null),					"newTab": coalesce(newTab, false)				}, [])			}, [])		}, []),	},	"copyright": footerCopyright,	"settings": {		"textColor": coalesce(textColor, undefined),		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),		    "image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}},  "settings": {    "general":   *[_id=="generalSettings"][0]{    siteName,    siteTitle,    siteDescription,    "siteImage": siteImage{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },    "siteIcon":  siteIcon{  	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },    "siteUrl": coalesce(siteUrl, ""),    "siteEmail": coalesce(siteEmail, "")  },    "reading":   *[_id=="readingSettings"][0]{    "homePage": homePage->{ _id, title, "slug": slug.current },    "blogPage": blogPage->{ _id, title, "slug": slug.current },    "blogSettings": {      "showExcerpt": coalesce(blogSettings.showExcerpt, true),      "excerptLength": coalesce(blogSettings.excerptLength, 360),      "filterBy": coalesce(blogSettings.filterBy, "tags"),      "perPage": coalesce(blogSettings.perPage, 9),      "showCats": coalesce(blogSettings.showCats, true),      "showTags": coalesce(blogSettings.showTags, true),      "showAuthor": coalesce(blogSettings.showAuthor, true),      "showDate": coalesce(blogSettings.showDate, true)    }  },		"seo": 	*[_id=="seoSettings"][0]{				"category": coalesce(category, ""), 		"classification": coalesce(classification, ""),		"keywords": coalesce(keywords, ""),		"language": coalesce(language, "en-US"), 		"locale": coalesce(locale, "en_US"),	 		"twitterHandle": coalesce(twitterHandle, ""), 		"linkedinHandle": coalesce(linkedinHandle, ""),		        "gSiteVerification": coalesce(gSiteVerification, ""),  		"noindex": coalesce(noindex, false) 	} ,    "tracking": 	*[_id=="trackingSettings"][0]{			google{			"enabled": coalesce(enabled, false),			"gTagManagerId": coalesce(gTagManagerId, "")      		},		"hubspot": {			"enabled": coalesce(hubspot.enabled, false),			"portalId": coalesce(hubspot.portalId, "")		}		 	}   }}
+export type GLOBALS_QUERY_RESULT = {
+  header:
+    | {
+        logo: {
+          image: {
+            asset: {
+              _id: string;
+              url: string | null;
+              metadata: {
+                dimensions: SanityImageDimensions | null;
+              };
+            } | null;
+          } | null;
+          alt: string | null;
+        } | null;
+        aboveMenu:
+          | Array<{
+              id: string;
+              title: string | null;
+              href: string | null;
+              icon: {
+                image: {
+                  asset: {
+                    _id: string;
+                    url: string | null;
+                    metadata: {
+                      dimensions: SanityImageDimensions | null;
+                    };
+                  } | null;
+                } | null;
+                alt: string | null;
+              } | null;
+              newTab: boolean | false;
+              hideOnMobile: boolean | false;
+            }>
+          | Array<never>;
+        menu: {
+          _id: string;
+          slug: string | null;
+          items:
+            | Array<{
+                label: string | null;
+                href: string | null;
+                newTab: boolean | false;
+                children:
+                  | Array<{
+                      label: string | null;
+                      href: string | null;
+                      description: string | null;
+                      icon: {
+                        image: {
+                          asset: {
+                            _id: string;
+                            url: string | null;
+                            metadata: {
+                              dimensions: SanityImageDimensions | null;
+                            };
+                          } | null;
+                        } | null;
+                        alt: string | null;
+                      } | null;
+                      newTab: boolean | false;
+                      children:
+                        | Array<{
+                            label: string | null;
+                            href: string | null;
+                            description: string | null;
+                            icon: {
+                              image: {
+                                asset: {
+                                  _id: string;
+                                  url: string | null;
+                                  metadata: {
+                                    dimensions: SanityImageDimensions | null;
+                                  };
+                                } | null;
+                              } | null;
+                              alt: string | null;
+                            } | null;
+                            newTab: boolean | false;
+                          }>
+                        | Array<never>;
+                    }>
+                  | Array<never>;
+              }>
+            | Array<never>;
+        } | null;
+        menuType: "dropdown" | "megamenu";
+        buttons:
+          | Array<{
+              id: string;
+              text: string | null;
+              href: string | null;
+              target: boolean | false;
+              highlight: boolean | false;
+            }>
+          | Array<never>;
+      }
+    | {
+        logo: null;
+        aboveMenu: Array<never>;
+        menu: null;
+        menuType: "dropdown";
+        buttons: Array<never>;
+      }
+    | null;
+  footer:
+    | {
+        logo: null;
+        menu: null;
+        copyright: null;
+        settings: {
+          textColor: null;
+          layout: {
+            pdTopBottom: "medium";
+            pdDisplay: "both";
+            template: "normal";
+            columns: "normal";
+            width: "normal";
+          };
+          background: {
+            type: "none";
+            bgColor: null;
+            image: null;
+            ovlColor: null;
+            ovlBlend: "overlay";
+            ovlOpacity: 50;
+            gradient: "banner";
+          };
+        };
+      }
+    | {
+        logo: null;
+        menu: null;
+        copyright: null;
+        settings: {
+          textColor: null;
+          layout: {
+            pdTopBottom: "half" | "medium" | "normal" | "small";
+            pdDisplay: "both" | "bottom" | "none" | "top";
+            template: "centered" | "normal" | "revCentered" | "reversed";
+            columns: "firstBig" | "lastBig" | "normal";
+            width: "full" | "normal";
+          };
+          background: {
+            type: "color" | "gradient" | "image" | "none";
+            bgColor: Color | null;
+            image: {
+              image: {
+                asset: {
+                  _id: string;
+                  url: string | null;
+                  metadata: {
+                    dimensions: SanityImageDimensions | null;
+                  };
+                } | null;
+              } | null;
+            } | null;
+            ovlColor: Color | null;
+            ovlBlend:
+              | "color-burn"
+              | "color-dodge"
+              | "color"
+              | "darken"
+              | "difference"
+              | "exclusion"
+              | "hard-light"
+              | "hue"
+              | "lighten"
+              | "luminosity"
+              | "multiply"
+              | "normal"
+              | "overlay"
+              | "saturation"
+              | "screen"
+              | "soft-light";
+            ovlOpacity: number | 50;
+            gradient:
+              | "banner"
+              | "darkblue"
+              | "flare"
+              | "lemontwist"
+              | "lunada"
+              | "mojito"
+              | "none"
+              | "ohhappiness"
+              | "sulphur";
+          };
+        };
+      }
+    | {
+        logo: {
+          image: {
+            asset: {
+              _id: string;
+              url: string | null;
+              metadata: {
+                dimensions: SanityImageDimensions | null;
+              };
+            } | null;
+          } | null;
+          alt: string | null;
+        } | null;
+        menu: {
+          _id: string;
+          slug: string | null;
+          items:
+            | Array<{
+                label: string | null;
+                href: string | null;
+                newTab: boolean | false;
+                children:
+                  | Array<{
+                      label: string | null;
+                      href: string | null;
+                      newTab: boolean | false;
+                      children:
+                        | Array<{
+                            label: string | null;
+                            href: string | null;
+                            newTab: boolean | false;
+                          }>
+                        | Array<never>;
+                    }>
+                  | Array<never>;
+              }>
+            | Array<never>;
+        } | null;
+        copyright: string | null;
+        settings: {
+          textColor: Color | null;
+          layout: {
+            pdTopBottom: "half" | "medium" | "normal" | "small";
+            pdDisplay: "both" | "bottom" | "none" | "top";
+            template: "centered" | "normal" | "revCentered" | "reversed";
+            columns: "firstBig" | "lastBig" | "normal";
+            width: "full" | "normal";
+          };
+          background: {
+            type: "color" | "gradient" | "image" | "none";
+            bgColor: Color | null;
+            image: {
+              image: {
+                asset: {
+                  _id: string;
+                  url: string | null;
+                  metadata: {
+                    dimensions: SanityImageDimensions | null;
+                  };
+                } | null;
+              } | null;
+            } | null;
+            ovlColor: Color | null;
+            ovlBlend:
+              | "color-burn"
+              | "color-dodge"
+              | "color"
+              | "darken"
+              | "difference"
+              | "exclusion"
+              | "hard-light"
+              | "hue"
+              | "lighten"
+              | "luminosity"
+              | "multiply"
+              | "normal"
+              | "overlay"
+              | "saturation"
+              | "screen"
+              | "soft-light";
+            ovlOpacity: number | 50;
+            gradient:
+              | "banner"
+              | "darkblue"
+              | "flare"
+              | "lemontwist"
+              | "lunada"
+              | "mojito"
+              | "none"
+              | "ohhappiness"
+              | "sulphur";
+          };
+        };
+      }
+    | null;
+  settings: {
+    general:
+      | {
+          siteName: null;
+          siteTitle: null;
+          siteDescription: null;
+          siteImage: null;
+          siteIcon: null;
+          siteUrl: "";
+          siteEmail: "";
+        }
+      | {
+          siteName: string | null;
+          siteTitle: string | null;
+          siteDescription: string | null;
+          siteImage: {
+            image: {
+              asset: {
+                _id: string;
+                url: string | null;
+                metadata: {
+                  dimensions: SanityImageDimensions | null;
+                };
+              } | null;
+            } | null;
+            alt: string | null;
+          } | null;
+          siteIcon: null;
+          siteUrl: string | "";
+          siteEmail: string | "";
+        }
+      | null;
+    reading:
+      | {
+          homePage: null;
+          blogPage: null;
+          blogSettings: {
+            showExcerpt: true;
+            excerptLength: 360;
+            filterBy: "tags";
+            perPage: 9;
+            showCats: true;
+            showTags: true;
+            showAuthor: true;
+            showDate: true;
+          };
+        }
+      | {
+          homePage: {
+            _id: string;
+            title: string | null;
+            slug: string | null;
+          } | null;
+          blogPage: {
+            _id: string;
+            title: string | null;
+            slug: string | null;
+          } | null;
+          blogSettings: {
+            showExcerpt: boolean | true;
+            excerptLength: number | 360;
+            filterBy: "categories" | "none" | "tags";
+            perPage: number | 9;
+            showCats: boolean | true;
+            showTags: boolean | true;
+            showAuthor: boolean | true;
+            showDate: boolean | true;
+          };
+        }
+      | null;
+    seo:
+      | {
+          category: string | "";
+          classification: string | "";
+          keywords: string | "";
+          language: "en-US";
+          locale: "en_US";
+          twitterHandle: string | "";
+          linkedinHandle: string | "";
+          gSiteVerification: string | "";
+          noindex: boolean | false;
+        }
+      | {
+          category: "";
+          classification: "";
+          keywords: "";
+          language: "en-US";
+          locale: "en_US";
+          twitterHandle: "";
+          linkedinHandle: "";
+          gSiteVerification: "";
+          noindex: false;
+        }
+      | null;
+    tracking:
+      | {
+          google: null;
+          hubspot: {
+            enabled: false;
+            portalId: string | "";
+          };
+        }
+      | {
+          google: null;
+          hubspot: {
+            enabled: false;
+            portalId: "";
+          };
+        }
+      | {
+          google: {
+            enabled: boolean | false;
+            gTagManagerId: string | "";
+          } | null;
+          hubspot: {
+            enabled: boolean | false;
+            portalId: string | "";
+          };
+        }
+      | null;
+  };
+};
+
+// Source: ../web/lib/queries/page-by-slug.tsx
+// Variable: PAGE_BY_SLUG_QUERY
+// Query: *[_type=="page" && slug.current==$slug && !defined(archivedAt)][0]{  _id,  _type,  "slug": slug.current,  title,  "description": coalesce(description, []),  "sections": coalesce(  sections[]->{    _id,    _type,		     ...select(_type=="aboutInfoType" => {	_id,	"kind": "aboutInfo",	title,	"description": coalesce(description, []),	"buttons": coalesce(buttons[]{ 	"id": coalesce(_key, _id), 	"highlight": coalesce(highlight, false), 	"target": coalesce(target, false),	"text": text, 	"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) }, []),	"collapsibles": coalesce(collapsibles[]{		"id": coalesce(_key, _id),		title,		"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },		"content": coalesce(content, [])	}, []),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),    ...select(_type == "accordionType" => {		_id,		"kind": "accordion",		"eyebrow": coalesce(eyebrow, null),		title,		"subtitle": coalesce(subtitle, ""),		"description": coalesce(description, []),		"image": image{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt, "widthSize": coalesce(widthSize, "normal"), "shape": coalesce(shape, "rounded") },			"items": coalesce(			items[]{				"id": coalesce(_key, _id),				title,				"description": coalesce(description, [])       			},			[]		),		"accSettings": {				"design": coalesce(settings.design, "faq"),			"ordered": coalesce(settings.ordered, false),			"firstExpanded": coalesce(settings.firstExpanded, false),			"textColor": coalesce(settings.textColor, undefined),			"accentColor": coalesce(settings.accentColor, undefined),			"bgColor": coalesce(settings.background, undefined)		},		"settings": {			"titleDesc": {				"showTitle": coalesce(titleDesc.showTitle, true),				"showDesc": coalesce(titleDesc.showDesc, false),					"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),				"titleTag": coalesce(titleDesc.titleTag, "h2"),				"textColor": coalesce(titleDesc.textColor, undefined),				"accentColor": coalesce(titleDesc.accentColor, undefined)			},			"layout": {				"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),				"pdDisplay": coalesce(layout.pdDisplay, "both"),				"template": coalesce(layout.template, "normal"),				"columns": coalesce(layout.columns, "normal"),				"width": coalesce(layout.width, "normal")			},			"background": {				"type": coalesce(background.type, "none"),				"bgColor": coalesce(background.color, undefined),				"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),				"ovlColor": coalesce(background.ovlColor, undefined),				"ovlBlend": coalesce(background.ovlBlend, "overlay"),				"ovlOpacity": coalesce(background.ovlOpacity, 50),				"gradient": coalesce(background.gradient, "banner")			}		}	}),    ...select(_type=="accreditationType" => {	_id,	"kind": "accreditation",	title,    "description": coalesce(description, []),		"items": coalesce(items[]{		title,		tag,		"id": coalesce(_key, _id), 		"image": image{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt, "widthSize": coalesce(widthSize, "normal") },	 			"link": link{ "href": select(       	linkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,		  	linkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,	linkType == "custom"   => href,	linkType == "file"     => file.asset->url,	linkType == "none"     => null), "newTab": coalesce(newTab, false) }		}, []),	"accrSettings": {		"showTitles": coalesce(accrSettings.showTitles, false),		"showTags": coalesce(accrSettings.showTags, true),		"displayType": coalesce(accrSettings.displayType, "grid"),		"showArrows": coalesce(accrSettings.showArrows, true),		"showDots": coalesce(accrSettings.showDots, true),		"autoplay": coalesce(accrSettings.autoplay, true),		"autoplayInterval": coalesce(accrSettings.autoplayInterval, 7),		"itemsPerView": coalesce(accrSettings.itemsPerView, 4)	},	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),    ...select(_type=="blogSection" => {	_id,	"kind": "blogSection",	title,	"description": coalesce(description, []),	"button": select(	defined(button[0]) => {		"id": coalesce(button[0]._key, button[0]._id),		"highlight": coalesce(button[0].highlight, false),		"target": coalesce(button[0].target, false),		"text": button[0].text,		"href": select(			button[0].type == "internal" => "/" + button[0].pageRef->slug.current,			button[0].type == "custom" => button[0].href,			null		)	},	null),  		"blogSettings": {		"limit": coalesce(blogOverviewSettings.limit, 3),      		"showExcerpt": coalesce(blogOverviewSettings.showExcerpt, true),		"showCats": coalesce(blogOverviewSettings.showCats, true),		"showTags": coalesce(blogOverviewSettings.showTags, false),		"showAuthor": coalesce(blogOverviewSettings.showAuthor, false),		"showDate": coalesce(blogOverviewSettings.showDate, true),	},		"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}   }),    ...select(_type=="comparisonType" => {	_id,	"kind": "comparison",   	 	title,		"description": coalesce(description, []),    "buttons": coalesce(buttons[]{ 	"id": coalesce(_key, _id), 	"highlight": coalesce(highlight, false), 	"target": coalesce(target, false),	"text": text, 	"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) }, []),	"steps": coalesce(steps[]{ 		"id": coalesce(_key, _id), 		title, 		"boxes": coalesce(boxes[]{ 			"id": coalesce(_key, _id), 			title, 			"description": coalesce(description, []), 			"textColor": coalesce(textColor, "#ffffff"), 			"background": coalesce(background, "#4E8199")		}, []),	}, []),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	} }),    ...select(_type=="contentBlocks" => {	_id,	"kind": "contentBlocks",	"aboveEyebrow": coalesce(aboveEyebrow, null),		 	"headline": headline,		"belowEyebrow": coalesce(belowEyebrow, null),	  	"description": coalesce(description, []), 		"blocks": coalesce(blocks[]{		"id": coalesce(_key, _id),		title,				"tagline": coalesce(tagline, null),		"description": coalesce(description, []),		"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt }		}, []),		"blocksSettings": {		"type": coalesce(blocksSettings.type, "box"),		"showIcon": coalesce(blocksSettings.showIcon, true),		"iconTitle": coalesce(blocksSettings.iconTitle, "stacked"),		"perRow": coalesce(blocksSettings.perRow, 3),		"collapsible": coalesce(blocksSettings.collapsible, false),		"gap": coalesce(blocksSettings.gap, "normal"),		"textColor": coalesce(blocksSettings.textColor, undefined),		"accentColor": coalesce(blocksSettings.accentColor, undefined),		"bgColor": coalesce(blocksSettings.background, undefined),		"iconBg": coalesce(blocksSettings.iconBg, undefined)	},	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),    ...select(_type=="ctaBannerType" => {	_id,	"kind": "ctaBanner",   	"eyebrow": coalesce(eyebrow, null),   	 	"title": headline,	    	"tagline": coalesce(tagline, null),  	  	"subheadline": coalesce(subheadline, []),       	"image": image{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), "alt": coalesce(alt, null) },     	"buttons": coalesce(buttons[]{ 	"id": coalesce(_key, _id), 	"highlight": coalesce(highlight, false), 	"target": coalesce(target, false),	"text": text, 	"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) }, []), 	"ctaSettings": {		"innerPadding": coalesce(ctaSettings.innerPadding, "normal"),		"ctaGradient": coalesce(ctaSettings.ctaGradient, "banner"),		"ctaBgColor": coalesce(ctaSettings.ctaBgColor, undefined)	},	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),        ...select(_type=="formType" => {	_id,	"kind": "form",	title,	"subtitle": coalesce(subtitle, ""),		"description": coalesce(description, []), 	"features": coalesce(features[]{		"id": coalesce(_key, _id), 		title, 		"description": coalesce(description, ""),		"ttlSize": coalesce(ttlSize, "small"),		"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt, "widthSize": coalesce(widthSize, "normal") } 	}, []),	"featDisplay": coalesce(featDisplay, "vertical"),	"form": coalesce(form, "customForm"),    "formTitle": coalesce(formTitle, ""),	"hubspot": select(      form == "hubSpotForm" => hubspot{        "region": coalesce(region, "na1"),        portalId,        formId      },         null    ),	"fields": coalesce(fields[]{     		"id": coalesce(_key, _id),		title,		"hubspotKey": coalesce(hubspotKey, null),		"info": coalesce(info, null),		"type": coalesce(type, "text"),		"placeholder": coalesce(placeholder, null),       		"options": coalesce(options[], []),		"cbxOptions": coalesce(cbxOptions[]{			"id": coalesce(_key, _id),			"label": coalesce(label, []),			"value": coalesce(value, ""),			"required": coalesce(required, false),			"checked": coalesce(checked, false)		}, []),		"optLayout": coalesce(optLayout, "vertical"),		"required": coalesce(required, false),		"size": coalesce(size, "full")	}, []),	"btnLabel": coalesce(btnLabel, "Send Message"),    	"footer": coalesce(footer, []),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),      ...select(_type=="topHeroType" => {	_id,	"kind": "hero",	"aboveTitle": coalesce(aboveHeadline, null),		 	"title": headline,		"belowTitle": coalesce(belowHeadline, null),	  	"subheadline": coalesce(subheadline, []), 	"features": coalesce(features[]{ 		"id": coalesce(_key, _id), 		"eyebrow": coalesce(eyebrow, null),		title, 		"description": coalesce(description, ""), 		"ttlSize": coalesce(ttlSize, "small"),		"layout": coalesce(layout, "text"),		"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt } 	}, []),	"featDisplay": coalesce(featDisplay, "vertical"),	"image": image{         	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	),        "alt": coalesce(alt, null),        "widthSize": coalesce(widthSize, "normal"),        "shape": coalesce(shape, "rounded")     },	"eyebrowImage": eyebrowImage{         	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	),        "alt": coalesce(alt, null),        "widthSize": coalesce(widthSize, "normal"),        "shape": coalesce(shape, "rounded")     },	"buttons": coalesce(buttons[]{ 	"id": coalesce(_key, _id), 	"highlight": coalesce(highlight, false), 	"target": coalesce(target, false),	"text": text, 	"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) }, []),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),     ...select(_type=="keyFeaturesType" => {	_id,	"kind": "keyFeatures",	"topHeadline": topHeadline,	"description": coalesce(description, []),	"bottomHeadline": bottomHeadline,	"cards": coalesce(cards[]{        		title,		"id": coalesce(_key, _id), 		"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },		"description": coalesce(description, [])	}, []),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),    ...select(_type=="mapType" => {    _id,    "kind": "mapSection",    title,    "subtitle": coalesce(subtitle, ""),    "description": coalesce(description, []),    "embedUrl": coalesce(embedUrl, ""),    "fullScreen": coalesce(fullScreen, false),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}      }),    ...select(_type=="productsType" => {	_id,	"kind": "products",	title,	"description": coalesce(description, []),	"cards": coalesce(cards[]{		"id": coalesce(_key, _id),		title,		"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },		"description": coalesce(description, []),		"features": coalesce(features[]{			"id": coalesce(_key, _id), 			title, 			"description": coalesce(description, ""),			"ttlSize": coalesce(ttlSize, "small"),			"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt } 		}, []),		"featDisplay": coalesce(featDisplay, "vertical"),		"addons": coalesce(addons, []),		"footer": coalesce(footer[]{			_type=="ctaMessage" => {				"_kind": "message",				"info": info,				"subtitle": subtitle,				"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },			    "href": select(       	linkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,		  	linkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,	linkType == "custom"   => href,	linkType == "file"     => file.asset->url,	linkType == "none"     => null),				"newTab": coalesce(newTab, false), 			},			_type=="ctaButton" => {				"_kind": "button",				"id": coalesce(_key, _id),				"highlight": coalesce(highlight, false),				"target": coalesce(target, false),				"text": text,				"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ),			}		}, []),    		"textColor": coalesce(textColor, "#ffffff"),   		"background": coalesce(background, "#505f66")        	}, []),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),    ...select(_type=="solutionsType" => {	_id,	"kind": "solutions",	title,	"description": coalesce(description, []),	"content": coalesce(content, []),	"cards": coalesce(cards[]{		"id": coalesce(_key, _id),		title,		"content": coalesce(content, []),		"image": image{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt, "widthSize": coalesce(widthSize, "normal") },		"items": coalesce(items[]{ 			"id": coalesce(_key, _id), 			title, 			subtitle, 			tag, 			"features": coalesce(features, []) 		}, []),		"footer": coalesce(footer[]{			_type=="ctaMessage" => {				"_kind": "message",				"info": info,				"subtitle": subtitle,				"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt, "widthSize": coalesce(widthSize, "normal") },				"href": select(       	linkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,		  	linkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,	linkType == "custom"   => href,	linkType == "file"     => file.asset->url,	linkType == "none"     => null),				"newTab": coalesce(newTab, false), 			},			_type=="ctaButton" => {				"_kind": "button",				"id": coalesce(_key, _id),				"highlight": coalesce(highlight, false),				"target": coalesce(target, false),				"text": text,				"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null )			}		}, []),		"textColor": coalesce(textColor, "#ffffff"),		"background": coalesce(background, "#505f66"),		"rounded": coalesce(rounded, true)	}, []),	"display": coalesce(display, "horizontal"),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),		...select(_type=="stepperType" => {	_id,	"kind": "stepper",   	 	title,		"eyebrow": coalesce(eyebrow, null),	"description": coalesce(description, []),	"steps": coalesce(steps[]{ 		"id": coalesce(_key, _id), 		label, 		title, 		"description": coalesce(description, []),  		"textColor": coalesce(textColor, undefined), 		"descColor": coalesce(descColor, undefined),		"background": coalesce(background, undefined),		"layout": coalesce(layout, "card")	}, []),	"buttons": coalesce(buttons[]{ 	"id": coalesce(_key, _id), 	"highlight": coalesce(highlight, false), 	"target": coalesce(target, false),	"text": text, 	"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) }, []),	"disclaimer": coalesce(disclaimer, null),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),    ...select(_type=="tableType" => {	_id,	"kind": "table",	"aboveEyebrow": coalesce(aboveEyebrow, null),	title,		"belowEyebrow": coalesce(belowEyebrow, null),	"description": coalesce(description, []),	"table": coalesce(table.rows[].cells, []),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),    ...select(_type=="teamOverviewType" => {	_id,	"kind": "teamOverview",	title,	subtitle,    "description": coalesce(description, []),	"members": coalesce(members[]{		"id": coalesce(_key, _id),		name,		position,		"image": image{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt, "widthSize": coalesce(widthSize, "normal") },		"bio": coalesce(bio, []),		"textColor": coalesce(textColor, null),		"background": coalesce(background, null)			}, []),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	} }),    ...select(_type=="textImageType" => {	_id,	"kind": "textImage",	title,	"aboveTitle": coalesce(aboveTitle, null),		"belowTitle": coalesce(belowTitle, null),	"description": coalesce(description, []),	"chips": coalesce(chips, []),	"image": image{         	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	),         "alt": coalesce(alt, null),         "caption": coalesce(caption, null),         "captionSub": coalesce(captionSub, null),         "credit": coalesce(credit, null),        "widthSize": coalesce(widthSize, "normal"),        "shape": coalesce(shape, "rounded") 		    },	"buttons": coalesce(buttons[]{ 	"id": coalesce(_key, _id), 	"highlight": coalesce(highlight, false), 	"target": coalesce(target, false),	"text": text, 	"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) }, []),	 	 	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}	}),        ...select(_type=="textOnlyType" => {	_id,	"kind": "text",	title,	"aboveTitle": coalesce(aboveTitle, undefined),							"belowTitle": coalesce(belowTitle, undefined),	"content": coalesce(content, []),			"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}})         }, []),  "settings": {  "showTitle": coalesce(settings.showTitle, true),  "showDesc": coalesce(settings.showDesc, true),  "shrinkTitle": coalesce(settings.shrinkTitle, false),  "alignTitle": coalesce(settings.alignTitle, "left"),  "pdTopBottom": coalesce(settings.pdTopBottom, "normal"),  "pdDisplay": coalesce(settings.pdDisplay, "both"),  "width": coalesce(settings.width, "normal"),  "textColor": coalesce(settings.textColor, undefined),  "gradientBg": coalesce(settings.gradientBg, "page")},  "seoMeta": {	"mode": coalesce(seo.mode, "auto"),	"title": coalesce(seo.title, ""),	"description": coalesce(seo.description, ""),	"image": seo.image{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },	"keywords": coalesce(seo.keywords, ""),	"noindex": coalesce(seo.noindex, false) }}
+export type PAGE_BY_SLUG_QUERY_RESULT = {
+  _id: string;
+  _type: "page";
+  slug: string | null;
+  title: string | null;
+  description: Array<never> | BlockContentMini;
+  sections:
+    | Array<never>
+    | Array<
+        | {
+            _id: string;
+            _type: "aboutInfoType";
+            kind: "aboutInfo";
+            title: string | null;
+            description: Array<never> | BlockContentMedi;
+            buttons:
+              | Array<{
+                  id: string;
+                  highlight: boolean | false;
+                  target: boolean | false;
+                  text: string | null;
+                  href: string | null;
+                }>
+              | Array<never>;
+            collapsibles:
+              | Array<{
+                  id: string;
+                  title: string | null;
+                  icon: {
+                    image: {
+                      asset: {
+                        _id: string;
+                        url: string | null;
+                        metadata: {
+                          dimensions: SanityImageDimensions | null;
+                        };
+                      } | null;
+                    } | null;
+                    alt: string | null;
+                  } | null;
+                  content: Array<never> | BlockContentMini;
+                }>
+              | Array<never>;
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "accordionType";
+            kind: "accordion";
+            eyebrow: string | null;
+            title: string | null;
+            subtitle: string | "";
+            description: Array<never> | BlockContentMedi;
+            image: {
+              image: {
+                asset: {
+                  _id: string;
+                  url: string | null;
+                  metadata: {
+                    dimensions: SanityImageDimensions | null;
+                  };
+                } | null;
+              } | null;
+              alt: string | null;
+              widthSize: "medium" | "normal" | "small";
+              shape: "disc" | "rounded" | "squared";
+            } | null;
+            items:
+              | Array<{
+                  id: string;
+                  title: string | null;
+                  description: Array<never> | BlockContentPlus;
+                }>
+              | Array<never>;
+            accSettings: {
+              design: "faq" | "glossary";
+              ordered: boolean | false;
+              firstExpanded: boolean | false;
+              textColor: Color | null;
+              accentColor: Color | null;
+              bgColor: Color | null;
+            };
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "accreditationType";
+            kind: "accreditation";
+            title: string | null;
+            description: Array<never> | BlockContentMedi;
+            items:
+              | Array<{
+                  title: string | null;
+                  tag: string | null;
+                  id: string;
+                  image: {
+                    image: {
+                      asset: {
+                        _id: string;
+                        url: string | null;
+                        metadata: {
+                          dimensions: SanityImageDimensions | null;
+                        };
+                      } | null;
+                    } | null;
+                    alt: string | null;
+                    widthSize: "medium" | "normal" | "small";
+                  } | null;
+                  link: {
+                    href: string | null;
+                    newTab: boolean | false;
+                  } | null;
+                }>
+              | Array<never>;
+            accrSettings: {
+              showTitles: boolean | false;
+              showTags: boolean | true;
+              displayType: "carousel" | "grid";
+              showArrows: boolean | true;
+              showDots: boolean | true;
+              autoplay: boolean | true;
+              autoplayInterval: number | 7;
+              itemsPerView: 1 | 2 | 3 | 4 | 5 | 6;
+            };
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "blogSection";
+            kind: "blogSection";
+            title: string | null;
+            description: Array<never> | BlockContentMedi;
+            button: {
+              id: string | null;
+              highlight: boolean | false;
+              target: boolean | false;
+              text: string | null;
+              href: string | null;
+            } | null;
+            blogSettings: {
+              limit: number | 3;
+              showExcerpt: boolean | true;
+              showCats: boolean | true;
+              showTags: boolean | false;
+              showAuthor: boolean | false;
+              showDate: boolean | true;
+            };
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "comparisonType";
+            kind: "comparison";
+            title: string | null;
+            description: Array<never> | BlockContentMedi;
+            buttons:
+              | Array<{
+                  id: string;
+                  highlight: boolean | false;
+                  target: boolean | false;
+                  text: string | null;
+                  href: string | null;
+                }>
+              | Array<never>;
+            steps:
+              | Array<{
+                  id: string;
+                  title: string | null;
+                  boxes:
+                    | Array<{
+                        id: string;
+                        title: string | null;
+                        description: Array<never> | BlockContentMini;
+                        textColor: Color | "#ffffff";
+                        background: Color | "#4E8199";
+                      }>
+                    | Array<never>;
+                }>
+              | Array<never>;
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "contentBlocks";
+            kind: "contentBlocks";
+            aboveEyebrow: string | null;
+            headline: string | null;
+            belowEyebrow: string | null;
+            description: Array<never> | BlockContentMini;
+            blocks:
+              | Array<{
+                  id: string;
+                  title: string | null;
+                  tagline: string | null;
+                  description: Array<never> | BlockContentMini;
+                  icon: {
+                    image: {
+                      asset: {
+                        _id: string;
+                        url: string | null;
+                        metadata: {
+                          dimensions: SanityImageDimensions | null;
+                        };
+                      } | null;
+                    } | null;
+                    alt: string | null;
+                  } | null;
+                }>
+              | Array<never>;
+            blocksSettings: {
+              type: "box" | "card" | "text";
+              showIcon: boolean | true;
+              iconTitle: "samerow" | "stacked";
+              perRow: 1 | 2 | 3 | 4;
+              collapsible: boolean | false;
+              gap: "bigger" | "medium" | "normal";
+              textColor: Color | null;
+              accentColor: Color | null;
+              bgColor: Color | null;
+              iconBg: Color | null;
+            };
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "ctaBannerType";
+            kind: "ctaBanner";
+            eyebrow: string | null;
+            title: string | null;
+            tagline: string | null;
+            subheadline: Array<never> | BlockContentMini;
+            image: {
+              image: {
+                asset: {
+                  _id: string;
+                  url: string | null;
+                  metadata: {
+                    dimensions: SanityImageDimensions | null;
+                  };
+                } | null;
+              } | null;
+              alt: string | null;
+            } | null;
+            buttons:
+              | Array<{
+                  id: string;
+                  highlight: boolean | false;
+                  target: boolean | false;
+                  text: string | null;
+                  href: string | null;
+                }>
+              | Array<never>;
+            ctaSettings: {
+              innerPadding: "half" | "medium" | "none" | "normal" | "small";
+              ctaGradient:
+                | "banner"
+                | "custom"
+                | "flare"
+                | "lemontwist"
+                | "lunada"
+                | "mojito"
+                | "none"
+                | "ohhappiness"
+                | "sulphur";
+              ctaBgColor: Color | null;
+            };
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "formType";
+            kind: "form";
+            title: string | null;
+            subtitle: string | "";
+            description: Array<never> | BlockContentMedi;
+            features:
+              | Array<{
+                  id: string;
+                  title: string | null;
+                  description: string | "";
+                  ttlSize: "large" | "medium" | "small";
+                  icon: {
+                    image: {
+                      asset: {
+                        _id: string;
+                        url: string | null;
+                        metadata: {
+                          dimensions: SanityImageDimensions | null;
+                        };
+                      } | null;
+                    } | null;
+                    alt: string | null;
+                    widthSize: "normal";
+                  } | null;
+                }>
+              | Array<never>;
+            featDisplay: "horizontal" | "vertical";
+            form: "customForm" | "hubSpotForm";
+            formTitle: string | "";
+            hubspot: {
+              region: string | "na1";
+              portalId: string | null;
+              formId: string | null;
+            } | null;
+            fields:
+              | Array<{
+                  id: string;
+                  title: string | null;
+                  hubspotKey: string | null;
+                  info: string | null;
+                  type:
+                    | "checkbox"
+                    | "email"
+                    | "radio"
+                    | "select"
+                    | "tel"
+                    | "text"
+                    | "textarea";
+                  placeholder: string | null;
+                  options: Array<string> | Array<never>;
+                  cbxOptions:
+                    | Array<{
+                        id: string;
+                        label: Array<never> | BlockContentMini;
+                        value: string | "";
+                        required: boolean | false;
+                        checked: boolean | false;
+                      }>
+                    | Array<never>;
+                  optLayout: "horizontal" | "vertical";
+                  required: boolean | false;
+                  size: "full" | "half";
+                }>
+              | Array<never>;
+            btnLabel: string | "Send Message";
+            footer: Array<never> | BlockContentMini;
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "keyFeaturesType";
+            kind: "keyFeatures";
+            topHeadline: string | null;
+            description: Array<never> | BlockContentMedi;
+            bottomHeadline: string | null;
+            cards:
+              | Array<{
+                  title: string | null;
+                  id: string;
+                  icon: {
+                    image: {
+                      asset: {
+                        _id: string;
+                        url: string | null;
+                        metadata: {
+                          dimensions: SanityImageDimensions | null;
+                        };
+                      } | null;
+                    } | null;
+                    alt: string | null;
+                  } | null;
+                  description: Array<never> | BlockContentMini;
+                }>
+              | Array<never>;
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "mapType";
+            kind: "mapSection";
+            title: string | null;
+            subtitle: string | "";
+            description: Array<never> | BlockContentMedi;
+            embedUrl: string | "";
+            fullScreen: boolean | false;
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "productsType";
+            kind: "products";
+            title: string | null;
+            description: Array<never> | BlockContentMedi;
+            cards:
+              | Array<{
+                  id: string;
+                  title: string | null;
+                  icon: {
+                    image: {
+                      asset: {
+                        _id: string;
+                        url: string | null;
+                        metadata: {
+                          dimensions: SanityImageDimensions | null;
+                        };
+                      } | null;
+                    } | null;
+                    alt: string | null;
+                  } | null;
+                  description: Array<never> | BlockContentMini;
+                  features:
+                    | Array<{
+                        id: string;
+                        title: string | null;
+                        description: string | "";
+                        ttlSize: "large" | "medium" | "small";
+                        icon: {
+                          image: {
+                            asset: {
+                              _id: string;
+                              url: string | null;
+                              metadata: {
+                                dimensions: SanityImageDimensions | null;
+                              };
+                            } | null;
+                          } | null;
+                          alt: string | null;
+                        } | null;
+                      }>
+                    | Array<never>;
+                  featDisplay: "horizontal" | "vertical";
+                  addons: Array<never> | BlockContentMedi;
+                  footer:
+                    | Array<never>
+                    | Array<
+                        | {
+                            _kind: "button";
+                            id: string;
+                            highlight: boolean | false;
+                            target: boolean | false;
+                            text: string | null;
+                            href: string | null;
+                          }
+                        | {
+                            _kind: "message";
+                            info: string | null;
+                            subtitle: string | null;
+                            icon: {
+                              image: {
+                                asset: {
+                                  _id: string;
+                                  url: string | null;
+                                  metadata: {
+                                    dimensions: SanityImageDimensions | null;
+                                  };
+                                } | null;
+                              } | null;
+                              alt: string | null;
+                            } | null;
+                            href: string | null;
+                            newTab: boolean | false;
+                          }
+                      >;
+                  textColor: Color | "#ffffff";
+                  background: Color | "#505f66";
+                }>
+              | Array<never>;
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "solutionsType";
+            kind: "solutions";
+            title: string | null;
+            description: Array<never> | BlockContentMedi;
+            content: Array<never>;
+            cards:
+              | Array<{
+                  id: string;
+                  title: string | null;
+                  content: Array<never> | BlockContentMini;
+                  image: {
+                    image: {
+                      asset: {
+                        _id: string;
+                        url: string | null;
+                        metadata: {
+                          dimensions: SanityImageDimensions | null;
+                        };
+                      } | null;
+                    } | null;
+                    alt: string | null;
+                    widthSize: "medium" | "normal" | "small";
+                  } | null;
+                  items:
+                    | Array<{
+                        id: string;
+                        title: string | null;
+                        subtitle: string | null;
+                        tag: string | null;
+                        features: Array<never> | BlockContentMedi;
+                      }>
+                    | Array<never>;
+                  footer:
+                    | Array<never>
+                    | Array<
+                        | {
+                            _kind: "button";
+                            id: string;
+                            highlight: boolean | false;
+                            target: boolean | false;
+                            text: string | null;
+                            href: string | null;
+                          }
+                        | {
+                            _kind: "message";
+                            info: string | null;
+                            subtitle: string | null;
+                            icon: {
+                              image: {
+                                asset: {
+                                  _id: string;
+                                  url: string | null;
+                                  metadata: {
+                                    dimensions: SanityImageDimensions | null;
+                                  };
+                                } | null;
+                              } | null;
+                              alt: string | null;
+                              widthSize: "normal";
+                            } | null;
+                            href: string | null;
+                            newTab: boolean | false;
+                          }
+                      >;
+                  textColor: Color | "#ffffff";
+                  background: Color | "#505f66";
+                  rounded: boolean | true;
+                }>
+              | Array<never>;
+            display: "horizontal" | "vertical";
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "stepperType";
+            kind: "stepper";
+            title: string | null;
+            eyebrow: string | null;
+            description: Array<never> | BlockContentMedi;
+            steps:
+              | Array<{
+                  id: string;
+                  label: string | null;
+                  title: string | null;
+                  description: Array<never> | BlockContentMini;
+                  textColor: Color | null;
+                  descColor: Color | null;
+                  background: Color | null;
+                  layout: "card" | "text";
+                }>
+              | Array<never>;
+            buttons:
+              | Array<{
+                  id: string;
+                  highlight: boolean | false;
+                  target: boolean | false;
+                  text: string | null;
+                  href: string | null;
+                }>
+              | Array<never>;
+            disclaimer: string | null;
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "tableType";
+            kind: "table";
+            aboveEyebrow: string | null;
+            title: string | null;
+            belowEyebrow: string | null;
+            description: Array<never> | BlockContentMedi;
+            table: Array<never> | Array<Array<string> | null>;
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "teamOverviewType";
+            kind: "teamOverview";
+            title: string | null;
+            subtitle: string | null;
+            description: Array<never> | BlockContentMedi;
+            members:
+              | Array<{
+                  id: string;
+                  name: string | null;
+                  position: string | null;
+                  image: {
+                    image: {
+                      asset: {
+                        _id: string;
+                        url: string | null;
+                        metadata: {
+                          dimensions: SanityImageDimensions | null;
+                        };
+                      } | null;
+                    } | null;
+                    alt: string | null;
+                    widthSize: "medium" | "normal" | "small";
+                  } | null;
+                  bio: Array<never> | BlockContentMini;
+                  textColor: Color | null;
+                  background: Color | null;
+                }>
+              | Array<never>;
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "textImageType";
+            kind: "textImage";
+            title: string | null;
+            aboveTitle: string | null;
+            belowTitle: string | null;
+            description: Array<never> | BlockContentMedi;
+            chips: Array<string> | Array<never>;
+            image: {
+              image: {
+                asset: {
+                  _id: string;
+                  url: string | null;
+                  metadata: {
+                    dimensions: SanityImageDimensions | null;
+                  };
+                } | null;
+              } | null;
+              alt: string | null;
+              caption: string | null;
+              captionSub: string | null;
+              credit: string | null;
+              widthSize: "medium" | "normal" | "small";
+              shape: "disc" | "rounded" | "squared";
+            } | null;
+            buttons:
+              | Array<{
+                  id: string;
+                  highlight: boolean | false;
+                  target: boolean | false;
+                  text: string | null;
+                  href: string | null;
+                }>
+              | Array<never>;
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "textOnlyType";
+            kind: "text";
+            title: string | null;
+            aboveTitle: string | null;
+            belowTitle: string | null;
+            content: Array<never> | BlockContentMaxi;
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "topHeroType";
+            kind: "hero";
+            aboveTitle: string | null;
+            title: string | null;
+            belowTitle: string | null;
+            subheadline: Array<never> | BlockContentMedi;
+            features:
+              | Array<{
+                  id: string;
+                  eyebrow: string | null;
+                  title: string | null;
+                  description: string | "";
+                  ttlSize: "large" | "medium" | "small";
+                  layout: "card" | "text";
+                  icon: {
+                    image: {
+                      asset: {
+                        _id: string;
+                        url: string | null;
+                        metadata: {
+                          dimensions: SanityImageDimensions | null;
+                        };
+                      } | null;
+                    } | null;
+                    alt: string | null;
+                  } | null;
+                }>
+              | Array<never>;
+            featDisplay: "horizontal" | "vertical";
+            image: {
+              image: {
+                asset: {
+                  _id: string;
+                  url: string | null;
+                  metadata: {
+                    dimensions: SanityImageDimensions | null;
+                  };
+                } | null;
+              } | null;
+              alt: string | null;
+              widthSize: "medium" | "normal" | "small";
+              shape: "disc" | "rounded" | "squared";
+            } | null;
+            eyebrowImage: {
+              image: {
+                asset: {
+                  _id: string;
+                  url: string | null;
+                  metadata: {
+                    dimensions: SanityImageDimensions | null;
+                  };
+                } | null;
+              } | null;
+              alt: string | null;
+              widthSize: "medium" | "normal" | "small";
+              shape: "disc" | "rounded" | "squared";
+            } | null;
+            buttons:
+              | Array<{
+                  id: string;
+                  highlight: boolean | false;
+                  target: boolean | false;
+                  text: string | null;
+                  href: string | null;
+                }>
+              | Array<never>;
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+      >;
+  settings: {
+    showTitle: boolean | true;
+    showDesc: boolean | true;
+    shrinkTitle: boolean | false;
+    alignTitle: "center" | "left" | "right";
+    pdTopBottom: "half" | "medium" | "normal" | "small";
+    pdDisplay: "both" | "bottom" | "none" | "top";
+    width: "full" | "normal";
+    textColor: Color | null;
+    gradientBg:
+      | "guideblue"
+      | "guidegray"
+      | "guidegreen"
+      | "home"
+      | "none"
+      | "page"
+      | "pageblue"
+      | "post"
+      | "product"
+      | "solution";
+  };
+  seoMeta: {
+    mode: "auto" | "ignore" | "override";
+    title: string | "";
+    description: string | "";
+    image: {
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+          metadata: {
+            dimensions: SanityImageDimensions | null;
+          };
+        } | null;
+      } | null;
+      alt: string | null;
+    } | null;
+    keywords: string | "";
+    noindex: boolean | false;
+  };
 } | null;
 
-// Source: ../web/src/app/page.tsx
-// Variable: POSTS_QUERY
-// Query: *[_type == "post" && defined(slug.current)] | order(_createdAt desc){ _id, title, slug }
-export type POSTS_QUERY_RESULT = Array<{
+// Source: ../web/lib/queries/post-by-slug.tsx
+// Variable: POST_BY_SLUG_QUERY
+// Query: *[_type == "post" && slug.current == $slug && !defined(archivedAt)][0]{  _id,  _type,  title,  "slug": slug.current,  "publishedAt": coalesce(publishedAt, _createdAt),   excerpt,  "image": image{         	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	),         "alt": coalesce(alt, null),         "caption": coalesce(caption, null),         "captionSub": coalesce(captionSub, null),         "credit": coalesce(credit, null),        "widthSize": coalesce(widthSize, "normal"),        "shape": coalesce(shape, "rounded") 		    }, body[]{    ...,    _type == "image" => {      ...,      "alt": coalesce(alt, ""),      "caption": coalesce(caption, ""),      "link": coalesce(link, ""),      "align": coalesce(align, "center"),      "target": select(blank == true => "_blank", "_self"),      asset->{        _id,        url,        metadata{          dimensions{width, height, aspectRatio},          lqip, hasAlpha, isOpaque        }      }    }  },  "categories": coalesce(categories[]->{ _id, _type, title, "slug": slug.current, description  }, []),   "tags": coalesce(tag[]->{ _id, _type, title, "slug": slug.current, description }, []),  "authors": coalesce(author[]->{ _id, _type, name, "slug": slug.current, role, image{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt }, bio  }, []),  "sections": coalesce(  sections[]->{    _id,    _type,		     ...select(_type=="aboutInfoType" => {	_id,	"kind": "aboutInfo",	title,	"description": coalesce(description, []),	"buttons": coalesce(buttons[]{ 	"id": coalesce(_key, _id), 	"highlight": coalesce(highlight, false), 	"target": coalesce(target, false),	"text": text, 	"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) }, []),	"collapsibles": coalesce(collapsibles[]{		"id": coalesce(_key, _id),		title,		"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },		"content": coalesce(content, [])	}, []),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),    ...select(_type == "accordionType" => {		_id,		"kind": "accordion",		"eyebrow": coalesce(eyebrow, null),		title,		"subtitle": coalesce(subtitle, ""),		"description": coalesce(description, []),		"image": image{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt, "widthSize": coalesce(widthSize, "normal"), "shape": coalesce(shape, "rounded") },			"items": coalesce(			items[]{				"id": coalesce(_key, _id),				title,				"description": coalesce(description, [])       			},			[]		),		"accSettings": {				"design": coalesce(settings.design, "faq"),			"ordered": coalesce(settings.ordered, false),			"firstExpanded": coalesce(settings.firstExpanded, false),			"textColor": coalesce(settings.textColor, undefined),			"accentColor": coalesce(settings.accentColor, undefined),			"bgColor": coalesce(settings.background, undefined)		},		"settings": {			"titleDesc": {				"showTitle": coalesce(titleDesc.showTitle, true),				"showDesc": coalesce(titleDesc.showDesc, false),					"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),				"titleTag": coalesce(titleDesc.titleTag, "h2"),				"textColor": coalesce(titleDesc.textColor, undefined),				"accentColor": coalesce(titleDesc.accentColor, undefined)			},			"layout": {				"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),				"pdDisplay": coalesce(layout.pdDisplay, "both"),				"template": coalesce(layout.template, "normal"),				"columns": coalesce(layout.columns, "normal"),				"width": coalesce(layout.width, "normal")			},			"background": {				"type": coalesce(background.type, "none"),				"bgColor": coalesce(background.color, undefined),				"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),				"ovlColor": coalesce(background.ovlColor, undefined),				"ovlBlend": coalesce(background.ovlBlend, "overlay"),				"ovlOpacity": coalesce(background.ovlOpacity, 50),				"gradient": coalesce(background.gradient, "banner")			}		}	}),    ...select(_type=="accreditationType" => {	_id,	"kind": "accreditation",	title,    "description": coalesce(description, []),		"items": coalesce(items[]{		title,		tag,		"id": coalesce(_key, _id), 		"image": image{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt, "widthSize": coalesce(widthSize, "normal") },	 			"link": link{ "href": select(       	linkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,		  	linkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,	linkType == "custom"   => href,	linkType == "file"     => file.asset->url,	linkType == "none"     => null), "newTab": coalesce(newTab, false) }		}, []),	"accrSettings": {		"showTitles": coalesce(accrSettings.showTitles, false),		"showTags": coalesce(accrSettings.showTags, true),		"displayType": coalesce(accrSettings.displayType, "grid"),		"showArrows": coalesce(accrSettings.showArrows, true),		"showDots": coalesce(accrSettings.showDots, true),		"autoplay": coalesce(accrSettings.autoplay, true),		"autoplayInterval": coalesce(accrSettings.autoplayInterval, 7),		"itemsPerView": coalesce(accrSettings.itemsPerView, 4)	},	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),    ...select(_type=="blogSection" => {	_id,	"kind": "blogSection",	title,	"description": coalesce(description, []),	"button": select(	defined(button[0]) => {		"id": coalesce(button[0]._key, button[0]._id),		"highlight": coalesce(button[0].highlight, false),		"target": coalesce(button[0].target, false),		"text": button[0].text,		"href": select(			button[0].type == "internal" => "/" + button[0].pageRef->slug.current,			button[0].type == "custom" => button[0].href,			null		)	},	null),  		"blogSettings": {		"limit": coalesce(blogOverviewSettings.limit, 3),      		"showExcerpt": coalesce(blogOverviewSettings.showExcerpt, true),		"showCats": coalesce(blogOverviewSettings.showCats, true),		"showTags": coalesce(blogOverviewSettings.showTags, false),		"showAuthor": coalesce(blogOverviewSettings.showAuthor, false),		"showDate": coalesce(blogOverviewSettings.showDate, true),	},		"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}   }),    ...select(_type=="comparisonType" => {	_id,	"kind": "comparison",   	 	title,		"description": coalesce(description, []),    "buttons": coalesce(buttons[]{ 	"id": coalesce(_key, _id), 	"highlight": coalesce(highlight, false), 	"target": coalesce(target, false),	"text": text, 	"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) }, []),	"steps": coalesce(steps[]{ 		"id": coalesce(_key, _id), 		title, 		"boxes": coalesce(boxes[]{ 			"id": coalesce(_key, _id), 			title, 			"description": coalesce(description, []), 			"textColor": coalesce(textColor, "#ffffff"), 			"background": coalesce(background, "#4E8199")		}, []),	}, []),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	} }),    ...select(_type=="contentBlocks" => {	_id,	"kind": "contentBlocks",	"aboveEyebrow": coalesce(aboveEyebrow, null),		 	"headline": headline,		"belowEyebrow": coalesce(belowEyebrow, null),	  	"description": coalesce(description, []), 		"blocks": coalesce(blocks[]{		"id": coalesce(_key, _id),		title,				"tagline": coalesce(tagline, null),		"description": coalesce(description, []),		"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt }		}, []),		"blocksSettings": {		"type": coalesce(blocksSettings.type, "box"),		"showIcon": coalesce(blocksSettings.showIcon, true),		"iconTitle": coalesce(blocksSettings.iconTitle, "stacked"),		"perRow": coalesce(blocksSettings.perRow, 3),		"collapsible": coalesce(blocksSettings.collapsible, false),		"gap": coalesce(blocksSettings.gap, "normal"),		"textColor": coalesce(blocksSettings.textColor, undefined),		"accentColor": coalesce(blocksSettings.accentColor, undefined),		"bgColor": coalesce(blocksSettings.background, undefined),		"iconBg": coalesce(blocksSettings.iconBg, undefined)	},	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),    ...select(_type=="ctaBannerType" => {	_id,	"kind": "ctaBanner",   	"eyebrow": coalesce(eyebrow, null),   	 	"title": headline,	    	"tagline": coalesce(tagline, null),  	  	"subheadline": coalesce(subheadline, []),       	"image": image{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), "alt": coalesce(alt, null) },     	"buttons": coalesce(buttons[]{ 	"id": coalesce(_key, _id), 	"highlight": coalesce(highlight, false), 	"target": coalesce(target, false),	"text": text, 	"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) }, []), 	"ctaSettings": {		"innerPadding": coalesce(ctaSettings.innerPadding, "normal"),		"ctaGradient": coalesce(ctaSettings.ctaGradient, "banner"),		"ctaBgColor": coalesce(ctaSettings.ctaBgColor, undefined)	},	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),        ...select(_type=="formType" => {	_id,	"kind": "form",	title,	"subtitle": coalesce(subtitle, ""),		"description": coalesce(description, []), 	"features": coalesce(features[]{		"id": coalesce(_key, _id), 		title, 		"description": coalesce(description, ""),		"ttlSize": coalesce(ttlSize, "small"),		"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt, "widthSize": coalesce(widthSize, "normal") } 	}, []),	"featDisplay": coalesce(featDisplay, "vertical"),	"form": coalesce(form, "customForm"),    "formTitle": coalesce(formTitle, ""),	"hubspot": select(      form == "hubSpotForm" => hubspot{        "region": coalesce(region, "na1"),        portalId,        formId      },         null    ),	"fields": coalesce(fields[]{     		"id": coalesce(_key, _id),		title,		"hubspotKey": coalesce(hubspotKey, null),		"info": coalesce(info, null),		"type": coalesce(type, "text"),		"placeholder": coalesce(placeholder, null),       		"options": coalesce(options[], []),		"cbxOptions": coalesce(cbxOptions[]{			"id": coalesce(_key, _id),			"label": coalesce(label, []),			"value": coalesce(value, ""),			"required": coalesce(required, false),			"checked": coalesce(checked, false)		}, []),		"optLayout": coalesce(optLayout, "vertical"),		"required": coalesce(required, false),		"size": coalesce(size, "full")	}, []),	"btnLabel": coalesce(btnLabel, "Send Message"),    	"footer": coalesce(footer, []),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),      ...select(_type=="topHeroType" => {	_id,	"kind": "hero",	"aboveTitle": coalesce(aboveHeadline, null),		 	"title": headline,		"belowTitle": coalesce(belowHeadline, null),	  	"subheadline": coalesce(subheadline, []), 	"features": coalesce(features[]{ 		"id": coalesce(_key, _id), 		"eyebrow": coalesce(eyebrow, null),		title, 		"description": coalesce(description, ""), 		"ttlSize": coalesce(ttlSize, "small"),		"layout": coalesce(layout, "text"),		"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt } 	}, []),	"featDisplay": coalesce(featDisplay, "vertical"),	"image": image{         	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	),        "alt": coalesce(alt, null),        "widthSize": coalesce(widthSize, "normal"),        "shape": coalesce(shape, "rounded")     },	"eyebrowImage": eyebrowImage{         	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	),        "alt": coalesce(alt, null),        "widthSize": coalesce(widthSize, "normal"),        "shape": coalesce(shape, "rounded")     },	"buttons": coalesce(buttons[]{ 	"id": coalesce(_key, _id), 	"highlight": coalesce(highlight, false), 	"target": coalesce(target, false),	"text": text, 	"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) }, []),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),     ...select(_type=="keyFeaturesType" => {	_id,	"kind": "keyFeatures",	"topHeadline": topHeadline,	"description": coalesce(description, []),	"bottomHeadline": bottomHeadline,	"cards": coalesce(cards[]{        		title,		"id": coalesce(_key, _id), 		"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },		"description": coalesce(description, [])	}, []),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),    ...select(_type=="mapType" => {    _id,    "kind": "mapSection",    title,    "subtitle": coalesce(subtitle, ""),    "description": coalesce(description, []),    "embedUrl": coalesce(embedUrl, ""),    "fullScreen": coalesce(fullScreen, false),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}      }),    ...select(_type=="productsType" => {	_id,	"kind": "products",	title,	"description": coalesce(description, []),	"cards": coalesce(cards[]{		"id": coalesce(_key, _id),		title,		"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },		"description": coalesce(description, []),		"features": coalesce(features[]{			"id": coalesce(_key, _id), 			title, 			"description": coalesce(description, ""),			"ttlSize": coalesce(ttlSize, "small"),			"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt } 		}, []),		"featDisplay": coalesce(featDisplay, "vertical"),		"addons": coalesce(addons, []),		"footer": coalesce(footer[]{			_type=="ctaMessage" => {				"_kind": "message",				"info": info,				"subtitle": subtitle,				"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },			    "href": select(       	linkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,		  	linkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,	linkType == "custom"   => href,	linkType == "file"     => file.asset->url,	linkType == "none"     => null),				"newTab": coalesce(newTab, false), 			},			_type=="ctaButton" => {				"_kind": "button",				"id": coalesce(_key, _id),				"highlight": coalesce(highlight, false),				"target": coalesce(target, false),				"text": text,				"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ),			}		}, []),    		"textColor": coalesce(textColor, "#ffffff"),   		"background": coalesce(background, "#505f66")        	}, []),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),    ...select(_type=="solutionsType" => {	_id,	"kind": "solutions",	title,	"description": coalesce(description, []),	"content": coalesce(content, []),	"cards": coalesce(cards[]{		"id": coalesce(_key, _id),		title,		"content": coalesce(content, []),		"image": image{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt, "widthSize": coalesce(widthSize, "normal") },		"items": coalesce(items[]{ 			"id": coalesce(_key, _id), 			title, 			subtitle, 			tag, 			"features": coalesce(features, []) 		}, []),		"footer": coalesce(footer[]{			_type=="ctaMessage" => {				"_kind": "message",				"info": info,				"subtitle": subtitle,				"icon": icon{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt, "widthSize": coalesce(widthSize, "normal") },				"href": select(       	linkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,		  	linkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,	linkType == "custom"   => href,	linkType == "file"     => file.asset->url,	linkType == "none"     => null),				"newTab": coalesce(newTab, false), 			},			_type=="ctaButton" => {				"_kind": "button",				"id": coalesce(_key, _id),				"highlight": coalesce(highlight, false),				"target": coalesce(target, false),				"text": text,				"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null )			}		}, []),		"textColor": coalesce(textColor, "#ffffff"),		"background": coalesce(background, "#505f66"),		"rounded": coalesce(rounded, true)	}, []),	"display": coalesce(display, "horizontal"),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),		...select(_type=="stepperType" => {	_id,	"kind": "stepper",   	 	title,		"eyebrow": coalesce(eyebrow, null),	"description": coalesce(description, []),	"steps": coalesce(steps[]{ 		"id": coalesce(_key, _id), 		label, 		title, 		"description": coalesce(description, []),  		"textColor": coalesce(textColor, undefined), 		"descColor": coalesce(descColor, undefined),		"background": coalesce(background, undefined),		"layout": coalesce(layout, "card")	}, []),	"buttons": coalesce(buttons[]{ 	"id": coalesce(_key, _id), 	"highlight": coalesce(highlight, false), 	"target": coalesce(target, false),	"text": text, 	"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) }, []),	"disclaimer": coalesce(disclaimer, null),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),    ...select(_type=="tableType" => {	_id,	"kind": "table",	"aboveEyebrow": coalesce(aboveEyebrow, null),	title,		"belowEyebrow": coalesce(belowEyebrow, null),	"description": coalesce(description, []),	"table": coalesce(table.rows[].cells, []),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}}),    ...select(_type=="teamOverviewType" => {	_id,	"kind": "teamOverview",	title,	subtitle,    "description": coalesce(description, []),	"members": coalesce(members[]{		"id": coalesce(_key, _id),		name,		position,		"image": image{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt, "widthSize": coalesce(widthSize, "normal") },		"bio": coalesce(bio, []),		"textColor": coalesce(textColor, null),		"background": coalesce(background, null)			}, []),	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	} }),    ...select(_type=="textImageType" => {	_id,	"kind": "textImage",	title,	"aboveTitle": coalesce(aboveTitle, null),		"belowTitle": coalesce(belowTitle, null),	"description": coalesce(description, []),	"chips": coalesce(chips, []),	"image": image{         	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	),         "alt": coalesce(alt, null),         "caption": coalesce(caption, null),         "captionSub": coalesce(captionSub, null),         "credit": coalesce(credit, null),        "widthSize": coalesce(widthSize, "normal"),        "shape": coalesce(shape, "rounded") 		    },	"buttons": coalesce(buttons[]{ 	"id": coalesce(_key, _id), 	"highlight": coalesce(highlight, false), 	"target": coalesce(target, false),	"text": text, 	"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) }, []),	 	 	"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}	}),        ...select(_type=="textOnlyType" => {	_id,	"kind": "text",	title,	"aboveTitle": coalesce(aboveTitle, undefined),							"belowTitle": coalesce(belowTitle, undefined),	"content": coalesce(content, []),			"settings": {		"titleDesc": {			"showTitle": coalesce(titleDesc.showTitle, true),			"showDesc": coalesce(titleDesc.showDesc, false),				"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),			"titleTag": coalesce(titleDesc.titleTag, "h2"),			"textColor": coalesce(titleDesc.textColor, undefined),			"accentColor": coalesce(titleDesc.accentColor, undefined)		},		"layout": {			"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),			"pdDisplay": coalesce(layout.pdDisplay, "both"),			"template": coalesce(layout.template, "normal"),			"columns": coalesce(layout.columns, "normal"),			"width": coalesce(layout.width, "normal")		},		"background": {			"type": coalesce(background.type, "none"),			"bgColor": coalesce(background.color, undefined),			"image": coalesce(background{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	) }, null),			"ovlColor": coalesce(background.ovlColor, undefined),			"ovlBlend": coalesce(background.ovlBlend, "overlay"),			"ovlOpacity": coalesce(background.ovlOpacity, 50),			"gradient": coalesce(background.gradient, "banner")		}	}})         }, []),   "settings": {	"showCats": coalesce(settings.showCats, false),	"showTags": coalesce(settings.showTags, true),	"showAuthor": coalesce(settings.showAuthor, true),	"showDate": coalesce(settings.showDate, true),	"alignTitle": coalesce(settings.alignTitle, "center"),	"pdTopBottom": coalesce(settings.pdTopBottom, "normal"),	"pdDisplay": coalesce(settings.pdDisplay, "both"),	"textColor": coalesce(settings.textColor, undefined),	"gradientBg": coalesce(settings.gradientBg, "post")  },  "seoMeta": {	"mode": coalesce(seo.mode, "auto"),	"title": coalesce(seo.title, ""),	"description": coalesce(seo.description, ""),	"image": seo.image{ 	"image": select(		defined(image.asset->url) => image{			asset->{				_id,				url,				"metadata": {					"dimensions": metadata.dimensions				}			}		},		null	), alt },	"keywords": coalesce(seo.keywords, ""),	"noindex": coalesce(seo.noindex, false) }}
+export type POST_BY_SLUG_QUERY_RESULT = {
   _id: string;
+  _type: "post";
   title: string | null;
-  slug: Slug | null;
-}>;
+  slug: string | null;
+  publishedAt: string;
+  excerpt: BlockContentExcerpt | null;
+  image: {
+    image: {
+      asset: {
+        _id: string;
+        url: string | null;
+        metadata: {
+          dimensions: SanityImageDimensions | null;
+        };
+      } | null;
+    } | null;
+    alt: string | null;
+    caption: string | null;
+    captionSub: string | null;
+    credit: string | null;
+    widthSize: "medium" | "normal" | "small";
+    shape: "disc" | "rounded" | "squared";
+  } | null;
+  body: Array<
+    | {
+        children?: Array<{
+          marks?: Array<string>;
+          text?: string;
+          _type: "span";
+          _key: string;
+        }>;
+        style?:
+          | "blockquote"
+          | "h1"
+          | "h2"
+          | "h3"
+          | "h4"
+          | "h5"
+          | "h6"
+          | "normal"
+          | "pCenter"
+          | "pRight"
+          | "quotenormal";
+        listItem?: "bullet" | "number";
+        markDefs?: Array<{
+          href?: string;
+          linkStyle?: "button" | "inline";
+          btnAlign?: "center" | "left" | "right";
+          btnSize?: "full" | "half" | "normal";
+          highlighted?: boolean;
+          blank?: boolean;
+          _type: "link";
+          _key: string;
+        }>;
+        level?: number;
+        _type: "block";
+        _key: string;
+      }
+    | {
+        asset: {
+          _id: string;
+          url: string | null;
+          metadata: {
+            dimensions: {
+              width: number | null;
+              height: number | null;
+              aspectRatio: number | null;
+            } | null;
+            lqip: string | null;
+            hasAlpha: boolean | null;
+            isOpaque: boolean | null;
+          } | null;
+        } | null;
+        media?: unknown;
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        alt: string | "";
+        caption: string | "";
+        credit?: string;
+        link: string | "";
+        blank?: boolean;
+        align: "center" | "left" | "none" | "right";
+        widthSize?: "medium" | "normal" | "small" | "tiny";
+        _type: "image";
+        _key: string;
+        target: "_blank" | "_self";
+      }
+    | {
+        _key: string;
+        _type: "table";
+        rows?: Array<
+          {
+            _key: string;
+          } & TableRow
+        >;
+      }
+  > | null;
+  categories:
+    | Array<{
+        _id: string;
+        _type: "category";
+        title: string | null;
+        slug: string | null;
+        description: BlockContentExcerpt | null;
+      }>
+    | Array<never>;
+  tags:
+    | Array<{
+        _id: string;
+        _type: "tag";
+        title: string | null;
+        slug: string | null;
+        description: BlockContentExcerpt | null;
+      }>
+    | Array<never>;
+  authors:
+    | Array<{
+        _id: string;
+        _type: "author";
+        name: string | null;
+        slug: string | null;
+        role: string | null;
+        image: {
+          image: {
+            asset: {
+              _id: string;
+              url: string | null;
+              metadata: {
+                dimensions: SanityImageDimensions | null;
+              };
+            } | null;
+          } | null;
+          alt: string | null;
+        } | null;
+        bio: BlockContentExcerpt | null;
+      }>
+    | Array<never>;
+  sections:
+    | Array<never>
+    | Array<
+        | {
+            _id: string;
+            _type: "aboutInfoType";
+            kind: "aboutInfo";
+            title: string | null;
+            description: Array<never> | BlockContentMedi;
+            buttons:
+              | Array<{
+                  id: string;
+                  highlight: boolean | false;
+                  target: boolean | false;
+                  text: string | null;
+                  href: string | null;
+                }>
+              | Array<never>;
+            collapsibles:
+              | Array<{
+                  id: string;
+                  title: string | null;
+                  icon: {
+                    image: {
+                      asset: {
+                        _id: string;
+                        url: string | null;
+                        metadata: {
+                          dimensions: SanityImageDimensions | null;
+                        };
+                      } | null;
+                    } | null;
+                    alt: string | null;
+                  } | null;
+                  content: Array<never> | BlockContentMini;
+                }>
+              | Array<never>;
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "accordionType";
+            kind: "accordion";
+            eyebrow: string | null;
+            title: string | null;
+            subtitle: string | "";
+            description: Array<never> | BlockContentMedi;
+            image: {
+              image: {
+                asset: {
+                  _id: string;
+                  url: string | null;
+                  metadata: {
+                    dimensions: SanityImageDimensions | null;
+                  };
+                } | null;
+              } | null;
+              alt: string | null;
+              widthSize: "medium" | "normal" | "small";
+              shape: "disc" | "rounded" | "squared";
+            } | null;
+            items:
+              | Array<{
+                  id: string;
+                  title: string | null;
+                  description: Array<never> | BlockContentPlus;
+                }>
+              | Array<never>;
+            accSettings: {
+              design: "faq" | "glossary";
+              ordered: boolean | false;
+              firstExpanded: boolean | false;
+              textColor: Color | null;
+              accentColor: Color | null;
+              bgColor: Color | null;
+            };
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "accreditationType";
+            kind: "accreditation";
+            title: string | null;
+            description: Array<never> | BlockContentMedi;
+            items:
+              | Array<{
+                  title: string | null;
+                  tag: string | null;
+                  id: string;
+                  image: {
+                    image: {
+                      asset: {
+                        _id: string;
+                        url: string | null;
+                        metadata: {
+                          dimensions: SanityImageDimensions | null;
+                        };
+                      } | null;
+                    } | null;
+                    alt: string | null;
+                    widthSize: "medium" | "normal" | "small";
+                  } | null;
+                  link: {
+                    href: string | null;
+                    newTab: boolean | false;
+                  } | null;
+                }>
+              | Array<never>;
+            accrSettings: {
+              showTitles: boolean | false;
+              showTags: boolean | true;
+              displayType: "carousel" | "grid";
+              showArrows: boolean | true;
+              showDots: boolean | true;
+              autoplay: boolean | true;
+              autoplayInterval: number | 7;
+              itemsPerView: 1 | 2 | 3 | 4 | 5 | 6;
+            };
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "blogSection";
+            kind: "blogSection";
+            title: string | null;
+            description: Array<never> | BlockContentMedi;
+            button: {
+              id: string | null;
+              highlight: boolean | false;
+              target: boolean | false;
+              text: string | null;
+              href: string | null;
+            } | null;
+            blogSettings: {
+              limit: number | 3;
+              showExcerpt: boolean | true;
+              showCats: boolean | true;
+              showTags: boolean | false;
+              showAuthor: boolean | false;
+              showDate: boolean | true;
+            };
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "comparisonType";
+            kind: "comparison";
+            title: string | null;
+            description: Array<never> | BlockContentMedi;
+            buttons:
+              | Array<{
+                  id: string;
+                  highlight: boolean | false;
+                  target: boolean | false;
+                  text: string | null;
+                  href: string | null;
+                }>
+              | Array<never>;
+            steps:
+              | Array<{
+                  id: string;
+                  title: string | null;
+                  boxes:
+                    | Array<{
+                        id: string;
+                        title: string | null;
+                        description: Array<never> | BlockContentMini;
+                        textColor: Color | "#ffffff";
+                        background: Color | "#4E8199";
+                      }>
+                    | Array<never>;
+                }>
+              | Array<never>;
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "contentBlocks";
+            kind: "contentBlocks";
+            aboveEyebrow: string | null;
+            headline: string | null;
+            belowEyebrow: string | null;
+            description: Array<never> | BlockContentMini;
+            blocks:
+              | Array<{
+                  id: string;
+                  title: string | null;
+                  tagline: string | null;
+                  description: Array<never> | BlockContentMini;
+                  icon: {
+                    image: {
+                      asset: {
+                        _id: string;
+                        url: string | null;
+                        metadata: {
+                          dimensions: SanityImageDimensions | null;
+                        };
+                      } | null;
+                    } | null;
+                    alt: string | null;
+                  } | null;
+                }>
+              | Array<never>;
+            blocksSettings: {
+              type: "box" | "card" | "text";
+              showIcon: boolean | true;
+              iconTitle: "samerow" | "stacked";
+              perRow: 1 | 2 | 3 | 4;
+              collapsible: boolean | false;
+              gap: "bigger" | "medium" | "normal";
+              textColor: Color | null;
+              accentColor: Color | null;
+              bgColor: Color | null;
+              iconBg: Color | null;
+            };
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "ctaBannerType";
+            kind: "ctaBanner";
+            eyebrow: string | null;
+            title: string | null;
+            tagline: string | null;
+            subheadline: Array<never> | BlockContentMini;
+            image: {
+              image: {
+                asset: {
+                  _id: string;
+                  url: string | null;
+                  metadata: {
+                    dimensions: SanityImageDimensions | null;
+                  };
+                } | null;
+              } | null;
+              alt: string | null;
+            } | null;
+            buttons:
+              | Array<{
+                  id: string;
+                  highlight: boolean | false;
+                  target: boolean | false;
+                  text: string | null;
+                  href: string | null;
+                }>
+              | Array<never>;
+            ctaSettings: {
+              innerPadding: "half" | "medium" | "none" | "normal" | "small";
+              ctaGradient:
+                | "banner"
+                | "custom"
+                | "flare"
+                | "lemontwist"
+                | "lunada"
+                | "mojito"
+                | "none"
+                | "ohhappiness"
+                | "sulphur";
+              ctaBgColor: Color | null;
+            };
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "formType";
+            kind: "form";
+            title: string | null;
+            subtitle: string | "";
+            description: Array<never> | BlockContentMedi;
+            features:
+              | Array<{
+                  id: string;
+                  title: string | null;
+                  description: string | "";
+                  ttlSize: "large" | "medium" | "small";
+                  icon: {
+                    image: {
+                      asset: {
+                        _id: string;
+                        url: string | null;
+                        metadata: {
+                          dimensions: SanityImageDimensions | null;
+                        };
+                      } | null;
+                    } | null;
+                    alt: string | null;
+                    widthSize: "normal";
+                  } | null;
+                }>
+              | Array<never>;
+            featDisplay: "horizontal" | "vertical";
+            form: "customForm" | "hubSpotForm";
+            formTitle: string | "";
+            hubspot: {
+              region: string | "na1";
+              portalId: string | null;
+              formId: string | null;
+            } | null;
+            fields:
+              | Array<{
+                  id: string;
+                  title: string | null;
+                  hubspotKey: string | null;
+                  info: string | null;
+                  type:
+                    | "checkbox"
+                    | "email"
+                    | "radio"
+                    | "select"
+                    | "tel"
+                    | "text"
+                    | "textarea";
+                  placeholder: string | null;
+                  options: Array<string> | Array<never>;
+                  cbxOptions:
+                    | Array<{
+                        id: string;
+                        label: Array<never> | BlockContentMini;
+                        value: string | "";
+                        required: boolean | false;
+                        checked: boolean | false;
+                      }>
+                    | Array<never>;
+                  optLayout: "horizontal" | "vertical";
+                  required: boolean | false;
+                  size: "full" | "half";
+                }>
+              | Array<never>;
+            btnLabel: string | "Send Message";
+            footer: Array<never> | BlockContentMini;
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "keyFeaturesType";
+            kind: "keyFeatures";
+            topHeadline: string | null;
+            description: Array<never> | BlockContentMedi;
+            bottomHeadline: string | null;
+            cards:
+              | Array<{
+                  title: string | null;
+                  id: string;
+                  icon: {
+                    image: {
+                      asset: {
+                        _id: string;
+                        url: string | null;
+                        metadata: {
+                          dimensions: SanityImageDimensions | null;
+                        };
+                      } | null;
+                    } | null;
+                    alt: string | null;
+                  } | null;
+                  description: Array<never> | BlockContentMini;
+                }>
+              | Array<never>;
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "mapType";
+            kind: "mapSection";
+            title: string | null;
+            subtitle: string | "";
+            description: Array<never> | BlockContentMedi;
+            embedUrl: string | "";
+            fullScreen: boolean | false;
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "productsType";
+            kind: "products";
+            title: string | null;
+            description: Array<never> | BlockContentMedi;
+            cards:
+              | Array<{
+                  id: string;
+                  title: string | null;
+                  icon: {
+                    image: {
+                      asset: {
+                        _id: string;
+                        url: string | null;
+                        metadata: {
+                          dimensions: SanityImageDimensions | null;
+                        };
+                      } | null;
+                    } | null;
+                    alt: string | null;
+                  } | null;
+                  description: Array<never> | BlockContentMini;
+                  features:
+                    | Array<{
+                        id: string;
+                        title: string | null;
+                        description: string | "";
+                        ttlSize: "large" | "medium" | "small";
+                        icon: {
+                          image: {
+                            asset: {
+                              _id: string;
+                              url: string | null;
+                              metadata: {
+                                dimensions: SanityImageDimensions | null;
+                              };
+                            } | null;
+                          } | null;
+                          alt: string | null;
+                        } | null;
+                      }>
+                    | Array<never>;
+                  featDisplay: "horizontal" | "vertical";
+                  addons: Array<never> | BlockContentMedi;
+                  footer:
+                    | Array<never>
+                    | Array<
+                        | {
+                            _kind: "button";
+                            id: string;
+                            highlight: boolean | false;
+                            target: boolean | false;
+                            text: string | null;
+                            href: string | null;
+                          }
+                        | {
+                            _kind: "message";
+                            info: string | null;
+                            subtitle: string | null;
+                            icon: {
+                              image: {
+                                asset: {
+                                  _id: string;
+                                  url: string | null;
+                                  metadata: {
+                                    dimensions: SanityImageDimensions | null;
+                                  };
+                                } | null;
+                              } | null;
+                              alt: string | null;
+                            } | null;
+                            href: string | null;
+                            newTab: boolean | false;
+                          }
+                      >;
+                  textColor: Color | "#ffffff";
+                  background: Color | "#505f66";
+                }>
+              | Array<never>;
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "solutionsType";
+            kind: "solutions";
+            title: string | null;
+            description: Array<never> | BlockContentMedi;
+            content: Array<never>;
+            cards:
+              | Array<{
+                  id: string;
+                  title: string | null;
+                  content: Array<never> | BlockContentMini;
+                  image: {
+                    image: {
+                      asset: {
+                        _id: string;
+                        url: string | null;
+                        metadata: {
+                          dimensions: SanityImageDimensions | null;
+                        };
+                      } | null;
+                    } | null;
+                    alt: string | null;
+                    widthSize: "medium" | "normal" | "small";
+                  } | null;
+                  items:
+                    | Array<{
+                        id: string;
+                        title: string | null;
+                        subtitle: string | null;
+                        tag: string | null;
+                        features: Array<never> | BlockContentMedi;
+                      }>
+                    | Array<never>;
+                  footer:
+                    | Array<never>
+                    | Array<
+                        | {
+                            _kind: "button";
+                            id: string;
+                            highlight: boolean | false;
+                            target: boolean | false;
+                            text: string | null;
+                            href: string | null;
+                          }
+                        | {
+                            _kind: "message";
+                            info: string | null;
+                            subtitle: string | null;
+                            icon: {
+                              image: {
+                                asset: {
+                                  _id: string;
+                                  url: string | null;
+                                  metadata: {
+                                    dimensions: SanityImageDimensions | null;
+                                  };
+                                } | null;
+                              } | null;
+                              alt: string | null;
+                              widthSize: "normal";
+                            } | null;
+                            href: string | null;
+                            newTab: boolean | false;
+                          }
+                      >;
+                  textColor: Color | "#ffffff";
+                  background: Color | "#505f66";
+                  rounded: boolean | true;
+                }>
+              | Array<never>;
+            display: "horizontal" | "vertical";
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "stepperType";
+            kind: "stepper";
+            title: string | null;
+            eyebrow: string | null;
+            description: Array<never> | BlockContentMedi;
+            steps:
+              | Array<{
+                  id: string;
+                  label: string | null;
+                  title: string | null;
+                  description: Array<never> | BlockContentMini;
+                  textColor: Color | null;
+                  descColor: Color | null;
+                  background: Color | null;
+                  layout: "card" | "text";
+                }>
+              | Array<never>;
+            buttons:
+              | Array<{
+                  id: string;
+                  highlight: boolean | false;
+                  target: boolean | false;
+                  text: string | null;
+                  href: string | null;
+                }>
+              | Array<never>;
+            disclaimer: string | null;
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "tableType";
+            kind: "table";
+            aboveEyebrow: string | null;
+            title: string | null;
+            belowEyebrow: string | null;
+            description: Array<never> | BlockContentMedi;
+            table: Array<never> | Array<Array<string> | null>;
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "teamOverviewType";
+            kind: "teamOverview";
+            title: string | null;
+            subtitle: string | null;
+            description: Array<never> | BlockContentMedi;
+            members:
+              | Array<{
+                  id: string;
+                  name: string | null;
+                  position: string | null;
+                  image: {
+                    image: {
+                      asset: {
+                        _id: string;
+                        url: string | null;
+                        metadata: {
+                          dimensions: SanityImageDimensions | null;
+                        };
+                      } | null;
+                    } | null;
+                    alt: string | null;
+                    widthSize: "medium" | "normal" | "small";
+                  } | null;
+                  bio: Array<never> | BlockContentMini;
+                  textColor: Color | null;
+                  background: Color | null;
+                }>
+              | Array<never>;
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "textImageType";
+            kind: "textImage";
+            title: string | null;
+            aboveTitle: string | null;
+            belowTitle: string | null;
+            description: Array<never> | BlockContentMedi;
+            chips: Array<string> | Array<never>;
+            image: {
+              image: {
+                asset: {
+                  _id: string;
+                  url: string | null;
+                  metadata: {
+                    dimensions: SanityImageDimensions | null;
+                  };
+                } | null;
+              } | null;
+              alt: string | null;
+              caption: string | null;
+              captionSub: string | null;
+              credit: string | null;
+              widthSize: "medium" | "normal" | "small";
+              shape: "disc" | "rounded" | "squared";
+            } | null;
+            buttons:
+              | Array<{
+                  id: string;
+                  highlight: boolean | false;
+                  target: boolean | false;
+                  text: string | null;
+                  href: string | null;
+                }>
+              | Array<never>;
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "textOnlyType";
+            kind: "text";
+            title: string | null;
+            aboveTitle: string | null;
+            belowTitle: string | null;
+            content: Array<never> | BlockContentMaxi;
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+        | {
+            _id: string;
+            _type: "topHeroType";
+            kind: "hero";
+            aboveTitle: string | null;
+            title: string | null;
+            belowTitle: string | null;
+            subheadline: Array<never> | BlockContentMedi;
+            features:
+              | Array<{
+                  id: string;
+                  eyebrow: string | null;
+                  title: string | null;
+                  description: string | "";
+                  ttlSize: "large" | "medium" | "small";
+                  layout: "card" | "text";
+                  icon: {
+                    image: {
+                      asset: {
+                        _id: string;
+                        url: string | null;
+                        metadata: {
+                          dimensions: SanityImageDimensions | null;
+                        };
+                      } | null;
+                    } | null;
+                    alt: string | null;
+                  } | null;
+                }>
+              | Array<never>;
+            featDisplay: "horizontal" | "vertical";
+            image: {
+              image: {
+                asset: {
+                  _id: string;
+                  url: string | null;
+                  metadata: {
+                    dimensions: SanityImageDimensions | null;
+                  };
+                } | null;
+              } | null;
+              alt: string | null;
+              widthSize: "medium" | "normal" | "small";
+              shape: "disc" | "rounded" | "squared";
+            } | null;
+            eyebrowImage: {
+              image: {
+                asset: {
+                  _id: string;
+                  url: string | null;
+                  metadata: {
+                    dimensions: SanityImageDimensions | null;
+                  };
+                } | null;
+              } | null;
+              alt: string | null;
+              widthSize: "medium" | "normal" | "small";
+              shape: "disc" | "rounded" | "squared";
+            } | null;
+            buttons:
+              | Array<{
+                  id: string;
+                  highlight: boolean | false;
+                  target: boolean | false;
+                  text: string | null;
+                  href: string | null;
+                }>
+              | Array<never>;
+            settings: {
+              titleDesc: {
+                showTitle: boolean | true;
+                showDesc: boolean | false;
+                shrinkTitle: boolean | false;
+                titleTag: "h1" | "h2" | "h3" | "h4";
+                textColor: Color | null;
+                accentColor: Color | null;
+              };
+              layout: {
+                pdTopBottom: "half" | "medium" | "normal" | "small";
+                pdDisplay: "both" | "bottom" | "none" | "top";
+                template: "centered" | "normal" | "revCentered" | "reversed";
+                columns: "firstBig" | "lastBig" | "normal";
+                width: "full" | "normal";
+              };
+              background: {
+                type: "color" | "gradient" | "image" | "none";
+                bgColor: Color | null;
+                image: {
+                  image: {
+                    asset: {
+                      _id: string;
+                      url: string | null;
+                      metadata: {
+                        dimensions: SanityImageDimensions | null;
+                      };
+                    } | null;
+                  } | null;
+                } | null;
+                ovlColor: Color | null;
+                ovlBlend:
+                  | "color-burn"
+                  | "color-dodge"
+                  | "color"
+                  | "darken"
+                  | "difference"
+                  | "exclusion"
+                  | "hard-light"
+                  | "hue"
+                  | "lighten"
+                  | "luminosity"
+                  | "multiply"
+                  | "normal"
+                  | "overlay"
+                  | "saturation"
+                  | "screen"
+                  | "soft-light";
+                ovlOpacity: number | 50;
+                gradient:
+                  | "banner"
+                  | "darkblue"
+                  | "flare"
+                  | "lemontwist"
+                  | "lunada"
+                  | "mojito"
+                  | "none"
+                  | "ohhappiness"
+                  | "sulphur";
+              };
+            };
+          }
+      >;
+  settings: {
+    showCats: boolean | false;
+    showTags: boolean | true;
+    showAuthor: boolean | true;
+    showDate: boolean | true;
+    alignTitle: "center" | "left" | "right";
+    pdTopBottom: "half" | "medium" | "normal" | "small";
+    pdDisplay: "both" | "bottom" | "none" | "top";
+    textColor: Color | null;
+    gradientBg:
+      | "guideblue"
+      | "guidegray"
+      | "guidegreen"
+      | "home"
+      | "none"
+      | "page"
+      | "pageblue"
+      | "post"
+      | "product"
+      | "solution";
+  };
+  seoMeta: {
+    mode: "auto" | "ignore" | "override";
+    title: string | "";
+    description: string | "";
+    image: {
+      image: {
+        asset: {
+          _id: string;
+          url: string | null;
+          metadata: {
+            dimensions: SanityImageDimensions | null;
+          };
+        } | null;
+      } | null;
+      alt: string | null;
+    } | null;
+    keywords: string | "";
+    noindex: boolean | false;
+  };
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    '*[_type == "post" && slug.current == $slug][0]{ _id, title, body }': POST_QUERY_RESULT;
-    '*[_type == "post" && defined(slug.current)] | order(_createdAt desc){ _id, title, slug }': POSTS_QUERY_RESULT;
+    '\n  *[_type == "category"] {\n    _id,\n    _type,\n    title,\n    description,\n    "slug": slug.current,\n    "count": count(*[_type == "post" && !defined(archivedAt) && (!$excludeDrafts || !(_id in path("drafts.**"))) && references(^._id)])\n  } | order(title asc)\n': BLOG_ALL_CATEGORIES_QUERY_RESULT;
+    '*[\n  _type == "post" &&\n  !defined(archivedAt) &&\n  (!$excludeDrafts || !(_id in path("drafts.**")))\n]': ALL_POSTS_RESULT;
+    '*[\n  _type == "post" &&\n  !defined(archivedAt) &&\n  (!$excludeDrafts || !(_id in path("drafts.**"))) &&\n  (!defined($tagSlug) || $tagSlug in tag[]->slug.current) &&\n  (!defined($categorySlug) || $categorySlug in categories[]->slug.current) &&\n  (!defined($authorSlug) || $authorSlug in author[]->slug.current)\n]': FILTERED_POSTS_RESULT;
+    '{\n  "items": *[\n  _type == "post" &&\n  !defined(archivedAt) &&\n  (!$excludeDrafts || !(_id in path("drafts.**"))) &&\n  (!defined($tagSlug) || $tagSlug in tag[]->slug.current) &&\n  (!defined($categorySlug) || $categorySlug in categories[]->slug.current) &&\n  (!defined($authorSlug) || $authorSlug in author[]->slug.current)\n] | order(coalesce(publishedAt, _createdAt) desc)[$offset...$end]{\n    _id,\n    title,\n    "slug": slug.current,\n\n    image{ \n      "image": select(\n        defined(image.asset) => {\n          "asset": image.asset->{\n            _id,\n            url,\n            metadata{\n              dimensions{width, height, aspectRatio},\n              lqip,\n              hasAlpha,\n              isOpaque\n            }\n          }\n        },\n        null\n      ),\n      "alt": coalesce(alt, "")\n    },    \n    \n    "publishedAt": coalesce(publishedAt, _createdAt),\n    "excerptText": coalesce(excerpt, null),\n    "categories": coalesce(categories[]->{ "slug": slug.current, title, _id, _type, description }, []),\n    "tags": coalesce(tag[]->{ "slug": slug.current, title, _id, _type, description }, []),\n    "authors": coalesce(author[]->{ "slug": slug.current, name, _id, _type, role, bio, image{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt } }, [])\n  },\n  "totalFiltered": count(*[\n  _type == "post" &&\n  !defined(archivedAt) &&\n  (!$excludeDrafts || !(_id in path("drafts.**"))) &&\n  (!defined($tagSlug) || $tagSlug in tag[]->slug.current) &&\n  (!defined($categorySlug) || $categorySlug in categories[]->slug.current) &&\n  (!defined($authorSlug) || $authorSlug in author[]->slug.current)\n]),\n  "totalUnfiltered": count(*[\n  _type == "post" &&\n  !defined(archivedAt) &&\n  (!$excludeDrafts || !(_id in path("drafts.**")))\n])\n}': BLOG_OVERVIEW_QUERY_RESULT;
+    '\n  *[_type == "tag"] {\n    _id,\n    _type,\n    title,\n    description,\n    "slug": slug.current,\n    "count": count(*[_type == "post" && !defined(archivedAt) && (!$excludeDrafts || !(_id in path("drafts.**"))) && references(^._id)])\n  } | order(title asc)\n': BLOG_ALL_TAGS_QUERY_RESULT;
+    'select(\n\tdefined(button[0]) => {\n\t\t"id": coalesce(button[0]._key, button[0]._id),\n\t\t"highlight": coalesce(button[0].highlight, false),\n\t\t"target": coalesce(button[0].target, false),\n\t\t"text": button[0].text,\n\t\t"href": select(\n\t\t\tbutton[0].type == "internal" => "/" + button[0].pageRef->slug.current,\n\t\t\tbutton[0].type == "custom" => button[0].href,\n\t\t\tnull\n\t\t)\n\t},\n\tnull\n)': BUTTON_FIRST_PROJECTION_RESULT;
+    'select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null )': BUTTON_KIND_PROJECTION_RESULT;
+    'coalesce(buttons[]{ \n\t"id": coalesce(_key, _id), \n\t"highlight": coalesce(highlight, false), \n\t"target": coalesce(target, false),\n\t"text": text, \n\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) \n}, [])': BUTTONS_PROJECTION_RESULT;
+    'select(       \n\tlinkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,\t\t  \n\tlinkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,\n\tlinkType == "custom"   => href,\n\tlinkType == "file"     => file.asset->url,\n\tlinkType == "none"     => null\n)': HREF_PROJECTION_RESULT;
+    'image{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, "alt": coalesce(alt, null) }': IMAGE_ICON_PROJECTION_RESULT;
+    'image{ \n        \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n,\n        "alt": coalesce(alt, null),\n        "widthSize": coalesce(widthSize, "normal"),\n        "shape": coalesce(shape, "rounded")\n     }': IMAGE_NO_META_PROJECTION_RESULT;
+    'image{ \n        \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, \n        "alt": coalesce(alt, null), \n        "caption": coalesce(caption, null), \n        "captionSub": coalesce(captionSub, null), \n        "credit": coalesce(credit, null),\n        "widthSize": coalesce(widthSize, "normal"),\n        "shape": coalesce(shape, "rounded") \t\t\n    }': IMAGE_WITH_META_PROJECTION_RESULT;
+    '*[_id=="siteFooter"][0]{\n\t"logo": footerLogo{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },    \n\t"menu": footerMenu->{\n\t\t_id,\n\t\t"slug": slug.current,\n\t\t"items": coalesce(children[]{\n\t\t\t"label": title,      \n\t\t\t"href": select(       \n\tlinkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,\t\t  \n\tlinkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,\n\tlinkType == "custom"   => href,\n\tlinkType == "file"     => file.asset->url,\n\tlinkType == "none"     => null\n),\n\t\t\t"newTab": coalesce(newTab, false),     \n\t\t\t"children": coalesce(children[]{\n\t\t\t\t"label": title,\n\t\t\t\t"href": select(       \n\tlinkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,\t\t  \n\tlinkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,\n\tlinkType == "custom"   => href,\n\tlinkType == "file"     => file.asset->url,\n\tlinkType == "none"     => null\n),\n\t\t\t\t"newTab": coalesce(newTab, false),       \n\t\t\t\t"children": coalesce(children[]{\n\t\t\t\t\t"label": title,\n\t\t\t\t\t"href": select(       \n\tlinkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,\t\t  \n\tlinkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,\n\tlinkType == "custom"   => href,\n\tlinkType == "file"     => file.asset->url,\n\tlinkType == "none"     => null\n),\n\t\t\t\t\t"newTab": coalesce(newTab, false)\n\t\t\t\t}, [])\n\t\t\t}, [])\n\t\t}, []),\n\t},\n\t"copyright": footerCopyright,\n\t"settings": {\n\t\t"textColor": coalesce(textColor, undefined),\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t    "image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}': FOOTER_QUERY_RESULT;
+    '*[_id=="siteHeader"][0]{   \n\t"logo": headerLogo{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n\t"aboveMenu": coalesce(aboveMenu[]{\n\t\t"id": coalesce(_key, _id),\n\t\ttitle,\n\t\t"href": select(       \n\tlinkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,\t\t  \n\tlinkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,\n\tlinkType == "custom"   => href,\n\tlinkType == "file"     => file.asset->url,\n\tlinkType == "none"     => null\n),\n\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n\t\t"newTab": coalesce(newTab, false),\n\t\t"hideOnMobile": coalesce(hideOnMobile, false) \n\t}, []),\n\t"menu": headerMenu->{\n\t\t_id,\n\t\t"slug": slug.current,\n\t\t"items": coalesce(children[]{\n\t\t\t"label": title,      \n\t\t\t"href": select(       \n\tlinkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,\t\t  \n\tlinkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,\n\tlinkType == "custom"   => href,\n\tlinkType == "file"     => file.asset->url,\n\tlinkType == "none"     => null\n),\n\t\t\t"newTab": coalesce(newTab, false),     \n\t\t\t"children": coalesce(children[]{\n\t\t\t\t"label": title,\n\t\t\t\t"href": select(       \n\tlinkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,\t\t  \n\tlinkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,\n\tlinkType == "custom"   => href,\n\tlinkType == "file"     => file.asset->url,\n\tlinkType == "none"     => null\n),        \n\t\t\t\t"description": description,\n\t\t\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n\t\t\t\t"newTab": coalesce(newTab, false),       \n\t\t\t\t"children": coalesce(children[]{\n\t\t\t\t\t"label": title,\n\t\t\t\t\t"href": select(       \n\tlinkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,\t\t  \n\tlinkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,\n\tlinkType == "custom"   => href,\n\tlinkType == "file"     => file.asset->url,\n\tlinkType == "none"     => null\n),\n\t\t\t\t\t"description": description,\n\t\t\t\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n\t\t\t\t\t"newTab": coalesce(newTab, false)\n\t\t\t\t}, [])\n\t\t\t}, [])\n\t\t}, []),\n\t},\n\t"menuType": coalesce(menuType, "dropdown"),\n\t"buttons": coalesce(headerButtons[]{   \n\t\t"id": coalesce(_key, _id),\n\t\t"text": text,    \n\t\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ),\n\t\t"target": coalesce(target, false),\n\t\t"highlight": coalesce(highlight, false)\n\t}, [])\n}': HEADER_QUERY_RESULT;
+    '*[\n  _type == "page" &&\n  defined(slug.current) &&\n  !(_id in path("drafts.**"))\n]{\n  "slug": slug.current,\n  "lastmod": coalesce(_updatedAt, _createdAt)\n}': PAGES_Q_RESULT;
+    '*[\n  _type == "post" &&\n  defined(slug.current) &&\n  !(_id in path("drafts.**"))\n]{\n  "slug": slug.current,\n  "lastmod": coalesce(publishedAt, _updatedAt, _createdAt)\n} | order(lastmod desc)': POSTS_Q_RESULT;
+    'coalesce(\n  sections[]->{\n    _id,\n    _type,\t\t \n    ...select(_type=="aboutInfoType" => {\n\t_id,\n\t"kind": "aboutInfo",\n\ttitle,\n\t"description": coalesce(description, []),\n\t"buttons": coalesce(buttons[]{ \n\t"id": coalesce(_key, _id), \n\t"highlight": coalesce(highlight, false), \n\t"target": coalesce(target, false),\n\t"text": text, \n\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) \n}, []),\n\t"collapsibles": coalesce(collapsibles[]{\n\t\t"id": coalesce(_key, _id),\n\t\ttitle,\n\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n\t\t"content": coalesce(content, [])\n\t}, []),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),\n    ...select(_type == "accordionType" => {\n\t\t_id,\n\t\t"kind": "accordion",\n\t\t"eyebrow": coalesce(eyebrow, null),\n\t\ttitle,\n\t\t"subtitle": coalesce(subtitle, ""),\n\t\t"description": coalesce(description, []),\n\t\t"image": image{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt, "widthSize": coalesce(widthSize, "normal"), "shape": coalesce(shape, "rounded") },\t\n\t\t"items": coalesce(\n\t\t\titems[]{\n\t\t\t\t"id": coalesce(_key, _id),\n\t\t\t\ttitle,\n\t\t\t\t"description": coalesce(description, [])       \n\t\t\t},\n\t\t\t[]\n\t\t),\n\t\t"accSettings": {\t\n\t\t\t"design": coalesce(settings.design, "faq"),\n\t\t\t"ordered": coalesce(settings.ordered, false),\n\t\t\t"firstExpanded": coalesce(settings.firstExpanded, false),\n\t\t\t"textColor": coalesce(settings.textColor, undefined),\n\t\t\t"accentColor": coalesce(settings.accentColor, undefined),\n\t\t\t"bgColor": coalesce(settings.background, undefined)\n\t\t},\n\t\t"settings": {\n\t\t\t"titleDesc": {\n\t\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t\t},\n\t\t\t"layout": {\n\t\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t\t"width": coalesce(layout.width, "normal")\n\t\t\t},\n\t\t\t"background": {\n\t\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t\t}\n\t\t}\n\t}\n),\n    ...select(_type=="accreditationType" => {\n\t_id,\n\t"kind": "accreditation",\n\ttitle,\n    "description": coalesce(description, []),\t\n\t"items": coalesce(items[]{\n\t\ttitle,\n\t\ttag,\n\t\t"id": coalesce(_key, _id), \n\t\t"image": image{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt, "widthSize": coalesce(widthSize, "normal") },\t \t\n\t\t"link": link{ "href": select(       \n\tlinkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,\t\t  \n\tlinkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,\n\tlinkType == "custom"   => href,\n\tlinkType == "file"     => file.asset->url,\n\tlinkType == "none"     => null\n), "newTab": coalesce(newTab, false) }\t\n\t}, []),\n\t"accrSettings": {\n\t\t"showTitles": coalesce(accrSettings.showTitles, false),\n\t\t"showTags": coalesce(accrSettings.showTags, true),\n\t\t"displayType": coalesce(accrSettings.displayType, "grid"),\n\t\t"showArrows": coalesce(accrSettings.showArrows, true),\n\t\t"showDots": coalesce(accrSettings.showDots, true),\n\t\t"autoplay": coalesce(accrSettings.autoplay, true),\n\t\t"autoplayInterval": coalesce(accrSettings.autoplayInterval, 7),\n\t\t"itemsPerView": coalesce(accrSettings.itemsPerView, 4)\n\t},\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),\n    ...select(_type=="blogSection" => {\n\t_id,\n\t"kind": "blogSection",\n\ttitle,\n\t"description": coalesce(description, []),\n\t"button": select(\n\tdefined(button[0]) => {\n\t\t"id": coalesce(button[0]._key, button[0]._id),\n\t\t"highlight": coalesce(button[0].highlight, false),\n\t\t"target": coalesce(button[0].target, false),\n\t\t"text": button[0].text,\n\t\t"href": select(\n\t\t\tbutton[0].type == "internal" => "/" + button[0].pageRef->slug.current,\n\t\t\tbutton[0].type == "custom" => button[0].href,\n\t\t\tnull\n\t\t)\n\t},\n\tnull\n),  \t\n\t"blogSettings": {\n\t\t"limit": coalesce(blogOverviewSettings.limit, 3),      \n\t\t"showExcerpt": coalesce(blogOverviewSettings.showExcerpt, true),\n\t\t"showCats": coalesce(blogOverviewSettings.showCats, true),\n\t\t"showTags": coalesce(blogOverviewSettings.showTags, false),\n\t\t"showAuthor": coalesce(blogOverviewSettings.showAuthor, false),\n\t\t"showDate": coalesce(blogOverviewSettings.showDate, true),\n\t},\t\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}   \n}),\n    ...select(_type=="comparisonType" => {\n\t_id,\n\t"kind": "comparison",   \t \n\ttitle,\t\n\t"description": coalesce(description, []),\n    "buttons": coalesce(buttons[]{ \n\t"id": coalesce(_key, _id), \n\t"highlight": coalesce(highlight, false), \n\t"target": coalesce(target, false),\n\t"text": text, \n\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) \n}, []),\n\t"steps": coalesce(steps[]{ \n\t\t"id": coalesce(_key, _id), \n\t\ttitle, \n\t\t"boxes": coalesce(boxes[]{ \n\t\t\t"id": coalesce(_key, _id), \n\t\t\ttitle, \n\t\t\t"description": coalesce(description, []), \n\t\t\t"textColor": coalesce(textColor, "#ffffff"), \n\t\t\t"background": coalesce(background, "#4E8199")\n\t\t}, []),\n\t}, []),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t} \n}),\n    ...select(_type=="contentBlocks" => {\n\t_id,\n\t"kind": "contentBlocks",\n\t"aboveEyebrow": coalesce(aboveEyebrow, null),\t\t \n\t"headline": headline,\t\n\t"belowEyebrow": coalesce(belowEyebrow, null),\t  \n\t"description": coalesce(description, []), \t\n\t"blocks": coalesce(blocks[]{\n\t\t"id": coalesce(_key, _id),\n\t\ttitle,\t\t\n\t\t"tagline": coalesce(tagline, null),\n\t\t"description": coalesce(description, []),\n\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt }\t\n\t}, []),\t\n\n\t"blocksSettings": {\n\t\t"type": coalesce(blocksSettings.type, "box"),\n\t\t"showIcon": coalesce(blocksSettings.showIcon, true),\n\t\t"iconTitle": coalesce(blocksSettings.iconTitle, "stacked"),\n\t\t"perRow": coalesce(blocksSettings.perRow, 3),\n\t\t"collapsible": coalesce(blocksSettings.collapsible, false),\n\t\t"gap": coalesce(blocksSettings.gap, "normal"),\n\t\t"textColor": coalesce(blocksSettings.textColor, undefined),\n\t\t"accentColor": coalesce(blocksSettings.accentColor, undefined),\n\t\t"bgColor": coalesce(blocksSettings.background, undefined),\n\t\t"iconBg": coalesce(blocksSettings.iconBg, undefined)\n\t},\n\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),\n    ...select(_type=="ctaBannerType" => {\n\t_id,\n\t"kind": "ctaBanner",   \n\t"eyebrow": coalesce(eyebrow, null),   \t \n\t"title": headline,\t    \n\t"tagline": coalesce(tagline, null),  \t  \n\t"subheadline": coalesce(subheadline, []),       \n\t"image": image{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, "alt": coalesce(alt, null) },     \n\t"buttons": coalesce(buttons[]{ \n\t"id": coalesce(_key, _id), \n\t"highlight": coalesce(highlight, false), \n\t"target": coalesce(target, false),\n\t"text": text, \n\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) \n}, []), \n\t"ctaSettings": {\n\t\t"innerPadding": coalesce(ctaSettings.innerPadding, "normal"),\n\t\t"ctaGradient": coalesce(ctaSettings.ctaGradient, "banner"),\n\t\t"ctaBgColor": coalesce(ctaSettings.ctaBgColor, undefined)\n\t},\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),    \n    ...select(_type=="formType" => {\n\t_id,\n\t"kind": "form",\n\ttitle,\n\t"subtitle": coalesce(subtitle, ""),\t\n\t"description": coalesce(description, []), \n\t"features": coalesce(features[]{\n\t\t"id": coalesce(_key, _id), \n\t\ttitle, \n\t\t"description": coalesce(description, ""),\n\t\t"ttlSize": coalesce(ttlSize, "small"),\n\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt, "widthSize": coalesce(widthSize, "normal") } \n\t}, []),\n\t"featDisplay": coalesce(featDisplay, "vertical"),\n\t"form": coalesce(form, "customForm"),\n    "formTitle": coalesce(formTitle, ""),\n\t"hubspot": select(\n      form == "hubSpotForm" => hubspot{\n        "region": coalesce(region, "na1"),\n        portalId,\n        formId\n      },   \n      null\n    ),\n\t"fields": coalesce(fields[]{     \n\t\t"id": coalesce(_key, _id),\n\t\ttitle,\n\t\t"hubspotKey": coalesce(hubspotKey, null),\n\t\t"info": coalesce(info, null),\n\t\t"type": coalesce(type, "text"),\n\t\t"placeholder": coalesce(placeholder, null),       \n\t\t"options": coalesce(options[], []),\n\t\t"cbxOptions": coalesce(cbxOptions[]{\n\t\t\t"id": coalesce(_key, _id),\n\t\t\t"label": coalesce(label, []),\n\t\t\t"value": coalesce(value, ""),\n\t\t\t"required": coalesce(required, false),\n\t\t\t"checked": coalesce(checked, false)\n\t\t}, []),\n\t\t"optLayout": coalesce(optLayout, "vertical"),\n\t\t"required": coalesce(required, false),\n\t\t"size": coalesce(size, "full")\n\t}, []),\n\t"btnLabel": coalesce(btnLabel, "Send Message"),    \n\t"footer": coalesce(footer, []),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),  \n    ...select(_type=="topHeroType" => {\n\t_id,\n\t"kind": "hero",\n\t"aboveTitle": coalesce(aboveHeadline, null),\t\t \n\t"title": headline,\t\n\t"belowTitle": coalesce(belowHeadline, null),\t  \n\t"subheadline": coalesce(subheadline, []), \n\t"features": coalesce(features[]{ \n\t\t"id": coalesce(_key, _id), \n\t\t"eyebrow": coalesce(eyebrow, null),\n\t\ttitle, \n\t\t"description": coalesce(description, ""), \n\t\t"ttlSize": coalesce(ttlSize, "small"),\n\t\t"layout": coalesce(layout, "text"),\n\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt } \n\t}, []),\n\t"featDisplay": coalesce(featDisplay, "vertical"),\n\t"image": image{ \n        \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n,\n        "alt": coalesce(alt, null),\n        "widthSize": coalesce(widthSize, "normal"),\n        "shape": coalesce(shape, "rounded")\n     },\n\t"eyebrowImage": eyebrowImage{ \n        \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n,\n        "alt": coalesce(alt, null),\n        "widthSize": coalesce(widthSize, "normal"),\n        "shape": coalesce(shape, "rounded")\n     },\n\t"buttons": coalesce(buttons[]{ \n\t"id": coalesce(_key, _id), \n\t"highlight": coalesce(highlight, false), \n\t"target": coalesce(target, false),\n\t"text": text, \n\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) \n}, []),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}), \n    ...select(_type=="keyFeaturesType" => {\n\t_id,\n\t"kind": "keyFeatures",\n\t"topHeadline": topHeadline,\n\t"description": coalesce(description, []),\n\t"bottomHeadline": bottomHeadline,\n\t"cards": coalesce(cards[]{        \n\t\ttitle,\n\t\t"id": coalesce(_key, _id), \n\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n\t\t"description": coalesce(description, [])\n\t}, []),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),\n    ...select(_type=="mapType" => {\n    _id,\n    "kind": "mapSection",\n    title,\n    "subtitle": coalesce(subtitle, ""),\n    "description": coalesce(description, []),\n    "embedUrl": coalesce(embedUrl, ""),\n    "fullScreen": coalesce(fullScreen, false),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}      \n}),\n    ...select(_type=="productsType" => {\n\t_id,\n\t"kind": "products",\n\ttitle,\n\t"description": coalesce(description, []),\n\t"cards": coalesce(cards[]{\n\t\t"id": coalesce(_key, _id),\n\t\ttitle,\n\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n\t\t"description": coalesce(description, []),\n\t\t"features": coalesce(features[]{\n\t\t\t"id": coalesce(_key, _id), \n\t\t\ttitle, \n\t\t\t"description": coalesce(description, ""),\n\t\t\t"ttlSize": coalesce(ttlSize, "small"),\n\t\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt } \n\t\t}, []),\n\t\t"featDisplay": coalesce(featDisplay, "vertical"),\n\t\t"addons": coalesce(addons, []),\n\t\t"footer": coalesce(footer[]{\n\t\t\t_type=="ctaMessage" => {\n\t\t\t\t"_kind": "message",\n\t\t\t\t"info": info,\n\t\t\t\t"subtitle": subtitle,\n\t\t\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n\t\t\t    "href": select(       \n\tlinkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,\t\t  \n\tlinkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,\n\tlinkType == "custom"   => href,\n\tlinkType == "file"     => file.asset->url,\n\tlinkType == "none"     => null\n),\n\t\t\t\t"newTab": coalesce(newTab, false), \n\t\t\t},\n\t\t\t_type=="ctaButton" => {\n\t\t\t\t"_kind": "button",\n\t\t\t\t"id": coalesce(_key, _id),\n\t\t\t\t"highlight": coalesce(highlight, false),\n\t\t\t\t"target": coalesce(target, false),\n\t\t\t\t"text": text,\n\t\t\t\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ),\n\t\t\t}\n\t\t}, []),    \n\t\t"textColor": coalesce(textColor, "#ffffff"),   \n\t\t"background": coalesce(background, "#505f66")        \n\t}, []),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),\n    ...select(_type=="solutionsType" => {\n\t_id,\n\t"kind": "solutions",\n\ttitle,\n\t"description": coalesce(description, []),\n\t"content": coalesce(content, []),\n\t"cards": coalesce(cards[]{\n\t\t"id": coalesce(_key, _id),\n\t\ttitle,\n\t\t"content": coalesce(content, []),\n\t\t"image": image{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt, "widthSize": coalesce(widthSize, "normal") },\n\t\t"items": coalesce(items[]{ \n\t\t\t"id": coalesce(_key, _id), \n\t\t\ttitle, \n\t\t\tsubtitle, \n\t\t\ttag, \n\t\t\t"features": coalesce(features, []) \n\t\t}, []),\n\t\t"footer": coalesce(footer[]{\n\t\t\t_type=="ctaMessage" => {\n\t\t\t\t"_kind": "message",\n\t\t\t\t"info": info,\n\t\t\t\t"subtitle": subtitle,\n\t\t\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt, "widthSize": coalesce(widthSize, "normal") },\n\t\t\t\t"href": select(       \n\tlinkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,\t\t  \n\tlinkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,\n\tlinkType == "custom"   => href,\n\tlinkType == "file"     => file.asset->url,\n\tlinkType == "none"     => null\n),\n\t\t\t\t"newTab": coalesce(newTab, false), \n\t\t\t},\n\t\t\t_type=="ctaButton" => {\n\t\t\t\t"_kind": "button",\n\t\t\t\t"id": coalesce(_key, _id),\n\t\t\t\t"highlight": coalesce(highlight, false),\n\t\t\t\t"target": coalesce(target, false),\n\t\t\t\t"text": text,\n\t\t\t\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null )\n\t\t\t}\n\t\t}, []),\n\t\t"textColor": coalesce(textColor, "#ffffff"),\n\t\t"background": coalesce(background, "#505f66"),\n\t\t"rounded": coalesce(rounded, true)\n\t}, []),\n\t"display": coalesce(display, "horizontal"),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),\n\t\t...select(_type=="stepperType" => {\n\t_id,\n\t"kind": "stepper",   \t \n\ttitle,\t\n\t"eyebrow": coalesce(eyebrow, null),\n\t"description": coalesce(description, []),\n\t"steps": coalesce(steps[]{ \n\t\t"id": coalesce(_key, _id), \n\t\tlabel, \n\t\ttitle, \n\t\t"description": coalesce(description, []),  \n\t\t"textColor": coalesce(textColor, undefined), \n\t\t"descColor": coalesce(descColor, undefined),\n\t\t"background": coalesce(background, undefined),\n\t\t"layout": coalesce(layout, "card")\n\t}, []),\n\t"buttons": coalesce(buttons[]{ \n\t"id": coalesce(_key, _id), \n\t"highlight": coalesce(highlight, false), \n\t"target": coalesce(target, false),\n\t"text": text, \n\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) \n}, []),\n\t"disclaimer": coalesce(disclaimer, null),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),\n    ...select(_type=="tableType" => {\n\t_id,\n\t"kind": "table",\n\t"aboveEyebrow": coalesce(aboveEyebrow, null),\n\ttitle,\t\n\t"belowEyebrow": coalesce(belowEyebrow, null),\n\t"description": coalesce(description, []),\n\t"table": coalesce(table.rows[].cells, []),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),\n    ...select(_type=="teamOverviewType" => {\n\t_id,\n\t"kind": "teamOverview",\n\ttitle,\n\tsubtitle,\n    "description": coalesce(description, []),\n\t"members": coalesce(members[]{\n\t\t"id": coalesce(_key, _id),\n\t\tname,\n\t\tposition,\n\t\t"image": image{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt, "widthSize": coalesce(widthSize, "normal") },\n\t\t"bio": coalesce(bio, []),\n\t\t"textColor": coalesce(textColor, null),\n\t\t"background": coalesce(background, null)\t\t\n\t}, []),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t} \n}),\n    ...select(_type=="textImageType" => {\n\t_id,\n\t"kind": "textImage",\n\ttitle,\n\t"aboveTitle": coalesce(aboveTitle, null),\t\n\t"belowTitle": coalesce(belowTitle, null),\n\t"description": coalesce(description, []),\n\t"chips": coalesce(chips, []),\n\t"image": image{ \n        \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, \n        "alt": coalesce(alt, null), \n        "caption": coalesce(caption, null), \n        "captionSub": coalesce(captionSub, null), \n        "credit": coalesce(credit, null),\n        "widthSize": coalesce(widthSize, "normal"),\n        "shape": coalesce(shape, "rounded") \t\t\n    },\n\t"buttons": coalesce(buttons[]{ \n\t"id": coalesce(_key, _id), \n\t"highlight": coalesce(highlight, false), \n\t"target": coalesce(target, false),\n\t"text": text, \n\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) \n}, []),\t \t \n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\t\n}),    \n    ...select(_type=="textOnlyType" => {\n\t_id,\n\t"kind": "text",\n\ttitle,\n\t"aboveTitle": coalesce(aboveTitle, undefined),\t\t\t\t\t\t\n\t"belowTitle": coalesce(belowTitle, undefined),\n\t"content": coalesce(content, []),\t\t\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n})       \n  }, [])': SECTIONS_PROJECTION_RESULT;
+    '{\n\t"mode": coalesce(seo.mode, "auto"),\n\t"title": coalesce(seo.title, ""),\n\t"description": coalesce(seo.description, ""),\n\t"image": seo.image{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n\t"keywords": coalesce(seo.keywords, ""),\n\t"noindex": coalesce(seo.noindex, false) \n}': SEO_META_PROJECTION_RESULT;
+    '\n  *[_id=="generalSettings"][0]{\n    siteName,\n    siteTitle,\n    siteDescription,\n    "siteImage": siteImage{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n    "siteIcon":  siteIcon{  \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n    "siteUrl": coalesce(siteUrl, ""),\n    "siteEmail": coalesce(siteEmail, "")\n  }\n': GENERAL_SETTINGS_QUERY_RESULT;
+    '{\n  "showTitle": coalesce(settings.showTitle, true),\n  "showDesc": coalesce(settings.showDesc, true),\n  "shrinkTitle": coalesce(settings.shrinkTitle, false),\n  "alignTitle": coalesce(settings.alignTitle, "left"),\n  "pdTopBottom": coalesce(settings.pdTopBottom, "normal"),\n  "pdDisplay": coalesce(settings.pdDisplay, "both"),\n  "width": coalesce(settings.width, "normal"),\n  "textColor": coalesce(settings.textColor, undefined),\n  "gradientBg": coalesce(settings.gradientBg, "page")\n}': PAGE_SETTINGS_QUERY_RESULT;
+    '{\n\t"showCats": coalesce(settings.showCats, false),\n\t"showTags": coalesce(settings.showTags, true),\n\t"showAuthor": coalesce(settings.showAuthor, true),\n\t"showDate": coalesce(settings.showDate, true),\n\t"alignTitle": coalesce(settings.alignTitle, "center"),\n\t"pdTopBottom": coalesce(settings.pdTopBottom, "normal"),\n\t"pdDisplay": coalesce(settings.pdDisplay, "both"),\n\t"textColor": coalesce(settings.textColor, undefined),\n\t"gradientBg": coalesce(settings.gradientBg, "post")\n  }\n': POST_SETTINGS_QUERY_RESULT;
+    '\n  *[_id=="readingSettings"][0]{\n    "homePage": homePage->{ _id, title, "slug": slug.current },\n    "blogPage": blogPage->{ _id, title, "slug": slug.current },\n    "blogSettings": {\n      "showExcerpt": coalesce(blogSettings.showExcerpt, true),\n      "excerptLength": coalesce(blogSettings.excerptLength, 360),\n      "filterBy": coalesce(blogSettings.filterBy, "tags"),\n      "perPage": coalesce(blogSettings.perPage, 9),\n      "showCats": coalesce(blogSettings.showCats, true),\n      "showTags": coalesce(blogSettings.showTags, true),\n      "showAuthor": coalesce(blogSettings.showAuthor, true),\n      "showDate": coalesce(blogSettings.showDate, true)\n    }\n  }\n': READING_SETTINGS_QUERY_RESULT;
+    '\n\t*[_id=="seoSettings"][0]{\t\t\n\t\t"category": coalesce(category, ""), \n\t\t"classification": coalesce(classification, ""),\n\t\t"keywords": coalesce(keywords, ""),\n\t\t"language": coalesce(language, "en-US"), \n\t\t"locale": coalesce(locale, "en_US"),\t \n\t\t"twitterHandle": coalesce(twitterHandle, ""), \n\t\t"linkedinHandle": coalesce(linkedinHandle, ""),\t\t\n        "gSiteVerification": coalesce(gSiteVerification, ""),  \n\t\t"noindex": coalesce(noindex, false) \n\t} \n': SEO_SETTINGS_QUERY_RESULT;
+    '\n\t*[_id=="trackingSettings"][0]{\t\n\t\tgoogle{\n\t\t\t"enabled": coalesce(enabled, false),\n\t\t\t"gTagManagerId": coalesce(gTagManagerId, "")      \n\t\t},\n\t\t"hubspot": {\n\t\t\t"enabled": coalesce(hubspot.enabled, false),\n\t\t\t"portalId": coalesce(hubspot.portalId, "")\n\t\t}\t\t \n\t} \n': TRACKING_SETTINGS_QUERY_RESULT;
+    '{\n  "header": *[_id=="siteHeader"][0]{   \n\t"logo": headerLogo{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n\t"aboveMenu": coalesce(aboveMenu[]{\n\t\t"id": coalesce(_key, _id),\n\t\ttitle,\n\t\t"href": select(       \n\tlinkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,\t\t  \n\tlinkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,\n\tlinkType == "custom"   => href,\n\tlinkType == "file"     => file.asset->url,\n\tlinkType == "none"     => null\n),\n\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n\t\t"newTab": coalesce(newTab, false),\n\t\t"hideOnMobile": coalesce(hideOnMobile, false) \n\t}, []),\n\t"menu": headerMenu->{\n\t\t_id,\n\t\t"slug": slug.current,\n\t\t"items": coalesce(children[]{\n\t\t\t"label": title,      \n\t\t\t"href": select(       \n\tlinkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,\t\t  \n\tlinkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,\n\tlinkType == "custom"   => href,\n\tlinkType == "file"     => file.asset->url,\n\tlinkType == "none"     => null\n),\n\t\t\t"newTab": coalesce(newTab, false),     \n\t\t\t"children": coalesce(children[]{\n\t\t\t\t"label": title,\n\t\t\t\t"href": select(       \n\tlinkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,\t\t  \n\tlinkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,\n\tlinkType == "custom"   => href,\n\tlinkType == "file"     => file.asset->url,\n\tlinkType == "none"     => null\n),        \n\t\t\t\t"description": description,\n\t\t\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n\t\t\t\t"newTab": coalesce(newTab, false),       \n\t\t\t\t"children": coalesce(children[]{\n\t\t\t\t\t"label": title,\n\t\t\t\t\t"href": select(       \n\tlinkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,\t\t  \n\tlinkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,\n\tlinkType == "custom"   => href,\n\tlinkType == "file"     => file.asset->url,\n\tlinkType == "none"     => null\n),\n\t\t\t\t\t"description": description,\n\t\t\t\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n\t\t\t\t\t"newTab": coalesce(newTab, false)\n\t\t\t\t}, [])\n\t\t\t}, [])\n\t\t}, []),\n\t},\n\t"menuType": coalesce(menuType, "dropdown"),\n\t"buttons": coalesce(headerButtons[]{   \n\t\t"id": coalesce(_key, _id),\n\t\t"text": text,    \n\t\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ),\n\t\t"target": coalesce(target, false),\n\t\t"highlight": coalesce(highlight, false)\n\t}, [])\n},\n  "footer": *[_id=="siteFooter"][0]{\n\t"logo": footerLogo{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },    \n\t"menu": footerMenu->{\n\t\t_id,\n\t\t"slug": slug.current,\n\t\t"items": coalesce(children[]{\n\t\t\t"label": title,      \n\t\t\t"href": select(       \n\tlinkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,\t\t  \n\tlinkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,\n\tlinkType == "custom"   => href,\n\tlinkType == "file"     => file.asset->url,\n\tlinkType == "none"     => null\n),\n\t\t\t"newTab": coalesce(newTab, false),     \n\t\t\t"children": coalesce(children[]{\n\t\t\t\t"label": title,\n\t\t\t\t"href": select(       \n\tlinkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,\t\t  \n\tlinkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,\n\tlinkType == "custom"   => href,\n\tlinkType == "file"     => file.asset->url,\n\tlinkType == "none"     => null\n),\n\t\t\t\t"newTab": coalesce(newTab, false),       \n\t\t\t\t"children": coalesce(children[]{\n\t\t\t\t\t"label": title,\n\t\t\t\t\t"href": select(       \n\tlinkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,\t\t  \n\tlinkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,\n\tlinkType == "custom"   => href,\n\tlinkType == "file"     => file.asset->url,\n\tlinkType == "none"     => null\n),\n\t\t\t\t\t"newTab": coalesce(newTab, false)\n\t\t\t\t}, [])\n\t\t\t}, [])\n\t\t}, []),\n\t},\n\t"copyright": footerCopyright,\n\t"settings": {\n\t\t"textColor": coalesce(textColor, undefined),\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t    "image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n},\n  "settings": {\n    "general": \n  *[_id=="generalSettings"][0]{\n    siteName,\n    siteTitle,\n    siteDescription,\n    "siteImage": siteImage{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n    "siteIcon":  siteIcon{  \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n    "siteUrl": coalesce(siteUrl, ""),\n    "siteEmail": coalesce(siteEmail, "")\n  }\n,\n    "reading": \n  *[_id=="readingSettings"][0]{\n    "homePage": homePage->{ _id, title, "slug": slug.current },\n    "blogPage": blogPage->{ _id, title, "slug": slug.current },\n    "blogSettings": {\n      "showExcerpt": coalesce(blogSettings.showExcerpt, true),\n      "excerptLength": coalesce(blogSettings.excerptLength, 360),\n      "filterBy": coalesce(blogSettings.filterBy, "tags"),\n      "perPage": coalesce(blogSettings.perPage, 9),\n      "showCats": coalesce(blogSettings.showCats, true),\n      "showTags": coalesce(blogSettings.showTags, true),\n      "showAuthor": coalesce(blogSettings.showAuthor, true),\n      "showDate": coalesce(blogSettings.showDate, true)\n    }\n  }\n,\n\t\t"seo": \n\t*[_id=="seoSettings"][0]{\t\t\n\t\t"category": coalesce(category, ""), \n\t\t"classification": coalesce(classification, ""),\n\t\t"keywords": coalesce(keywords, ""),\n\t\t"language": coalesce(language, "en-US"), \n\t\t"locale": coalesce(locale, "en_US"),\t \n\t\t"twitterHandle": coalesce(twitterHandle, ""), \n\t\t"linkedinHandle": coalesce(linkedinHandle, ""),\t\t\n        "gSiteVerification": coalesce(gSiteVerification, ""),  \n\t\t"noindex": coalesce(noindex, false) \n\t} \n,\n    "tracking": \n\t*[_id=="trackingSettings"][0]{\t\n\t\tgoogle{\n\t\t\t"enabled": coalesce(enabled, false),\n\t\t\t"gTagManagerId": coalesce(gTagManagerId, "")      \n\t\t},\n\t\t"hubspot": {\n\t\t\t"enabled": coalesce(hubspot.enabled, false),\n\t\t\t"portalId": coalesce(hubspot.portalId, "")\n\t\t}\t\t \n\t} \n\n  }\n}': GLOBALS_QUERY_RESULT;
+    '*[_type=="page" && slug.current==$slug && !defined(archivedAt)][0]{\n  _id,\n  _type,\n  "slug": slug.current,\n  title,\n  "description": coalesce(description, []),\n  "sections": coalesce(\n  sections[]->{\n    _id,\n    _type,\t\t \n    ...select(_type=="aboutInfoType" => {\n\t_id,\n\t"kind": "aboutInfo",\n\ttitle,\n\t"description": coalesce(description, []),\n\t"buttons": coalesce(buttons[]{ \n\t"id": coalesce(_key, _id), \n\t"highlight": coalesce(highlight, false), \n\t"target": coalesce(target, false),\n\t"text": text, \n\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) \n}, []),\n\t"collapsibles": coalesce(collapsibles[]{\n\t\t"id": coalesce(_key, _id),\n\t\ttitle,\n\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n\t\t"content": coalesce(content, [])\n\t}, []),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),\n    ...select(_type == "accordionType" => {\n\t\t_id,\n\t\t"kind": "accordion",\n\t\t"eyebrow": coalesce(eyebrow, null),\n\t\ttitle,\n\t\t"subtitle": coalesce(subtitle, ""),\n\t\t"description": coalesce(description, []),\n\t\t"image": image{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt, "widthSize": coalesce(widthSize, "normal"), "shape": coalesce(shape, "rounded") },\t\n\t\t"items": coalesce(\n\t\t\titems[]{\n\t\t\t\t"id": coalesce(_key, _id),\n\t\t\t\ttitle,\n\t\t\t\t"description": coalesce(description, [])       \n\t\t\t},\n\t\t\t[]\n\t\t),\n\t\t"accSettings": {\t\n\t\t\t"design": coalesce(settings.design, "faq"),\n\t\t\t"ordered": coalesce(settings.ordered, false),\n\t\t\t"firstExpanded": coalesce(settings.firstExpanded, false),\n\t\t\t"textColor": coalesce(settings.textColor, undefined),\n\t\t\t"accentColor": coalesce(settings.accentColor, undefined),\n\t\t\t"bgColor": coalesce(settings.background, undefined)\n\t\t},\n\t\t"settings": {\n\t\t\t"titleDesc": {\n\t\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t\t},\n\t\t\t"layout": {\n\t\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t\t"width": coalesce(layout.width, "normal")\n\t\t\t},\n\t\t\t"background": {\n\t\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t\t}\n\t\t}\n\t}\n),\n    ...select(_type=="accreditationType" => {\n\t_id,\n\t"kind": "accreditation",\n\ttitle,\n    "description": coalesce(description, []),\t\n\t"items": coalesce(items[]{\n\t\ttitle,\n\t\ttag,\n\t\t"id": coalesce(_key, _id), \n\t\t"image": image{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt, "widthSize": coalesce(widthSize, "normal") },\t \t\n\t\t"link": link{ "href": select(       \n\tlinkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,\t\t  \n\tlinkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,\n\tlinkType == "custom"   => href,\n\tlinkType == "file"     => file.asset->url,\n\tlinkType == "none"     => null\n), "newTab": coalesce(newTab, false) }\t\n\t}, []),\n\t"accrSettings": {\n\t\t"showTitles": coalesce(accrSettings.showTitles, false),\n\t\t"showTags": coalesce(accrSettings.showTags, true),\n\t\t"displayType": coalesce(accrSettings.displayType, "grid"),\n\t\t"showArrows": coalesce(accrSettings.showArrows, true),\n\t\t"showDots": coalesce(accrSettings.showDots, true),\n\t\t"autoplay": coalesce(accrSettings.autoplay, true),\n\t\t"autoplayInterval": coalesce(accrSettings.autoplayInterval, 7),\n\t\t"itemsPerView": coalesce(accrSettings.itemsPerView, 4)\n\t},\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),\n    ...select(_type=="blogSection" => {\n\t_id,\n\t"kind": "blogSection",\n\ttitle,\n\t"description": coalesce(description, []),\n\t"button": select(\n\tdefined(button[0]) => {\n\t\t"id": coalesce(button[0]._key, button[0]._id),\n\t\t"highlight": coalesce(button[0].highlight, false),\n\t\t"target": coalesce(button[0].target, false),\n\t\t"text": button[0].text,\n\t\t"href": select(\n\t\t\tbutton[0].type == "internal" => "/" + button[0].pageRef->slug.current,\n\t\t\tbutton[0].type == "custom" => button[0].href,\n\t\t\tnull\n\t\t)\n\t},\n\tnull\n),  \t\n\t"blogSettings": {\n\t\t"limit": coalesce(blogOverviewSettings.limit, 3),      \n\t\t"showExcerpt": coalesce(blogOverviewSettings.showExcerpt, true),\n\t\t"showCats": coalesce(blogOverviewSettings.showCats, true),\n\t\t"showTags": coalesce(blogOverviewSettings.showTags, false),\n\t\t"showAuthor": coalesce(blogOverviewSettings.showAuthor, false),\n\t\t"showDate": coalesce(blogOverviewSettings.showDate, true),\n\t},\t\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}   \n}),\n    ...select(_type=="comparisonType" => {\n\t_id,\n\t"kind": "comparison",   \t \n\ttitle,\t\n\t"description": coalesce(description, []),\n    "buttons": coalesce(buttons[]{ \n\t"id": coalesce(_key, _id), \n\t"highlight": coalesce(highlight, false), \n\t"target": coalesce(target, false),\n\t"text": text, \n\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) \n}, []),\n\t"steps": coalesce(steps[]{ \n\t\t"id": coalesce(_key, _id), \n\t\ttitle, \n\t\t"boxes": coalesce(boxes[]{ \n\t\t\t"id": coalesce(_key, _id), \n\t\t\ttitle, \n\t\t\t"description": coalesce(description, []), \n\t\t\t"textColor": coalesce(textColor, "#ffffff"), \n\t\t\t"background": coalesce(background, "#4E8199")\n\t\t}, []),\n\t}, []),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t} \n}),\n    ...select(_type=="contentBlocks" => {\n\t_id,\n\t"kind": "contentBlocks",\n\t"aboveEyebrow": coalesce(aboveEyebrow, null),\t\t \n\t"headline": headline,\t\n\t"belowEyebrow": coalesce(belowEyebrow, null),\t  \n\t"description": coalesce(description, []), \t\n\t"blocks": coalesce(blocks[]{\n\t\t"id": coalesce(_key, _id),\n\t\ttitle,\t\t\n\t\t"tagline": coalesce(tagline, null),\n\t\t"description": coalesce(description, []),\n\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt }\t\n\t}, []),\t\n\n\t"blocksSettings": {\n\t\t"type": coalesce(blocksSettings.type, "box"),\n\t\t"showIcon": coalesce(blocksSettings.showIcon, true),\n\t\t"iconTitle": coalesce(blocksSettings.iconTitle, "stacked"),\n\t\t"perRow": coalesce(blocksSettings.perRow, 3),\n\t\t"collapsible": coalesce(blocksSettings.collapsible, false),\n\t\t"gap": coalesce(blocksSettings.gap, "normal"),\n\t\t"textColor": coalesce(blocksSettings.textColor, undefined),\n\t\t"accentColor": coalesce(blocksSettings.accentColor, undefined),\n\t\t"bgColor": coalesce(blocksSettings.background, undefined),\n\t\t"iconBg": coalesce(blocksSettings.iconBg, undefined)\n\t},\n\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),\n    ...select(_type=="ctaBannerType" => {\n\t_id,\n\t"kind": "ctaBanner",   \n\t"eyebrow": coalesce(eyebrow, null),   \t \n\t"title": headline,\t    \n\t"tagline": coalesce(tagline, null),  \t  \n\t"subheadline": coalesce(subheadline, []),       \n\t"image": image{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, "alt": coalesce(alt, null) },     \n\t"buttons": coalesce(buttons[]{ \n\t"id": coalesce(_key, _id), \n\t"highlight": coalesce(highlight, false), \n\t"target": coalesce(target, false),\n\t"text": text, \n\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) \n}, []), \n\t"ctaSettings": {\n\t\t"innerPadding": coalesce(ctaSettings.innerPadding, "normal"),\n\t\t"ctaGradient": coalesce(ctaSettings.ctaGradient, "banner"),\n\t\t"ctaBgColor": coalesce(ctaSettings.ctaBgColor, undefined)\n\t},\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),    \n    ...select(_type=="formType" => {\n\t_id,\n\t"kind": "form",\n\ttitle,\n\t"subtitle": coalesce(subtitle, ""),\t\n\t"description": coalesce(description, []), \n\t"features": coalesce(features[]{\n\t\t"id": coalesce(_key, _id), \n\t\ttitle, \n\t\t"description": coalesce(description, ""),\n\t\t"ttlSize": coalesce(ttlSize, "small"),\n\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt, "widthSize": coalesce(widthSize, "normal") } \n\t}, []),\n\t"featDisplay": coalesce(featDisplay, "vertical"),\n\t"form": coalesce(form, "customForm"),\n    "formTitle": coalesce(formTitle, ""),\n\t"hubspot": select(\n      form == "hubSpotForm" => hubspot{\n        "region": coalesce(region, "na1"),\n        portalId,\n        formId\n      },   \n      null\n    ),\n\t"fields": coalesce(fields[]{     \n\t\t"id": coalesce(_key, _id),\n\t\ttitle,\n\t\t"hubspotKey": coalesce(hubspotKey, null),\n\t\t"info": coalesce(info, null),\n\t\t"type": coalesce(type, "text"),\n\t\t"placeholder": coalesce(placeholder, null),       \n\t\t"options": coalesce(options[], []),\n\t\t"cbxOptions": coalesce(cbxOptions[]{\n\t\t\t"id": coalesce(_key, _id),\n\t\t\t"label": coalesce(label, []),\n\t\t\t"value": coalesce(value, ""),\n\t\t\t"required": coalesce(required, false),\n\t\t\t"checked": coalesce(checked, false)\n\t\t}, []),\n\t\t"optLayout": coalesce(optLayout, "vertical"),\n\t\t"required": coalesce(required, false),\n\t\t"size": coalesce(size, "full")\n\t}, []),\n\t"btnLabel": coalesce(btnLabel, "Send Message"),    \n\t"footer": coalesce(footer, []),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),  \n    ...select(_type=="topHeroType" => {\n\t_id,\n\t"kind": "hero",\n\t"aboveTitle": coalesce(aboveHeadline, null),\t\t \n\t"title": headline,\t\n\t"belowTitle": coalesce(belowHeadline, null),\t  \n\t"subheadline": coalesce(subheadline, []), \n\t"features": coalesce(features[]{ \n\t\t"id": coalesce(_key, _id), \n\t\t"eyebrow": coalesce(eyebrow, null),\n\t\ttitle, \n\t\t"description": coalesce(description, ""), \n\t\t"ttlSize": coalesce(ttlSize, "small"),\n\t\t"layout": coalesce(layout, "text"),\n\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt } \n\t}, []),\n\t"featDisplay": coalesce(featDisplay, "vertical"),\n\t"image": image{ \n        \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n,\n        "alt": coalesce(alt, null),\n        "widthSize": coalesce(widthSize, "normal"),\n        "shape": coalesce(shape, "rounded")\n     },\n\t"eyebrowImage": eyebrowImage{ \n        \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n,\n        "alt": coalesce(alt, null),\n        "widthSize": coalesce(widthSize, "normal"),\n        "shape": coalesce(shape, "rounded")\n     },\n\t"buttons": coalesce(buttons[]{ \n\t"id": coalesce(_key, _id), \n\t"highlight": coalesce(highlight, false), \n\t"target": coalesce(target, false),\n\t"text": text, \n\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) \n}, []),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}), \n    ...select(_type=="keyFeaturesType" => {\n\t_id,\n\t"kind": "keyFeatures",\n\t"topHeadline": topHeadline,\n\t"description": coalesce(description, []),\n\t"bottomHeadline": bottomHeadline,\n\t"cards": coalesce(cards[]{        \n\t\ttitle,\n\t\t"id": coalesce(_key, _id), \n\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n\t\t"description": coalesce(description, [])\n\t}, []),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),\n    ...select(_type=="mapType" => {\n    _id,\n    "kind": "mapSection",\n    title,\n    "subtitle": coalesce(subtitle, ""),\n    "description": coalesce(description, []),\n    "embedUrl": coalesce(embedUrl, ""),\n    "fullScreen": coalesce(fullScreen, false),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}      \n}),\n    ...select(_type=="productsType" => {\n\t_id,\n\t"kind": "products",\n\ttitle,\n\t"description": coalesce(description, []),\n\t"cards": coalesce(cards[]{\n\t\t"id": coalesce(_key, _id),\n\t\ttitle,\n\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n\t\t"description": coalesce(description, []),\n\t\t"features": coalesce(features[]{\n\t\t\t"id": coalesce(_key, _id), \n\t\t\ttitle, \n\t\t\t"description": coalesce(description, ""),\n\t\t\t"ttlSize": coalesce(ttlSize, "small"),\n\t\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt } \n\t\t}, []),\n\t\t"featDisplay": coalesce(featDisplay, "vertical"),\n\t\t"addons": coalesce(addons, []),\n\t\t"footer": coalesce(footer[]{\n\t\t\t_type=="ctaMessage" => {\n\t\t\t\t"_kind": "message",\n\t\t\t\t"info": info,\n\t\t\t\t"subtitle": subtitle,\n\t\t\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n\t\t\t    "href": select(       \n\tlinkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,\t\t  \n\tlinkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,\n\tlinkType == "custom"   => href,\n\tlinkType == "file"     => file.asset->url,\n\tlinkType == "none"     => null\n),\n\t\t\t\t"newTab": coalesce(newTab, false), \n\t\t\t},\n\t\t\t_type=="ctaButton" => {\n\t\t\t\t"_kind": "button",\n\t\t\t\t"id": coalesce(_key, _id),\n\t\t\t\t"highlight": coalesce(highlight, false),\n\t\t\t\t"target": coalesce(target, false),\n\t\t\t\t"text": text,\n\t\t\t\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ),\n\t\t\t}\n\t\t}, []),    \n\t\t"textColor": coalesce(textColor, "#ffffff"),   \n\t\t"background": coalesce(background, "#505f66")        \n\t}, []),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),\n    ...select(_type=="solutionsType" => {\n\t_id,\n\t"kind": "solutions",\n\ttitle,\n\t"description": coalesce(description, []),\n\t"content": coalesce(content, []),\n\t"cards": coalesce(cards[]{\n\t\t"id": coalesce(_key, _id),\n\t\ttitle,\n\t\t"content": coalesce(content, []),\n\t\t"image": image{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt, "widthSize": coalesce(widthSize, "normal") },\n\t\t"items": coalesce(items[]{ \n\t\t\t"id": coalesce(_key, _id), \n\t\t\ttitle, \n\t\t\tsubtitle, \n\t\t\ttag, \n\t\t\t"features": coalesce(features, []) \n\t\t}, []),\n\t\t"footer": coalesce(footer[]{\n\t\t\t_type=="ctaMessage" => {\n\t\t\t\t"_kind": "message",\n\t\t\t\t"info": info,\n\t\t\t\t"subtitle": subtitle,\n\t\t\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt, "widthSize": coalesce(widthSize, "normal") },\n\t\t\t\t"href": select(       \n\tlinkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,\t\t  \n\tlinkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,\n\tlinkType == "custom"   => href,\n\tlinkType == "file"     => file.asset->url,\n\tlinkType == "none"     => null\n),\n\t\t\t\t"newTab": coalesce(newTab, false), \n\t\t\t},\n\t\t\t_type=="ctaButton" => {\n\t\t\t\t"_kind": "button",\n\t\t\t\t"id": coalesce(_key, _id),\n\t\t\t\t"highlight": coalesce(highlight, false),\n\t\t\t\t"target": coalesce(target, false),\n\t\t\t\t"text": text,\n\t\t\t\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null )\n\t\t\t}\n\t\t}, []),\n\t\t"textColor": coalesce(textColor, "#ffffff"),\n\t\t"background": coalesce(background, "#505f66"),\n\t\t"rounded": coalesce(rounded, true)\n\t}, []),\n\t"display": coalesce(display, "horizontal"),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),\n\t\t...select(_type=="stepperType" => {\n\t_id,\n\t"kind": "stepper",   \t \n\ttitle,\t\n\t"eyebrow": coalesce(eyebrow, null),\n\t"description": coalesce(description, []),\n\t"steps": coalesce(steps[]{ \n\t\t"id": coalesce(_key, _id), \n\t\tlabel, \n\t\ttitle, \n\t\t"description": coalesce(description, []),  \n\t\t"textColor": coalesce(textColor, undefined), \n\t\t"descColor": coalesce(descColor, undefined),\n\t\t"background": coalesce(background, undefined),\n\t\t"layout": coalesce(layout, "card")\n\t}, []),\n\t"buttons": coalesce(buttons[]{ \n\t"id": coalesce(_key, _id), \n\t"highlight": coalesce(highlight, false), \n\t"target": coalesce(target, false),\n\t"text": text, \n\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) \n}, []),\n\t"disclaimer": coalesce(disclaimer, null),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),\n    ...select(_type=="tableType" => {\n\t_id,\n\t"kind": "table",\n\t"aboveEyebrow": coalesce(aboveEyebrow, null),\n\ttitle,\t\n\t"belowEyebrow": coalesce(belowEyebrow, null),\n\t"description": coalesce(description, []),\n\t"table": coalesce(table.rows[].cells, []),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),\n    ...select(_type=="teamOverviewType" => {\n\t_id,\n\t"kind": "teamOverview",\n\ttitle,\n\tsubtitle,\n    "description": coalesce(description, []),\n\t"members": coalesce(members[]{\n\t\t"id": coalesce(_key, _id),\n\t\tname,\n\t\tposition,\n\t\t"image": image{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt, "widthSize": coalesce(widthSize, "normal") },\n\t\t"bio": coalesce(bio, []),\n\t\t"textColor": coalesce(textColor, null),\n\t\t"background": coalesce(background, null)\t\t\n\t}, []),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t} \n}),\n    ...select(_type=="textImageType" => {\n\t_id,\n\t"kind": "textImage",\n\ttitle,\n\t"aboveTitle": coalesce(aboveTitle, null),\t\n\t"belowTitle": coalesce(belowTitle, null),\n\t"description": coalesce(description, []),\n\t"chips": coalesce(chips, []),\n\t"image": image{ \n        \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, \n        "alt": coalesce(alt, null), \n        "caption": coalesce(caption, null), \n        "captionSub": coalesce(captionSub, null), \n        "credit": coalesce(credit, null),\n        "widthSize": coalesce(widthSize, "normal"),\n        "shape": coalesce(shape, "rounded") \t\t\n    },\n\t"buttons": coalesce(buttons[]{ \n\t"id": coalesce(_key, _id), \n\t"highlight": coalesce(highlight, false), \n\t"target": coalesce(target, false),\n\t"text": text, \n\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) \n}, []),\t \t \n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\t\n}),    \n    ...select(_type=="textOnlyType" => {\n\t_id,\n\t"kind": "text",\n\ttitle,\n\t"aboveTitle": coalesce(aboveTitle, undefined),\t\t\t\t\t\t\n\t"belowTitle": coalesce(belowTitle, undefined),\n\t"content": coalesce(content, []),\t\t\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n})       \n  }, []),\n  "settings": {\n  "showTitle": coalesce(settings.showTitle, true),\n  "showDesc": coalesce(settings.showDesc, true),\n  "shrinkTitle": coalesce(settings.shrinkTitle, false),\n  "alignTitle": coalesce(settings.alignTitle, "left"),\n  "pdTopBottom": coalesce(settings.pdTopBottom, "normal"),\n  "pdDisplay": coalesce(settings.pdDisplay, "both"),\n  "width": coalesce(settings.width, "normal"),\n  "textColor": coalesce(settings.textColor, undefined),\n  "gradientBg": coalesce(settings.gradientBg, "page")\n},\n  "seoMeta": {\n\t"mode": coalesce(seo.mode, "auto"),\n\t"title": coalesce(seo.title, ""),\n\t"description": coalesce(seo.description, ""),\n\t"image": seo.image{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n\t"keywords": coalesce(seo.keywords, ""),\n\t"noindex": coalesce(seo.noindex, false) \n}\n}': PAGE_BY_SLUG_QUERY_RESULT;
+    '*[_type == "post" && slug.current == $slug && !defined(archivedAt)][0]{\n  _id,\n  _type,\n  title,\n  "slug": slug.current,\n  "publishedAt": coalesce(publishedAt, _createdAt),\n   excerpt,\n  "image": image{ \n        \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, \n        "alt": coalesce(alt, null), \n        "caption": coalesce(caption, null), \n        "captionSub": coalesce(captionSub, null), \n        "credit": coalesce(credit, null),\n        "widthSize": coalesce(widthSize, "normal"),\n        "shape": coalesce(shape, "rounded") \t\t\n    },\n\n body[]{\n    ...,\n    _type == "image" => {\n      ...,\n      "alt": coalesce(alt, ""),\n      "caption": coalesce(caption, ""),\n      "link": coalesce(link, ""),\n      "align": coalesce(align, "center"),\n      "target": select(blank == true => "_blank", "_self"),\n      asset->{\n        _id,\n        url,\n        metadata{\n          dimensions{width, height, aspectRatio},\n          lqip, hasAlpha, isOpaque\n        }\n      }\n    }\n  },\n\n  "categories": coalesce(categories[]->{ _id, _type, title, "slug": slug.current, description  }, []), \n  "tags": coalesce(tag[]->{ _id, _type, title, "slug": slug.current, description }, []),\n  "authors": coalesce(author[]->{ _id, _type, name, "slug": slug.current, role, image{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt }, bio  }, []),\n  "sections": coalesce(\n  sections[]->{\n    _id,\n    _type,\t\t \n    ...select(_type=="aboutInfoType" => {\n\t_id,\n\t"kind": "aboutInfo",\n\ttitle,\n\t"description": coalesce(description, []),\n\t"buttons": coalesce(buttons[]{ \n\t"id": coalesce(_key, _id), \n\t"highlight": coalesce(highlight, false), \n\t"target": coalesce(target, false),\n\t"text": text, \n\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) \n}, []),\n\t"collapsibles": coalesce(collapsibles[]{\n\t\t"id": coalesce(_key, _id),\n\t\ttitle,\n\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n\t\t"content": coalesce(content, [])\n\t}, []),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),\n    ...select(_type == "accordionType" => {\n\t\t_id,\n\t\t"kind": "accordion",\n\t\t"eyebrow": coalesce(eyebrow, null),\n\t\ttitle,\n\t\t"subtitle": coalesce(subtitle, ""),\n\t\t"description": coalesce(description, []),\n\t\t"image": image{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt, "widthSize": coalesce(widthSize, "normal"), "shape": coalesce(shape, "rounded") },\t\n\t\t"items": coalesce(\n\t\t\titems[]{\n\t\t\t\t"id": coalesce(_key, _id),\n\t\t\t\ttitle,\n\t\t\t\t"description": coalesce(description, [])       \n\t\t\t},\n\t\t\t[]\n\t\t),\n\t\t"accSettings": {\t\n\t\t\t"design": coalesce(settings.design, "faq"),\n\t\t\t"ordered": coalesce(settings.ordered, false),\n\t\t\t"firstExpanded": coalesce(settings.firstExpanded, false),\n\t\t\t"textColor": coalesce(settings.textColor, undefined),\n\t\t\t"accentColor": coalesce(settings.accentColor, undefined),\n\t\t\t"bgColor": coalesce(settings.background, undefined)\n\t\t},\n\t\t"settings": {\n\t\t\t"titleDesc": {\n\t\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t\t},\n\t\t\t"layout": {\n\t\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t\t"width": coalesce(layout.width, "normal")\n\t\t\t},\n\t\t\t"background": {\n\t\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t\t}\n\t\t}\n\t}\n),\n    ...select(_type=="accreditationType" => {\n\t_id,\n\t"kind": "accreditation",\n\ttitle,\n    "description": coalesce(description, []),\t\n\t"items": coalesce(items[]{\n\t\ttitle,\n\t\ttag,\n\t\t"id": coalesce(_key, _id), \n\t\t"image": image{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt, "widthSize": coalesce(widthSize, "normal") },\t \t\n\t\t"link": link{ "href": select(       \n\tlinkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,\t\t  \n\tlinkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,\n\tlinkType == "custom"   => href,\n\tlinkType == "file"     => file.asset->url,\n\tlinkType == "none"     => null\n), "newTab": coalesce(newTab, false) }\t\n\t}, []),\n\t"accrSettings": {\n\t\t"showTitles": coalesce(accrSettings.showTitles, false),\n\t\t"showTags": coalesce(accrSettings.showTags, true),\n\t\t"displayType": coalesce(accrSettings.displayType, "grid"),\n\t\t"showArrows": coalesce(accrSettings.showArrows, true),\n\t\t"showDots": coalesce(accrSettings.showDots, true),\n\t\t"autoplay": coalesce(accrSettings.autoplay, true),\n\t\t"autoplayInterval": coalesce(accrSettings.autoplayInterval, 7),\n\t\t"itemsPerView": coalesce(accrSettings.itemsPerView, 4)\n\t},\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),\n    ...select(_type=="blogSection" => {\n\t_id,\n\t"kind": "blogSection",\n\ttitle,\n\t"description": coalesce(description, []),\n\t"button": select(\n\tdefined(button[0]) => {\n\t\t"id": coalesce(button[0]._key, button[0]._id),\n\t\t"highlight": coalesce(button[0].highlight, false),\n\t\t"target": coalesce(button[0].target, false),\n\t\t"text": button[0].text,\n\t\t"href": select(\n\t\t\tbutton[0].type == "internal" => "/" + button[0].pageRef->slug.current,\n\t\t\tbutton[0].type == "custom" => button[0].href,\n\t\t\tnull\n\t\t)\n\t},\n\tnull\n),  \t\n\t"blogSettings": {\n\t\t"limit": coalesce(blogOverviewSettings.limit, 3),      \n\t\t"showExcerpt": coalesce(blogOverviewSettings.showExcerpt, true),\n\t\t"showCats": coalesce(blogOverviewSettings.showCats, true),\n\t\t"showTags": coalesce(blogOverviewSettings.showTags, false),\n\t\t"showAuthor": coalesce(blogOverviewSettings.showAuthor, false),\n\t\t"showDate": coalesce(blogOverviewSettings.showDate, true),\n\t},\t\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}   \n}),\n    ...select(_type=="comparisonType" => {\n\t_id,\n\t"kind": "comparison",   \t \n\ttitle,\t\n\t"description": coalesce(description, []),\n    "buttons": coalesce(buttons[]{ \n\t"id": coalesce(_key, _id), \n\t"highlight": coalesce(highlight, false), \n\t"target": coalesce(target, false),\n\t"text": text, \n\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) \n}, []),\n\t"steps": coalesce(steps[]{ \n\t\t"id": coalesce(_key, _id), \n\t\ttitle, \n\t\t"boxes": coalesce(boxes[]{ \n\t\t\t"id": coalesce(_key, _id), \n\t\t\ttitle, \n\t\t\t"description": coalesce(description, []), \n\t\t\t"textColor": coalesce(textColor, "#ffffff"), \n\t\t\t"background": coalesce(background, "#4E8199")\n\t\t}, []),\n\t}, []),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t} \n}),\n    ...select(_type=="contentBlocks" => {\n\t_id,\n\t"kind": "contentBlocks",\n\t"aboveEyebrow": coalesce(aboveEyebrow, null),\t\t \n\t"headline": headline,\t\n\t"belowEyebrow": coalesce(belowEyebrow, null),\t  \n\t"description": coalesce(description, []), \t\n\t"blocks": coalesce(blocks[]{\n\t\t"id": coalesce(_key, _id),\n\t\ttitle,\t\t\n\t\t"tagline": coalesce(tagline, null),\n\t\t"description": coalesce(description, []),\n\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt }\t\n\t}, []),\t\n\n\t"blocksSettings": {\n\t\t"type": coalesce(blocksSettings.type, "box"),\n\t\t"showIcon": coalesce(blocksSettings.showIcon, true),\n\t\t"iconTitle": coalesce(blocksSettings.iconTitle, "stacked"),\n\t\t"perRow": coalesce(blocksSettings.perRow, 3),\n\t\t"collapsible": coalesce(blocksSettings.collapsible, false),\n\t\t"gap": coalesce(blocksSettings.gap, "normal"),\n\t\t"textColor": coalesce(blocksSettings.textColor, undefined),\n\t\t"accentColor": coalesce(blocksSettings.accentColor, undefined),\n\t\t"bgColor": coalesce(blocksSettings.background, undefined),\n\t\t"iconBg": coalesce(blocksSettings.iconBg, undefined)\n\t},\n\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),\n    ...select(_type=="ctaBannerType" => {\n\t_id,\n\t"kind": "ctaBanner",   \n\t"eyebrow": coalesce(eyebrow, null),   \t \n\t"title": headline,\t    \n\t"tagline": coalesce(tagline, null),  \t  \n\t"subheadline": coalesce(subheadline, []),       \n\t"image": image{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, "alt": coalesce(alt, null) },     \n\t"buttons": coalesce(buttons[]{ \n\t"id": coalesce(_key, _id), \n\t"highlight": coalesce(highlight, false), \n\t"target": coalesce(target, false),\n\t"text": text, \n\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) \n}, []), \n\t"ctaSettings": {\n\t\t"innerPadding": coalesce(ctaSettings.innerPadding, "normal"),\n\t\t"ctaGradient": coalesce(ctaSettings.ctaGradient, "banner"),\n\t\t"ctaBgColor": coalesce(ctaSettings.ctaBgColor, undefined)\n\t},\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),    \n    ...select(_type=="formType" => {\n\t_id,\n\t"kind": "form",\n\ttitle,\n\t"subtitle": coalesce(subtitle, ""),\t\n\t"description": coalesce(description, []), \n\t"features": coalesce(features[]{\n\t\t"id": coalesce(_key, _id), \n\t\ttitle, \n\t\t"description": coalesce(description, ""),\n\t\t"ttlSize": coalesce(ttlSize, "small"),\n\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt, "widthSize": coalesce(widthSize, "normal") } \n\t}, []),\n\t"featDisplay": coalesce(featDisplay, "vertical"),\n\t"form": coalesce(form, "customForm"),\n    "formTitle": coalesce(formTitle, ""),\n\t"hubspot": select(\n      form == "hubSpotForm" => hubspot{\n        "region": coalesce(region, "na1"),\n        portalId,\n        formId\n      },   \n      null\n    ),\n\t"fields": coalesce(fields[]{     \n\t\t"id": coalesce(_key, _id),\n\t\ttitle,\n\t\t"hubspotKey": coalesce(hubspotKey, null),\n\t\t"info": coalesce(info, null),\n\t\t"type": coalesce(type, "text"),\n\t\t"placeholder": coalesce(placeholder, null),       \n\t\t"options": coalesce(options[], []),\n\t\t"cbxOptions": coalesce(cbxOptions[]{\n\t\t\t"id": coalesce(_key, _id),\n\t\t\t"label": coalesce(label, []),\n\t\t\t"value": coalesce(value, ""),\n\t\t\t"required": coalesce(required, false),\n\t\t\t"checked": coalesce(checked, false)\n\t\t}, []),\n\t\t"optLayout": coalesce(optLayout, "vertical"),\n\t\t"required": coalesce(required, false),\n\t\t"size": coalesce(size, "full")\n\t}, []),\n\t"btnLabel": coalesce(btnLabel, "Send Message"),    \n\t"footer": coalesce(footer, []),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),  \n    ...select(_type=="topHeroType" => {\n\t_id,\n\t"kind": "hero",\n\t"aboveTitle": coalesce(aboveHeadline, null),\t\t \n\t"title": headline,\t\n\t"belowTitle": coalesce(belowHeadline, null),\t  \n\t"subheadline": coalesce(subheadline, []), \n\t"features": coalesce(features[]{ \n\t\t"id": coalesce(_key, _id), \n\t\t"eyebrow": coalesce(eyebrow, null),\n\t\ttitle, \n\t\t"description": coalesce(description, ""), \n\t\t"ttlSize": coalesce(ttlSize, "small"),\n\t\t"layout": coalesce(layout, "text"),\n\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt } \n\t}, []),\n\t"featDisplay": coalesce(featDisplay, "vertical"),\n\t"image": image{ \n        \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n,\n        "alt": coalesce(alt, null),\n        "widthSize": coalesce(widthSize, "normal"),\n        "shape": coalesce(shape, "rounded")\n     },\n\t"eyebrowImage": eyebrowImage{ \n        \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n,\n        "alt": coalesce(alt, null),\n        "widthSize": coalesce(widthSize, "normal"),\n        "shape": coalesce(shape, "rounded")\n     },\n\t"buttons": coalesce(buttons[]{ \n\t"id": coalesce(_key, _id), \n\t"highlight": coalesce(highlight, false), \n\t"target": coalesce(target, false),\n\t"text": text, \n\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) \n}, []),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}), \n    ...select(_type=="keyFeaturesType" => {\n\t_id,\n\t"kind": "keyFeatures",\n\t"topHeadline": topHeadline,\n\t"description": coalesce(description, []),\n\t"bottomHeadline": bottomHeadline,\n\t"cards": coalesce(cards[]{        \n\t\ttitle,\n\t\t"id": coalesce(_key, _id), \n\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n\t\t"description": coalesce(description, [])\n\t}, []),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),\n    ...select(_type=="mapType" => {\n    _id,\n    "kind": "mapSection",\n    title,\n    "subtitle": coalesce(subtitle, ""),\n    "description": coalesce(description, []),\n    "embedUrl": coalesce(embedUrl, ""),\n    "fullScreen": coalesce(fullScreen, false),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}      \n}),\n    ...select(_type=="productsType" => {\n\t_id,\n\t"kind": "products",\n\ttitle,\n\t"description": coalesce(description, []),\n\t"cards": coalesce(cards[]{\n\t\t"id": coalesce(_key, _id),\n\t\ttitle,\n\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n\t\t"description": coalesce(description, []),\n\t\t"features": coalesce(features[]{\n\t\t\t"id": coalesce(_key, _id), \n\t\t\ttitle, \n\t\t\t"description": coalesce(description, ""),\n\t\t\t"ttlSize": coalesce(ttlSize, "small"),\n\t\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt } \n\t\t}, []),\n\t\t"featDisplay": coalesce(featDisplay, "vertical"),\n\t\t"addons": coalesce(addons, []),\n\t\t"footer": coalesce(footer[]{\n\t\t\t_type=="ctaMessage" => {\n\t\t\t\t"_kind": "message",\n\t\t\t\t"info": info,\n\t\t\t\t"subtitle": subtitle,\n\t\t\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n\t\t\t    "href": select(       \n\tlinkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,\t\t  \n\tlinkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,\n\tlinkType == "custom"   => href,\n\tlinkType == "file"     => file.asset->url,\n\tlinkType == "none"     => null\n),\n\t\t\t\t"newTab": coalesce(newTab, false), \n\t\t\t},\n\t\t\t_type=="ctaButton" => {\n\t\t\t\t"_kind": "button",\n\t\t\t\t"id": coalesce(_key, _id),\n\t\t\t\t"highlight": coalesce(highlight, false),\n\t\t\t\t"target": coalesce(target, false),\n\t\t\t\t"text": text,\n\t\t\t\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ),\n\t\t\t}\n\t\t}, []),    \n\t\t"textColor": coalesce(textColor, "#ffffff"),   \n\t\t"background": coalesce(background, "#505f66")        \n\t}, []),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),\n    ...select(_type=="solutionsType" => {\n\t_id,\n\t"kind": "solutions",\n\ttitle,\n\t"description": coalesce(description, []),\n\t"content": coalesce(content, []),\n\t"cards": coalesce(cards[]{\n\t\t"id": coalesce(_key, _id),\n\t\ttitle,\n\t\t"content": coalesce(content, []),\n\t\t"image": image{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt, "widthSize": coalesce(widthSize, "normal") },\n\t\t"items": coalesce(items[]{ \n\t\t\t"id": coalesce(_key, _id), \n\t\t\ttitle, \n\t\t\tsubtitle, \n\t\t\ttag, \n\t\t\t"features": coalesce(features, []) \n\t\t}, []),\n\t\t"footer": coalesce(footer[]{\n\t\t\t_type=="ctaMessage" => {\n\t\t\t\t"_kind": "message",\n\t\t\t\t"info": info,\n\t\t\t\t"subtitle": subtitle,\n\t\t\t\t"icon": icon{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt, "widthSize": coalesce(widthSize, "normal") },\n\t\t\t\t"href": select(       \n\tlinkType == "internal" && pageRef->_type == "page" => "/" + pageRef->slug.current,\t\t  \n\tlinkType == "internal" && pageRef->_type == "post" => "/blog/" + pageRef->slug.current,\n\tlinkType == "custom"   => href,\n\tlinkType == "file"     => file.asset->url,\n\tlinkType == "none"     => null\n),\n\t\t\t\t"newTab": coalesce(newTab, false), \n\t\t\t},\n\t\t\t_type=="ctaButton" => {\n\t\t\t\t"_kind": "button",\n\t\t\t\t"id": coalesce(_key, _id),\n\t\t\t\t"highlight": coalesce(highlight, false),\n\t\t\t\t"target": coalesce(target, false),\n\t\t\t\t"text": text,\n\t\t\t\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null )\n\t\t\t}\n\t\t}, []),\n\t\t"textColor": coalesce(textColor, "#ffffff"),\n\t\t"background": coalesce(background, "#505f66"),\n\t\t"rounded": coalesce(rounded, true)\n\t}, []),\n\t"display": coalesce(display, "horizontal"),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),\n\t\t...select(_type=="stepperType" => {\n\t_id,\n\t"kind": "stepper",   \t \n\ttitle,\t\n\t"eyebrow": coalesce(eyebrow, null),\n\t"description": coalesce(description, []),\n\t"steps": coalesce(steps[]{ \n\t\t"id": coalesce(_key, _id), \n\t\tlabel, \n\t\ttitle, \n\t\t"description": coalesce(description, []),  \n\t\t"textColor": coalesce(textColor, undefined), \n\t\t"descColor": coalesce(descColor, undefined),\n\t\t"background": coalesce(background, undefined),\n\t\t"layout": coalesce(layout, "card")\n\t}, []),\n\t"buttons": coalesce(buttons[]{ \n\t"id": coalesce(_key, _id), \n\t"highlight": coalesce(highlight, false), \n\t"target": coalesce(target, false),\n\t"text": text, \n\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) \n}, []),\n\t"disclaimer": coalesce(disclaimer, null),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),\n    ...select(_type=="tableType" => {\n\t_id,\n\t"kind": "table",\n\t"aboveEyebrow": coalesce(aboveEyebrow, null),\n\ttitle,\t\n\t"belowEyebrow": coalesce(belowEyebrow, null),\n\t"description": coalesce(description, []),\n\t"table": coalesce(table.rows[].cells, []),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n}),\n    ...select(_type=="teamOverviewType" => {\n\t_id,\n\t"kind": "teamOverview",\n\ttitle,\n\tsubtitle,\n    "description": coalesce(description, []),\n\t"members": coalesce(members[]{\n\t\t"id": coalesce(_key, _id),\n\t\tname,\n\t\tposition,\n\t\t"image": image{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt, "widthSize": coalesce(widthSize, "normal") },\n\t\t"bio": coalesce(bio, []),\n\t\t"textColor": coalesce(textColor, null),\n\t\t"background": coalesce(background, null)\t\t\n\t}, []),\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t} \n}),\n    ...select(_type=="textImageType" => {\n\t_id,\n\t"kind": "textImage",\n\ttitle,\n\t"aboveTitle": coalesce(aboveTitle, null),\t\n\t"belowTitle": coalesce(belowTitle, null),\n\t"description": coalesce(description, []),\n\t"chips": coalesce(chips, []),\n\t"image": image{ \n        \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, \n        "alt": coalesce(alt, null), \n        "caption": coalesce(caption, null), \n        "captionSub": coalesce(captionSub, null), \n        "credit": coalesce(credit, null),\n        "widthSize": coalesce(widthSize, "normal"),\n        "shape": coalesce(shape, "rounded") \t\t\n    },\n\t"buttons": coalesce(buttons[]{ \n\t"id": coalesce(_key, _id), \n\t"highlight": coalesce(highlight, false), \n\t"target": coalesce(target, false),\n\t"text": text, \n\t"href": select( type=="internal" => "/" + pageRef->slug.current, type=="custom" => href, null ) \n}, []),\t \t \n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\t\n}),    \n    ...select(_type=="textOnlyType" => {\n\t_id,\n\t"kind": "text",\n\ttitle,\n\t"aboveTitle": coalesce(aboveTitle, undefined),\t\t\t\t\t\t\n\t"belowTitle": coalesce(belowTitle, undefined),\n\t"content": coalesce(content, []),\t\t\n\t"settings": {\n\t\t"titleDesc": {\n\t\t\t"showTitle": coalesce(titleDesc.showTitle, true),\n\t\t\t"showDesc": coalesce(titleDesc.showDesc, false),\t\n\t\t\t"shrinkTitle": coalesce(titleDesc.shrinkTitle, false),\n\t\t\t"titleTag": coalesce(titleDesc.titleTag, "h2"),\n\t\t\t"textColor": coalesce(titleDesc.textColor, undefined),\n\t\t\t"accentColor": coalesce(titleDesc.accentColor, undefined)\n\t\t},\n\t\t"layout": {\n\t\t\t"pdTopBottom": coalesce(layout.pdTopBottom, "medium"),\n\t\t\t"pdDisplay": coalesce(layout.pdDisplay, "both"),\n\t\t\t"template": coalesce(layout.template, "normal"),\n\t\t\t"columns": coalesce(layout.columns, "normal"),\n\t\t\t"width": coalesce(layout.width, "normal")\n\t\t},\n\t\t"background": {\n\t\t\t"type": coalesce(background.type, "none"),\n\t\t\t"bgColor": coalesce(background.color, undefined),\n\t\t\t"image": coalesce(background{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n }, null),\n\t\t\t"ovlColor": coalesce(background.ovlColor, undefined),\n\t\t\t"ovlBlend": coalesce(background.ovlBlend, "overlay"),\n\t\t\t"ovlOpacity": coalesce(background.ovlOpacity, 50),\n\t\t\t"gradient": coalesce(background.gradient, "banner")\n\t\t}\n\t}\n})       \n  }, []), \n  "settings": {\n\t"showCats": coalesce(settings.showCats, false),\n\t"showTags": coalesce(settings.showTags, true),\n\t"showAuthor": coalesce(settings.showAuthor, true),\n\t"showDate": coalesce(settings.showDate, true),\n\t"alignTitle": coalesce(settings.alignTitle, "center"),\n\t"pdTopBottom": coalesce(settings.pdTopBottom, "normal"),\n\t"pdDisplay": coalesce(settings.pdDisplay, "both"),\n\t"textColor": coalesce(settings.textColor, undefined),\n\t"gradientBg": coalesce(settings.gradientBg, "post")\n  }\n,\n  "seoMeta": {\n\t"mode": coalesce(seo.mode, "auto"),\n\t"title": coalesce(seo.title, ""),\n\t"description": coalesce(seo.description, ""),\n\t"image": seo.image{ \n\t"image": select(\n\t\tdefined(image.asset->url) => image{\n\t\t\tasset->{\n\t\t\t\t_id,\n\t\t\t\turl,\n\t\t\t\t"metadata": {\n\t\t\t\t\t"dimensions": metadata.dimensions\n\t\t\t\t}\n\t\t\t}\n\t\t},\n\t\tnull\n\t)\n, alt },\n\t"keywords": coalesce(seo.keywords, ""),\n\t"noindex": coalesce(seo.noindex, false) \n}\n}': POST_BY_SLUG_QUERY_RESULT;
   }
 }

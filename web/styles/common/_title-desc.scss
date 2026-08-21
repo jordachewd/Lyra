@@ -1,0 +1,81 @@
+@use './../mixins' as *;
+@use './../variables' as *;
+
+.lyraTitleDesc {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+
+  &.center:not(.shrink) {
+    @include lyraMediaQuery($mq-desktop) {
+      max-width: 65%;
+    }
+  }
+
+  &.shrink {
+    &.center {
+      margin: 0 auto;
+      @include lyraMediaQuery($mq-desktop) {
+        max-width: 50%;
+      }
+    }
+
+    &.right {
+      margin-left: auto;
+      @include lyraMediaQuery($mq-desktop) {
+        max-width: 50%;
+      }
+    }
+
+    @include lyraMediaQuery($mq-desktop) {
+      max-width: 50%;
+    }
+  }
+
+  &-eyebrow,
+  &-title,
+  &-desc {
+    width: 100%;
+    display: flex;
+    color: var(--TitleDesc-txt, var(--pgHeadColor-txt, inherit));
+  }
+
+  &-eyebrow {
+    color: var(--TitleDesc-accent, var(--pgHeadColor-txt, var(--TitleDesc-txt, inherit)));
+
+    &.above {
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      font-size: 0.8125rem;
+      opacity: 0.75;
+    }
+
+    &.below {
+      margin-top: 1.25rem;
+    }
+  }
+
+  &-desc {
+    margin-top: 1.25rem;
+    flex-direction: column;
+  }
+
+  &.right .lyraTitleDesc {
+    &-eyebrow,
+    &-title,
+    &-desc {
+      justify-content: flex-end;
+      text-align: right;
+    }
+  }
+
+  &.center .lyraTitleDesc {
+    &-eyebrow,
+    &-title,
+    &-desc {
+      justify-content: center;
+      text-align: center;
+    }
+  }
+}
