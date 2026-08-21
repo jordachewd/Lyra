@@ -1,26 +1,26 @@
 # Lyra — Content Studio
 
 The editorial home of the Lyra website, built on
-[Sanity Studio v6](https://www.sanity.io/studio). Everything the site shows —
-pages, blog posts, navigation, footer, and site-wide settings — is created and
+[Sanity Studio v6](https://www.sanity.io/studio). Everything the site shows -
+pages, blog posts, navigation, footer, and site-wide settings - is created and
 published here. The website in [`../web`](../web) picks up changes within
 seconds of publishing.
 
 ## What editors can do
 
-- **Build pages from reusable sections** — author a section once (a hero, a
+- **Build pages from reusable sections** - author a section once (a hero, a
   feature grid, a stepper, a comparison table…) and reuse it on any page.
   A dedicated view surfaces sections that are no longer used anywhere.
-- **Write and organize the blog** — posts with authors, categories, and tags,
+- **Write and organize the blog** - posts with authors, categories, and tags,
   rich text with images, code blocks, and tables
-- **Control the site's look** — header (dropdown or mega-menu navigation),
+- **Control the site's look** - header (dropdown or mega-menu navigation),
   footer, brand colors, and per-section layout options
-- **Manage site-wide settings** — general info, SEO defaults, reading
+- **Manage site-wide settings** - general info, SEO defaults, reading
   settings, and analytics/tracking configuration, each in a single dedicated
   document
-- **Archive instead of delete** — pages and posts support soft archiving with
+- **Archive instead of delete** - pages and posts support soft archiving with
   one-click restore
-- **Stay safe** — core pages (home, blog) are protected from deletion,
+- **Stay safe** - core pages (home, blog) are protected from deletion,
   unpublishing, and slug changes
 
 ## Stack
@@ -53,12 +53,12 @@ npm run dev                  # http://localhost:3333
 
 ## Configuration
 
-The Studio is configured entirely through environment variables — see
+The Studio is configured entirely through environment variables - see
 [`.env.example`](.env.example). No project identifiers or credentials are
 stored in the source code.
 
 ## License
 
 This project is **not** open source. It is published for reference and
-evaluation purposes only — see [LICENSE](../LICENSE) at the repository root
+evaluation purposes only - see [LICENSE](../LICENSE) at the repository root
 for the full terms.
