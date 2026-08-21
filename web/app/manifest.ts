@@ -10,11 +10,9 @@ export default function manifest(): MetadataRoute.Manifest {
     display: 'standalone',
     background_color: '#ffffff',
     theme_color: '#0a2540',
-    icons: [
-      {src: '/favicon-16x16.png', sizes: '16x16', type: 'image/png'},
-      {src: '/favicon-32x32.png', sizes: '32x32', type: 'image/png'},
-      {src: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png'},
-    ],
+    // `icons` is omitted while no brand icon files ship. Listing entries that
+    // 404 makes the manifest invalid for installability; an absent list is
+    // merely incomplete. Add them back alongside real files in `app/`.
     scope: '/',
     id: isProduction ? siteUrl : '/',
   }

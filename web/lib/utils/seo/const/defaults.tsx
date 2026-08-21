@@ -11,10 +11,6 @@ export const SEO_DEFAULTS = {
   title: 'Lyra',
   description: 'Lyra',
 
-  logoPng: '/logos/lyra_logo.png',
-  orgLogo: 'https://lyra.jwd-apps.com/assets/lyra-logo-hor.svg',
-  orgImage: 'https://lyra.jwd-apps.com/logos/lyra_logo.png',
-
   twitter: '',
   linkedin: '',
 

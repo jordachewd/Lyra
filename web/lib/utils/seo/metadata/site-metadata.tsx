@@ -19,7 +19,7 @@ export async function getSiteMeta(): Promise<SiteMetadata> {
   const siteDesc = gen?.siteDescription ?? SEO_DEFAULTS.description
 
   const siteImage = gen?.siteImage?.image as AnyImageField | undefined
-  const siteImgUrl = siteImage ? urlFor(siteImage).url() : SEO_DEFAULTS.orgImage
+  const siteImgUrl = siteImage ? urlFor(siteImage).url() : undefined
 
   const siteUrl = (gen?.siteUrl ?? defaultUrl).replace(/\/+$/, '')
   const siteEmail = gen?.siteEmail ?? SEO_DEFAULTS.email

@@ -1,5 +1,4 @@
 import {SiteMetadata} from '@/lib/types/metadata-site'
-import {SEO_DEFAULTS} from '../const/defaults'
 import type {JsonLd} from '@/lib/types/seo'
 
 export function buildRootLayoutJsonLd(ctx: SiteMetadata): JsonLd {
@@ -9,10 +8,7 @@ export function buildRootLayoutJsonLd(ctx: SiteMetadata): JsonLd {
     name: ctx.siteName,
     url: ctx.siteUrl,
     description: ctx.siteDesc,
-    logo: {
-      '@type': 'ImageObject',
-      url: SEO_DEFAULTS.orgLogo,
-    },
+    logo: ctx.siteImgUrl ? {'@type': 'ImageObject', url: ctx.siteImgUrl} : undefined,
     image: ctx.siteImgUrl,
     address: {
       '@type': 'PostalAddress',
