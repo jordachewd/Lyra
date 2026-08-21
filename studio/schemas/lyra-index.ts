@@ -1,4 +1,3 @@
-import {portalSchema} from './portal-index'
 import {aboveMenuItemType} from './website/objects/menus/aboveMenuItem'
 import {siteFooter} from './website/documents/appearance/footer'
 import {siteHeader} from './website/documents/appearance/header'
@@ -26,8 +25,6 @@ import {solutionsType} from './website/documents/sections/solutions'
 import {stepperType} from './website/documents/sections/stepper'
 import {tableType} from './website/documents/sections/table'
 import {teamOverviewType} from './website/documents/sections/teamOverview'
-import {textBlocksType} from './website/documents/sections/textBlocks'
-import {textCardsType} from './website/documents/sections/textCards'
 import {textImageType} from './website/documents/sections/textImageType'
 import {textOnlyType} from './website/documents/sections/textOnlyType'
 import {generalSettings} from './website/documents/settings/general'
@@ -56,8 +53,6 @@ import {solutionCard} from './website/objects/ui/solutionCard'
 import {solutionItem} from './website/objects/ui/solutionItem'
 import {stepperItem} from './website/objects/ui/stepperItem'
 import {teamMember} from './website/objects/ui/teamMember'
-import {textBlock} from './website/objects/ui/textBlock'
-import {textCard} from './website/objects/ui/textCard'
 import {ctaButton} from './website/objects/ui/ctaButton'
 import {ctaMessage} from './website/objects/ui/ctaMessage'
 import {fileWithMeta} from './website/objects/ui/fileWithMeta'
@@ -70,11 +65,7 @@ import {trackingSettings} from './website/documents/settings/tracking'
 import {seoMeta} from './website/objects/seo/seoMeta'
 import {postSettings} from './website/objects/settings/postSettings'
 import {blogSettings} from './website/objects/settings/blogSettings'
-import {webinarPage} from './website/documents/webinars/webinarPage'
-import {webinarCat} from './website/documents/webinars/webinarCat'
 import {linkField} from './website/objects/ui/linkField'
-import {webinarsSettings} from './website/objects/settings/webinarsSettings'
-import {webinars} from './website/documents/settings/webinars'
 import {cmmTtlDescSettings} from './website/objects/settings/common/cmmTtlDescSettings'
 import {cmmLySettings} from './website/objects/settings/common/cmmLySettings'
 import {cmmBgSettings} from './website/objects/settings/common/cmmBgSettings'
@@ -84,11 +75,8 @@ import {contentBlocks} from './website/documents/sections/contentBlocks'
 import {contentBlock} from './website/objects/ui/contentBlock'
 import {blogOverviewSettings} from './website/objects/settings/sections/blogOverview'
 import {accreditationSettings} from './website/objects/settings/sections/accreditationSettings'
-import {webinarThankYou} from './website/objects/settings/webinarThankYou'
 
-export const arratechSchema = [
-  ...portalSchema,
-
+export const lyraSchema = [
   /* Pages */
   pageType,
   pageSettings,
@@ -99,13 +87,6 @@ export const arratechSchema = [
   authorType,
   categoryType,
   tagType,
-
-  /* Webinars */
-  webinars,
-  webinarsSettings,
-  webinarThankYou,
-  webinarPage,
-  webinarCat,
 
   /* Sections */
   aboutInfoType,
@@ -128,8 +109,6 @@ export const arratechSchema = [
   tableType,
   teamOverviewType,
   textImageType,
-  textBlocksType,
-  textCardsType,
   textOnlyType,
   topHeroType,
 
@@ -164,8 +143,6 @@ export const arratechSchema = [
   solutionCard,
   solutionItem,
   teamMember,
-  textBlock,
-  textCard,
   linkField,
   cmmTtlDescSettings,
   cmmLySettings,
