@@ -48,17 +48,17 @@ export default function Hero({
   const feats = features ?? []
 
   const featClass = classNames(
-    'arrHero-features',
+    'lyraHero-features',
     featDisplay || 'vertical',
     shrinkTitle && 'shrink',
     align,
   )
 
   return (
-    <SectionWrapper id={`hero-${_id}`} settings={settings as SectionSettings} className="arrHero">
-      <div className="arrHero-content">
+    <SectionWrapper id={`hero-${_id}`} settings={settings as SectionSettings} className="lyraHero">
+      <div className="lyraHero-content">
         {hasEyebrowImg && (
-          <div className={`arrHero-eyebrowImage ${eyebrowImgShape}`}>
+          <div className={`lyraHero-eyebrowImage ${eyebrowImgShape}`}>
             <RenderImage
               image={eyebrowImage}
               alt={eyebrowImgAlt}
@@ -92,13 +92,13 @@ export default function Hero({
         {hasBtns && (
           <SectionButtons
             buttons={buttons}
-            className={`arrHero-actions ${align}`}
+            className={`lyraHero-actions ${align}`}
             location={`${title} section`}
           />
         )}
       </div>
 
-      <div className={`arrHero-image ${imgShape}`}>
+      <div className={`lyraHero-image ${imgShape}`}>
         {hasImg && (
           <RenderImage
             image={image}

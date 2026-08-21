@@ -1,5 +1,5 @@
 version: 0.1
-contact: info@arratech.com
+contact: info@lyra.jwd-apps.com
 policy:
   crawl: allow
   cache: allow
@@ -8,4 +8,4 @@ policy:
   attribute: require
   rate_limit: 1 rps
   commercial_use: disallow
-notes: Please link back to https://www.arratech.com when quoting.
+notes: Please link back to https://lyra.jwd-apps.com when quoting.

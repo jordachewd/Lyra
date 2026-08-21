@@ -27,10 +27,10 @@ export default function TextOnlySection({
     <SectionWrapper
       id={`text-only-${_id}`}
       settings={settings as SectionSettings}
-      className="arrTextOnly"
+      className="lyraTextOnly"
     >
       {showTitle && (
-        <div className="arrTextOnly-title">
+        <div className="lyraTextOnly-title">
           <TitleDesc
             title={title}
             above={aboveTitle || undefined}
@@ -43,7 +43,7 @@ export default function TextOnlySection({
 
       {hasDesc && showDesc && (
         <RichText
-          className="arrTextOnly-content"
+          className="lyraTextOnly-content"
           value={content as RichTextPropValue}
           textColor={textColor as SanityColor}
           accentColor={accentColor as SanityColor}

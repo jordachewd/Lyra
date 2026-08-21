@@ -63,25 +63,25 @@ export default function ConsentDialogClient({initial, show}: Props) {
   const actions =
     view === 'banner' ? (
       <div className="consent__actions">
-        <button className="arrButton highlighted" onClick={acceptAll} disabled={pending}>
+        <button className="lyraButton highlighted" onClick={acceptAll} disabled={pending}>
           Accept all
         </button>
-        <button className="arrButton highlighted" onClick={rejectAll} disabled={pending}>
+        <button className="lyraButton highlighted" onClick={rejectAll} disabled={pending}>
           Reject all
         </button>
-        <button className="arrButton" onClick={() => setView('modal')} disabled={pending}>
+        <button className="lyraButton" onClick={() => setView('modal')} disabled={pending}>
           Customize
         </button>
       </div>
     ) : (
       <div className="consent__actions consent__actions--modal">
-        <button className="arrButton highlighted" onClick={saveCustom} disabled={pending}>
+        <button className="lyraButton highlighted" onClick={saveCustom} disabled={pending}>
           Save choices
         </button>
-        <button className="arrButton highlighted" onClick={acceptAll} disabled={pending}>
+        <button className="lyraButton highlighted" onClick={acceptAll} disabled={pending}>
           Accept all
         </button>
-        <button className="arrButton" onClick={rejectAll} disabled={pending}>
+        <button className="lyraButton" onClick={rejectAll} disabled={pending}>
           Reject all
         </button>
       </div>

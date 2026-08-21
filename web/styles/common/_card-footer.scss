@@ -1,7 +1,7 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrCardFooter {
+.lyraCardFooter {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -10,7 +10,7 @@
   padding-top: 1.5rem;
   gap: 1.5rem;
 
-  @include arrMediaQuery($mq-tablet) {
+  @include lyraMediaQuery($mq-tablet) {
     flex-direction: row;
     gap: 1rem;
   }
@@ -38,10 +38,10 @@
     display: flex;
     flex-direction: column;
     flex: 1 1 calc(100% - 44px - 1rem);
-    @include arrTextTypography(0.875rem, 300, 1.2);
+    @include lyraTextTypography(0.875rem, 300, 1.2);
     color: var(--cardFooter-txt, var(--text-primary));
 
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       flex: 1 1 auto;
     }
 
@@ -59,8 +59,8 @@
 
   &-link {
     text-decoration: none;
-    @include arrTransition(opacity, 0.25s);
-    @include arrHover {
+    @include lyraTransition(opacity, 0.25s);
+    @include lyraHover {
       opacity: 0.65;
     }
   }
@@ -71,7 +71,7 @@
     display: flex;
     align-items: center;
 
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       width: auto;
       flex: auto;
     }
@@ -82,14 +82,14 @@
     justify-content: flex-end;
     align-items: center;
     width: 100%;
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       width: auto;
       flex: auto;
     }
 
-    & > .arrButton {
+    & > .lyraButton {
       flex: 1;
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraMediaQuery($mq-tablet) {
         flex: none;
       }
     }

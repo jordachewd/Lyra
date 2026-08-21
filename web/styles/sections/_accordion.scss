@@ -1,13 +1,13 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrAccordion {
+.lyraAccordion {
   &-content {
     display: flex;
     gap: 1.25rem;
     flex-direction: column;
-    @include arrTextTypography(16px, 300, 1.3);
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraTextTypography(16px, 300, 1.3);
+    @include lyraMediaQuery($mq-tablet) {
       gap: 1.75rem;
     }
   }
@@ -20,7 +20,7 @@
   }
 
   &:has(&-wrapper.reversed) &-content {
-    .arrTitleDesc {
+    .lyraTitleDesc {
       &.right.shrink {
         margin-left: 0;
       }
@@ -52,12 +52,12 @@
       display: flex;
     }
 
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       flex-direction: row;
     }
 
     &-letter {
-      @include arrTextTypography(3rem, 300, 1);
+      @include lyraTextTypography(3rem, 300, 1);
       color: var(--accordionItem-txt, var(--text-primary));
       min-width: 3.5rem;
     }
@@ -80,8 +80,8 @@
     }
 
     &.faq {
-      @include arrTransition(border-color, 0.25s);
-      @include arrBackdropBlur(8px, rgba(var(--accordionItem-bgRgb, 255, 255, 255), 0.15));
+      @include lyraTransition(border-color, 0.25s);
+      @include lyraBackdropBlur(8px, rgba(var(--accordionItem-bgRgb, 255, 255, 255), 0.15));
       padding: 1rem;
       min-height: 56px;
       border-radius: 0.75rem;
@@ -91,7 +91,7 @@
       }
     }
 
-    &.glossary .arrAccordion {
+    &.glossary .lyraAccordion {
       &-question {
         justify-content: flex-start;
         &-text {
@@ -106,7 +106,7 @@
         border-radius: 0.75rem;
         padding: 0 1rem;
         margin-left: 2.25rem;
-        @include arrBackdropBlur(8px, rgba(var(--accordionItem-bgRgb, 255, 255, 255), 0.15));
+        @include lyraBackdropBlur(8px, rgba(var(--accordionItem-bgRgb, 255, 255, 255), 0.15));
         &.open {
           padding: 1rem;
         }
@@ -197,7 +197,7 @@
     }
   }
 
-  &-answerWrap.open .arrAccordion-answer {
+  &-answerWrap.open .lyraAccordion-answer {
     transform: translateY(0);
   }
 

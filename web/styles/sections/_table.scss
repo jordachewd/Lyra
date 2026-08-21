@@ -1,7 +1,7 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrTableSection {
+.lyraTableSection {
   &-wrapper {
     flex-direction: column;
     &.centered > div,

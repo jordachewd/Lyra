@@ -16,7 +16,7 @@ export default function HubspotFormEmbed({
   formId,
   className,
 }: HubspotFormClientProps) {
-  const formClasses = classNames('arrHubspotForm', 'hs-form-frame', className)
+  const formClasses = classNames('lyraHubspotForm', 'hs-form-frame', className)
 
   return (
     <>

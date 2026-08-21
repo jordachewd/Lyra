@@ -28,7 +28,7 @@ export function resolveOgImages(
 
     const dims = asset?.metadata?.dimensions
     const imgAlt = typeof si?.alt === 'string' && si.alt?.trim()
-    const alt = imgAlt || 'Arratech Image'
+    const alt = imgAlt || 'Lyra Image'
 
     items.push({
       url,

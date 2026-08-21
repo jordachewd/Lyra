@@ -1,10 +1,10 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrButton {
+.lyraButton {
   /* Vars */
-  --arrBtnHoverBg: rgba(255, 255, 255, 0.25);
-  --arrBtnBoxShadow: 0 0 1rem 0 #ffffff4d;
+  --lyraBtnHoverBg: rgba(255, 255, 255, 0.25);
+  --lyraBtnBoxShadow: 0 0 1rem 0 #ffffff4d;
   /* --- */
   display: flex;
   align-items: center;
@@ -23,8 +23,8 @@
   -moz-user-select: none;
   -ms-user-select: none;
   -webkit-tap-highlight-color: transparent;
-  @include arrTextTypography(0.875rem, 600, 1, 0.03em);
-  @include arrTransition;
+  @include lyraTextTypography(0.875rem, 600, 1, 0.03em);
+  @include lyraTransition;
   word-break: normal;
   word-wrap: normal;
   cursor: pointer;
@@ -58,11 +58,11 @@
   &.highlighted {
     color: var(--text-secondary);
     background: var(--text-primary);
-    box-shadow: var(--arrBtnBoxShadow);
+    box-shadow: var(--lyraBtnBoxShadow);
 
-    @include arrHover {
+    @include lyraHover {
       color: var(--text-primary);
-      background: var(--arrBtnHoverBg);
+      background: var(--lyraBtnHoverBg);
     }
 
     &:disabled {
@@ -73,9 +73,9 @@
   }
 
   &:not(.highlighted) {
-    @include arrHover {
+    @include lyraHover {
       color: var(--text-primary);
-      background: var(--arrBtnHoverBg);
+      background: var(--lyraBtnHoverBg);
     }
 
     &:disabled {

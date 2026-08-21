@@ -1,7 +1,7 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrMain {
+.lyraMain {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -12,22 +12,22 @@
     width: 100%;
     padding: 0;
 
-    & .arrSection:first-child,
-    & .arrPost-header:first-child {
+    & .lyraSection:first-child,
+    & .lyraPost-header:first-child {
       &.ptb {
         &_normal {
           padding-top: 7rem;
 
-          @include arrMediaQuery($mq-tablet) {
+          @include lyraMediaQuery($mq-tablet) {
             padding-top: 9.05rem;
-            body:has(> .arrHeader.has-above-menu) & {
+            body:has(> .lyraHeader.has-above-menu) & {
               padding-top: 10.75rem;
             }
           }
 
-          @include arrMediaQuery($site-width) {
+          @include lyraMediaQuery($site-width) {
             padding-top: 11rem;
-            body:has(> .arrHeader.has-above-menu) & {
+            body:has(> .lyraHeader.has-above-menu) & {
               padding-top: 12.75rem;
             }
           }
@@ -36,16 +36,16 @@
         &_medium {
           padding-top: 6rem;
 
-          @include arrMediaQuery($mq-tablet) {
+          @include lyraMediaQuery($mq-tablet) {
             padding-top: 7.55rem;
-            body:has(> .arrHeader.has-above-menu) & {
+            body:has(> .lyraHeader.has-above-menu) & {
               padding-top: 9.25rem;
             }
           }
 
-          @include arrMediaQuery($site-width) {
+          @include lyraMediaQuery($site-width) {
             padding-top: 9rem;
-            body:has(> .arrHeader.has-above-menu) & {
+            body:has(> .lyraHeader.has-above-menu) & {
               padding-top: 10.75rem;
             }
           }
@@ -54,16 +54,16 @@
         &_half {
           padding-top: 5.5rem;
 
-          @include arrMediaQuery($mq-tablet) {
+          @include lyraMediaQuery($mq-tablet) {
             padding-top: 6.8rem;
-            body:has(> .arrHeader.has-above-menu) & {
+            body:has(> .lyraHeader.has-above-menu) & {
               padding-top: 8.5rem;
             }
           }
 
-          @include arrMediaQuery($site-width) {
+          @include lyraMediaQuery($site-width) {
             padding-top: 8rem;
-            body:has(> .arrHeader.has-above-menu) & {
+            body:has(> .lyraHeader.has-above-menu) & {
               padding-top: 9.75rem;
             }
           }
@@ -72,16 +72,16 @@
         &_small {
           padding-top: 5rem;
 
-          @include arrMediaQuery($mq-tablet) {
+          @include lyraMediaQuery($mq-tablet) {
             padding-top: 5.8rem;
-            body:has(> .arrHeader.has-above-menu) & {
+            body:has(> .lyraHeader.has-above-menu) & {
               padding-top: 7.55rem;
             }
           }
 
-          @include arrMediaQuery($site-width) {
+          @include lyraMediaQuery($site-width) {
             padding-top: 7rem;
-            body:has(> .arrHeader.has-above-menu) & {
+            body:has(> .lyraHeader.has-above-menu) & {
               padding-top: 8.25rem;
             }
           }
@@ -93,16 +93,16 @@
         &_none {
           padding-top: 3.9rem;
 
-          @include arrMediaQuery($mq-tablet) {
+          @include lyraMediaQuery($mq-tablet) {
             padding-top: 4.55rem;
-            body:has(> .arrHeader.has-above-menu) & {
+            body:has(> .lyraHeader.has-above-menu) & {
               padding-top: 6.4rem;
             }
           }
 
-          @include arrMediaQuery($site-width) {
+          @include lyraMediaQuery($site-width) {
             padding-top: 5rem;
-            body:has(> .arrHeader.has-above-menu) & {
+            body:has(> .lyraHeader.has-above-menu) & {
               padding-top: 6.75rem;
             }
           }

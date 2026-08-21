@@ -26,7 +26,7 @@ export default function BlogCategoryFilter({items, totalCount}: BlogCategoryFilt
   if (!hasItems) return null
 
   return (
-    <div className="arrBlog-filters">
+    <div className="lyraBlog-filters">
       <span className="sr-only">Filter by category</span>
 
       <div className="cattag-chips">

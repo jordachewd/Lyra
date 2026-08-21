@@ -11,7 +11,7 @@ type Props = {
 
 export default function AccreditationsGrid({items, settings}: Props) {
   return (
-    <div className="arrAccreditations-grid">
+    <div className="lyraAccreditations-grid">
       {items.map((item, index) => (
         <AccreditationItem key={item.id + index} item={item} settings={settings} />
       ))}

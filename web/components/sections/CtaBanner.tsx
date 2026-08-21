@@ -48,23 +48,23 @@ export default function CtaBannerSection({
     'ctaContainer',
   )
 
-  const ctaContainerClass = classNames('arrCtaBanner-container', {
-    [`arrGradient-${ctaGradient}`]: isGradient,
+  const ctaContainerClass = classNames('lyraCtaBanner-container', {
+    [`lyraGradient-${ctaGradient}`]: isGradient,
     [`cols-${columns}`]: template === 'normal' || template === 'reversed',
     [`${template}`]: template,
     'no-img': !hasImg,
   })
 
-  const ctaContentClass = classNames('arrCtaBanner-content', `pd-${innerPadding}`)
+  const ctaContentClass = classNames('lyraCtaBanner-content', `pd-${innerPadding}`)
 
   return (
     <SectionWrapper
       id={`cta-banner-${_id}`}
       settings={settings as SectionSettings}
-      className="arrCtaBanner"
+      className="lyraCtaBanner"
     >
       <div className={ctaContainerClass} style={ctaContainerCss.vars}>
-        <div className="arrCtaBanner-image">
+        <div className="lyraCtaBanner-image">
           {hasImg && (
             <RenderImage
               image={img}
@@ -77,7 +77,7 @@ export default function CtaBannerSection({
 
         <div className={ctaContentClass}>
           {titleDesc.showTitle && (
-            <div className="arrCtaBanner-content-title">
+            <div className="lyraCtaBanner-content-title">
               <TitleDesc
                 title={title}
                 desc={subheadline as RichTextPropValue}
@@ -92,7 +92,7 @@ export default function CtaBannerSection({
           {hasButtons && (
             <SectionButtons
               buttons={buttons}
-              className="arrCtaBanner-content-actions"
+              className="lyraCtaBanner-content-actions"
               location={`${title} section`}
             />
           )}

@@ -1,7 +1,7 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrContentBlocks {
+.lyraContentBlocks {
   &-wrapper {
     &.normal,
     &.reversed {
@@ -46,25 +46,25 @@
     }
 
     &:has(.twoPerRow) {
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraMediaQuery($mq-tablet) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
     &:has(.threePerRow) {
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraMediaQuery($mq-tablet) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
-      @include arrMediaQuery($mq-desktop) {
+      @include lyraMediaQuery($mq-desktop) {
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
     }
 
     &:has(.fourPerRow) {
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraMediaQuery($mq-tablet) {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
-      @include arrMediaQuery($mq-desktop) {
+      @include lyraMediaQuery($mq-desktop) {
         grid-template-columns: repeat(4, minmax(0, 1fr));
       }
     }
@@ -89,8 +89,8 @@
       padding: 1.5rem;
       border: 1px solid rgba(255, 255, 255, 0.1);
       box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.05);
-      @include arrTransition(border-color, 0.25s);
-      @include arrBackdropBlur(8px, var(--contentBlocks-bg, rgba(255, 255, 255, 0.15)));
+      @include lyraTransition(border-color, 0.25s);
+      @include lyraBackdropBlur(8px, var(--contentBlocks-bg, rgba(255, 255, 255, 0.15)));
     }
 
     &.card {
@@ -101,7 +101,7 @@
       background: var(--contentBlocks-bg, linear-gradient(to bottom, #324148, #799dae));
 
       &.samerow {
-        @include arrMediaQuery($mq-tablet) {
+        @include lyraMediaQuery($mq-tablet) {
           gap: 3rem;
         }
       }
@@ -111,7 +111,7 @@
       cursor: pointer;
       gap: 0 !important;
       height: auto;
-      @include arrFocusVisible;
+      @include lyraFocusVisible;
     }
 
     &-head {
@@ -129,7 +129,7 @@
         align-items: flex-start;
         &.card {
           gap: 2rem;
-          @include arrMediaQuery($mq-tablet) {
+          @include lyraMediaQuery($mq-tablet) {
             gap: 3rem;
           }
         }
@@ -175,7 +175,7 @@
 
         &-text,
         &-tagline {
-          @include arrTextTypography(1.25rem, 500, 1.3);
+          @include lyraTextTypography(1.25rem, 500, 1.3);
           color: var(--contentBlocks-accent, var(--contentBlocks-txt, var(--text-primary)));
         }
 
@@ -289,7 +289,7 @@
 
   &:has(&-wrapper.centered) &-grid,
   &:has(&-wrapper.revCentered) &-grid {
-    .arrContentBlocks-block {
+    .lyraContentBlocks-block {
       &-head-title-text,
       &-head-title-tagline,
       &-desc-content {

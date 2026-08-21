@@ -4,13 +4,13 @@
 // Inline SVG caret
 $caret-svg: '%3Csvg xmlns%3D%22http%3A//www.w3.org/2000/svg%22 viewBox%3D%220 0 24 24%22 fill%3D%22none%22%3E%3Cpath d%3D%22M6 9l6 6 6-6%22 stroke%3D%22%23ffffff%22 stroke-width%3D%222%22 stroke-linecap%3D%22round%22 stroke-linejoin%3D%22round%22/%3E%3C/svg%3E';
 
-.arrFormField {
+.lyraFormField {
   gap: 0.75rem;
   width: 100%;
   display: flex;
   flex-direction: column;
 
-  @include arrMediaQuery($mq-tablet) {
+  @include lyraMediaQuery($mq-tablet) {
     &.half {
       width: calc(50% - 0.9rem);
     }
@@ -18,7 +18,7 @@ $caret-svg: '%3Csvg xmlns%3D%22http%3A//www.w3.org/2000/svg%22 viewBox%3D%220 0 
 
   & > * {
     display: flex;
-    @include arrTextTypography(1rem, 400, 1.25, 0);
+    @include lyraTextTypography(1rem, 400, 1.25, 0);
   }
 
   label {
@@ -90,7 +90,7 @@ $caret-svg: '%3Csvg xmlns%3D%22http%3A//www.w3.org/2000/svg%22 viewBox%3D%220 0 
       margin-top: 0.125rem;
       flex: 1 1 calc(100% - 1rem - 20px);
 
-      .arrPortableText {
+      .lyraPortableText {
         line-height: 1;
         font-weight: 400;
         font-size: 0.875rem;
@@ -119,7 +119,7 @@ $caret-svg: '%3Csvg xmlns%3D%22http%3A//www.w3.org/2000/svg%22 viewBox%3D%220 0 
           margin: 0;
           line-height: 0.75rem;
         }
-        .arrPortableText {
+        .lyraPortableText {
           line-height: 1.3;
         }
       }
@@ -134,8 +134,8 @@ $caret-svg: '%3Csvg xmlns%3D%22http%3A//www.w3.org/2000/svg%22 viewBox%3D%220 0 
     border-radius: 0.5rem;
     border: 1px solid var(--color-light);
     background-color: rgba(255, 255, 255, 0.1);
-    @include arrTransition(all, 0.25s);
-    @include arrHover {
+    @include lyraTransition(all, 0.25s);
+    @include lyraHover {
       background-color: rgba(255, 255, 255, 0.08);
     }
 
@@ -185,7 +185,7 @@ $caret-svg: '%3Csvg xmlns%3D%22http%3A//www.w3.org/2000/svg%22 viewBox%3D%220 0 
       }
     }
 
-    @include arrHover {
+    @include lyraHover {
       background-color: rgba(255, 255, 255, 0.08);
     }
 

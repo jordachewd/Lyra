@@ -3,7 +3,7 @@
  * RESPONSIVE BREAKPOINTS
  * ====================================
  * Mobile-first breakpoint system using em units.
- * Usage: @include arrMediaQuery($mq-tablet) { ... }
+ * Usage: @include lyraMediaQuery($mq-tablet) { ... }
  * 
  * BREAKPOINT GUIDE:
  * - Base mobile:  < 320px  (default styles, no media query needed)

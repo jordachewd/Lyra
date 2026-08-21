@@ -1,6 +1,6 @@
 import {SectionOf} from '@/lib/zod/website/content/page'
 import {RichTextPropValue} from '../ui/RichText'
-import ArrPortableTable from './partials/ArrPortableTable'
+import LyraPortableTable from './partials/LyraPortableTable'
 import {SectionSettings} from '@/lib/zod/sections/settings/section-wrapper'
 import SectionWrapper from '../layout/partials/SectionWrapper'
 import TitleDesc from '../layout/partials/TitleDesc'
@@ -29,7 +29,7 @@ export default function TableSection({
     <SectionWrapper
       id={`table-${_id}`}
       settings={settings as SectionSettings}
-      className="arrTableSection"
+      className="lyraTableSection"
     >
       {showTitle && (
         <TitleDesc
@@ -39,20 +39,20 @@ export default function TableSection({
           below={belowEyebrow || undefined}
           alignment={align}
           settings={titleDesc}
-          className="arrTableSection-title"
+          className="lyraTableSection-title"
         />
       )}
 
-      <div className="arrTableSection-content">
+      <div className="lyraTableSection-content">
         {hasTable ? (
-          <ArrPortableTable
+          <LyraPortableTable
             data={table}
-            className="arrTableSection"
+            className="lyraTableSection"
             textColor={textColor as SanityColor}
             accentColor={accentColor as SanityColor}
           />
         ) : (
-          <div className="arrTableSection-empty">No data available.</div>
+          <div className="lyraTableSection-empty">No data available.</div>
         )}
       </div>
     </SectionWrapper>

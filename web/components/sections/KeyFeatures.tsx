@@ -23,36 +23,36 @@ export default function KeyFeaturesSection(props: KeyFeaturesProps) {
     <SectionWrapper
       id={`key-features-${_id}`}
       settings={settings as SectionSettings}
-      className="arrKeyFeatures"
+      className="lyraKeyFeatures"
     >
       {titleDesc.showTitle && (
         <TitleDesc
           title={topHeadline}
           desc={description as RichTextPropValue}
-          className="arrKeyFeatures-topHeadline"
+          className="lyraKeyFeatures-topHeadline"
           alignment={align}
           settings={titleDesc}
         />
       )}
 
       {cards.length > 0 && (
-        <div className="arrKeyFeatures-cards">
+        <div className="lyraKeyFeatures-cards">
           {cards.map((card, index) => {
             const keyId = card.id + index
             const icon = card.icon as NestedImageField | null | undefined
             const iconAlt = icon?.alt ?? `Key Feature Icon ${index + 1}`
 
             return (
-              <div key={keyId} className="arrKeyFeatures-card">
+              <div key={keyId} className="lyraKeyFeatures-card">
                 {icon && (
-                  <div className="arrKeyFeatures-card-icon">
+                  <div className="lyraKeyFeatures-card-icon">
                     <RenderImage image={icon} alt={iconAlt} displayWidth={24} mobileWidth={24} />
                   </div>
                 )}
 
                 <RichText
                   value={card.description as RichTextPropValue}
-                  className="arrKeyFeatures-card-text"
+                  className="lyraKeyFeatures-card-text"
                 />
               </div>
             )
@@ -65,7 +65,7 @@ export default function KeyFeaturesSection(props: KeyFeaturesProps) {
           title={bottomHeadline}
           alignment={align}
           settings={titleDesc}
-          className="arrKeyFeatures-bottomHeadline"
+          className="lyraKeyFeatures-bottomHeadline"
         />
       )}
     </SectionWrapper>

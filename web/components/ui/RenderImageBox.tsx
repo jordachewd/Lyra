@@ -16,7 +16,7 @@ export default function RenderImageBox({img, imgSize = 720, className: css, titl
   const alt = img?.alt ?? (title || 'Section Image')
   const size = getImgSize(img?.widthSize || 'normal', imgSize)
   const shape = img?.shape ?? 'normal'
-  const style = classNames('arrImageBox', shape, css)
+  const style = classNames('lyraImageBox', shape, css)
 
   return (
     <div className={style}>

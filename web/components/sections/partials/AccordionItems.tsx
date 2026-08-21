@@ -28,8 +28,8 @@ function AccordionItems({items, settings, className}: AccordionItemProps) {
     [firstExpanded, sorted],
   )
 
-  const itemsCss = useMemo(() => classNames('arrAccordion-items', className), [className])
-  const groupCss = useMemo(() => classNames('arrAccordion-group', className), [className])
+  const itemsCss = useMemo(() => classNames('lyraAccordion-items', className), [className])
+  const groupCss = useMemo(() => classNames('lyraAccordion-group', className), [className])
 
   const [openIndex, setOpenIndex] = useState<number | null>(initialOpenIndex)
   const handleOpenItem = useCallback((index: number) => {
@@ -46,7 +46,7 @@ function AccordionItems({items, settings, className}: AccordionItemProps) {
   )
 
   if (!hasItems) {
-    return <div className="arrAccordion-noItems">No items yet.</div>
+    return <div className="lyraAccordion-noItems">No items yet.</div>
   }
 
   if (ordered && grouped.length > 0) {
@@ -54,8 +54,8 @@ function AccordionItems({items, settings, className}: AccordionItemProps) {
       <div className={itemsCss} style={cssVars.vars}>
         {grouped.map((row) => (
           <div key={row.id} className={groupCss}>
-            <div className="arrAccordion-group-letter">{row.letter}</div>
-            <div className="arrAccordion-group-items">
+            <div className="lyraAccordion-group-letter">{row.letter}</div>
+            <div className="lyraAccordion-group-items">
               {row.items.map(({index, item}) => (
                 <AccordionRow
                   key={item.id}

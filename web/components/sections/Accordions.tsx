@@ -31,7 +31,7 @@ export default function AccordionSection({
   const hasImg = !!img?.image
   const imgWidth = isCentered ? 960 : width === 'full' ? 860 : 680
 
-  const contentCss = classNames('arrAccordion-content', {
+  const contentCss = classNames('lyraAccordion-content', {
     ordered: accSettings.ordered,
   })
 
@@ -43,10 +43,10 @@ export default function AccordionSection({
     <SectionWrapper
       id={`accordion-${_id}`}
       settings={settings as SectionSettings}
-      className="arrAccordion"
+      className="lyraAccordion"
     >
       {hasImg && (
-        <RenderImageBox title={title} img={img} imgSize={imgWidth} className="arrAccordion-image" />
+        <RenderImageBox title={title} img={img} imgSize={imgWidth} className="lyraAccordion-image" />
       )}
 
       <div className={contentCss}>

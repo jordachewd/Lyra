@@ -19,31 +19,31 @@ function AboutInfoCards({features}: AboutInfoCardsProps) {
   }, [])
 
   return (
-    <div className="arrAboutInfo-features">
+    <div className="lyraAboutInfo-features">
       {features.map((feature: AboutCard, index) => {
         const featKey = feature.id || index
         const featIcon = feature.icon as NestedImageField | null | undefined
         const featAlt = featIcon?.alt ?? (feature.title || `Feature Icon ${index + 1}`)
         const featTitle = feature.title ?? `Feature ${index + 1}`
         const featContent = feature.content as RichTextPropValue
-        const featClass = classNames('arrAboutInfo-feature-content', {
+        const featClass = classNames('lyraAboutInfo-feature-content', {
           opened: open === index,
         })
 
         return (
-          <div key={featKey} onClick={() => onClick(index)} className="arrAboutInfo-feature-card">
-            <span className="arrAboutInfo-feature-icon">
+          <div key={featKey} onClick={() => onClick(index)} className="lyraAboutInfo-feature-card">
+            <span className="lyraAboutInfo-feature-icon">
               <RenderImage image={featIcon} alt={featAlt} />
             </span>
 
-            <div className="arrAboutInfo-feature-head">
-              <span className="arrAboutInfo-feature-title">{featTitle}</span>
-              <span className="arrAboutInfo-feature-rollout" aria-hidden="true"></span>
+            <div className="lyraAboutInfo-feature-head">
+              <span className="lyraAboutInfo-feature-title">{featTitle}</span>
+              <span className="lyraAboutInfo-feature-rollout" aria-hidden="true"></span>
             </div>
 
             <div className={featClass}>
-              <div className="arrAboutInfo-feature-content-inner">
-                <RichText value={featContent} className="arrAboutInfo-feature-content-body" />
+              <div className="lyraAboutInfo-feature-content-inner">
+                <RichText value={featContent} className="lyraAboutInfo-feature-content-body" />
               </div>
             </div>
           </div>

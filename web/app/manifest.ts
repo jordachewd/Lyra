@@ -3,8 +3,8 @@ import {isProduction, siteUrl} from '@/lib/const/env'
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Arratech AB',
-    short_name: 'Arratech',
+    name: 'Lyra',
+    short_name: 'Lyra',
     description: 'Connect to the Peppol Network | Access Point Solution',
     start_url: '/',
     display: 'standalone',

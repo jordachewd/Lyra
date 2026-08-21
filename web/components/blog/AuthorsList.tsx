@@ -14,7 +14,7 @@ type AuthsListProps = {
 export default function AuthorsList({
   authors,
   imageSize = 24,
-  className = 'arrPost-featImage-authors',
+  className = 'lyraPost-featImage-authors',
   clickable = true,
 }: AuthsListProps) {
   return (
@@ -41,7 +41,7 @@ export default function AuthorsList({
             <Link
               key={a._id}
               href={`/blog?author=${a.slug}`}
-              className="arrPost-featImage-authors-item"
+              className="lyraPost-featImage-authors-item"
               aria-label={`View all posts by ${a.name}`}
             >
               {content}
@@ -50,7 +50,7 @@ export default function AuthorsList({
         }
 
         return (
-          <div key={a._id} className="arrPost-featImage-authors-item">
+          <div key={a._id} className="lyraPost-featImage-authors-item">
             {content}
           </div>
         )

@@ -1,7 +1,7 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrSolutions {
+.lyraSolutions {
   &-wrapper {
     flex-direction: column;
     &.centered > div,
@@ -21,16 +21,16 @@
     gap: 1.5rem;
 
     &.vertical {
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraMediaQuery($mq-tablet) {
         grid-template-columns: repeat(2, 1fr);
         gap: 1rem;
       }
 
-      @include arrMediaQuery($mq-desktop) {
+      @include lyraMediaQuery($mq-desktop) {
         grid-template-columns: repeat(3, 1fr);
       }
 
-      @include arrMediaQuery($mq-screen) {
+      @include lyraMediaQuery($mq-screen) {
         gap: 1.5rem;
       }
     }
@@ -57,7 +57,7 @@
       border-radius: 1.5rem;
     }
 
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       flex-direction: row;
 
       &.vertical {
@@ -68,7 +68,7 @@
         width: 50%;
       }
 
-      &:nth-child(even) .arrSolutions-card-image.horizontal {
+      &:nth-child(even) .lyraSolutions-card-image.horizontal {
         order: 2;
         border-right: none;
         border-left: 1px solid rgba(255, 255, 255, 0.2);
@@ -87,7 +87,7 @@
         max-height: 100%;
       }
 
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraMediaQuery($mq-tablet) {
         border-bottom: none;
 
         &.horizontal {
@@ -110,7 +110,7 @@
         display: flex;
       }
 
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraMediaQuery($mq-tablet) {
         &.vertical {
           height: auto;
           flex-grow: 1;
@@ -123,7 +123,7 @@
         flex-direction: column;
 
         &-title {
-          @include arrTextTypography(1.825rem, 300, 1.2);
+          @include lyraTextTypography(1.825rem, 300, 1.2);
           color: var(--solutionCard-txt, var(--text-primary));
         }
 
@@ -135,7 +135,7 @@
           }
         }
 
-        @include arrMediaQuery($mq-tablet) {
+        @include lyraMediaQuery($mq-tablet) {
           gap: 1.5rem;
 
           &-title {
@@ -146,7 +146,7 @@
             padding: 3rem 3rem 2rem;
           }
 
-          &.vertical .arrSolutions-card-content-header-title {
+          &.vertical .lyraSolutions-card-content-header-title {
             font-size: 1.825rem;
           }
         }
@@ -158,7 +158,7 @@
       flex-direction: column;
       padding: 0 2rem 2rem 2rem;
 
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraMediaQuery($mq-tablet) {
         &.horizontal {
           padding: 0 3rem 3rem 3rem;
         }
@@ -175,7 +175,7 @@
         align-items: center;
         justify-content: center;
         text-align: center;
-        @include arrBackdropBlur;
+        @include lyraBackdropBlur;
 
         &::before {
           content: '';
@@ -192,22 +192,22 @@
         &-text {
           padding-left: 1.25rem;
           text-transform: uppercase;
-          @include arrTextTypography(0.75rem, 600, 1);
+          @include lyraTextTypography(0.75rem, 600, 1);
           color: var(--solutionFeat-txt, var(--text-primary));
         }
       }
 
       &-title {
         margin-top: -0.75rem;
-        @include arrTextTypography(1.25rem, 300, 1.25);
+        @include lyraTextTypography(1.25rem, 300, 1.25);
         color: var(--solutionFeat-txt, var(--text-primary));
-        @include arrMediaQuery($mq-tablet) {
+        @include lyraMediaQuery($mq-tablet) {
           font-size: 1.5rem;
         }
       }
 
       &-subtitle {
-        @include arrTextTypography(1rem, 400, 1.25);
+        @include lyraTextTypography(1rem, 400, 1.25);
         color: var(--solutionFeat-txt, var(--text-primary));
       }
     }
@@ -216,16 +216,16 @@
       margin-top: auto;
       padding: 2rem;
 
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraMediaQuery($mq-tablet) {
         &.horizontal {
           padding: 3rem;
         }
       }
 
       &.vertical {
-        .arrCardFooter-btn {
+        .lyraCardFooter-btn {
           flex: 1 1 auto;
-          & > .arrButton {
+          & > .lyraButton {
             flex: 1;
           }
         }

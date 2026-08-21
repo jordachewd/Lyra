@@ -21,18 +21,18 @@ function SolutionsCardFeature({feature, textColor, layout}: CardFeatureProps) {
     ...(textColor ? {['--solutionFeat-txt' as string]: textColor} : null),
   }
 
-  const cardClass = classNames('arrSolutions-card-feature', layoutCss)
+  const cardClass = classNames('lyraSolutions-card-feature', layoutCss)
 
   return (
     <div className={cardClass} style={cssVars}>
-      <div className="arrSolutions-card-feature-badge">
-        {feature.tag && <div className="arrSolutions-card-feature-badge-text">{feature.tag}</div>}
+      <div className="lyraSolutions-card-feature-badge">
+        {feature.tag && <div className="lyraSolutions-card-feature-badge-text">{feature.tag}</div>}
       </div>
 
-      <div className="arrSolutions-card-feature-title">{feature.title}</div>
+      <div className="lyraSolutions-card-feature-title">{feature.title}</div>
 
       {feature.subtitle && (
-        <div className="arrSolutions-card-feature-subtitle">{feature.subtitle}</div>
+        <div className="lyraSolutions-card-feature-subtitle">{feature.subtitle}</div>
       )}
 
       {features && features.length > 0 && (
@@ -40,7 +40,7 @@ function SolutionsCardFeature({feature, textColor, layout}: CardFeatureProps) {
           content={features}
           label="Show all features"
           textColor={textColor}
-          className="arrSolutions-card-feature-addons"
+          className="lyraSolutions-card-feature-addons"
         />
       )}
     </div>

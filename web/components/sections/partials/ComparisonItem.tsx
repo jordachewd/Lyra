@@ -9,10 +9,10 @@ export default function ComparisonItem({item}: ComparisonItemProps) {
   const boxes = item.boxes || []
 
   return (
-    <div className="arrComparison-step">
-      <div className="arrComparison-step-title">{item.title}</div>
+    <div className="lyraComparison-step">
+      <div className="lyraComparison-step-title">{item.title}</div>
       {boxes.length > 0 && (
-        <div className="arrComparison-step-boxes">
+        <div className="lyraComparison-step-boxes">
           {boxes.map((box, index) => (
             <ComparisonBox key={box.id + index} box={box} />
           ))}

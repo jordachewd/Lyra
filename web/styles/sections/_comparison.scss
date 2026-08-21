@@ -1,7 +1,7 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrComparison {
+.lyraComparison {
   &-wrapper {
     flex-direction: column;
     &.centered > div,
@@ -28,7 +28,7 @@
     width: 100%;
     margin: 6rem 0;
 
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       gap: 6rem;
     }
 
@@ -68,7 +68,7 @@
       border: 1px solid #fff;
       background: var(--color-dark);
       text-transform: uppercase;
-      @include arrTextTypography(0.875rem, 600, 1.3);
+      @include lyraTextTypography(0.875rem, 600, 1.3);
     }
 
     &-boxes {
@@ -76,7 +76,7 @@
       width: 100%;
       display: flex;
 
-      @include arrMediaQuery($mq-desktop) {
+      @include lyraMediaQuery($mq-desktop) {
         max-width: 60%;
         gap: 1.5rem;
       }
@@ -84,7 +84,7 @@
       & > div {
         width: 100%;
         display: flex;
-        @include arrMediaQuery($mq-tablet) {
+        @include lyraMediaQuery($mq-tablet) {
           width: 50%;
         }
       }
@@ -102,7 +102,7 @@
       }
 
       &-title {
-        @include arrTextTypography(1rem, 600, 1);
+        @include lyraTextTypography(1rem, 600, 1);
         color: var(--comparisonBox-txt, var(--text-primary));
       }
 

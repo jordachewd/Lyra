@@ -16,14 +16,14 @@ export default function CardFooterMsg({message}: CardFooterMessageProps) {
   const content = (
     <>
       {hasIcon && (
-        <div className="arrCardFooter-icon">
+        <div className="lyraCardFooter-icon">
           <RenderImage image={icon} alt={iconAlt} />
         </div>
       )}
 
-      <div className="arrCardFooter-info">
-        <span className="arrCardFooter-info-text">{message.info}</span>
-        {message.subtitle && <span className="arrCardFooter-info-subtext">{message.subtitle}</span>}
+      <div className="lyraCardFooter-info">
+        <span className="lyraCardFooter-info-text">{message.info}</span>
+        {message.subtitle && <span className="lyraCardFooter-info-subtext">{message.subtitle}</span>}
       </div>
     </>
   )
@@ -32,7 +32,7 @@ export default function CardFooterMsg({message}: CardFooterMessageProps) {
     return (
       <Link
         href={href}
-        className="arrCardFooter-msg arrCardFooter-link"
+        className="lyraCardFooter-msg lyraCardFooter-link"
         target={message.target ? '_blank' : '_self'}
         rel={message.target ? 'noopener noreferrer' : undefined}
       >
@@ -41,5 +41,5 @@ export default function CardFooterMsg({message}: CardFooterMessageProps) {
     )
   }
 
-  return <div className="arrCardFooter-msg">{content}</div>
+  return <div className="lyraCardFooter-msg">{content}</div>
 }

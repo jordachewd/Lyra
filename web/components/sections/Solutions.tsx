@@ -30,13 +30,13 @@ export default function SolutionsSection({
     horizontal: display === 'horizontal',
   })
 
-  const cardsCss = classNames('arrSolutions-cards', layoutCss)
+  const cardsCss = classNames('lyraSolutions-cards', layoutCss)
 
   return (
     <SectionWrapper
       id={`solutions-${_id}`}
       settings={settings as SectionSettings}
-      className="arrSolutions"
+      className="lyraSolutions"
     >
       {titleDesc.showTitle && (
         <TitleDesc

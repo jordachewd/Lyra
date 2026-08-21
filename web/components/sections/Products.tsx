@@ -19,7 +19,7 @@ export default function ProductsSection({_id, title, description, cards, setting
     <SectionWrapper
       id={`products-${_id}`}
       settings={settings as SectionSettings}
-      className="arrProducts"
+      className="lyraProducts"
     >
       {titleDesc.showTitle && (
         <TitleDesc
@@ -27,12 +27,12 @@ export default function ProductsSection({_id, title, description, cards, setting
           desc={description as RichTextPropValue}
           alignment={align}
           settings={titleDesc}
-          className="arrProducts-title"
+          className="lyraProducts-title"
         />
       )}
 
       {hasCards && (
-        <div className="arrProducts-cards">
+        <div className="lyraProducts-cards">
           {cards.map((card, index) => (
             <ProductCard key={index + card.id} card={card} />
           ))}

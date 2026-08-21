@@ -25,7 +25,7 @@ export default function RichText({
 }: RichTextProps) {
   if (!value?.length) return null
 
-  const classes = classNames('arrPortableText', cssClass)
+  const classes = classNames('lyraPortableText', cssClass)
 
   const richTextCss = getCssVars(
     {

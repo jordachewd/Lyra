@@ -4,7 +4,7 @@ import Footer from '@/components/layout/Footer'
 import Header from '@/components/layout/Header'
 import {isProduction, isStaging} from '@/lib/const/env'
 import {getGlobals} from '@/lib/data/globals'
-import {arrBuildMetadata} from '@/lib/utils/seo/metadata/build-metadata'
+import {lyraBuildMetadata} from '@/lib/utils/seo/metadata/build-metadata'
 import RootJsonLd from '@/components/seo/RootJsonLd'
 import type {GlobalsData} from '@/lib/zod/website/layout/globals'
 import type {GoogleSchema, HubspotSchema} from '@/lib/zod/website/settings/tracking'
@@ -15,8 +15,8 @@ import {notFound} from 'next/navigation'
 import {ReactNode} from 'react'
 import {inter} from './fonts'
 import StagingBanner from '@/components/layout/StagingBanner'
-import ArrGtm from '@/components/analytics/ArrGtm'
-import ArrHubSpot from '@/components/analytics/ArrHubSpot'
+import LyraGtm from '@/components/analytics/LyraGtm'
+import LyraHubSpot from '@/components/analytics/LyraHubSpot'
 import ConsentDefaults from '@/components/consent/ConsentDefaults'
 import './globals.scss'
 import './styles.scss'
@@ -28,7 +28,7 @@ type RootLayoutProps = {
 export async function generateMetadata(): Promise<Metadata> {
   if (!isProduction) return {}
 
-  return arrBuildMetadata({
+  return lyraBuildMetadata({
     ogType: 'website',
   })
 }
@@ -60,12 +60,12 @@ export default async function RootLayout({children}: RootLayoutProps) {
         {/* Consent Defaults (inline, nonced, runs beforeInteractive) */}
         <ConsentDefaults />
         {/* Google Tag Manager bootstrap (inline, nonced, runs beforeInteractive) */}
-        {isGtm && gTagManagerId && <ArrGtm gtmId={gTagManagerId} />}
+        {isGtm && gTagManagerId && <LyraGtm gtmId={gTagManagerId} />}
       </head>
 
       <body className={bodyClass}>
         {/* Google Tag Manager (noscript) */}
-        {isGtm && gTagManagerId && <ArrGtm gtmId={gTagManagerId} noscript />}
+        {isGtm && gTagManagerId && <LyraGtm gtmId={gTagManagerId} noscript />}
 
         {/* Body Class Manager */}
         <BodyClassManager />
@@ -88,7 +88,7 @@ export default async function RootLayout({children}: RootLayoutProps) {
         {isProduction && <RootJsonLd />}
 
         {/* Hubspot Tracking Code */}
-        {isHbs && hbPortalId && <ArrHubSpot id={hbPortalId} />}
+        {isHbs && hbPortalId && <LyraHubSpot id={hbPortalId} />}
       </body>
     </html>
   )

@@ -19,7 +19,7 @@ export default function FeatureItems({
   accentColor,
 }: FeatureItemsProps) {
   if (features.length === 0) return null
-  const itemClass = classNames('arrFeatures', cssClass, {
+  const itemClass = classNames('lyraFeatures', cssClass, {
     cards: features.some((feat) => feat.layout === 'card'),
   })
 
@@ -40,17 +40,17 @@ export default function FeatureItems({
         const desc = description ? description : null
 
         return (
-          <div key={feature.id + index} className={`arrFeatures-item ${layout}`}>
+          <div key={feature.id + index} className={`lyraFeatures-item ${layout}`}>
             {icon && (
-              <div className="arrFeatures-icon">
+              <div className="lyraFeatures-icon">
                 <RenderImage image={icon} alt={iconAlt} />
               </div>
             )}
 
-            <div className="arrFeatures-content">
-              {eyebrow && <span className="arrFeatures-content-eyebrow">{eyebrow}</span>}
-              <span className={`arrFeatures-content-title ${ttlSize}`}>{title}</span>
-              {desc && <span className="arrFeatures-content-description">{desc}</span>}
+            <div className="lyraFeatures-content">
+              {eyebrow && <span className="lyraFeatures-content-eyebrow">{eyebrow}</span>}
+              <span className={`lyraFeatures-content-title ${ttlSize}`}>{title}</span>
+              {desc && <span className="lyraFeatures-content-description">{desc}</span>}
             </div>
           </div>
         )

@@ -40,15 +40,15 @@ export default function PostFeatImage({postId, post}: PostFeatImageProps) {
   const hasImg = Boolean(pImage && pImage.image)
 
   return (
-    <section id={`${postId}-featImage`} className="arrPost-featImage">
+    <section id={`${postId}-featImage`} className="lyraPost-featImage">
       {hasCats && (
-        <div className="arrPost-featImage-widgets top">
+        <div className="lyraPost-featImage-widgets top">
           <CatTagChip items={pCats} />
         </div>
       )}
 
       {hasImg && (
-        <div className={`arrPost-featImage-image ${pImgShape}`}>
+        <div className={`lyraPost-featImage-image ${pImgShape}`}>
           <RenderImage
             image={pImage}
             alt={pImgAlt}
@@ -58,13 +58,13 @@ export default function PostFeatImage({postId, post}: PostFeatImageProps) {
           />
 
           {(pImgCap || pImgCapSub || pImgCredit) && (
-            <div className="arrPost-featImage-image-meta">
-              {pImgCap && <div className="arrPost-featImage-image-caption">{pImgCap}</div>}
+            <div className="lyraPost-featImage-image-meta">
+              {pImgCap && <div className="lyraPost-featImage-image-caption">{pImgCap}</div>}
               {pImgCapSub && (
-                <div className="arrPost-featImage-image-caption-sub">{pImgCapSub}</div>
+                <div className="lyraPost-featImage-image-caption-sub">{pImgCapSub}</div>
               )}
               {pImgCredit && (
-                <div className="arrPost-featImage-image-credit">
+                <div className="lyraPost-featImage-image-credit">
                   <span>Credit/Source:</span>
                   {pImgCredit}
                 </div>
@@ -75,10 +75,10 @@ export default function PostFeatImage({postId, post}: PostFeatImageProps) {
       )}
 
       {(hasDate || hasTags) && (
-        <div className="arrPost-featImage-widgets bottom">
+        <div className="lyraPost-featImage-widgets bottom">
           {hasTags && <CatTagChip items={pTags} />}
           {hasDate && (
-            <time dateTime={pDate} className="arrPost-featImage-date">
+            <time dateTime={pDate} className="lyraPost-featImage-date">
               {pDate}
             </time>
           )}

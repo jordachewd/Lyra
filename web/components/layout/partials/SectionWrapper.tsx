@@ -26,15 +26,15 @@ export default function SectionWrapper({id, settings, children, className, style
   const hasBgBlend = type === 'image' && ovlBlend
   const hasBgOpacity = type === 'image' && ovlOpacity !== undefined && ovlOpacity !== null
 
-  const sectClass = classNames('arrSection', className, {
-    [`arrGradient-${gradient}`]: hasBgGradient,
+  const sectClass = classNames('lyraSection', className, {
+    [`lyraGradient-${gradient}`]: hasBgGradient,
     [`ptb_${pdTopBottom}`]: pdTopBottom,
     [`pdd_${pdDisplay}`]: pdDisplay,
     'bg-color': hasBgColor,
     'bg-img': hasBgImg,
   })
 
-  const wrapCss = classNames('arrSection-wrapper', {
+  const wrapCss = classNames('lyraSection-wrapper', {
     [`${className}-wrapper`]: className,
     [`cols-${columns}`]: template === 'normal' || template === 'reversed',
     [`${template}`]: template,

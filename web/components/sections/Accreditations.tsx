@@ -36,7 +36,7 @@ export default function AccreditationSection({
     <SectionWrapper
       id={`accreditations-${_id}`}
       settings={settings as SectionSettings}
-      className="arrAccreditations"
+      className="lyraAccreditations"
     >
       {titleDesc.showTitle && (
         <TitleDesc

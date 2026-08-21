@@ -1,7 +1,7 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrMainNav--megamenu {
+.lyraMainNav--megamenu {
   --main-nav-megamenu-max-height: min(70dvh, 42rem);
 
   .megamenu-group {
@@ -14,15 +14,15 @@
     overflow: visible;
   }
 
-  @include arrMediaQuery($mq-nav) {
+  @include lyraMediaQuery($mq-nav) {
     position: static;
 
-    .arrMainNav-menu.megamenu,
-    .arrMainNav-menu.megamenu > .menu-item {
+    .lyraMainNav-menu.megamenu,
+    .lyraMainNav-menu.megamenu > .menu-item {
       position: static;
     }
 
-    .arrMainNav-menu.megamenu > .menu-item > .megamenu-panel {
+    .lyraMainNav-menu.megamenu > .menu-item > .megamenu-panel {
       position: absolute;
       inset: calc(100% + 0.75rem) 0 auto;
       width: auto;
@@ -88,7 +88,7 @@
 
       &.has-link {
         cursor: pointer;
-        @include arrHover {
+        @include lyraHover {
           background-color: var(--main-nav-hover-background);
         }
       }

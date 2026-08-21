@@ -53,8 +53,8 @@ export default async function PostJsonLd({data}: PostJsonLdProps) {
   return (
     <script
       nonce={nonce}
-      id="arratech-post-jsonld"
-      key="arratech-post-jsonld"
+      id="lyra-post-jsonld"
+      key="lyra-post-jsonld"
       type="application/ld+json"
       dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd)}}
     />

@@ -49,7 +49,7 @@ function ContentBlocksList({items, blocksSettings}: ContentBlocksListProps) {
 
   const blockClass = useMemo(
     () =>
-      classNames('arrContentBlocks-block', type, iconTitle, perRowToClass(perRow), {
+      classNames('lyraContentBlocks-block', type, iconTitle, perRowToClass(perRow), {
         collapsible: collapsible,
       }),
     [type, iconTitle, perRow, collapsible],
@@ -57,7 +57,7 @@ function ContentBlocksList({items, blocksSettings}: ContentBlocksListProps) {
 
   const gridClass = useMemo(
     () =>
-      classNames('arrContentBlocks-grid', type, {
+      classNames('lyraContentBlocks-grid', type, {
         collapsible: collapsible,
         [`gap-${gap}`]: gap !== 'normal',
       }),
@@ -87,7 +87,7 @@ function ContentBlocksList({items, blocksSettings}: ContentBlocksListProps) {
         const canToggle = collapsible && blkHasDesc
         const isOpen = openItem === idx
 
-        const textClass = classNames('arrContentBlocks-block-desc', type, {
+        const textClass = classNames('lyraContentBlocks-block-desc', type, {
           collapsible: collapsible,
           open: isOpen,
         })
@@ -104,9 +104,9 @@ function ContentBlocksList({items, blocksSettings}: ContentBlocksListProps) {
 
         return (
           <div key={block.id} className={blockClass} {...toggleProps}>
-            <div className={`arrContentBlocks-block-head ${type} ${iconTitle}`}>
+            <div className={`lyraContentBlocks-block-head ${type} ${iconTitle}`}>
               {blkHasIcon && (
-                <div className={`arrContentBlocks-block-head-icon ${type}`}>
+                <div className={`lyraContentBlocks-block-head-icon ${type}`}>
                   <RenderImage
                     image={blkIcon}
                     alt={blkIconAlt}
@@ -116,11 +116,11 @@ function ContentBlocksList({items, blocksSettings}: ContentBlocksListProps) {
                 </div>
               )}
 
-              <div className="arrContentBlocks-block-head-title">
-                <span className="arrContentBlocks-block-head-title-text">{block.title}</span>
+              <div className="lyraContentBlocks-block-head-title">
+                <span className="lyraContentBlocks-block-head-title-text">{block.title}</span>
 
                 {block.tagline && (
-                  <span className="arrContentBlocks-block-head-title-tagline">{block.tagline}</span>
+                  <span className="lyraContentBlocks-block-head-title-tagline">{block.tagline}</span>
                 )}
               </div>
             </div>
@@ -128,13 +128,13 @@ function ContentBlocksList({items, blocksSettings}: ContentBlocksListProps) {
             {blkHasDesc && (
               <div className={textClass}>
                 <RichText
-                  className="arrContentBlocks-block-desc-content"
+                  className="lyraContentBlocks-block-desc-content"
                   value={block.description as RichTextPropValue}
                 />
               </div>
             )}
 
-            {canToggle && <span aria-hidden="true" className="arrContentBlocks-block-collapse" />}
+            {canToggle && <span aria-hidden="true" className="lyraContentBlocks-block-collapse" />}
           </div>
         )
       })}

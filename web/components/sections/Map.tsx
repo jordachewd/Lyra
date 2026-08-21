@@ -25,28 +25,28 @@ export default function MapSection({
     <SectionWrapper
       id={`map-${_id}`}
       settings={settings as SectionSettings}
-      className="arrMapSection"
+      className="lyraMapSection"
     >
       {titleDesc.showTitle && (
-        <div className="arrMapSection-content">
+        <div className="lyraMapSection-content">
           <TitleDesc
             title={title}
             below={subtitle}
             desc={description as RichTextPropValue}
             alignment={align}
             settings={titleDesc}
-            className="arrMapSection-title"
+            className="lyraMapSection-title"
           />
         </div>
       )}
 
-      <div className="arrMapSection-map">
+      <div className="lyraMapSection-map">
         {embedUrl ? (
           <iframe
             loading="lazy"
             src={embedUrl}
             referrerPolicy="no-referrer-when-downgrade"
-            title={title || 'Arratech Office Location'}
+            title={title || 'Lyra Office Location'}
             allowFullScreen={fullScreen}
           />
         ) : (

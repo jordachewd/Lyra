@@ -1,12 +1,12 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrTeamOverview {
+.lyraTeamOverview {
   &-wrapper {
     flex-direction: column;
     &.centered,
     &.revCentered {
-      .arrTeamOverview {
+      .lyraTeamOverview {
         &-title {
           margin: 0 auto;
         }
@@ -23,11 +23,11 @@
     grid-template-columns: 1fr;
     gap: 1rem;
 
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @include arrMediaQuery($mq-desktop) {
+    @include lyraMediaQuery($mq-desktop) {
       grid-template-columns: repeat(4, 1fr);
     }
   }
@@ -46,7 +46,7 @@
       display: flex;
     }
 
-    @include arrTransition;
+    @include lyraTransition;
 
     &-image {
       overflow: hidden;
@@ -69,7 +69,7 @@
     &-name,
     &-position {
       text-align: center;
-      @include arrTextTypography(1rem, 600, 1.2);
+      @include lyraTextTypography(1rem, 600, 1.2);
       color: var(--teamMember-txt, var(--text-primary));
     }
 

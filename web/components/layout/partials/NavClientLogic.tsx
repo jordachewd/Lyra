@@ -21,7 +21,7 @@ export default function NavClientLogic() {
   }, [])
 
   useEffect(() => {
-    const root = document.querySelector<HTMLElement>('.arrHeader')
+    const root = document.querySelector<HTMLElement>('.lyraHeader')
     if (!root) return
 
     const handleMenuOpen = (e: Event) => {
@@ -42,14 +42,14 @@ export default function NavClientLogic() {
   }, [])
 
   useEffect(() => {
-    const root = document.querySelector<HTMLElement>('.arrHeader')
+    const root = document.querySelector<HTMLElement>('.lyraHeader')
     if (!root) return
 
     uncheckAll(root)
   }, [pathname, uncheckAll])
 
   useEffect(() => {
-    const root = document.querySelector<HTMLElement>('.arrHeader')
+    const root = document.querySelector<HTMLElement>('.lyraHeader')
     if (!root) return
 
     const closeMenus = () => {
@@ -96,7 +96,7 @@ export default function NavClientLogic() {
   }, [uncheckAll])
 
   useEffect(() => {
-    const root = document.querySelector<HTMLElement>('.arrHeader')
+    const root = document.querySelector<HTMLElement>('.lyraHeader')
     if (!root) return
 
     const toggle = document.getElementById('mobile-nav-toggle') as HTMLInputElement | null
@@ -147,7 +147,7 @@ export default function NavClientLogic() {
           target.parentElement?.classList.contains('menu-item')
         ) {
           const topToggles = root.querySelectorAll<HTMLInputElement>(
-            '.arrMainNav-menu > .menu-item > input.submenu-toggle',
+            '.lyraMainNav-menu > .menu-item > input.submenu-toggle',
           )
           topToggles.forEach((other) => {
             if (other !== target && other.checked) other.checked = false
@@ -164,7 +164,7 @@ export default function NavClientLogic() {
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
-      const root = document.querySelector<HTMLElement>('.arrHeader')
+      const root = document.querySelector<HTMLElement>('.lyraHeader')
       if (!root) return
 
       const target = e.target as HTMLElement
@@ -184,7 +184,7 @@ export default function NavClientLogic() {
             opener.focus()
           } else {
             const firstMenuItem = root.querySelector<HTMLElement>(
-              '.arrMainNav-menu > .menu-item .top-link, .arrMainNav-menu > .menu-item .top-label',
+              '.lyraMainNav-menu > .menu-item .top-link, .lyraMainNav-menu > .menu-item .top-label',
             )
             firstMenuItem?.focus()
           }
@@ -245,8 +245,8 @@ export default function NavClientLogic() {
       const isOpen = toggle?.checked ?? false
       const isMobile = window.matchMedia('(max-width: 63.9375em)').matches // < 1024px, matches $mq-nav
 
-      const main = document.querySelector('main.arrMain')
-      const footer = document.querySelector('footer.arrFooter')
+      const main = document.querySelector('main.lyraMain')
+      const footer = document.querySelector('footer.lyraFooter')
 
       if (isMobile && isOpen) {
         main?.setAttribute('inert', '')

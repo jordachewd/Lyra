@@ -37,8 +37,8 @@ export default async function BlogJsonLd({data}: BlogJsonLdProps) {
   return (
     <script
       nonce={nonce}
-      id="arratech-blog-jsonld"
-      key="arratech-blog-jsonld"
+      id="lyra-blog-jsonld"
+      key="lyra-blog-jsonld"
       type="application/ld+json"
       dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd)}}
     />

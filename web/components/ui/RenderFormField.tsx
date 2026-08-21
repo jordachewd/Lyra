@@ -15,7 +15,7 @@ export default function RenderFormField({field, error, className: cssClass}: For
   const inputId = stringToSlug(id + '-' + title)
 
   const fieldCss = classNames(
-    'arrFormField',
+    'lyraFormField',
     size,
     type,
     {
@@ -31,7 +31,7 @@ export default function RenderFormField({field, error, className: cssClass}: For
           {title}
           {required && <span className={error ? 'hasError' : undefined}>*</span>}
         </label>
-        {info && <span className="arrFormField-info">{info}</span>}
+        {info && <span className="lyraFormField-info">{info}</span>}
         <input
           id={inputId}
           type={type}
@@ -39,7 +39,7 @@ export default function RenderFormField({field, error, className: cssClass}: For
           placeholder={placeholder || ''}
           className={error ? 'hasError' : undefined}
         />
-        {error && <span className="arrFormField-error">{error}</span>}
+        {error && <span className="lyraFormField-error">{error}</span>}
       </div>
     )
   }
@@ -51,7 +51,7 @@ export default function RenderFormField({field, error, className: cssClass}: For
           {title}
           {required && <span className={error ? 'hasError' : undefined}>*</span>}
         </label>
-        {info && <span className="arrFormField-info">{info}</span>}
+        {info && <span className="lyraFormField-info">{info}</span>}
         <textarea
           rows={5}
           id={inputId}
@@ -59,7 +59,7 @@ export default function RenderFormField({field, error, className: cssClass}: For
           placeholder={placeholder || ''}
           className={error ? 'hasError' : undefined}
         />
-        {error && <span className="arrFormField-error">{error}</span>}
+        {error && <span className="lyraFormField-error">{error}</span>}
       </div>
     )
   }
@@ -71,7 +71,7 @@ export default function RenderFormField({field, error, className: cssClass}: For
           {title}
           {required && <span className={error ? 'hasError' : undefined}>*</span>}
         </label>
-        {info && <span className="arrFormField-info">{info}</span>}
+        {info && <span className="lyraFormField-info">{info}</span>}
         <select id={inputId} name={id} className={error ? 'hasError' : undefined} defaultValue="">
           <option value="" disabled={required}>
             Select option
@@ -82,7 +82,7 @@ export default function RenderFormField({field, error, className: cssClass}: For
             </option>
           ))}
         </select>
-        {error && <span className="arrFormField-error">{error}</span>}
+        {error && <span className="lyraFormField-error">{error}</span>}
       </div>
     )
   }
@@ -94,12 +94,12 @@ export default function RenderFormField({field, error, className: cssClass}: For
           {title}
           {required && <span className={error ? 'hasError' : undefined}>*</span>}
         </legend>
-        {info && <span className="arrFormField-info">{info}</span>}
-        <div className={`arrFormField-options ${optLayout}`}>
+        {info && <span className="lyraFormField-info">{info}</span>}
+        <div className={`lyraFormField-options ${optLayout}`}>
           {options.map((opt, i) => {
             const optId = inputId + '-' + i
             return (
-              <div key={optId} className="arrFormField-option radio">
+              <div key={optId} className="lyraFormField-option radio">
                 <input
                   type="radio"
                   id={optId}
@@ -113,7 +113,7 @@ export default function RenderFormField({field, error, className: cssClass}: For
             )
           })}
         </div>
-        {error && <span className="arrFormField-error">{error}</span>}
+        {error && <span className="lyraFormField-error">{error}</span>}
       </fieldset>
     )
   }
@@ -123,15 +123,15 @@ export default function RenderFormField({field, error, className: cssClass}: For
     return (
       <fieldset className={fieldCss}>
         <legend>{title}</legend>
-        {info && <span className="arrFormField-info">{info}</span>}
+        {info && <span className="lyraFormField-info">{info}</span>}
         {hasCbx && (
-          <div className={`arrFormField-options ${optLayout}`}>
+          <div className={`lyraFormField-options ${optLayout}`}>
             {cbxOptions.map((opt: FormCheckbox, i: number) => {
               const optId = inputId + '-' + i
               const label = opt.label as RichTextPropValue
               const value = stringToSlug(`${i}-${title}-${opt.value ?? 'opt'}`)
               return (
-                <div key={optId} className="arrFormField-option checkbox">
+                <div key={optId} className="lyraFormField-option checkbox">
                   <input
                     type="checkbox"
                     id={optId}
@@ -149,7 +149,7 @@ export default function RenderFormField({field, error, className: cssClass}: For
             })}
           </div>
         )}
-        {error && <span className="arrFormField-error">{error}</span>}
+        {error && <span className="lyraFormField-error">{error}</span>}
       </fieldset>
     )
   }

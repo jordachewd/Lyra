@@ -85,7 +85,7 @@ export default function AccreditationsCarousel({items, settings}: Props) {
 
   return (
     <div
-      className="arrAccreditations-carousel"
+      className="lyraAccreditations-carousel"
       role="region"
       aria-roledescription="carousel"
       aria-label="Accreditations"
@@ -93,7 +93,7 @@ export default function AccreditationsCarousel({items, settings}: Props) {
       style={{'--arr-per-view': itemsPerView} as CSSProperties}
       {...pauseHandlers}
     >
-      <div className="arrAccreditations-carousel-track" style={trackStyle} aria-live="off">
+      <div className="lyraAccreditations-carousel-track" style={trackStyle} aria-live="off">
         {items.map((item, index) => (
           <AccreditationItem key={item.id + index} item={item} settings={settings} />
         ))}
@@ -103,13 +103,13 @@ export default function AccreditationsCarousel({items, settings}: Props) {
         <>
           <button
             type="button"
-            className="arrAccreditations-carousel-arrow arrAccreditations-carousel-arrow--prev"
+            className="lyraAccreditations-carousel-arrow lyraAccreditations-carousel-arrow--prev"
             aria-label="Previous accreditations"
             onClick={goPrev}
           />
           <button
             type="button"
-            className="arrAccreditations-carousel-arrow arrAccreditations-carousel-arrow--next"
+            className="lyraAccreditations-carousel-arrow lyraAccreditations-carousel-arrow--next"
             aria-label="Next accreditations"
             onClick={goNext}
           />
@@ -117,12 +117,12 @@ export default function AccreditationsCarousel({items, settings}: Props) {
       )}
 
       {hasControls && showDots && (
-        <div className="arrAccreditations-carousel-dots">
+        <div className="lyraAccreditations-carousel-dots">
           {Array.from({length: pages}).map((_, index) => (
             <button
               key={index}
               type="button"
-              className={classNames('arrAccreditations-carousel-dot', {
+              className={classNames('lyraAccreditations-carousel-dot', {
                 'is-active': index === page,
               })}
               aria-label={`Go to page ${index + 1}`}

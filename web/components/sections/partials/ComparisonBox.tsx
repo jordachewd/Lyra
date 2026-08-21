@@ -16,11 +16,11 @@ export default function ComparisonBox({box}: ComparisonBoxProps) {
     'comparisonBox',
   )
   return (
-    <div className="arrComparison-step-box" style={boxCss.vars}>
-      <div className="arrComparison-step-box-title">{box.title}</div>
+    <div className="lyraComparison-step-box" style={boxCss.vars}>
+      <div className="lyraComparison-step-box-title">{box.title}</div>
       {box.description.length > 0 && (
         <RichText
-          className="arrComparison-step-box-desc"
+          className="lyraComparison-step-box-desc"
           value={box.description as RichTextPropValue}
         />
       )}

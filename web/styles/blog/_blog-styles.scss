@@ -1,7 +1,7 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrBlog {
+.lyraBlog {
   &-wrapper {
     display: flex;
     flex-direction: column;
@@ -11,13 +11,13 @@
 
     &.normal {
       max-width: $site-width;
-      @include arrMediaQuery($site-width) {
+      @include lyraMediaQuery($site-width) {
         padding: 0;
       }
     }
 
     &.full {
-      @include arrMediaQuery($mq-max) {
+      @include lyraMediaQuery($mq-max) {
         padding-left: 4rem;
         padding-right: 4rem;
       }
@@ -31,7 +31,7 @@
     border-radius: 1rem;
     overflow: hidden;
 
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       grid-template-columns: 1fr 1fr;
     }
 
@@ -59,11 +59,11 @@
       padding: 1.5em;
       gap: 1.25rem;
       background: linear-gradient(111deg, #0018f3 0.05%, #4e8199 55.93%);
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraMediaQuery($mq-tablet) {
         padding: 2.5em;
       }
 
-      @include arrMediaQuery($mq-desktop) {
+      @include lyraMediaQuery($mq-desktop) {
         padding: 3.5em;
       }
     }
@@ -77,14 +77,14 @@
       width: 100%;
       & a {
         text-decoration: none;
-        @include arrTransition();
-        @include arrTextTypography(1.6rem, 300, 1.2);
+        @include lyraTransition();
+        @include lyraTextTypography(1.6rem, 300, 1.2);
 
-        @include arrMediaQuery($mq-tablet) {
+        @include lyraMediaQuery($mq-tablet) {
           font-size: 2.1rem;
         }
 
-        @include arrMediaQuery($mq-desktop) {
+        @include lyraMediaQuery($mq-desktop) {
           font-size: 2.6rem;
         }
 
@@ -139,7 +139,7 @@
     flex-wrap: wrap;
 
     &-btn {
-      @include arrTextTypography(0.875rem, 400, 1);
+      @include lyraTextTypography(0.875rem, 400, 1);
       text-decoration: none;
       background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -149,14 +149,14 @@
       min-height: 44px;
       text-align: center;
       cursor: pointer;
-      @include arrTransition;
+      @include lyraTransition;
 
       &:focus-visible {
         outline: 2px solid #3b82f6;
         outline-offset: 2px;
       }
 
-      @include arrHover {
+      @include lyraHover {
         background: rgba(255, 255, 255, 0.12);
       }
 
@@ -177,7 +177,7 @@
 
   &-noPosts {
     text-align: center;
-    @include arrTextTypography(0.85rem, 300);
+    @include lyraTextTypography(0.85rem, 300);
     font-style: italic;
     color: var(--color-gray);
   }

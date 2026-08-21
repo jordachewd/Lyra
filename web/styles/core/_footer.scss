@@ -1,14 +1,14 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrFooter {
+.lyraFooter {
   width: 100%;
   display: flex;
   margin: 0;
   padding: 0;
 
   &.bg-color {
-    background-color: var(--arrFooter-bg, transparent);
+    background-color: var(--lyraFooter-bg, transparent);
   }
 
   &.bg-img {
@@ -16,12 +16,12 @@
     background-position: center;
     background-repeat: no-repeat;
     background-image:
-      var(--arrFooter-bgImg),
+      var(--lyraFooter-bgImg),
       linear-gradient(
-        rgba(var(--arrFooter-bgOverlayRgb, 0, 0, 0), var(--arrFooter-bgOpacity, 0.5)),
+        rgba(var(--lyraFooter-bgOverlayRgb, 0, 0, 0), var(--lyraFooter-bgOpacity, 0.5)),
         rgba(
-          var(--arrFooter-bgOverlayRgb, 0, 0, 0),
-          min(1, calc(var(--arrFooter-bgOpacity, 0.5) + 0.1))
+          var(--lyraFooter-bgOverlayRgb, 0, 0, 0),
+          min(1, calc(var(--lyraFooter-bgOpacity, 0.5) + 0.1))
         )
       );
     background-blend-mode: overlay;
@@ -32,7 +32,7 @@
       padding-top: 3rem;
       padding-bottom: 2rem;
 
-      @include arrMediaQuery($site-width) {
+      @include lyraMediaQuery($site-width) {
         padding-top: 4rem;
       }
     }
@@ -41,7 +41,7 @@
       padding-top: 2.25rem;
       padding-bottom: 1.75rem;
 
-      @include arrMediaQuery($site-width) {
+      @include lyraMediaQuery($site-width) {
         padding-top: 3rem;
       }
     }
@@ -50,7 +50,7 @@
       padding-top: 1.5rem;
       padding-bottom: 1rem;
 
-      @include arrMediaQuery($site-width) {
+      @include lyraMediaQuery($site-width) {
         padding-top: 2rem;
       }
     }
@@ -85,12 +85,12 @@
     margin: 0 auto;
     background-color: transparent;
 
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       flex-wrap: wrap;
       flex-direction: row;
     }
 
-    @include arrMediaQuery($site-width) {
+    @include lyraMediaQuery($site-width) {
       padding: 0;
       gap: 4rem;
     }
@@ -100,7 +100,7 @@
     }
 
     &.fullWidth {
-      @include arrMediaQuery($mq-max) {
+      @include lyraMediaQuery($mq-max) {
         padding-left: 4rem;
         padding-right: 4rem;
       }
@@ -118,11 +118,11 @@
       width: 60%;
       height: auto;
 
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraMediaQuery($mq-tablet) {
         width: 80%;
       }
 
-      @include arrMediaQuery($site-width) {
+      @include lyraMediaQuery($site-width) {
         width: 100%;
       }
     }
@@ -135,12 +135,12 @@
     flex: 1 1 0%;
     width: 100%;
 
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       grid-template-columns: repeat(4, 1fr);
       gap: 2rem;
     }
 
-    @include arrMediaQuery($site-width) {
+    @include lyraMediaQuery($site-width) {
       gap: 3rem;
     }
   }
@@ -150,13 +150,13 @@
     flex-direction: column;
     gap: 1.75rem;
 
-    @include arrMediaQuery($site-width) {
+    @include lyraMediaQuery($site-width) {
       padding: 0 2rem;
     }
   }
 
   &-nav-heading {
-    @include arrTextTypography(0.875rem, 600, 1, 0.02em, var(--arrFooter-txt, inherit));
+    @include lyraTextTypography(0.875rem, 600, 1, 0.02em, var(--lyraFooter-txt, inherit));
     text-transform: uppercase;
   }
 
@@ -174,9 +174,9 @@
   }
 
   &-nav-item {
-    @include arrTransition();
-    @include arrTextTypography();
-    color: var(--arrFooter-txt, var(--color-white));
+    @include lyraTransition();
+    @include lyraTextTypography();
+    color: var(--lyraFooter-txt, var(--color-white));
     display: inline-flex;
     position: relative;
     align-items: center;
@@ -184,7 +184,7 @@
     line-height: 1.3;
     margin: 0.5rem 0;
 
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       font-size: 0.875rem;
     }
 
@@ -198,7 +198,7 @@
       border-radius: 0.25rem;
       background: var(--color-accent-light);
       opacity: 0;
-      @include arrTransition(all, 0.4s, ease);
+      @include lyraTransition(all, 0.4s, ease);
     }
 
     &:hover {
@@ -225,6 +225,6 @@
 
   &-copyright {
     display: flex;
-    @include arrTextTypography(0.75rem, 300, 1.6, 0em, var(--arrFooter-txt, inherit));
+    @include lyraTextTypography(0.75rem, 300, 1.6, 0em, var(--lyraFooter-txt, inherit));
   }
 }

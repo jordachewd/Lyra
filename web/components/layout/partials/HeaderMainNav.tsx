@@ -11,9 +11,9 @@ type HeaderMainNavProps = {
 
 export default function HeaderMainNav({menuItems, menuType}: HeaderMainNavProps) {
   const isMegaMenu = menuType === 'megamenu'
-  const navClass = classNames('arrMainNav', {
-    'arrMainNav--dropdown': !isMegaMenu,
-    'arrMainNav--megamenu': isMegaMenu,
+  const navClass = classNames('lyraMainNav', {
+    'lyraMainNav--dropdown': !isMegaMenu,
+    'lyraMainNav--megamenu': isMegaMenu,
   })
 
   return (

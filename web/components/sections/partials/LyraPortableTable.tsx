@@ -3,18 +3,18 @@ import {getCssVars} from '@/lib/utils/common/get-css-vars'
 import {TableMatrixSchema} from '@/lib/zod/sections/content/table'
 import classNames from 'classnames'
 
-type ArrTableProps = {
+type LyraTableProps = {
   data: TableMatrixSchema
   className?: string
   textColor?: SanityColor
   accentColor?: SanityColor
 }
 
-export default function ArrPortableTable({data, className, textColor, accentColor}: ArrTableProps) {
+export default function LyraPortableTable({data, className, textColor, accentColor}: LyraTableProps) {
   const [headRow, ...bodyRows] = data.length > 1 ? data : ([] as TableMatrixSchema)
   const rowsBody = data.length > 1 ? bodyRows : data
 
-  const tableClass = classNames('arrPortableTable', {
+  const tableClass = classNames('lyraPortableTable', {
     [`${className}-table`]: !!className,
   })
 

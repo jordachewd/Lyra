@@ -30,7 +30,7 @@ export default function TitleDesc({
     settings as TitleDescSettingsSchema
 
   const HTag: ElementType = titleTag as SectionTitleTag
-  const wrapperCss = classNames('arrTitleDesc', className, alignment, {
+  const wrapperCss = classNames('lyraTitleDesc', className, alignment, {
     shrink: shrinkTitle,
   })
   const hasDesc = showDesc && desc && desc.length > 0
@@ -44,12 +44,12 @@ export default function TitleDesc({
 
   return (
     <div className={wrapperCss} style={cssVars.vars}>
-      {above && <h6 className="arrTitleDesc-eyebrow above">{above}</h6>}
-      <HTag className="arrTitleDesc-title">{title}</HTag>
-      {below && <h5 className="arrTitleDesc-eyebrow below">{below}</h5>}
+      {above && <h6 className="lyraTitleDesc-eyebrow above">{above}</h6>}
+      <HTag className="lyraTitleDesc-title">{title}</HTag>
+      {below && <h5 className="lyraTitleDesc-eyebrow below">{below}</h5>}
       {hasDesc && (
         <RichText
-          className="arrTitleDesc-desc"
+          className="lyraTitleDesc-desc"
           value={desc}
           textColor={textColor as SanityColor}
           accentColor={accentColor as SanityColor}

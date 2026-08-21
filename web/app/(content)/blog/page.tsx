@@ -11,7 +11,7 @@ import {notFound} from 'next/navigation'
 import {ComponentType} from 'react'
 import {getBlogSlug} from '@/lib/data/utils/get-blog-slug'
 import PageGradientStyle from '@/components/layout/body/PageGradientStyle'
-import {arrGetPageMetadata} from '@/lib/utils/seo/metadata/page-metadata'
+import {lyraGetPageMetadata} from '@/lib/utils/seo/metadata/page-metadata'
 import BlogJsonLd from '@/components/seo/BlogJsonLd'
 import {isProduction} from '@/lib/const/env'
 import {getBlogTags} from '@/lib/data/blog-tags'
@@ -44,7 +44,7 @@ export async function generateMetadata({searchParams}: BlogPageProps): Promise<M
       description: 'The requested page does not exist.',
     }
 
-  const baseMetadata = await arrGetPageMetadata({page})
+  const baseMetadata = await lyraGetPageMetadata({page})
 
   const tagSlug = params.tag
   const categorySlug = params.category
@@ -56,7 +56,7 @@ export async function generateMetadata({searchParams}: BlogPageProps): Promise<M
 
     return {
       ...baseMetadata,
-      title: `${suffix} · Arratech AB`,
+      title: `${suffix} · Lyra`,
     }
   }
 
@@ -82,7 +82,7 @@ export default async function BlogPage({searchParams}: BlogPageProps) {
 
   let jsonld: PageJsonLdData | undefined
   if (isProduction) {
-    const baseJsonld = (await arrGetPageMetadata({
+    const baseJsonld = (await lyraGetPageMetadata({
       page,
       data: 'jsonld',
     })) as PageJsonLdData
@@ -92,7 +92,7 @@ export default async function BlogPage({searchParams}: BlogPageProps) {
 
       jsonld = {
         ...baseJsonld,
-        title: `${suffix} · Arratech AB`,
+        title: `${suffix} · Lyra`,
       }
     } else {
       jsonld = baseJsonld
@@ -131,8 +131,8 @@ export default async function BlogPage({searchParams}: BlogPageProps) {
     <>
       <PageGradientStyle type={gradientBg} />
 
-      <main className="arrMain" id="main-content">
-        <div className="arrMain-wrapper" id={`page-${page._id}`}>
+      <main className="lyraMain" id="main-content">
+        <div className="lyraMain-wrapper" id={`page-${page._id}`}>
           {showTitle && (
             <PageHeadWrapper id={page._id} settings={settings}>
               <TitleDesc

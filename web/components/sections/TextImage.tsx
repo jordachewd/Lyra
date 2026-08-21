@@ -30,7 +30,7 @@ export default function TextImage({
   const align = isCentered ? 'center' : 'left'
 
   const img = image?.image as NestedImageField | null | undefined
-  const imgAlt = image?.alt ?? (title || 'Arratech Image')
+  const imgAlt = image?.alt ?? (title || 'Lyra Image')
   const imgCaption = image?.caption ?? ''
   const imgCaptionSub = image?.captionSub ?? ''
   const imgCredit = image?.credit ?? ''
@@ -53,9 +53,9 @@ export default function TextImage({
     <SectionWrapper
       id={`text-image-${_id}`}
       settings={settings as SectionSettings}
-      className="arrTextImage"
+      className="lyraTextImage"
     >
-      <div className="arrTextImage-content">
+      <div className="lyraTextImage-content">
         {titleDesc.showTitle && (
           <TitleDesc
             title={title}
@@ -68,7 +68,7 @@ export default function TextImage({
         )}
 
         {hasChips && (
-          <div className="cattag-chips arrTextImage-chips" style={textImgCss.vars}>
+          <div className="cattag-chips lyraTextImage-chips" style={textImgCss.vars}>
             {chips!.map((chip, index) => (
               <span key={index} className="cattag-chip">
                 {chip}
@@ -80,14 +80,14 @@ export default function TextImage({
         {hasBtns && (
           <SectionButtons
             buttons={buttons}
-            className={`arrTextImage-actions ${align}`}
+            className={`lyraTextImage-actions ${align}`}
             location={`${title} section`}
           />
         )}
       </div>
 
       {img && (
-        <div className={`arrTextImage-image ${imgShape}`}>
+        <div className={`lyraTextImage-image ${imgShape}`}>
           <RenderImage
             image={img}
             alt={imgAlt}
@@ -96,12 +96,12 @@ export default function TextImage({
             priority
           />
           {(imgCaption || imgCaptionSub || imgCredit) && (
-            <div className="arrTextImage-image-meta">
-              {imgCaption && <div className="arrTextImage-image-caption">{imgCaption}</div>}
+            <div className="lyraTextImage-image-meta">
+              {imgCaption && <div className="lyraTextImage-image-caption">{imgCaption}</div>}
               {imgCaptionSub && (
-                <div className="arrTextImage-image-caption-sub">{imgCaptionSub}</div>
+                <div className="lyraTextImage-image-caption-sub">{imgCaptionSub}</div>
               )}
-              {imgCredit && <div className="arrTextImage-image-credit">{imgCredit}</div>}
+              {imgCredit && <div className="lyraTextImage-image-credit">{imgCredit}</div>}
             </div>
           )}
         </div>

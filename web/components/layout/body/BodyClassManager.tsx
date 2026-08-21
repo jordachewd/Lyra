@@ -27,7 +27,7 @@ export default function BodyClassManager() {
     const pagePath = `${pathname ?? '/'}${q ? `?${q}` : ''}`
 
     if (lastPVPath !== pagePath) {
-      const pageTitle = document.title || 'Arratech AB'
+      const pageTitle = document.title || 'Lyra'
       trackPageView(pageTitle, pagePath)
       lastPVPath = pagePath
     }

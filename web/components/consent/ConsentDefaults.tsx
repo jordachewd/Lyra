@@ -6,7 +6,7 @@ export default async function ConsentDefaults() {
   return (
     <Script
       nonce={nonce}
-      id="arratech-consent-defaults"
+      id="lyra-consent-defaults"
       strategy="beforeInteractive"
       dangerouslySetInnerHTML={{
         __html: `

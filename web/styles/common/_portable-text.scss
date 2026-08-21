@@ -1,8 +1,8 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrPortableText {
-  @include arrTextTypography();
+.lyraPortableText {
+  @include lyraTextTypography();
   color: var(--richText-txt, var(--text-primary));
 
   // Base reset for direct children
@@ -125,12 +125,12 @@
     position: relative;
     padding: 4rem 2rem;
     text-align: center;
-    @include arrTextTypography(2.25rem, 300, 1.2, -0.05em);
+    @include lyraTextTypography(2.25rem, 300, 1.2, -0.05em);
     @include textGradientOverlay(var(--richText-accent, var(--color-blue)));
     border-top: 1px solid var(--richText-accent, var(--color-blue));
     border-bottom: 1px solid var(--richText-txt, var(--text-primary));
 
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       padding: 4rem;
     }
   }
@@ -196,7 +196,7 @@
   }
 
   // Links
-  a:not(.arrButton) {
+  a:not(.lyraButton) {
     position: relative;
     color: var(--richText-accent, var(--color-accent-light));
     text-decoration: none;
@@ -211,7 +211,7 @@
       border-radius: 0.25rem;
       background: var(--richText-accent, var(--color-accent-light));
       opacity: 0;
-      @include arrTransition(all, 0.4s, ease);
+      @include lyraTransition(all, 0.4s, ease);
     }
 
     &:hover::after {

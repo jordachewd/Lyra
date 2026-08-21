@@ -1,7 +1,7 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrCtaBanner {
+.lyraCtaBanner {
   &-container {
     width: 100%;
     display: flex;
@@ -10,11 +10,11 @@
     border-radius: 1.5rem;
     background-color: var(--ctaContainer-bg, transparent);
 
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       flex-direction: row;
     }
 
-    @include arrMediaQuery($mq-desktop) {
+    @include lyraMediaQuery($mq-desktop) {
       &.cols-firstBig {
         &.normal {
           & > div:first-child {
@@ -84,7 +84,7 @@
       padding: 0;
     }
 
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       gap: 2.5rem;
       &.pd {
         &-normal {
@@ -102,7 +102,7 @@
       }
     }
 
-    .arrTitleDesc {
+    .lyraTitleDesc {
       &.shrink {
         max-width: 65%;
       }
@@ -122,14 +122,14 @@
       gap: 1rem;
     }
 
-    .arrPortableText p {
+    .lyraPortableText p {
       margin: 0;
     }
   }
 
   &:has(&-wrapper.cols-normal) &-container:not(.no-img) &-image {
     width: 100%;
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       max-width: 620px;
     }
   }
@@ -152,7 +152,7 @@
   }
 
   &:has(&-wrapper.reversed) &-container:not(.no-img) &-content {
-    &-title .arrTitleDesc {
+    &-title .lyraTitleDesc {
       &-title,
       &-eyebrow,
       &-desc {

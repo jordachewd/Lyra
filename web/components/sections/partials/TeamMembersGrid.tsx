@@ -22,14 +22,14 @@ function TeamMembersGrid({members}: TeamMembersProps) {
   }, [])
 
   return (
-    <div className="arrTeamOverview-cards">
+    <div className="lyraTeamOverview-cards">
       {members.map((member, index) => {
         const img = member.image as NestedImageField | null | undefined
         const imgAlt = img?.alt ?? (member.name || 'Team Member Image')
         const imgSize = getImgSize(img?.widthSize || 'normal', 140)
         const hasBio = member.bio && member.bio.length > 0
 
-        const bioTextClass = classNames('arrTeamOverview-card-bio-preview', {
+        const bioTextClass = classNames('lyraTeamOverview-card-bio-preview', {
           open: openItem === index,
         })
 
@@ -42,28 +42,28 @@ function TeamMembersGrid({members}: TeamMembersProps) {
         )
 
         return (
-          <div key={member.id || index} className="arrTeamOverview-card" style={memberCss.vars}>
-            <div className="arrTeamOverview-card-image">
+          <div key={member.id || index} className="lyraTeamOverview-card" style={memberCss.vars}>
+            <div className="lyraTeamOverview-card-image">
               <RenderImage image={img} alt={imgAlt} displayWidth={imgSize} mobileWidth={imgSize} />
             </div>
 
-            <div className="arrTeamOverview-card-name">{member.name}</div>
+            <div className="lyraTeamOverview-card-name">{member.name}</div>
 
             {member.position && (
-              <div className="arrTeamOverview-card-position">{member.position}</div>
+              <div className="lyraTeamOverview-card-position">{member.position}</div>
             )}
 
             {hasBio && (
               <>
                 <div className={bioTextClass}>
                   <RichText
-                    className="arrTeamOverview-card-bio"
+                    className="lyraTeamOverview-card-bio"
                     value={member.bio as RichTextPropValue}
                   />
                 </div>
 
                 <button
-                  className="arrButton arrTeamOverview-button"
+                  className="lyraButton lyraTeamOverview-button"
                   onClick={() => openBlock(index)}
                 >
                   <span>{openItem === index ? 'Close Bio' : 'Read Bio'}</span>

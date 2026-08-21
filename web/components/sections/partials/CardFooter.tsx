@@ -23,12 +23,12 @@ export default function CardFooter({
   }
 
   return (
-    <div className={`arrCardFooter ${cssClass}`} style={cssVars}>
+    <div className={`lyraCardFooter ${cssClass}`} style={cssVars}>
       {message && <CardFooterMsg message={message} />}
       {button?.href && (
         <SectionButtons
           buttons={[button]}
-          className="arrCardFooter-btn"
+          className="lyraCardFooter-btn"
           location={`${section} section`}
         />
       )}

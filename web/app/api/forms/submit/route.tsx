@@ -95,7 +95,7 @@ export async function POST(req: NextRequest) {
       extra_values: values,
     }
 
-    const hubspotRes = await fetch('https://api.arratech.com/internal/addhubspotlead', {
+    const hubspotRes = await fetch('https://api.lyra.com/internal/addhubspotlead', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(payload),

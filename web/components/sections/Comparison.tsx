@@ -30,7 +30,7 @@ export default function ComparisonSection({
     <SectionWrapper
       id={`comparison-${_id}`}
       settings={settings as SectionSettings}
-      className="arrComparison"
+      className="lyraComparison"
     >
       {titleDesc.showTitle && (
         <TitleDesc
@@ -42,7 +42,7 @@ export default function ComparisonSection({
       )}
 
       {hasSteps && (
-        <div className="arrComparison-steps">
+        <div className="lyraComparison-steps">
           {allSteps.map((step, index) => (
             <ComparisonItem key={step.id + index} item={step} />
           ))}
@@ -52,7 +52,7 @@ export default function ComparisonSection({
       {hasButtons && (
         <SectionButtons
           buttons={buttons}
-          className="arrStepper-actions"
+          className="lyraStepper-actions"
           location={`${title} section`}
         />
       )}

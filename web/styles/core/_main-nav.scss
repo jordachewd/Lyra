@@ -1,7 +1,7 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrMainNav {
+.lyraMainNav {
   --main-nav-list-max-height: 90dvh;
   --main-nav-font-size: 0.875rem;
   --main-nav-shadow: 0 24px 50px -24px rgba(2, 6, 23, 0.25);
@@ -25,15 +25,15 @@
     opacity: 0;
     transform: translateY(-1rem);
     pointer-events: none;
-    @include arrTransition;
+    @include lyraTransition;
 
     & > .menu-item {
       position: relative;
     }
   }
 
-  #mobile-nav-toggle:checked ~ .arrHeader-main & {
-    .arrMainNav-menu {
+  #mobile-nav-toggle:checked ~ .lyraHeader-main & {
+    .lyraMainNav-menu {
       max-height: var(--main-nav-list-max-height);
       transform: translateY(0);
       opacity: 1;
@@ -53,7 +53,7 @@
     cursor: pointer;
     gap: 0.5em;
 
-    @include arrTransition;
+    @include lyraTransition;
 
     &:focus-visible {
       outline: 2px solid #3b82f6;
@@ -89,7 +89,7 @@
     align-items: center;
     justify-content: space-between;
     text-transform: uppercase;
-    @include arrTextTypography(14px, 600);
+    @include lyraTextTypography(14px, 600);
 
     & > a {
       text-decoration: none;
@@ -108,7 +108,7 @@
     min-width: 44px;
     min-height: 44px;
     border-radius: 8px;
-    @include arrTransition;
+    @include lyraTransition;
 
     &:hover,
     &:focus-visible {
@@ -135,7 +135,7 @@
     border-radius: 8px;
     font-size: var(--main-nav-font-size);
 
-    @include arrTransition;
+    @include lyraTransition;
 
     &:focus-visible {
       outline: 2px solid #3b82f6;
@@ -158,7 +158,7 @@
       font-size: 11px;
       font-weight: 300;
 
-      @include arrMediaQuery($mq-nav) {
+      @include lyraMediaQuery($mq-nav) {
         color: var(--storm-30);
       }
     }
@@ -197,7 +197,7 @@
         font-size: 11px;
         font-weight: 300;
 
-        @include arrMediaQuery($mq-nav) {
+        @include lyraMediaQuery($mq-nav) {
           color: var(--storm-30);
         }
       }
@@ -207,9 +207,9 @@
   .menu-list {
     max-height: 0;
     overflow: hidden;
-    @include arrTransition;
+    @include lyraTransition;
 
-    @include arrMediaQuery($mq-nav) {
+    @include lyraMediaQuery($mq-nav) {
       opacity: 0;
       transform: translateY(8px);
       visibility: hidden;
@@ -244,7 +244,7 @@
     display: flex;
     flex-direction: column;
 
-    @include arrTransition;
+    @include lyraTransition;
   }
 
   .child-item {
@@ -258,8 +258,8 @@
     gap: 1.25rem;
     margin: 0;
 
-    @include arrTransition;
-    @include arrMediaQuery($mq-nav) {
+    @include lyraTransition;
+    @include lyraMediaQuery($mq-nav) {
       gap: 0.25rem;
     }
   }
@@ -273,9 +273,9 @@
     align-items: flex-start;
     gap: 8px;
     width: 100%;
-    @include arrTransition;
+    @include lyraTransition;
 
-    @include arrMediaQuery($mq-nav) {
+    @include lyraMediaQuery($mq-nav) {
       border-radius: 8px;
       padding: 8px 6px;
     }
@@ -296,10 +296,10 @@
     pointer-events: none;
   }
 
-  @include arrMediaQuery($mq-nav) {
+  @include lyraMediaQuery($mq-nav) {
     width: auto;
 
-    .arrMainNav-menu {
+    .lyraMainNav-menu {
       max-height: none;
       transform: none;
       opacity: 1;
@@ -322,7 +322,7 @@
       }
     }
 
-    .arrMainNav-menu > .menu-item:hover > .item-header {
+    .lyraMainNav-menu > .menu-item:hover > .item-header {
       background-color: var(--main-nav-hover-background);
 
       .chev {
@@ -330,9 +330,9 @@
       }
     }
 
-    .arrMainNav-menu > .menu-item.has-children:hover > .menu-list,
-    .arrMainNav-menu > .menu-item.has-children:focus-within > .menu-list,
-    .arrMainNav-menu > .menu-item.has-children > .menu-list:hover {
+    .lyraMainNav-menu > .menu-item.has-children:hover > .menu-list,
+    .lyraMainNav-menu > .menu-item.has-children:focus-within > .menu-list,
+    .lyraMainNav-menu > .menu-item.has-children > .menu-list:hover {
       opacity: 1;
       visibility: visible;
       transform: translateY(0);
@@ -345,14 +345,14 @@
     }
   }
 
-  @include arrMediaQuery($mq-screen) {
-    .arrMainNav-menu {
+  @include lyraMediaQuery($mq-screen) {
+    .lyraMainNav-menu {
       gap: 1.375rem;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .arrMainNav-menu,
+    .lyraMainNav-menu,
     .menu-list,
     .grandchild-list {
       transition: none !important;

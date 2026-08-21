@@ -50,33 +50,33 @@ export default function BlogPostsList({
   const totalPages = Math.ceil(totalFiltered / perPage)
 
   if (totalUnfiltered === 0) {
-    return <p className="arrBlog-noPosts">No posts found.</p>
+    return <p className="lyraBlog-noPosts">No posts found.</p>
   }
 
   return (
     <section
       id={`section-bloglist-${pageId}`}
-      className={`arrBlog-wrapper ${layout}`}
+      className={`lyraBlog-wrapper ${layout}`}
       aria-label="Blog posts list"
     >
       {featPost && <FeaturedPost post={featPost} settings={settings} />}
 
       {hasCats && (
-        <Suspense fallback={<div className="arrBlog-filters" />}>
+        <Suspense fallback={<div className="lyraBlog-filters" />}>
           <BlogCategoryFilter items={categories} totalCount={totalUnfiltered} />
         </Suspense>
       )}
 
       {hasTags && (
-        <Suspense fallback={<div className="arrBlog-filters" />}>
+        <Suspense fallback={<div className="lyraBlog-filters" />}>
           <BlogTagFilter items={tags} totalCount={totalUnfiltered} />
         </Suspense>
       )}
 
       {postsList.length > 0 ? (
-        <BlogCardsList posts={postsList} settings={settings} className="arrBlog-posts" />
+        <BlogCardsList posts={postsList} settings={settings} className="lyraBlog-posts" />
       ) : (
-        !featPost && <p className="arrBlog-noPosts">No posts found.</p>
+        !featPost && <p className="lyraBlog-noPosts">No posts found.</p>
       )}
 
       {totalPages > 1 && (

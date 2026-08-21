@@ -1,9 +1,9 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrTextOnly {
+.lyraTextOnly {
   &-title {
-    .arrTitleDesc.center:not(.shrink) {
+    .lyraTitleDesc.center:not(.shrink) {
       max-width: 100%;
     }
   }
@@ -27,7 +27,7 @@
     }
   }
 
-  &:has(&-wrapper.reversed) &-title .arrTitleDesc {
+  &:has(&-wrapper.reversed) &-title .lyraTitleDesc {
     margin-left: 0;
     & > * {
       justify-content: flex-start;

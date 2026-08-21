@@ -13,7 +13,7 @@ function hasChildren(item: MenuItem) {
 
 export default function HeaderMegaMenuNav({menuItems}: HeaderMegaMenuNavProps) {
   return (
-    <ul className="arrMainNav-menu megamenu" id="nav-menu">
+    <ul className="lyraMainNav-menu megamenu" id="nav-menu">
       {menuItems.map((item, i) => {
         const tId = `mega-menu-item-${i}`
         const itemHasChildren = hasChildren(item)

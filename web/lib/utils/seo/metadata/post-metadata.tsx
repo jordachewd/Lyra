@@ -3,8 +3,8 @@ import {ptToPlainText} from '@/lib/utils/common/pt-to-plain-text'
 import type {PostDetail} from '@/lib/zod/website/content/post'
 import type {SeoMetaSchema, SeoModeSchema} from '@/lib/zod/sections/layout/seo-meta'
 import type {Metadata} from 'next'
-import {arrBuildMetadata} from './build-metadata'
-import {arrNoMetadata} from './no-metadata'
+import {lyraBuildMetadata} from './build-metadata'
+import {lyraNoMetadata} from './no-metadata'
 import {urlFor} from '@/lib/utils/sanity/image'
 import type {PostJsonLdData} from '@/lib/types/seo'
 
@@ -13,12 +13,12 @@ type PostMetaProps = {
   data?: 'jsonld' | 'metadata'
 }
 
-export async function arrGetPostMetadata({
+export async function lyraGetPostMetadata({
   post,
   data = 'metadata',
 }: PostMetaProps): Promise<Metadata | PostJsonLdData> {
   if (!post) {
-    return await arrBuildMetadata({
+    return await lyraBuildMetadata({
       pathname: '/blog/404',
       title: 'Page not found',
       ogType: 'website',
@@ -66,12 +66,12 @@ export async function arrGetPostMetadata({
   }
 
   if (seoMeta?.mode === ('ignore' as SeoModeSchema))
-    return await arrNoMetadata({
+    return await lyraNoMetadata({
       title,
       noIndex: seoMeta?.noindex ?? false,
     })
 
-  return await arrBuildMetadata({
+  return await lyraBuildMetadata({
     pathname: `/blog/${post.slug}`,
     title,
     description,

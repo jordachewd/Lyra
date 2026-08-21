@@ -41,8 +41,8 @@ export default async function PageJsonLd({data}: PageJsonLdProps) {
   return (
     <script
       nonce={nonce}
-      id="arratech-page-jsonld"
-      key="arratech-page-jsonld"
+      id="lyra-page-jsonld"
+      key="lyra-page-jsonld"
       type="application/ld+json"
       dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd)}}
     />

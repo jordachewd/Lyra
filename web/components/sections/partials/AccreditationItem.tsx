@@ -25,9 +25,9 @@ export default function AccreditationItem({item, settings}: Props) {
 
   const content = (
     <>
-      {hasTitle && <div className="arrAccreditations-item-title">{item.title}</div>}
+      {hasTitle && <div className="lyraAccreditations-item-title">{item.title}</div>}
       {hasImg && (
-        <div className="arrAccreditations-item-image">
+        <div className="lyraAccreditations-item-image">
           <RenderImage
             image={img}
             alt={img?.alt || item.title}
@@ -36,7 +36,7 @@ export default function AccreditationItem({item, settings}: Props) {
           />
         </div>
       )}
-      {hasTag && <div className="arrAccreditations-item-tag">{item.tag}</div>}
+      {hasTag && <div className="lyraAccreditations-item-tag">{item.tag}</div>}
     </>
   )
 
@@ -45,7 +45,7 @@ export default function AccreditationItem({item, settings}: Props) {
       {linkHref ? (
         <Link
           href={linkHref}
-          className="arrAccreditations-item"
+          className="lyraAccreditations-item"
           {...(linkNewTab && {
             target: '_blank',
             rel: 'noopener noreferrer',
@@ -54,7 +54,7 @@ export default function AccreditationItem({item, settings}: Props) {
           {content}
         </Link>
       ) : (
-        <div className="arrAccreditations-item">{content}</div>
+        <div className="lyraAccreditations-item">{content}</div>
       )}
     </>
   )

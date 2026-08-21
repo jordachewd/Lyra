@@ -30,24 +30,24 @@ export default function ProductCard({card}: ProductCardProps) {
   )
 
   return (
-    <div className="arrProducts-card" style={cardCss.vars}>
-      <div className="arrProducts-card-heading">
+    <div className="lyraProducts-card" style={cardCss.vars}>
+      <div className="lyraProducts-card-heading">
         {icon && (
-          <div className="arrProducts-card-heading-icon">
+          <div className="lyraProducts-card-heading-icon">
             <RenderImage image={icon} alt={iconAlt} displayWidth={32} mobileWidth={32} />
           </div>
         )}
 
-        <div className="arrProducts-card-heading-title">{card.title}</div>
+        <div className="lyraProducts-card-heading-title">{card.title}</div>
       </div>
 
       {hasDesc && (
-        <RichText className="arrProducts-card-desc" value={card.description as RichTextPropValue} />
+        <RichText className="lyraProducts-card-desc" value={card.description as RichTextPropValue} />
       )}
 
       {hasFeatures && (
-        <div className="arrProducts-card-features">
-          <div className="arrProducts-card-features-title">Key features</div>
+        <div className="lyraProducts-card-features">
+          <div className="lyraProducts-card-features-title">Key features</div>
 
           <FeatureItems
             features={card.features}
@@ -59,7 +59,7 @@ export default function ProductCard({card}: ProductCardProps) {
             <CollapsibleAddons
               label="Show all features"
               content={card.addons as RichTextPropValue}
-              className="arrProducts-card-addons"
+              className="lyraProducts-card-addons"
               textColor={cardCss.colors.textColor}
             />
           )}
@@ -70,7 +70,7 @@ export default function ProductCard({card}: ProductCardProps) {
         <CardFooter
           content={card.footer as CardFooterItem[]}
           textColor={cardCss.colors.textColor}
-          className="arrProducts-card-footer"
+          className="lyraProducts-card-footer"
           section={card.title}
         />
       )}

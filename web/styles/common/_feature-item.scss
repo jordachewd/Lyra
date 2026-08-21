@@ -1,7 +1,7 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrFeatures {
+.lyraFeatures {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -21,16 +21,16 @@
       gap: 0.5rem;
     }
 
-    .arrFeatures {
+    .lyraFeatures {
       &-item {
         width: 100%;
         flex: 1 1 calc(100% / 2 - 0.75rem);
 
-        @include arrMediaQuery($mq-tablet) {
+        @include lyraMediaQuery($mq-tablet) {
           flex: 1 1 calc(100% / 4 - 1.125rem);
         }
 
-        @include arrMediaQuery($mq-screen) {
+        @include lyraMediaQuery($mq-screen) {
           flex: 1 1 calc(100% / 6 - 1.25rem);
         }
 
@@ -41,7 +41,7 @@
           border: 1px solid rgba(var(--color-gray-rgb), 0.16);
           padding: 0.75rem 0.5rem;
 
-          .arrFeatures {
+          .lyraFeatures {
             &-icon {
               margin: 0.25rem auto 0 auto;
             }
@@ -106,7 +106,7 @@
     &-title,
     &-eyebrow,
     &-description {
-      @include arrTextTypography(0.875rem, 400, 1.2);
+      @include lyraTextTypography(0.875rem, 400, 1.2);
     }
 
     &-title {

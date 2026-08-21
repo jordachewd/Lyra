@@ -11,10 +11,10 @@ export default function FooterNavColumn({menuItem}: FooterNavColumnProps) {
   const hasChildren = itemChildren && itemChildren.length > 0
 
   return (
-    <div className="arrFooter-nav-column">
+    <div className="lyraFooter-nav-column">
       {hasHref ? (
         <Link
-          className="arrFooter-nav-heading"
+          className="lyraFooter-nav-heading"
           href={menuItem.href ?? '#'}
           target={menuItem.newTab ? '_blank' : undefined}
           rel={menuItem.newTab ? 'noopener noreferrer' : undefined}
@@ -22,11 +22,11 @@ export default function FooterNavColumn({menuItem}: FooterNavColumnProps) {
           {menuItem.label}
         </Link>
       ) : (
-        <div className="arrFooter-nav-heading">{menuItem.label}</div>
+        <div className="lyraFooter-nav-heading">{menuItem.label}</div>
       )}
 
       {hasChildren && (
-        <ul className="arrFooter-nav-list">
+        <ul className="lyraFooter-nav-list">
           {itemChildren.map((navItem: MenuItem, navIdx: number) => {
             const navHasHref = !!navItem.href
             const navItemChildren = (navItem.children || []) as MenuItem[]
@@ -37,36 +37,36 @@ export default function FooterNavColumn({menuItem}: FooterNavColumnProps) {
                 {navHasHref ? (
                   <Link
                     href={navItem.href ?? '#'}
-                    className="arrFooter-nav-item"
+                    className="lyraFooter-nav-item"
                     target={navItem.newTab ? '_blank' : undefined}
                     rel={navItem.newTab ? 'noopener noreferrer' : undefined}
                   >
                     {navItem.label}
                   </Link>
                 ) : (
-                  <span className="arrFooter-nav-item" role="menuitem">
+                  <span className="lyraFooter-nav-item" role="menuitem">
                     {navItem.label}
                   </span>
                 )}
 
                 {navHasChildren && (
-                  <ul className="arrFooter-nav-list child-list">
+                  <ul className="lyraFooter-nav-list child-list">
                     {navItemChildren.map((child, childIdx) => (
                       <li
                         key={`${child.label}-${navIdx}-${childIdx}`}
-                        className="arrFooter-nav-item child"
+                        className="lyraFooter-nav-item child"
                       >
                         {child.href ? (
                           <Link
                             href={child.href ?? '#'}
-                            className="arrFooter-nav-item child"
+                            className="lyraFooter-nav-item child"
                             target={child.newTab ? '_blank' : undefined}
                             rel={child.newTab ? 'noopener noreferrer' : undefined}
                           >
                             {child.label}
                           </Link>
                         ) : (
-                          <span className="arrFooter-nav-item child">{child.label}</span>
+                          <span className="lyraFooter-nav-item child">{child.label}</span>
                         )}
                       </li>
                     ))}

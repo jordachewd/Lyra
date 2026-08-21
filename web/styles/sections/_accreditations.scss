@@ -1,7 +1,7 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrAccreditations {
+.lyraAccreditations {
   &-wrapper {
     &.centered > div,
     &.revCentered > div {
@@ -22,11 +22,11 @@
     grid-template-columns: 1fr;
     grid-auto-rows: var(--arr-row-h);
 
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    @include arrMediaQuery($mq-desktop) {
+    @include lyraMediaQuery($mq-desktop) {
       grid-template-columns: repeat(4, minmax(0, 1fr));
     }
 
@@ -58,8 +58,8 @@
       background: linear-gradient(to right, transparent, #37464d 20%, #37464d 80%, transparent);
     }
 
-    @include arrMediaQuery($mq-desktop) {
-      .arrAccreditations-item:nth-child(4n)::after {
+    @include lyraMediaQuery($mq-desktop) {
+      .lyraAccreditations-item:nth-child(4n)::after {
         display: none;
       }
     }
@@ -75,7 +75,7 @@
     padding: 3.5rem 1rem;
     gap: 1.5rem;
 
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       &::after {
         content: '';
         position: absolute;
@@ -100,14 +100,14 @@
       }
     }
 
-    @include arrMediaQuery($mq-desktop) {
+    @include lyraMediaQuery($mq-desktop) {
       &:nth-child(2n)::after {
         display: flex;
       }
     }
 
     &-title {
-      @include arrTextTypography;
+      @include lyraTextTypography;
       display: flex;
     }
 
@@ -132,7 +132,7 @@
       display: flex;
       position: relative;
       text-transform: uppercase;
-      @include arrTextTypography(0.675rem, 600, 0.5, 0.02em);
+      @include lyraTextTypography(0.675rem, 600, 0.5, 0.02em);
       padding: 0.75rem 1rem 0.75rem 1.75rem;
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 28px;
@@ -159,14 +159,14 @@
     padding-top: 2rem;
     max-width: 100% !important;
 
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       padding-top: 3rem;
     }
 
-    @include arrMediaQuery($mq-desktop) {
+    @include lyraMediaQuery($mq-desktop) {
       padding-top: 4rem;
       @for $n from 1 through 6 {
-        &[data-per-view='#{$n}'] .arrAccreditations-item:nth-child(#{$n}n)::after {
+        &[data-per-view='#{$n}'] .lyraAccreditations-item:nth-child(#{$n}n)::after {
           display: none;
         }
       }
@@ -186,11 +186,11 @@
     &::before {
       top: 2rem;
 
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraMediaQuery($mq-tablet) {
         top: 3rem;
       }
 
-      @include arrMediaQuery($mq-desktop) {
+      @include lyraMediaQuery($mq-desktop) {
         top: 4rem;
       }
     }
@@ -198,11 +198,11 @@
     &::after {
       bottom: 2.8rem;
 
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraMediaQuery($mq-tablet) {
         bottom: 4.2rem;
       }
 
-      @include arrMediaQuery($mq-desktop) {
+      @include lyraMediaQuery($mq-desktop) {
         bottom: 5.6rem;
       }
     }
@@ -210,16 +210,16 @@
     &-track {
       display: flex;
       transform: translateX(calc(var(--arr-page, 0) * -100%));
-      @include arrTransition(transform, 0.5s, ease);
+      @include lyraTransition(transform, 0.5s, ease);
 
-      > .arrAccreditations-item {
+      > .lyraAccreditations-item {
         flex: 0 0 100%;
 
-        @include arrMediaQuery($mq-tablet) {
+        @include lyraMediaQuery($mq-tablet) {
           flex-basis: 50%;
         }
 
-        @include arrMediaQuery($mq-desktop) {
+        @include lyraMediaQuery($mq-desktop) {
           flex-basis: calc(100% / var(--arr-per-view, 4));
         }
       }
@@ -241,8 +241,8 @@
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 100%;
       cursor: pointer;
-      @include arrTransition(background-color, 0.3s);
-      @include arrFocusVisible;
+      @include lyraTransition(background-color, 0.3s);
+      @include lyraFocusVisible;
 
       &::before {
         content: '';
@@ -252,7 +252,7 @@
         border-right: 2px solid currentColor;
       }
 
-      @include arrHover {
+      @include lyraHover {
         background: rgba(55, 70, 77, 0.7);
       }
 
@@ -277,11 +277,11 @@
       justify-content: center;
       margin-top: 2rem;
 
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraMediaQuery($mq-tablet) {
         margin-top: 3rem;
       }
 
-      @include arrMediaQuery($mq-desktop) {
+      @include lyraMediaQuery($mq-desktop) {
         margin-top: 4rem;
       }
     }
@@ -293,7 +293,7 @@
       cursor: pointer;
       padding: 0.25rem;
       background: transparent;
-      @include arrFocusVisible;
+      @include lyraFocusVisible;
 
       &::before {
         content: '';
@@ -301,7 +301,7 @@
         height: 0.5rem;
         border: 1px solid rgba(255, 255, 255, 0.3);
         border-radius: 100%;
-        @include arrTransition(background-color, 0.3s);
+        @include lyraTransition(background-color, 0.3s);
       }
 
       &.is-active::before {

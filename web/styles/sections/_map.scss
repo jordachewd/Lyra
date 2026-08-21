@@ -1,7 +1,7 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrMapSection {
+.lyraMapSection {
   &-map {
     height: 100%;
 
@@ -9,7 +9,7 @@
       margin: 0;
       font-style: italic;
       opacity: 0.7;
-      @include arrTextTypography(0.75rem, 300, 1);
+      @include lyraTextTypography(0.75rem, 300, 1);
     }
 
     iframe {
@@ -19,7 +19,7 @@
       border: none;
       border-radius: 1.5rem;
 
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraMediaQuery($mq-tablet) {
         height: 468px;
       }
     }
@@ -40,7 +40,7 @@
     width: 100%;
     max-width: 100%;
     margin: 0 auto;
-    @include arrMediaQuery($mq-desktop) {
+    @include lyraMediaQuery($mq-desktop) {
       iframe {
         height: 580px;
       }

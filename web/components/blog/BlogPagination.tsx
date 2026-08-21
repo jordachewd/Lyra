@@ -47,18 +47,18 @@ export default function BlogPagination({
   }
 
   return (
-    <nav className="arrBlog-pagination" aria-label="Pagination navigation">
+    <nav className="lyraBlog-pagination" aria-label="Pagination navigation">
       {currentPage > 1 ? (
         <Link
           href={buildUrl(currentPage - 1)}
-          className="arrBlog-pagination-btn"
+          className="lyraBlog-pagination-btn"
           aria-label="Go to previous page"
           scroll={false}
         >
           «
         </Link>
       ) : (
-        <span className="arrBlog-pagination-btn" aria-disabled="true">
+        <span className="lyraBlog-pagination-btn" aria-disabled="true">
           «
         </span>
       )}
@@ -68,7 +68,7 @@ export default function BlogPagination({
         return isActive ? (
           <span
             key={pageNum}
-            className="arrBlog-pagination-btn"
+            className="lyraBlog-pagination-btn"
             aria-current="page"
             aria-label={`Page ${pageNum}`}
           >
@@ -78,7 +78,7 @@ export default function BlogPagination({
           <Link
             key={pageNum}
             href={buildUrl(pageNum)}
-            className="arrBlog-pagination-btn"
+            className="lyraBlog-pagination-btn"
             aria-label={`Go to page ${pageNum}`}
             scroll={false}
           >
@@ -90,14 +90,14 @@ export default function BlogPagination({
       {currentPage < totalPages ? (
         <Link
           href={buildUrl(currentPage + 1)}
-          className="arrBlog-pagination-btn"
+          className="lyraBlog-pagination-btn"
           aria-label="Go to next page"
           scroll={false}
         >
           »
         </Link>
       ) : (
-        <span className="arrBlog-pagination-btn" aria-disabled="true">
+        <span className="lyraBlog-pagination-btn" aria-disabled="true">
           »
         </span>
       )}

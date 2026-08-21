@@ -1,12 +1,12 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrProducts {
+.lyraProducts {
   &-wrapper {
     flex-direction: column;
     &.centered,
     &.revCentered {
-      .arrProducts {
+      .lyraProducts {
         &-title {
           margin: 0 auto;
         }
@@ -26,7 +26,7 @@
     grid-template-columns: 1fr;
     gap: 1.5rem;
 
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       grid-template-columns: repeat(2, 1fr);
       gap: 2rem;
     }
@@ -51,7 +51,7 @@
       align-items: center;
       gap: 1.5rem;
 
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraMediaQuery($mq-tablet) {
         flex-direction: column;
         align-items: flex-start;
       }
@@ -74,7 +74,7 @@
       }
 
       &-title {
-        @include arrTextTypography(2rem, 300, 1.2);
+        @include lyraTextTypography(2rem, 300, 1.2);
         color: var(--prodCard-txt, var(--text-primary));
       }
     }
@@ -89,12 +89,12 @@
       display: flex;
       flex-direction: column;
       &-title {
-        @include arrTextTypography(0.8rem, 600, 1);
+        @include lyraTextTypography(0.8rem, 600, 1);
         color: var(--prodCard-txt, var(--text-primary));
         text-transform: uppercase;
       }
 
-      & > .arrFeatures.horizontal .arrFeatures-item {
+      & > .lyraFeatures.horizontal .lyraFeatures-item {
         flex: 1 1 calc(100% / 3 - 1.5rem);
       }
     }

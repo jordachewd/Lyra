@@ -11,8 +11,8 @@ export default async function RootJsonLd() {
   return (
     <script
       nonce={nonce}
-      id="arratech-site-jsonld"
-      key="arratech-site-jsonld"
+      id="lyra-site-jsonld"
+      key="lyra-site-jsonld"
       type="application/ld+json"
       dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd)}}
     />

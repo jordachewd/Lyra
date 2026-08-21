@@ -1,7 +1,7 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrSection {
+.lyraSection {
   width: 100%;
   display: flex;
   margin: 0;
@@ -11,12 +11,12 @@
       padding-top: 3rem;
       padding-bottom: 3rem;
 
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraMediaQuery($mq-tablet) {
         padding-top: 4.75rem;
         padding-bottom: 4.75rem;
       }
 
-      @include arrMediaQuery($site-width) {
+      @include lyraMediaQuery($site-width) {
         padding-top: 7rem;
         padding-bottom: 7rem;
       }
@@ -26,12 +26,12 @@
       padding-top: 2rem;
       padding-bottom: 2rem;
 
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraMediaQuery($mq-tablet) {
         padding-top: 3.25rem;
         padding-bottom: 3.25rem;
       }
 
-      @include arrMediaQuery($site-width) {
+      @include lyraMediaQuery($site-width) {
         padding-top: 5rem;
         padding-bottom: 5rem;
       }
@@ -41,12 +41,12 @@
       padding-top: 1.5rem;
       padding-bottom: 1.5rem;
 
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraMediaQuery($mq-tablet) {
         padding-top: 2.375rem;
         padding-bottom: 2.375rem;
       }
 
-      @include arrMediaQuery($site-width) {
+      @include lyraMediaQuery($site-width) {
         padding-top: 3.5rem;
         padding-bottom: 3.5rem;
       }
@@ -56,12 +56,12 @@
       padding-top: 1rem;
       padding-bottom: 1rem;
 
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraMediaQuery($mq-tablet) {
         padding-top: 1.375rem;
         padding-bottom: 1.375rem;
       }
 
-      @include arrMediaQuery($site-width) {
+      @include lyraMediaQuery($site-width) {
         padding-top: 1.75rem;
         padding-bottom: 1.75rem;
       }
@@ -125,7 +125,7 @@
       min-width: 0;
     }
 
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       gap: 3rem;
       flex-direction: row;
 
@@ -172,7 +172,7 @@
       }
     }
 
-    @include arrMediaQuery($mq-desktop) {
+    @include lyraMediaQuery($mq-desktop) {
       gap: 4rem;
 
       &:not(.cols-firstBig):not(.cols-lastBig) > div {
@@ -222,7 +222,7 @@
       flex-direction: column;
       justify-content: center;
       text-align: center;
-      & > div:not(.arrTitleDesc) {
+      & > div:not(.lyraTitleDesc) {
         width: 100%;
         max-width: $mq-tablet;
       }
@@ -230,7 +230,7 @@
 
     &.reversed {
       flex-direction: column-reverse;
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraMediaQuery($mq-tablet) {
         flex-direction: row-reverse;
       }
     }
@@ -239,20 +239,20 @@
       flex-direction: column-reverse;
       justify-content: center;
       text-align: center;
-      & > div:not(.arrTitleDesc) {
+      & > div:not(.lyraTitleDesc) {
         max-width: $mq-tablet;
       }
     }
 
     &.siteWidth {
       max-width: $site-width;
-      @include arrMediaQuery($site-width) {
+      @include lyraMediaQuery($site-width) {
         padding: 0;
       }
     }
 
     &.fullWidth {
-      @include arrMediaQuery($mq-max) {
+      @include lyraMediaQuery($mq-max) {
         padding-left: 4rem;
         padding-right: 4rem;
       }

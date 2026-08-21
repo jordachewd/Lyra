@@ -1,7 +1,7 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrGradient {
+.lyraGradient {
   &-banner {
     background: #4e8199;
     background: -webkit-linear-gradient(111deg, #0018f3 0.05%, #4e8199 55.93%);

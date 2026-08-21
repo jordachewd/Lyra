@@ -36,16 +36,16 @@ export default async function FormSection({
   const hasFields = fields && fields.length > 0
   const hasFeatures = features && features.length > 0
 
-  const featClass = classNames('arrFormSection-heading-features', align, featDisplay || 'vertical')
+  const featClass = classNames('lyraFormSection-heading-features', align, featDisplay || 'vertical')
 
   return (
     <SectionWrapper
       id={`form-${_id}`}
       settings={settings as SectionSettings}
-      className="arrFormSection"
+      className="lyraFormSection"
     >
       {titleDesc.showTitle && (
-        <div className="arrFormSection-heading">
+        <div className="lyraFormSection-heading">
           <TitleDesc
             title={title}
             below={subtitle}
@@ -74,7 +74,7 @@ export default async function FormSection({
           region={hubspot.region}
           portalId={hubspot.portalId}
           formId={hubspot.formId}
-          className="arrFormSection-hubspot"
+          className="lyraFormSection-hubspot"
         />
       )}
     </SectionWrapper>

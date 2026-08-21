@@ -17,25 +17,25 @@ type RowProps = {
 }
 
 function AccordionRow({item, index, isOpen, type, textColor, accentColor, onToggle}: RowProps) {
-  const itemCss = classNames('arrAccordion-item', {
+  const itemCss = classNames('lyraAccordion-item', {
     faq: type === 'faq',
     glossary: type === 'glossary',
   })
 
-  const answerCss = classNames('arrAccordion-answerWrap', {
+  const answerCss = classNames('lyraAccordion-answerWrap', {
     open: isOpen,
   })
 
   return (
     <div className={itemCss} onClick={() => onToggle(index)}>
-      <div className="arrAccordion-question">
-        <span className="arrAccordion-question-text">{item.title}</span>
-        <span aria-hidden="true" className="arrAccordion-question-icon" />
+      <div className="lyraAccordion-question">
+        <span className="lyraAccordion-question-text">{item.title}</span>
+        <span aria-hidden="true" className="lyraAccordion-question-icon" />
       </div>
 
       <div className={answerCss}>
         <RichText
-          className="arrAccordion-answer"
+          className="lyraAccordion-answer"
           value={item.description as RichTextPropValue}
           textColor={textColor}
           accentColor={accentColor}

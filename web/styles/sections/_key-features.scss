@@ -1,12 +1,12 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrKeyFeatures {
+.lyraKeyFeatures {
   &-wrapper {
     flex-direction: column;
     &.centered,
     &.revCentered {
-      .arrKeyFeatures {
+      .lyraKeyFeatures {
         &-topHeadline,
         &-bottomHeadline {
           margin: 0 auto;
@@ -19,13 +19,13 @@
 
     &.reversed {
       flex-direction: column;
-      .arrKeyFeatures-bottomHeadline .arrTitleDesc-title {
+      .lyraKeyFeatures-bottomHeadline .lyraTitleDesc-title {
         justify-content: flex-start;
       }
     }
   }
 
-  &-bottomHeadline .arrTitleDesc-title {
+  &-bottomHeadline .lyraTitleDesc-title {
     justify-content: flex-end;
   }
 
@@ -34,11 +34,11 @@
     grid-template-columns: 1fr;
     gap: 0.5rem;
 
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @include arrMediaQuery($mq-desktop) {
+    @include lyraMediaQuery($mq-desktop) {
       grid-template-columns: repeat(3, 1fr);
     }
   }
@@ -53,7 +53,7 @@
     align-items: center;
     gap: 1.25rem;
 
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       padding: 1.5rem;
     }
 

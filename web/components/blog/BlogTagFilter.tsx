@@ -26,7 +26,7 @@ export default function BlogTagFilter({items, totalCount}: BlogTagFilterProps) {
   if (!hasItems) return null
 
   return (
-    <div className="arrBlog-filters">
+    <div className="lyraBlog-filters">
       <span className="sr-only">Filter by tag</span>
 
       <div className="cattag-chips">

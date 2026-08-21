@@ -7,7 +7,7 @@ type FooterLogoProps = {logo: ImageField; className?: string}
 
 export default function FooterLogo({logo, className: style}: FooterLogoProps) {
   const logoImg = logo as NestedImageField | null | undefined
-  const alt = logo?.alt ?? 'Arratech Footer Logo'
+  const alt = logo?.alt ?? 'Lyra Footer Logo'
 
   return (
     <div className={style}>

@@ -22,12 +22,12 @@ export default function Header({data}: HeaderProps) {
 
   if (!hasLogo && !hasMenu && !hasBtns) return null
 
-  const headerClass = classNames('arrHeader', {
+  const headerClass = classNames('lyraHeader', {
     'has-above-menu': hasAbove,
   })
 
   return (
-    <header className={headerClass} aria-label="Arratech Header">
+    <header className={headerClass} aria-label="Lyra Header">
       {hasMenu && (
         <>
           <NavClientLogic />
@@ -43,9 +43,9 @@ export default function Header({data}: HeaderProps) {
 
       {hasAbove && <HeaderAbove menu={aboveMenu} />}
 
-      <div className="arrHeader-main">
-        <div className="arrHeader-brand">
-          {hasLogo && <HeaderLogo logo={logo} className="arrHeader-brand-slot" />}
+      <div className="lyraHeader-main">
+        <div className="lyraHeader-brand">
+          {hasLogo && <HeaderLogo logo={logo} className="lyraHeader-brand-slot" />}
           {hasMenu && <MobileNavBtn />}
         </div>
 

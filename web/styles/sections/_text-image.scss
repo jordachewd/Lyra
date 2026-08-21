@@ -1,7 +1,7 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrTextImage {
+.lyraTextImage {
   &-wrapper {
     &.normal,
     &.reversed {
@@ -12,7 +12,7 @@
   &-content {
     flex-direction: column;
     gap: 2rem;
-    .arrTitleDesc.center:not(.shrink) {
+    .lyraTitleDesc.center:not(.shrink) {
       max-width: 100%;
     }
   }
@@ -51,7 +51,7 @@
       gap: 0.35rem;
 
       & > div {
-        @include arrTextTypography(1.125rem, 400, 1.2);
+        @include lyraTextTypography(1.125rem, 400, 1.2);
       }
     }
 

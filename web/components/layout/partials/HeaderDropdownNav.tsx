@@ -13,7 +13,7 @@ function isLeaf(item: MenuItem) {
 
 export default function HeaderDropdownNav({menuItems}: HeaderDropdownNavProps) {
   return (
-    <ul className="arrMainNav-menu" id="nav-menu">
+    <ul className="lyraMainNav-menu" id="nav-menu">
       {menuItems.map((item, i) => {
         const tId = `menu-item-${i}`
         const hasChildren = !isLeaf(item)

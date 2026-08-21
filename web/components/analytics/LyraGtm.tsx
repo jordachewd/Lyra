@@ -5,7 +5,7 @@ type GTMProps = {
   noscript?: boolean
 }
 
-export default async function ArrGtm({gtmId, noscript = false}: GTMProps) {
+export default async function LyraGtm({gtmId, noscript = false}: GTMProps) {
   const nonce = (await headers()).get('x-nonce') ?? undefined
 
   if (noscript)
@@ -23,7 +23,7 @@ export default async function ArrGtm({gtmId, noscript = false}: GTMProps) {
   return (
     <script
       nonce={nonce}
-      id="arratech-gtm-bootstrap"
+      id="lyra-gtm-bootstrap"
       dangerouslySetInnerHTML={{
         __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

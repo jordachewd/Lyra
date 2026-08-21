@@ -145,28 +145,28 @@ export default function RanderFormClient({
   }, [formKind])
 
   return (
-    <form className="arrFormSection-form" onSubmit={handleSubmit} onFocus={handleFocus}>
-      {formTitle && <div className="arrFormSection-form-title">{formTitle}</div>}
+    <form className="lyraFormSection-form" onSubmit={handleSubmit} onFocus={handleFocus}>
+      {formTitle && <div className="lyraFormSection-form-title">{formTitle}</div>}
 
       {hasInputs ? (
         <>
-          <div className="arrFormSection-inputs">
+          <div className="lyraFormSection-inputs">
             {inputs.map((input) => (
               <RenderFormField key={input.id} field={input} error={errors[input.id]} />
             ))}
           </div>
-          <button type="submit" className="arrButton highlighted" disabled={submitting}>
+          <button type="submit" className="lyraButton highlighted" disabled={submitting}>
             {submitting ? 'Sending...' : btnTxt}
           </button>
 
           {openSnackbar && errors._form && (
-            <div className="arrFormSection-error">{errors._form}</div>
+            <div className="lyraFormSection-error">{errors._form}</div>
           )}
 
-          {hasFooter && <RichText className="arrFormSection-footer" value={disclaimer} />}
+          {hasFooter && <RichText className="lyraFormSection-footer" value={disclaimer} />}
         </>
       ) : (
-        <div className="arrFormSection-inputs">Form has no inputs yet.</div>
+        <div className="lyraFormSection-inputs">Form has no inputs yet.</div>
       )}
     </form>
   )

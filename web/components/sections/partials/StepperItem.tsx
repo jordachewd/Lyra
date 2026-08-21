@@ -23,12 +23,12 @@ function StepperItem({item, isRowEnd = false}: StepperItemProps) {
     'stepperItem',
   )
 
-  const stepClass = classNames('arrStepper-step', layout, {
+  const stepClass = classNames('lyraStepper-step', layout, {
     'no-label': !label,
     'row-end': isRowEnd,
   })
 
-  const labelClass = classNames('arrStepper-step-label', {
+  const labelClass = classNames('lyraStepper-step-label', {
     'no-label': !label,
     'has-ring': !!textColor,
   })
@@ -36,11 +36,11 @@ function StepperItem({item, isRowEnd = false}: StepperItemProps) {
   return (
     <div id={`step-${id}`} className={stepClass} style={stepCss.vars}>
       <div className={labelClass}>{label}</div>
-      <div className={`arrStepper-step-content ${layout}`}>
-        <div className="arrStepper-step-content-title">{title}</div>
+      <div className={`lyraStepper-step-content ${layout}`}>
+        <div className="lyraStepper-step-content-title">{title}</div>
         {description.length > 0 && (
           <RichText
-            className="arrStepper-step-content-desc"
+            className="lyraStepper-step-content-desc"
             value={description as RichTextPropValue}
             textColor={descColor as SanityColor}
           />

@@ -29,7 +29,7 @@ function SolutionCard({card, layout}: SolutionsCardProps) {
     horizontal: layout === 'horizontal',
   })
 
-  const cardClass = classNames('arrSolutions-card', layoutCss, {
+  const cardClass = classNames('lyraSolutions-card', layoutCss, {
     rounded: card.rounded,
   })
 
@@ -46,7 +46,7 @@ function SolutionCard({card, layout}: SolutionsCardProps) {
   return (
     <div id={cardId} className={cardClass} style={cardCss.vars}>
       {image && (
-        <div className={`arrSolutions-card-image ${layoutCss}`}>
+        <div className={`lyraSolutions-card-image ${layoutCss}`}>
           <RenderImage
             image={image}
             alt={imageAlt}
@@ -57,13 +57,13 @@ function SolutionCard({card, layout}: SolutionsCardProps) {
         </div>
       )}
 
-      <div className={`arrSolutions-card-content ${layoutCss}`}>
-        <div className={`arrSolutions-card-content-header ${layoutCss}`}>
-          <div className="arrSolutions-card-content-header-title">{card.title}</div>
+      <div className={`lyraSolutions-card-content ${layoutCss}`}>
+        <div className={`lyraSolutions-card-content-header ${layoutCss}`}>
+          <div className="lyraSolutions-card-content-header-title">{card.title}</div>
 
           {card.content.length > 0 && (
             <RichText
-              className="arrSolutions-card-content-header-desc"
+              className="lyraSolutions-card-content-header-desc"
               value={card.content as RichTextPropValue}
             />
           )}
@@ -84,7 +84,7 @@ function SolutionCard({card, layout}: SolutionsCardProps) {
         {cardFooter.length > 0 && (
           <CardFooter
             content={cardFooter}
-            className={`arrSolutions-card-footer ${layoutCss}`}
+            className={`lyraSolutions-card-footer ${layoutCss}`}
             textColor={cardCss.colors.textColor}
             section={card.title}
           />

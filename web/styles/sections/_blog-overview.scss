@@ -1,7 +1,7 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrBlogSection {
+.lyraBlogSection {
   &-wrapper {
     flex-direction: column;
     &.centered > div,
@@ -23,11 +23,11 @@
     width: 100%;
     gap: 1.5rem;
 
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @include arrMediaQuery($mq-desktop) {
+    @include lyraMediaQuery($mq-desktop) {
       grid-template-columns: repeat(3, 1fr);
     }
 
@@ -36,7 +36,7 @@
       height: 100%;
       border-radius: 1rem;
       overflow: hidden;
-      @include arrBackdropBlur;
+      @include lyraBackdropBlur;
     }
   }
 
@@ -47,7 +47,7 @@
     position: relative;
     overflow: hidden;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    @include arrTransition();
+    @include lyraTransition();
 
     &:before {
       content: '';
@@ -80,7 +80,7 @@
       height: 240px;
       overflow: hidden;
       background: rgba(#1a2b33, 0.3);
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraMediaQuery($mq-tablet) {
         height: 280px;
       }
 
@@ -100,7 +100,7 @@
       flex-direction: column;
       text-decoration: none;
       justify-content: flex-start;
-      @include arrTextTypography(1rem, 300, 1.4);
+      @include lyraTextTypography(1rem, 300, 1.4);
 
       & > a,
       & > div {
@@ -110,8 +110,8 @@
 
     &-title {
       text-decoration: none;
-      @include arrTransition();
-      @include arrTextTypography(1.4rem, 300, 1.4);
+      @include lyraTransition();
+      @include lyraTextTypography(1.4rem, 300, 1.4);
       &:hover {
         opacity: 0.75;
       }
@@ -125,7 +125,7 @@
       margin-bottom: auto;
       flex-direction: column;
       & p {
-        @include arrTextTypography(0.9rem, 300);
+        @include lyraTextTypography(0.9rem, 300);
       }
     }
 

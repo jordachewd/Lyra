@@ -1,13 +1,13 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrPortableTable {
+.lyraPortableTable {
   width: 100%;
   display: flex;
   overflow: auto;
   flex-direction: column;
 
-  @include arrMediaQuery($mq-tablet) {
+  @include lyraMediaQuery($mq-tablet) {
     border-radius: 0.625rem;
     border: 1px solid
       rgba(var(--portableTable-accentRgb, var(--portableTable-txtRgb, var(--color-white-rgb))), 0.1);
@@ -30,7 +30,7 @@
           0.1
         );
 
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraMediaQuery($mq-tablet) {
         flex-direction: row;
         border-radius: 0;
         overflow: visible;
@@ -50,7 +50,7 @@
             0.1
           );
 
-        @include arrTextTypography(
+        @include lyraTextTypography(
           0.875rem,
           300,
           1.2,
@@ -60,7 +60,7 @@
 
         font-size: 0.875rem;
 
-        @include arrBackdropBlur(
+        @include lyraBackdropBlur(
           4px,
           rgba(var(--portableTable-txtRgb, var(--color-white-rgb)), 0.05)
         );
@@ -69,7 +69,7 @@
           border-bottom: none;
         }
 
-        @include arrMediaQuery($mq-tablet) {
+        @include lyraMediaQuery($mq-tablet) {
           border-right: 1px solid
             rgba(
               var(--portableTable-accentRgb, var(--portableTable-txtRgb, var(--color-white-rgb))),
@@ -92,7 +92,7 @@
         font-weight: 600;
         font-size: 1rem;
         color: var(--portableTable-accent, var(--portableTable-txt, var(--text-primary)));
-        @include arrBackdropBlur(
+        @include lyraBackdropBlur(
           4px,
           rgba(
             var(--portableTable-accentRgb, var(--portableTable-txtRgb, var(--color-white-rgb))),
@@ -104,13 +104,13 @@
       td:first-child {
         font-weight: 600;
         opacity: 1;
-        @include arrBackdropBlur(
+        @include lyraBackdropBlur(
           4px,
           rgba(var(--portableTable-txtRgb, var(--color-white-rgb)), 0.15)
         );
 
-        @include arrMediaQuery($mq-tablet) {
-          @include arrBackdropBlur(
+        @include lyraMediaQuery($mq-tablet) {
+          @include lyraBackdropBlur(
             4px,
             rgba(var(--portableTable-txtRgb, var(--color-white-rgb)), 0.08)
           );
@@ -125,7 +125,7 @@
 
   thead {
     display: none;
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       display: flex;
     }
   }
@@ -134,15 +134,15 @@
     gap: 1rem;
     display: flex;
 
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       gap: 0;
     }
 
     tr {
       cursor: default;
-      @include arrTransition(background-color);
+      @include lyraTransition(background-color);
 
-      @include arrHover {
+      @include lyraHover {
         background-color: rgba(var(--portableTable-txtRgb, var(--color-white-rgb)), 0.08);
       }
     }

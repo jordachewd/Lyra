@@ -33,7 +33,7 @@ export default function StepperSection({
     <SectionWrapper
       id={`stepper-${_id}`}
       settings={settings as SectionSettings}
-      className="arrStepper"
+      className="lyraStepper"
     >
       {titleDesc.showTitle && (
         <TitleDesc
@@ -42,12 +42,12 @@ export default function StepperSection({
           desc={description as RichTextPropValue}
           alignment={align}
           settings={titleDesc}
-          className="arrStepper-title"
+          className="lyraStepper-title"
         />
       )}
 
       {hasSteps && (
-        <div className="arrStepper-steps">
+        <div className="lyraStepper-steps">
           {steps.map((step, index) => {
             const isRowEnd = (index + 1) % STEPS_PER_ROW === 0
             const showSeparator = isRowEnd && index < steps.length - 1
@@ -56,8 +56,8 @@ export default function StepperSection({
               <Fragment key={step.id + index}>
                 <StepperItem item={step} isRowEnd={isRowEnd} />
                 {showSeparator && (
-                  <div className="arrStepper-step-separator">
-                    <div className="arrStepper-step-separator-line"></div>
+                  <div className="lyraStepper-step-separator">
+                    <div className="lyraStepper-step-separator-line"></div>
                   </div>
                 )}
               </Fragment>
@@ -69,12 +69,12 @@ export default function StepperSection({
       {hasButtons && (
         <SectionButtons
           buttons={buttons}
-          className="arrStepper-actions"
+          className="lyraStepper-actions"
           location={`${title} section`}
         />
       )}
 
-      {disclaimer && <div className="arrStepper-disclaimer">{disclaimer}</div>}
+      {disclaimer && <div className="lyraStepper-disclaimer">{disclaimer}</div>}
     </SectionWrapper>
   )
 }

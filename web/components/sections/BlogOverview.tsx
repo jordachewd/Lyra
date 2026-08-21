@@ -46,7 +46,7 @@ export default async function BlogOverviewSection({
     <SectionWrapper
       id={`blog-overview-${_id}`}
       settings={settings as SectionSettings}
-      className="arrBlogSection"
+      className="lyraBlogSection"
     >
       {titleDesc.showTitle && (
         <TitleDesc
@@ -60,15 +60,15 @@ export default async function BlogOverviewSection({
       {hasPosts ? (
         <BlogCardsList posts={listItems} settings={listSettings} />
       ) : (
-        <p className="arrBlog-noPosts">No posts yet.</p>
+        <p className="lyraBlog-noPosts">No posts yet.</p>
       )}
 
       {button && (
-        <div className="arrBlogSection-bottom">
+        <div className="lyraBlogSection-bottom">
           <Link
             href={button.href ?? '/'}
             target={button.target ? '_blank' : '_self'}
-            className={`arrButton ${button.highlight ? 'highlighted' : ''}`}
+            className={`lyraButton ${button.highlight ? 'highlighted' : ''}`}
           >
             {button.text}
           </Link>

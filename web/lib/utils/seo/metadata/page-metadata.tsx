@@ -3,8 +3,8 @@ import {ptToPlainText} from '@/lib/utils/common/pt-to-plain-text'
 import type {PageBySlug} from '@/lib/zod/website/content/page'
 import type {SeoMetaSchema, SeoModeSchema} from '@/lib/zod/sections/layout/seo-meta'
 import type {Metadata} from 'next'
-import {arrBuildMetadata} from './build-metadata'
-import {arrNoMetadata} from './no-metadata'
+import {lyraBuildMetadata} from './build-metadata'
+import {lyraNoMetadata} from './no-metadata'
 import {getSectionMetadata} from './section-metadata'
 import {urlFor} from '@/lib/utils/sanity/image'
 import {PageJsonLdData} from '@/lib/types/seo'
@@ -16,13 +16,13 @@ type PgMetaProps = {
   data?: 'jsonld' | 'metadata'
 }
 
-export async function arrGetPageMetadata({
+export async function lyraGetPageMetadata({
   page,
   canonical,
   data = 'metadata',
 }: PgMetaProps): Promise<Metadata | PageJsonLdData> {
   if (!page) {
-    return await arrBuildMetadata({
+    return await lyraBuildMetadata({
       pathname: canonical || '/404',
       title: 'Page not found',
       ogType: 'website',
@@ -62,7 +62,7 @@ export async function arrGetPageMetadata({
 
     return {
       url: canonical || `/${page.slug}`,
-      title: `${title} · Arratech AB`,
+      title: `${title} · Lyra`,
       description,
       imageUrl: imgUrl || undefined,
       ignore: seoMeta?.mode === ('ignore' as SeoModeSchema),
@@ -70,14 +70,14 @@ export async function arrGetPageMetadata({
   }
 
   if (seoMeta?.mode === ('ignore' as SeoModeSchema))
-    return await arrNoMetadata({
-      title: `${title} · Arratech AB`,
+    return await lyraNoMetadata({
+      title: `${title} · Lyra`,
       noIndex: seoMeta?.noindex ?? false,
     })
 
-  return await arrBuildMetadata({
+  return await lyraBuildMetadata({
     pathname: canonical || `/${page.slug}`,
-    title: `${title} · Arratech AB`,
+    title: `${title} · Lyra`,
     description,
     image,
     keywords,

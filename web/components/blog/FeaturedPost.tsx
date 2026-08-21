@@ -36,41 +36,41 @@ export default function FeaturedPost({post, settings}: FeaturedProps) {
   const hasTags = tags.length > 0 && showTags
   const hasExcerpt = !!excerpt && showExcerpt
 
-  const heroClass = classNames('arrBlog-hero', {
+  const heroClass = classNames('lyraBlog-hero', {
     noImage: !hasImg,
   })
 
   return (
     <div className={heroClass} aria-label="featured article">
       {hasImg && (
-        <Link href={`/blog/${post.slug}`} className="arrBlog-hero-media">
+        <Link href={`/blog/${post.slug}`} className="lyraBlog-hero-media">
           <RenderImage image={image} alt={alt} displayWidth={700} mobileWidth={360} priority />
         </Link>
       )}
 
-      <div className="arrBlog-hero-content">
-        {hasCats && <CatTagChip className="arrBlog-hero-categories" items={categories} />}
+      <div className="lyraBlog-hero-content">
+        {hasCats && <CatTagChip className="lyraBlog-hero-categories" items={categories} />}
 
-        <h2 className="arrBlog-hero-headline">
+        <h2 className="lyraBlog-hero-headline">
           <Link href={`/blog/${post.slug}`}> {title} </Link>
         </h2>
 
         {hasAuths && (
           <AuthorsList
-            className="arrBlog-hero-authors"
+            className="lyraBlog-hero-authors"
             imageSize={20}
             authors={authors}
             clickable
           />
         )}
 
-        {hasExcerpt && <RichText className="arrBlog-hero-excerpt" value={excerpt} />}
+        {hasExcerpt && <RichText className="lyraBlog-hero-excerpt" value={excerpt} />}
 
         {(hasTags || showDate) && (
-          <div className="arrBlog-hero-meta">
-            {hasTags && <CatTagChip className="arrBlog-hero-tags" items={tags} />}
+          <div className="lyraBlog-hero-meta">
+            {hasTags && <CatTagChip className="lyraBlog-hero-tags" items={tags} />}
             {showDate && (
-              <time className="arrBlog-hero-date" dateTime={date}>
+              <time className="lyraBlog-hero-date" dateTime={date}>
                 {date}
               </time>
             )}

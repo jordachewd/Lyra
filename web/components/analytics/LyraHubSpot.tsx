@@ -8,7 +8,7 @@ type HubSpotProps = {
   id: string
 }
 
-export default async function ArrHubSpot({id}: HubSpotProps) {
+export default async function LyraHubSpot({id}: HubSpotProps) {
   const nonce = (await headers()).get('x-nonce') ?? undefined
   const serverConsent: StoredConsent | null = await getServerConsent()
   const consent = serverConsent ?? defaultConsent()

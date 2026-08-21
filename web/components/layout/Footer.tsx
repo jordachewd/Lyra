@@ -27,13 +27,13 @@ export default function Footer({data}: FooterProps) {
   const hasBgImg = type === 'image' && !!image?.image?.asset?.url
   const hasBgOpacity = type === 'image' && ovlOpacity !== undefined && ovlOpacity !== null
 
-  const ftClass = classNames('arrFooter', 'ptb_' + pdTopBottom, 'pdd_' + pdDisplay, {
-    [`arrGradient-${gradient}`]: hasBgGradient,
+  const ftClass = classNames('lyraFooter', 'ptb_' + pdTopBottom, 'pdd_' + pdDisplay, {
+    [`lyraGradient-${gradient}`]: hasBgGradient,
     'bg-color': hasBgColor,
     'bg-img': hasBgImg,
   })
 
-  const ftWrap = classNames('arrFooter-container', template, {
+  const ftWrap = classNames('lyraFooter-container', template, {
     siteWidth: width === 'normal',
     fullWidth: width === 'full',
   })
@@ -47,7 +47,7 @@ export default function Footer({data}: FooterProps) {
       bgOverlay: ovlColor as SanityColor,
       bgOpacity: hasBgOpacity ? ovlOpacity : null,
     },
-    'arrFooter',
+    'lyraFooter',
   )
   ftCss = cssVars.vars
 
@@ -56,10 +56,10 @@ export default function Footer({data}: FooterProps) {
   return (
     <footer className={ftClass} style={ftCss}>
       <div className={ftWrap}>
-        {hasLogo && <FooterLogo logo={logo} className="arrFooter-logo" />}
+        {hasLogo && <FooterLogo logo={logo} className="lyraFooter-logo" />}
 
         {hasMenus && (
-          <div className="arrFooter-nav-center">
+          <div className="lyraFooter-nav-center">
             {menus.map((item: MenuItem, idx: number) => (
               <FooterNavColumn key={`${item.label}-${idx}`} menuItem={item} />
             ))}
@@ -67,8 +67,8 @@ export default function Footer({data}: FooterProps) {
         )}
 
         {copyright && (
-          <div className="arrFooter-bottom">
-            <span className="arrFooter-copyright">{copyright}</span>
+          <div className="lyraFooter-bottom">
+            <span className="lyraFooter-copyright">{copyright}</span>
           </div>
         )}
       </div>

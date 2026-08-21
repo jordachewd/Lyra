@@ -14,13 +14,13 @@ type SectionProps = {
 export default function PageHeadWrapper({id, settings, children, className}: SectionProps) {
   const {pdTopBottom, pdDisplay, width, textColor} = settings as PageSettingsType
   const sectionCss = classNames(
-    'arrSection arrPageHead',
+    'lyraSection lyraPageHead',
     className,
     'ptb_' + pdTopBottom,
     'pdd_' + pdDisplay,
   )
   const wrapperClass = className ? className + '-wrapper' : ''
-  const wrapperCss = classNames('arrSection-wrapper', wrapperClass, {
+  const wrapperCss = classNames('lyraSection-wrapper', wrapperClass, {
     siteWidth: width === 'normal',
     fullWidth: width === 'full',
   })

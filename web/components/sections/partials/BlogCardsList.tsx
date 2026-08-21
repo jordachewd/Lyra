@@ -22,7 +22,7 @@ type ListProps = {
 
 export default function BlogCardsList({posts, settings, className: cssClass}: ListProps) {
   const {showExcerpt, showCats, showTags, showAuthor, showDate} = settings
-  const sectionClass = classNames('arrBlogSection-posts', cssClass)
+  const sectionClass = classNames('lyraBlogSection-posts', cssClass)
 
   return (
     <div className={sectionClass}>
@@ -40,8 +40,8 @@ export default function BlogCardsList({posts, settings, className: cssClass}: Li
         const cardDate = formatPostDate(card.publishedAt)
 
         return (
-          <div key={idx + card._id} className="arrBlogSection-postCard">
-            <Link href={`/blog/${card.slug}`} className="arrBlogSection-postCard-image">
+          <div key={idx + card._id} className="lyraBlogSection-postCard">
+            <Link href={`/blog/${card.slug}`} className="lyraBlogSection-postCard-image">
               {hasImg ? (
                 <RenderImage
                   image={cardImg}
@@ -55,22 +55,22 @@ export default function BlogCardsList({posts, settings, className: cssClass}: Li
               )}
             </Link>
 
-            <div className="arrBlogSection-postCard-content">
+            <div className="lyraBlogSection-postCard-content">
               {hasCats && (
                 <CatTagChip
-                  className="arrBlogSection-postCard-categories"
+                  className="lyraBlogSection-postCard-categories"
                   items={card.categories as Category[]}
                 />
               )}
 
-              <Link href={`/blog/${card.slug}`} className="arrBlogSection-postCard-title">
+              <Link href={`/blog/${card.slug}`} className="lyraBlogSection-postCard-title">
                 {card.title}
               </Link>
 
               {hasAuths && (
                 <AuthorsList
                   imageSize={20}
-                  className="arrBlogSection-postCard-authors"
+                  className="lyraBlogSection-postCard-authors"
                   authors={card.authors as Author[]}
                   clickable
                 />
@@ -78,22 +78,22 @@ export default function BlogCardsList({posts, settings, className: cssClass}: Li
 
               {hasExcerpt && (
                 <RichText
-                  className="arrBlogSection-postCard-excerpt"
+                  className="lyraBlogSection-postCard-excerpt"
                   value={card.excerptText as RichTextPropValue}
                 />
               )}
 
               {(hasTags || hasDate) && (
-                <div className="arrBlogSection-postCard-widgets">
+                <div className="lyraBlogSection-postCard-widgets">
                   {hasTags && (
                     <CatTagChip
-                      className="arrBlogSection-postCard-tags"
+                      className="lyraBlogSection-postCard-tags"
                       items={card.tags as Tag[]}
                     />
                   )}
 
                   {hasDate && (
-                    <time dateTime={cardDate} className="arrBlogSection-postCard-date">
+                    <time dateTime={cardDate} className="lyraBlogSection-postCard-date">
                       {cardDate}
                     </time>
                   )}

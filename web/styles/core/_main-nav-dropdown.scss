@@ -1,7 +1,7 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrMainNav--dropdown {
+.lyraMainNav--dropdown {
   --main-nav-list-width: min(580px, 90vw);
   --main-nav-left-panel-width: min(360px, 60vw);
 
@@ -16,7 +16,7 @@
     padding: 1rem 0 1rem 2rem;
   }
 
-  @include arrMediaQuery($mq-nav) {
+  @include lyraMediaQuery($mq-nav) {
     .menu-list {
       position: absolute;
       top: calc(100% + 1.25rem);

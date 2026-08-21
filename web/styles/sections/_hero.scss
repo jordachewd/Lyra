@@ -1,7 +1,7 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrHero {
+.lyraHero {
   &-wrapper {
     &.normal,
     &.reversed {
@@ -12,7 +12,7 @@
   &-content {
     flex-direction: column;
     gap: 2rem;
-    .arrTitleDesc.center:not(.shrink) {
+    .lyraTitleDesc.center:not(.shrink) {
       max-width: 100%;
     }
   }

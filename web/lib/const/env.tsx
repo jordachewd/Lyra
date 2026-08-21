@@ -9,7 +9,7 @@ export const isProduction = nodeEnv === 'production' && siteEnv === 'production'
 
 // Site
 const publicUrl = process.env.NEXT_PUBLIC_SITE_URL
-export const siteUrl = publicUrl ?? 'https://www.arratech.com'
+export const siteUrl = publicUrl ?? 'https://www.lyra.com'
 
 // Sanity (public)
 const projId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID

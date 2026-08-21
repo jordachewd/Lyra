@@ -7,7 +7,7 @@ import {toNestedImageField} from '../../../images/normalize'
 import {toArray} from '@/lib/utils/common/to-array'
 import {resolveOgImages} from '@/lib/utils/seo/common/og-images'
 
-export async function arrBuildMetadata(args: MetadataArgs = {}): Promise<Metadata> {
+export async function lyraBuildMetadata(args: MetadataArgs = {}): Promise<Metadata> {
   const meta = (await getSiteMeta()) as SiteMetadata
 
   const baseUrl = meta.siteUrl!

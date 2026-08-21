@@ -1,14 +1,14 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrTitleDesc {
+.lyraTitleDesc {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   width: 100%;
 
   &.center:not(.shrink) {
-    @include arrMediaQuery($mq-desktop) {
+    @include lyraMediaQuery($mq-desktop) {
       max-width: 65%;
     }
   }
@@ -16,19 +16,19 @@
   &.shrink {
     &.center {
       margin: 0 auto;
-      @include arrMediaQuery($mq-desktop) {
+      @include lyraMediaQuery($mq-desktop) {
         max-width: 50%;
       }
     }
 
     &.right {
       margin-left: auto;
-      @include arrMediaQuery($mq-desktop) {
+      @include lyraMediaQuery($mq-desktop) {
         max-width: 50%;
       }
     }
 
-    @include arrMediaQuery($mq-desktop) {
+    @include lyraMediaQuery($mq-desktop) {
       max-width: 50%;
     }
   }
@@ -61,7 +61,7 @@
     flex-direction: column;
   }
 
-  &.right .arrTitleDesc {
+  &.right .lyraTitleDesc {
     &-eyebrow,
     &-title,
     &-desc {
@@ -70,7 +70,7 @@
     }
   }
 
-  &.center .arrTitleDesc {
+  &.center .lyraTitleDesc {
     &-eyebrow,
     &-title,
     &-desc {

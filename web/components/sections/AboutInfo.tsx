@@ -22,11 +22,11 @@ export default function AboutInfoSection(props: AboutInfoProps) {
     <SectionWrapper
       id={`about-info-${_id}`}
       settings={settings as SectionSettings}
-      className="arrAboutInfo"
+      className="lyraAboutInfo"
     >
       {hasCollapsibles && <AboutInfoCards features={collapsibles} />}
 
-      <div className="arrAboutInfo-content">
+      <div className="lyraAboutInfo-content">
         {titleDesc.showTitle && (
           <TitleDesc
             alignment={align}
@@ -39,7 +39,7 @@ export default function AboutInfoSection(props: AboutInfoProps) {
         {hasBtns && (
           <SectionButtons
             buttons={buttons}
-            className="arrAboutInfo-actions"
+            className="lyraAboutInfo-actions"
             location={`${title} section`}
           />
         )}

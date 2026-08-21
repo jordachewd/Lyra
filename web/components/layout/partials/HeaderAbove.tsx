@@ -11,7 +11,7 @@ type HeaderAboveProps = {
 
 export default function HeaderAbove({menu, className: cssClass}: HeaderAboveProps) {
   return (
-    <div className={`arrHeader-features ${cssClass || ''}`}>
+    <div className={`lyraHeader-features ${cssClass || ''}`}>
       {menu.map((item, index) => {
         const id = item.id || `above-menu-item-${index}`
         const href = item.href || null
@@ -20,7 +20,7 @@ export default function HeaderAbove({menu, className: cssClass}: HeaderAboveProp
         const icon = item.icon as NestedImageField | null | undefined
         const alt = item.icon?.alt || item.title || 'Icon'
 
-        const btnOnMobile = cssClass === 'mobile-only' ? 'arrButton small' : ''
+        const btnOnMobile = cssClass === 'mobile-only' ? 'lyraButton small' : ''
         const onMobileCss = classNames(btnOnMobile, {
           hideOnMobile: item.hideOnMobile && cssClass === 'mobile-only',
         })
@@ -33,7 +33,7 @@ export default function HeaderAbove({menu, className: cssClass}: HeaderAboveProp
                 alt={alt}
                 displayWidth={20}
                 mobileWidth={20}
-                className="arrHeader-features-icon"
+                className="lyraHeader-features-icon"
               />
             )}
             <span>{item.title}</span>
@@ -46,12 +46,12 @@ export default function HeaderAbove({menu, className: cssClass}: HeaderAboveProp
             href={href}
             target={target}
             rel={rel}
-            className={`arrHeader-features-link ${onMobileCss}`}
+            className={`lyraHeader-features-link ${onMobileCss}`}
           >
             {content}
           </Link>
         ) : (
-          <div key={id} className={`arrHeader-features-item ${onMobileCss}`}>
+          <div key={id} className={`lyraHeader-features-item ${onMobileCss}`}>
             {content}
           </div>
         )

@@ -26,7 +26,7 @@ export default function TeamSection({
     <SectionWrapper
       id={`team-${_id}`}
       settings={settings as SectionSettings}
-      className="arrTeamOverview"
+      className="lyraTeamOverview"
     >
       {titleDesc.showTitle && (
         <TitleDesc
@@ -35,7 +35,7 @@ export default function TeamSection({
           desc={description as RichTextPropValue}
           alignment={align}
           settings={titleDesc}
-          className="arrTeamOverview-title"
+          className="lyraTeamOverview-title"
         />
       )}
 

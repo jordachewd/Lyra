@@ -1,13 +1,13 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrFormSection {
+.lyraFormSection {
   &-heading {
     display: flex;
     flex-direction: column;
     gap: 1rem;
 
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       gap: 1.5rem;
     }
   }
@@ -27,13 +27,13 @@
 
     &-title {
       display: flex;
-      @include arrTextTypography(1.5rem, 300);
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraTextTypography(1.5rem, 300);
+      @include lyraMediaQuery($mq-tablet) {
         font-size: 2rem;
       }
     }
 
-    & > button.arrButton {
+    & > button.lyraButton {
       padding: 1rem;
       margin-top: 1.5rem;
     }
@@ -60,7 +60,7 @@
     flex: none !important;
   }
 
-  &:has(&-wrapper.reversed) &-heading .arrTitleDesc {
+  &:has(&-wrapper.reversed) &-heading .lyraTitleDesc {
     margin-left: 0;
     & > * {
       justify-content: flex-start;

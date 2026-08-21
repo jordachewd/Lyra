@@ -8,7 +8,7 @@ type NoMetadataArgs = {
   noIndex?: boolean
 }
 
-export async function arrNoMetadata(args: NoMetadataArgs = {}): Promise<Metadata> {
+export async function lyraNoMetadata(args: NoMetadataArgs = {}): Promise<Metadata> {
   const meta = (await getSiteMeta()) as SiteMetadata
 
   const baseUrl = meta.siteUrl!
@@ -17,7 +17,7 @@ export async function arrNoMetadata(args: NoMetadataArgs = {}): Promise<Metadata
 
   const metadata: Metadata = {
     metadataBase: new URL(baseUrl),
-    title: {default: title, template: `%s · Arratech AB`},
+    title: {default: title, template: `%s · Lyra`},
     description: undefined,
     applicationName: undefined,
     authors: undefined,

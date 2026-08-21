@@ -38,7 +38,7 @@ function SectionButtonsClient({
           key={btn.id || index}
           href={btn.href ?? '/'}
           target={btn.target ? '_blank' : '_self'}
-          className={`arrButton ${btn.highlight ? 'highlighted' : ''}`}
+          className={`lyraButton ${btn.highlight ? 'highlighted' : ''}`}
           onClick={() => handleClick(btn.text)}
         >
           {btn.text}

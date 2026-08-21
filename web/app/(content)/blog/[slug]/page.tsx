@@ -4,7 +4,7 @@ import RichText, {type RichTextPropValue} from '@/components/ui/RichText'
 import {isProduction} from '@/lib/const/env'
 import {sectionRegistry, SectionKind} from '@/lib/const/sections-kind'
 import {getPostBySlug} from '@/lib/data/post'
-import {arrGetPostMetadata} from '@/lib/utils/seo/metadata/post-metadata'
+import {lyraGetPostMetadata} from '@/lib/utils/seo/metadata/post-metadata'
 import type {Section} from '@/lib/zod/website/layout/sections'
 import type {PostJsonLdData} from '@/lib/types/seo'
 import type {Metadata} from 'next'
@@ -32,7 +32,7 @@ export async function generateMetadata({params}: PostProps): Promise<Metadata> {
       description: 'The requested post does not exist.',
     }
 
-  return await arrGetPostMetadata({post})
+  return await lyraGetPostMetadata({post})
 }
 
 export default async function PostPage({params}: PostProps) {
@@ -42,7 +42,7 @@ export default async function PostPage({params}: PostProps) {
 
   let jsonld: PostJsonLdData | undefined
   if (isProduction) {
-    jsonld = (await arrGetPostMetadata({
+    jsonld = (await lyraGetPostMetadata({
       post,
       data: 'jsonld',
     })) as PostJsonLdData
@@ -53,7 +53,7 @@ export default async function PostPage({params}: PostProps) {
   const pSettings: PostSettings | null = post.settings
   const postId = `post-${post._id}`
   const {alignTitle, pdTopBottom, pdDisplay, textColor, gradientBg} = pSettings as PostSettings
-  const pTitleClass = classNames('arrPost-header', 'ptb_' + pdTopBottom, 'pdd_' + pdDisplay)
+  const pTitleClass = classNames('lyraPost-header', 'ptb_' + pdTopBottom, 'pdd_' + pdDisplay)
   const pTitleCss = getCssVars(
     {
       textColor: textColor as SanityColor,
@@ -70,21 +70,21 @@ export default async function PostPage({params}: PostProps) {
     <>
       <PageGradientStyle type={gradientBg} />
 
-      <main className="arrMain" id="main-content">
-        <div className="arrMain-wrapper" id={postId}>
+      <main className="lyraMain" id="main-content">
+        <div className="lyraMain-wrapper" id={postId}>
           <section id={`${postId}-header`} className={pTitleClass} style={pTitleCss.vars}>
             <TitleDesc
               title={post.title}
               alignment={alignTitle}
               settings={titleDescSettings}
-              className="arrPost-title"
+              className="lyraPost-title"
             />
           </section>
 
           <PostFeatImage postId={postId} post={post} />
 
           {pBody && (
-            <section id={`${postId}-body`} className="arrPost-body">
+            <section id={`${postId}-body`} className="lyraPost-body">
               <RichText value={post.body as RichTextPropValue} />
             </section>
           )}

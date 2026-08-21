@@ -1,4 +1,4 @@
-export type ArrPageGradientsTypes =
+export type LyraPageGradientsTypes =
   | 'none'
   | 'home'
   | 'page'

@@ -10,7 +10,7 @@ import {isProduction} from '@/lib/const/env'
 import {sectionRegistry, type SectionKind} from '@/lib/const/sections-kind'
 import {getPageBySlug} from '@/lib/data/page'
 import {getHomeSlug} from '@/lib/data/utils/get-home-slug'
-import {arrGetPageMetadata} from '@/lib/utils/seo/metadata/page-metadata'
+import {lyraGetPageMetadata} from '@/lib/utils/seo/metadata/page-metadata'
 import {notFound} from 'next/navigation'
 import {PageSettingsType} from '@/lib/zod/sections/layout/page-settings'
 import PageHeadWrapper from '@/components/layout/partials/PageHeadWrapper'
@@ -27,7 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
       description: 'The requested page does not exist.',
     }
 
-  return (await arrGetPageMetadata({
+  return (await lyraGetPageMetadata({
     page,
     canonical: '/',
   })) as Promise<Metadata>
@@ -42,7 +42,7 @@ export default async function HomePage() {
 
   let jsonld: PageJsonLdData | undefined
   if (isProduction) {
-    jsonld = (await arrGetPageMetadata({
+    jsonld = (await lyraGetPageMetadata({
       page,
       canonical: '/',
       data: 'jsonld',
@@ -65,10 +65,10 @@ export default async function HomePage() {
     <>
       <PageGradientStyle type={gradientBg} />
 
-      <main className="arrMain" id="main-content">
-        <div className="arrMain-wrapper" id={`page-${page._id}`}>
+      <main className="lyraMain" id="main-content">
+        <div className="lyraMain-wrapper" id={`page-${page._id}`}>
           {showTitle && (
-            <PageHeadWrapper id={page._id} settings={settings} className="arrMain-pgHead">
+            <PageHeadWrapper id={page._id} settings={settings} className="lyraMain-pgHead">
               <TitleDesc
                 title={page.title}
                 desc={pageDesc}

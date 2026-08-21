@@ -1,7 +1,7 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrAboutInfo {
+.lyraAboutInfo {
   &-wrapper {
     align-items: flex-start;
   }
@@ -11,7 +11,7 @@
     gap: 0.75rem;
     flex-wrap: wrap;
     align-items: flex-start;
-    @include arrMediaQuery($mq-tablet) {
+    @include lyraMediaQuery($mq-tablet) {
       order: 0;
     }
   }
@@ -28,9 +28,9 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 12px;
       cursor: pointer;
-      @include arrBackdropBlur;
-      @include arrTransition(border-color, 0.25s);
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraBackdropBlur;
+      @include lyraTransition(border-color, 0.25s);
+      @include lyraMediaQuery($mq-tablet) {
         max-width: calc(50% - (1.5rem / 4));
       }
 
@@ -59,7 +59,7 @@
     }
 
     &-title {
-      @include arrTextTypography(0.875rem, 600);
+      @include lyraTextTypography(0.875rem, 600);
       max-width: calc(100% - 32px);
       text-transform: uppercase;
       white-space: nowrap;
@@ -162,7 +162,7 @@
   }
 
   &__heading {
-    @include arrTextTypography(3rem, 300, 1);
+    @include lyraTextTypography(3rem, 300, 1);
   }
 
   &__desc {
@@ -184,7 +184,7 @@
   &:has(&-wrapper.centered) &-content,
   &:has(&-wrapper.revCentered) &-content {
     max-width: 100%;
-    .arrAboutInfo-actions {
+    .lyraAboutInfo-actions {
       justify-content: center;
     }
   }
@@ -192,13 +192,13 @@
   &:has(&-wrapper.centered) &-features,
   &:has(&-wrapper.revCentered) &-features {
     margin: 0 auto;
-    .arrAboutInfo-feature-content {
+    .lyraAboutInfo-feature-content {
       text-align: left;
     }
   }
 
   &:has(&-wrapper.reversed) &-content {
-    .arrTitleDesc {
+    .lyraTitleDesc {
       &-title,
       &-eyebrow,
       &-desc {

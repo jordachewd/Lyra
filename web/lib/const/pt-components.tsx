@@ -6,7 +6,7 @@ import {type PTImageBlock} from '../zod/sections/layout/imageWithMeta'
 import {Blockquote} from './pt-components/blockquote'
 import {QMark} from './pt-components/qmark'
 import {TableMatrixSchema} from '../zod/sections/content/table'
-import ArrPortableTable from '@/components/sections/partials/ArrPortableTable'
+import LyraPortableTable from '@/components/sections/partials/LyraPortableTable'
 import classNames from 'classnames'
 import {getImgSize} from '../utils/common/get-image-size'
 
@@ -43,7 +43,7 @@ export const PTComponents: PortableTextComponents = {
         return Array.isArray(cells) ? cells.filter((c): c is string => typeof c === 'string') : []
       })
 
-      return <ArrPortableTable data={tableData} />
+      return <LyraPortableTable data={tableData} />
     },
 
     image: ({value}: ImageProps) => {
@@ -117,7 +117,7 @@ export const PTComponents: PortableTextComponents = {
       const external = value?.blank && (/^https?:\/\//i.test(href) || /^http?:\/\//i.test(href))
 
       const btnWrapCss = classNames('pt-btn-wrapper', btnAlign)
-      const btnCss = classNames('arrButton', {
+      const btnCss = classNames('lyraButton', {
         highlighted: isHighlighted,
         halfwidth: btnSize === 'half',
         fullwidth: btnSize === 'full',

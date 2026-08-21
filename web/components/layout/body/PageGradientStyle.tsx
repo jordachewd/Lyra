@@ -1,10 +1,10 @@
-import {ArrPageGradientsTypes} from '@/lib/types/page-gradients'
+import {LyraPageGradientsTypes} from '@/lib/types/page-gradients'
 
 type PageGradientResult = {
-  type: ArrPageGradientsTypes
+  type: LyraPageGradientsTypes
 }
 
-const map: Record<Exclude<ArrPageGradientsTypes, 'none'>, string> = {
+const map: Record<Exclude<LyraPageGradientsTypes, 'none'>, string> = {
   home: 'var(--arr-home-gradient)',
   page: 'var(--arr-page-gradient)',
   pageblue: 'var(--arr-pageblue-gradient)',

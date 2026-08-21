@@ -4,8 +4,8 @@
 @use './variables' as *;
 
 /* Media Query || Max Width */
-/* Usage: @include arrMediaQuery(40em) { ... } */
-@mixin arrMediaQuery($query) {
+/* Usage: @include lyraMediaQuery(40em) { ... } */
+@mixin lyraMediaQuery($query) {
   @if $no-mq-support {
     @if $query <= $serve-to-nomq-max-width {
       @content;
@@ -18,8 +18,8 @@
 }
 
 /* Media Query || Max Height */
-/* Usage: @include arrMediaQueryHeight(40em) { ... } */
-@mixin arrMediaQueryHeight($query) {
+/* Usage: @include lyraMediaQueryHeight(40em) { ... } */
+@mixin lyraMediaQueryHeight($query) {
   @if $no-mq-support {
     @if $query <= $serve-to-nomq-max-width {
       @content;
@@ -32,8 +32,8 @@
 }
 
 /* Typography Mixin */
-/* Usage: .foo { @include arrTextTypography(1rem, 300, 1.6, 0.02em, var(--text-primary), break-word); } */
-@function arrFluidFontSize($size) {
+/* Usage: .foo { @include lyraTextTypography(1rem, 300, 1.6, 0.02em, var(--text-primary), break-word); } */
+@function lyraFluidFontSize($size) {
   @if meta.type-of($size) != 'number' or math.is-unitless($size) {
     @return $size; // clamp()/calc() (headings) and unitless pass through
   }
@@ -47,7 +47,7 @@
   @return $size; // rem returned as specified — no upward inflation
 }
 
-@mixin arrTextTypography(
+@mixin lyraTextTypography(
   $fSize: 0.875rem,
   $fWeight: 300,
   $lHeight: 1.6,
@@ -55,7 +55,7 @@
   $txtColor: var(--text-primary),
   $wordWrap: break-word
 ) {
-  font-size: arrFluidFontSize($fSize);
+  font-size: lyraFluidFontSize($fSize);
   font-weight: $fWeight;
   line-height: $lHeight;
   letter-spacing: $ltSpacing;
@@ -65,8 +65,8 @@
 }
 
 /* Transform Mixins */
-/* Usage: .foo { @include arrTransform(translateY(-50%) rotate(2deg), center); } */
-@mixin arrTransform($value, $origin: null, $box: null) {
+/* Usage: .foo { @include lyraTransform(translateY(-50%) rotate(2deg), center); } */
+@mixin lyraTransform($value, $origin: null, $box: null) {
   transform: $value;
   @if $origin != null {
     transform-origin: $origin;
@@ -77,14 +77,14 @@
 }
 
 /* Optional: varargs convenience */
-/* Usage: .bar { @include arrTransformV(translateX(10px), scale(.95)); } */
-@mixin arrTransformV($values...) {
+/* Usage: .bar { @include lyraTransformV(translateX(10px), scale(.95)); } */
+@mixin lyraTransformV($values...) {
   transform: $values;
 }
 
 /* Transition Mixins */
-/* Usage: .button { @include arrTransition(background-color, .2s, $ease-standard); } */
-@mixin arrTransition(
+/* Usage: .button { @include lyraTransition(background-color, .2s, $ease-standard); } */
+@mixin lyraTransition(
   $property: all,
   $duration: 0.5s,
   $easing: ease-in-out,
@@ -105,10 +105,10 @@
 
 /* Backdrop Blur Mixin */
 /* Usage:
-.card--frosted { @include arrBackdropBlur(20px, rgba(255,255,255,.12), 120%); }
-.toolbar       { @include arrBackdropBlur(16px, rgba(0,0,0,.22), 140%, 105%); } 
+.card--frosted { @include lyraBackdropBlur(20px, rgba(255,255,255,.12), 120%); }
+.toolbar       { @include lyraBackdropBlur(16px, rgba(0,0,0,.22), 140%, 105%); } 
 */
-@mixin arrBackdropBlur(
+@mixin lyraBackdropBlur(
   $blur: 8px,
   $bg: rgba(255, 255, 255, 0.15),
   $saturate: null,
@@ -142,9 +142,9 @@
 
 // Reset / remove previously applied backdrop blur
 // Usage:
-// .card--plain { @include arrBackdropBlurReset(); }
-// .toolbar--solid { @include arrBackdropBlurReset(#121212, $important: true); }
-@mixin arrBackdropBlurReset($background: transparent, $important: false) {
+// .card--plain { @include lyraBackdropBlurReset(); }
+// .toolbar--solid { @include lyraBackdropBlurReset(#121212, $important: true); }
+@mixin lyraBackdropBlurReset($background: transparent, $important: false) {
   $imp: null;
   @if $important {
     $imp: '!important';
@@ -208,9 +208,9 @@
 
 // Hover Mixins
 // Usage:
-// .btn { @include arrHover { background: #222; } }
+// .btn { @include lyraHover { background: #222; } }
 
-@mixin arrHover {
+@mixin lyraHover {
   @media (hover: hover) and (pointer: fine) {
     &:hover {
       @content;
@@ -218,8 +218,8 @@
   }
 }
 
-// .card { @include arrHoverOn('&:hover .card__img') { transform: scale(1.03); } }
-@mixin arrHoverOn($selector) {
+// .card { @include lyraHoverOn('&:hover .card__img') { transform: scale(1.03); } }
+@mixin lyraHoverOn($selector) {
   @media (hover: hover) and (pointer: fine) {
     #{$selector} {
       @content;
@@ -228,9 +228,9 @@
 }
 
 // Focus visible mixin for consistent keyboard focus styling
-// Usage: .btn { @include arrFocusVisible; }
-// or with custom color: .btn { @include arrFocusVisible(#ff0000, 3px); }
-@mixin arrFocusVisible($color: #3b82f6, $offset: 2px, $width: 2px) {
+// Usage: .btn { @include lyraFocusVisible; }
+// or with custom color: .btn { @include lyraFocusVisible(#ff0000, 3px); }
+@mixin lyraFocusVisible($color: #3b82f6, $offset: 2px, $width: 2px) {
   &:focus-visible {
     outline: $width solid $color;
     outline-offset: $offset;
@@ -238,8 +238,8 @@
 }
 
 // Touch target mixin ensures minimum 44x44px interactive area
-// Usage: .link { @include arrTouchTarget; }
-@mixin arrTouchTarget($min-size: 44px) {
+// Usage: .link { @include lyraTouchTarget; }
+@mixin lyraTouchTarget($min-size: 44px) {
   min-height: $min-size;
   min-width: $min-size;
   display: inline-flex;

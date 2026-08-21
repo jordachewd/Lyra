@@ -18,9 +18,9 @@ export default function CollapsibleAddons({
   className: cssClass,
 }: AddonsProps) {
   const [open, setOpen] = useState<boolean>(false)
-  const addonClass = classNames('arrCollapsibleAddons', cssClass)
+  const addonClass = classNames('lyraCollapsibleAddons', cssClass)
 
-  const wrapperClass = useMemo(() => classNames('arrCollapsibleAddons-wrapper', {open}), [open])
+  const wrapperClass = useMemo(() => classNames('lyraCollapsibleAddons-wrapper', {open}), [open])
 
   const cssVars: CSSProperties = useMemo(
     () => (textColor ? {['--collapsibleAddon-txt' as string]: textColor} : {}),
@@ -34,18 +34,18 @@ export default function CollapsibleAddons({
   return (
     <div className={addonClass} style={cssVars}>
       <div
-        className="arrCollapsibleAddons-header"
+        className="lyraCollapsibleAddons-header"
         onClick={toggleOpen}
         role="button"
         tabIndex={0}
         aria-expanded={open}
       >
-        <span aria-hidden="true" className="arrCollapsibleAddons-header-icon" />
-        <span className="arrCollapsibleAddons-header-text">{label}</span>
+        <span aria-hidden="true" className="lyraCollapsibleAddons-header-icon" />
+        <span className="lyraCollapsibleAddons-header-text">{label}</span>
       </div>
 
       <div className={wrapperClass}>
-        <RichText value={content} className="arrCollapsibleAddons-wrapper-content" />
+        <RichText value={content} className="lyraCollapsibleAddons-wrapper-content" />
       </div>
     </div>
   )

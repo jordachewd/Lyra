@@ -8,7 +8,7 @@ type HeaderLogoProps = {logo: ImageField; className?: string}
 
 export default function HeaderLogo({logo, className: style}: HeaderLogoProps) {
   const logoImg = logo as NestedImageField | null | undefined
-  const alt = logo?.alt ?? 'Arratech Header Logo'
+  const alt = logo?.alt ?? 'Lyra Header Logo'
 
   const {src, width, height} = useSanityImage(logoImg, {
     targetWidth: 168,

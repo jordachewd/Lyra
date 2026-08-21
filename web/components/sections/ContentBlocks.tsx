@@ -31,7 +31,7 @@ export default function ContentBlocks({
     <SectionWrapper
       id={`contentBlocks-${_id}`}
       settings={settings as SectionSettings}
-      className="arrContentBlocks"
+      className="lyraContentBlocks"
     >
       {titleDesc.showTitle && (
         <TitleDesc
@@ -41,7 +41,7 @@ export default function ContentBlocks({
           below={belowEyebrow || undefined}
           alignment={align}
           settings={titleDesc}
-          className="arrContentBlocks-title"
+          className="lyraContentBlocks-title"
         />
       )}
 

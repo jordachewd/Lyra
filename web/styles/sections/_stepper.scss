@@ -1,7 +1,7 @@
 @use './../mixins' as *;
 @use './../variables' as *;
 
-.arrStepper {
+.lyraStepper {
   --stepsPerRow: 7;
   --stepsGap: 2rem;
   --stepsCol: calc(
@@ -23,7 +23,7 @@
   }
 
   /* Normal & Reversed */
-  @include arrMediaQuery($mq-desktop) {
+  @include lyraMediaQuery($mq-desktop) {
     &:has(&-wrapper.normal) &-steps,
     &:has(&-wrapper.reversed) &-steps,
     &:has(&-wrapper.revCentered) &-steps {
@@ -93,7 +93,7 @@
   }
 
   /* Reversed  */
-  @include arrMediaQuery($mq-desktop) {
+  @include lyraMediaQuery($mq-desktop) {
     &:has(&-wrapper.reversed) &-steps,
     &:has(&-wrapper.revCentered) &-steps {
       flex-direction: row-reverse;
@@ -165,7 +165,7 @@
       padding: 0.5rem 0.75rem;
       align-items: center;
       justify-content: center;
-      @include arrTextTypography(0.75rem, 500, 1.1);
+      @include lyraTextTypography(0.75rem, 500, 1.1);
       border-radius: 2rem;
       border: 1px solid rgba(255, 255, 255, 0.25);
       background: #41525a;
@@ -177,7 +177,7 @@
 
       &.no-label {
         padding: 0.5rem;
-        @include arrMediaQuery($mq-desktop) {
+        @include lyraMediaQuery($mq-desktop) {
           margin: 0;
         }
       }
@@ -189,7 +189,7 @@
       width: 100%;
       margin: 1.5rem 0;
 
-      @include arrMediaQuery($mq-desktop) {
+      @include lyraMediaQuery($mq-desktop) {
         display: block;
       }
 
@@ -257,27 +257,27 @@
         padding: 1rem;
         border-radius: 0.75rem;
         background-color: var(--stepperItem-bg, var(--color-green));
-        @include arrMediaQuery($mq-desktop) {
+        @include lyraMediaQuery($mq-desktop) {
           gap: 1.5rem;
         }
-        & > .arrStepper-step-content-title {
+        & > .lyraStepper-step-content-title {
           font-size: 1.125rem;
         }
       }
 
-      @include arrMediaQuery($mq-tablet) {
+      @include lyraMediaQuery($mq-tablet) {
         max-width: 50%;
       }
 
-      @include arrMediaQuery($mq-desktop) {
+      @include lyraMediaQuery($mq-desktop) {
         max-width: 40%;
       }
 
-      @include arrMediaQuery($mq-screen) {
+      @include lyraMediaQuery($mq-screen) {
         max-width: 35%;
       }
 
-      @include arrMediaQuery($mq-lscreen) {
+      @include lyraMediaQuery($mq-lscreen) {
         max-width: 30%;
       }
 
@@ -287,7 +287,7 @@
       }
 
       &-title {
-        @include arrTextTypography(
+        @include lyraTextTypography(
           clamp(0.75rem, calc(0.8125rem + 0.390625vw), 0.875rem),
           500,
           1.2
