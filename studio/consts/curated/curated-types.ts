@@ -1,7 +1,4 @@
-import {PORTAL_CURATED_TYPES} from './portal-curated-types'
-
 export const CURATED_TYPES = [
-  ...PORTAL_CURATED_TYPES,
   'media.tag',
   'page',
 
@@ -10,9 +7,6 @@ export const CURATED_TYPES = [
   'author',
   'category',
   'tag',
-
-  'webinarPage',
-  'webinarCat',
 
   'aboutInfoType',
   'accordionType',
@@ -30,8 +24,6 @@ export const CURATED_TYPES = [
   'tableType',
   'teamOverviewType',
   'textImageType',
-  'textBlocksType',
-  'textCardsType',
   'textOnlyType',
   'topHeroType',
 

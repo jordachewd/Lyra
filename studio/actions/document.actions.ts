@@ -12,7 +12,7 @@ export const documentActions: DocumentActionsResolver = (prev, ctx) => {
     })
   }
 
-  if (ctx.schemaType === 'page' || ctx.schemaType === 'post' || ctx.schemaType === 'webinarPage') {
+  if (ctx.schemaType === 'page' || ctx.schemaType === 'post') {
     const next = prev.map((A: DocumentActionComponent) => {
       const name = A?.action as string | undefined
 

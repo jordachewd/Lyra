@@ -16,8 +16,6 @@ export const websiteSectionTypes = [
   'tableType',
   'teamOverviewType',
   'textImageType',
-  'textBlocksType',
-  'textCardsType',
   'textOnlyType',
 ]
 

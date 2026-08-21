@@ -29,17 +29,6 @@ export const readingSettings = defineType({
       type: 'blogSettings',
       title: 'Blog Page • Settings',
     }),
-
-    defineField({
-      name: 'webinars',
-      type: 'webinars',
-      title: 'Webinars • Content & Settings',
-      validation: (Rule) =>
-        Rule.custom((val: {page?: {_ref?: string}} | undefined) => {
-          if (!val?.page?._ref) return 'Webinars page is required.'
-          return true
-        }),
-    }),
   ],
   preview: {
     prepare() {
