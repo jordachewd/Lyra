@@ -213,16 +213,30 @@ The site expects the Studio's content to exist. See
 | --- | --- |
 | `npm run dev` | `next dev --webpack` |
 | `npm run build` | `next build --webpack` |
-| `npm start` | `next start --webpack` |
+| `npm start` | `next start` — local verification of a production build |
 | `npm run lint` | `eslint` (flat config) |
 | `npm run type-check` | `tsc --noEmit` |
 | `npm run type-check-watch` | `tsc --noEmit --watch` |
 | `npm run knip` | unused dependency/export audit |
 
+**`npm start` is for local verification only.** `next.config.mjs` sets
+`output: 'standalone'`, and Next warns that `next start` does not honour it. A
+real deployment runs the standalone server instead:
+
+```bash
+npm run build
+node .next/standalone/server.js
+```
+
+The standalone output does not include `public/` or `.next/static/` — a host has
+to copy both alongside `server.js`.
+
 **The `--webpack` flag is load-bearing.** `next.config.mjs` installs
 `@svgr/webpack` so `.svg` imports resolve as React components. Next 16 defaults
 to Turbopack, which ignores that block — drop the flag and SVG-as-component
 imports break with an error that points at the import rather than the config.
+The flag belongs on `dev` and `build` only; `next start` rejects it, since it
+serves an already-built bundle and selects no bundler.
 
 **ESLint is pinned to 9.x on purpose.** `eslint-plugin-react@7.37.5` (pulled in
 by `eslint-config-next`) declares a peer range topping out at `^9.7`, and
