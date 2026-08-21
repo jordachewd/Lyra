@@ -9,7 +9,7 @@ A two-package monorepo:
 | [`web/`](web) | Next.js 16 frontend — App Router, React 19 Server Components, Sass | 3000 |
 | [`studio/`](studio) | Sanity Studio v6 — content models, desk structure, editorial workflows | 3333 |
 
-Both share the Sanity project `pg4jpzc7`, dataset `production`. The site reads
+Both share the Sanity project and dataset. The site reads
 that dataset over GROQ and validates every response with hand-written Zod
 schemas before rendering.
 
@@ -74,7 +74,6 @@ model/      Read-only reference implementation (local-only)
 
 ## License
 
-This source code is published for reference and evaluation purposes only. No
-permission is granted to use, copy, modify, merge, publish, distribute,
-sublicense, or sell copies of this software, in whole or in part. See
-[LICENSE](LICENSE) for the full terms.
+This source code is published for reference and evaluation purposes only. 
+`No permission is granted to use, copy, modify, merge, publish, distribute, sublicense, or sell copies of this software, in whole or in part.`
+See [LICENSE](LICENSE) for the full terms.
