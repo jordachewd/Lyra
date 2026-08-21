@@ -3,6 +3,11 @@
 Sanity Studio for the Lyra marketing website — pages, blog, reusable content
 sections, appearance and site settings.
 
+The frontend that consumes this content lives in [`../web`](../web). It reads
+the dataset over GROQ and validates every response with hand-written Zod
+schemas, so a schema change here can break the site at runtime even when both
+projects typecheck. See `web/README.md` for the six-layer section contract.
+
 ## Requirements
 
 - Node.js >= 22.12
@@ -28,14 +33,20 @@ gitignored — never commit real values.
 | `npm run lint` | Lint with the Sanity Studio ESLint config |
 | `npm run typegen` | Extract the schema and regenerate `../web/sanity.types.ts` |
 
-`npm run typegen` writes into `web/`. Run it only as part of frontend work, and
-expect to update the queries in `web/src` alongside it.
+`npm run typegen` writes into `web/`, scanning `../web/{app,components,lib}`.
+
+**The website does not import the generated types.** `web/lib/zod/**` is
+hand-written and is the single source of truth for content types; typegen is a
+reference aid for checking what a query actually returns. Expect it to report
+errors on the 18 files in `web/lib/queries/fragments/sections/` — those export
+GROQ *fragments* rather than standalone queries, and are composed into complete
+queries elsewhere. That is expected, not a defect.
 
 > **`npm run dev` also writes to `web/`.** `sanity.cli.ts` sets
 > `typegen.enabled: true`, so the dev server regenerates `../web/sanity.types.ts`
 > on start and whenever the schema changes. If you are not doing frontend work,
 > check `git status web/` after a dev session and revert if you did not intend
-> the change.
+> the change. Since nothing imports the file, such a change is never urgent.
 
 ## Verifying a schema change
 
@@ -89,5 +100,10 @@ studio/
   transparent RGBA entry.
 - The `BlockQuote (Lyra Style)` editor variant stores the value `blockquote`;
   its house visual still needs defining on the frontend.
-- Typegen and the `web/` integration are a separate pass — `web/sanity.types.ts`
-  does not yet describe this schema.
+- The dataset needs its singletons created and published before the website can
+  render: Reading Settings (with Home Page and Blog Page), General/SEO/Tracking
+  Settings, Site Header with a Menu, and Site Footer. `web/` calls
+  `notFound()` on the whole site until they exist.
+- Cache revalidation between this Studio and the site needs a one-time webhook
+  setup — see `docs/sanity-webhooks-setup.md` (kept locally; `docs/` is
+  gitignored).
