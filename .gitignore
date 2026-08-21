@@ -61,3 +61,5 @@ GEMINI.md
 
 # AI-generated / design source files (kept from the original .gitignore)
 *.ai
+
+model/
